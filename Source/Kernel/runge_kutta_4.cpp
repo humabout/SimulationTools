@@ -7,11 +7,78 @@
 #include "runge_kutta_4.h"
 
 
-// TODO: Add Description Block
+//----------------------------------------------------------------------------
+// Name:    RungeKutta4
+// Purpose: Default constructor. Sets the pointer to NULL.
+//----------------------------------------------------------------------------
+kernel::RungeKutta4::RungeKutta4()
+{
+  this->x0      = 0;
+  this->k1      = 0;
+  this->k2      = 0;
+  this->k3      = 0;
+  this->k4      = 0;
+  this->RK_Step = 0;
+  This_State = NULL;
+}
+
+
+//----------------------------------------------------------------------------
+// Name:    RungeKutta4
+// Purpose: Constructor overload. This sets the state to be updated.
+//----------------------------------------------------------------------------
+kernel::RungeKutta4::RungeKutta4(State* state_)
+{
+  this->x0 =      0;
+  this->k1 =      0;
+  this->k2 =      0;
+  this->k3 =      0;
+  this->k4 =      0;
+  this->RK_Step = 0;
+  This_State = state_;
+}
+
+
+//----------------------------------------------------------------------------
+// Name:    RungeKutta4
+// Purpose: This propagates the state forward one time step using the Runge
+//          Kutta 4 method.
+//----------------------------------------------------------------------------
+kernel::RungeKutta4::~RungeKutta4()
+{
+  // Deallocates nothing.
+}
+
+
+// TODO: Needs a description
+void kernel::RungeKutta4::doInitialize()
+{
+  IntegrationMethod::Time_Current = 0;
+  IntegrationMethod::Is_Ready = true;
+  RungeKutta4::RK_Step = 0;
+  RungeKutta4::Time_RK = 0;
+}
+
+
+// TODO: Needs a description
+void kernel::RungeKutta4::doReset(double time_step_,
+                                  double sample_rate_)
+{
+  IntegrationMethod::Time_Step = time_step_;
+  IntegrationMethod::Sample_Rate = sample_rate_;
+  RungeKutta4::Half_Time_Step = 0.5 * Time_Step;
+}
+
+
+//----------------------------------------------------------------------------
+// Name:    doUpdateState
+// Purpose: This propagates the state forward one time step using the Runge
+//          Kutta 4 method.
+//----------------------------------------------------------------------------
 void kernel::RungeKutta4::doUpdateState(void)
 {
-  double x = X->get();
-  double dx = X->getDerrivative();
+  double x = This_State->get();
+  double dx = This_State->getDerrivative();
   switch (RK_Step)
   {
   case 0:
@@ -37,7 +104,10 @@ void kernel::RungeKutta4::doUpdateState(void)
 }
 
 
-// TODO: Add Description Block
+//----------------------------------------------------------------------------
+// Name:    doUpdateClock
+// Purpose: This implements clock updates for use with the runge kutta method.
+//----------------------------------------------------------------------------
 void kernel::RungeKutta4::doUpdateClock(void)
 {
   // Update the RK step based on where in teh rk4 loop the algorithm currently is

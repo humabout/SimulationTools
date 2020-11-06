@@ -74,8 +74,8 @@ namespace kernel
     //
     // In practice, using a singleton is a lot like using static methods 
     // except that you can take advantage of inheritanceand virtual methods.
-    static void initialize(IntegrationMethod::type method);
-    static void reset(double time_step_, 
+    void initialize(IntegrationMethod::type method);
+    void reset(double time_step_, 
                       double sample_rate_ = 0);
     static void setSampleRate(double sample_rate_);
 
@@ -94,10 +94,13 @@ namespace kernel
     static double Sample_Rate;
     static bool   Is_Ready;
 
-    State* X; // TODO: Needs a better name!
+    State* This_State;
 
     // Setters
-    virtual static void doInitialize(void);
+    // TODO: Make these pure eventually
+    virtual void doInitialize(void);
+    virtual void doReset(double time_step_,
+                         double sample_rate_);
 
     // Functionality
     virtual void doUpdateState(void) = 0;

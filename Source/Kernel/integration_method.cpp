@@ -24,7 +24,7 @@ bool                            kernel::IntegrationMethod::Is_Ready = true;
 //----------------------------------------------------------------------------
 kernel::IntegrationMethod::IntegrationMethod()
 {
-  // Nothing to initialize.
+  This_State = NULL;
 }
 
 
@@ -99,7 +99,23 @@ void kernel::IntegrationMethod::doInitialize(void)
 
 
 //----------------------------------------------------------------------------
-// Name:    doInitialize
+// Name:    doReset
+// Purpose: This implements the reset() interface by resetting the timestep, 
+//          and if provided, the sample rate for the simulation, and 
+//          recalculates the next time to integrate.
+//----------------------------------------------------------------------------
+void kernel::IntegrationMethod::doReset(double time_step_,
+  double sample_rate_)
+{
+  IntegrationMethod::Time_Step = time_step_;
+  IntegrationMethod::Sample_Rate = sample_rate_;
+  // Overload in RK4 also does this:
+  //RungeKutta4::Half_Time_Step = 0.5 * Time_Step;
+}
+
+
+//----------------------------------------------------------------------------
+// Name:    initialize
 // Purpose: This implements the Initialize() interface by setting all static
 //          variables to zero.
 //----------------------------------------------------------------------------
@@ -162,24 +178,21 @@ bool kernel::IntegrationMethod::isTimeToSample(double sample_rate_)
 
 //----------------------------------------------------------------------------
 // Name:    reset
-// Purpose: This resets the timestep, and if provided, teh sample rate for the 
+// Purpose: This resets the timestep, and if provided, the sample rate for the 
 //          simulation, and recalculates the next time to integrate.
 //----------------------------------------------------------------------------
 void kernel::IntegrationMethod::reset(double time_step_,
                                       double sample_rate_ = 0)
 {
-  IntegrationMethod::Time_Step = time_step_;
-  IntegrationMethod::Sample_Rate = sample_rate_;
-  // Overload in RK4 also does this:
-  //RungeKutta4::Half_Time_Step = 0.5 * Time_Step;
+  doReset(time_step_, sample_rate_);
 }
 
 
 //----------------------------------------------------------------------------
 // Name:    updateClock
-// Purpose: This resets updates the shared clock used by the integrator to
-//          execute its algorithm. It defers actual implementation as part of
-//          the template pattern so that specific integration methods can set
+// Purpose: This updates the shared clock used by the integrator to execute 
+//          its algorithm. It defers actual implementation as part of the 
+//          template pattern so that specific integration methods can set
 //          exactly how to update the clock.
 //----------------------------------------------------------------------------
 void kernel::IntegrationMethod::updateClock(void)
@@ -190,8 +203,8 @@ void kernel::IntegrationMethod::updateClock(void)
 
 //----------------------------------------------------------------------------
 // Name:    updateState
-// Purpose: This resets updates the executes the integration algorithm that 
-//          updates the state registered with this instance. It defers actual 
+// Purpose: This updates the executes the integration algorithm that updates 
+//          the state registered with this instance. It defers actual 
 //          implementation as part of the template pattern so that specific 
 //          integration methods can set exactly how to update the state.
 //----------------------------------------------------------------------------

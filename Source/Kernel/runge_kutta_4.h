@@ -53,6 +53,10 @@ namespace kernel
     double k4;
     static unsigned short int RK_Step;
 
+    void doInitialize() override;
+    void doReset(double time_step_,
+                 double sample_rate_) override;
+
     // Interface Implementation
     void doUpdateState(void) override final;
     void doUpdateClock(void) override final;
