@@ -19,7 +19,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Source\Kernel\state_interface.h">
+    <ClInclude Include="..\Source\Kernel\state.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Kernel\integration_method.h">
       <Filter>Kernel</Filter>
     </ClInclude>
   </ItemGroup>
