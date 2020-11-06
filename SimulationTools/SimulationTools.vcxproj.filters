@@ -36,5 +36,8 @@
     <ClCompile Include="..\Source\Kernel\state.cpp">
       <Filter>Kernel</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\Kernel\integration_method.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

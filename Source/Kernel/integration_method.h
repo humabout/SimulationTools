@@ -52,20 +52,20 @@ namespace kernel
     static bool   isTimeToSample(double sample_rate_);
 
     // Setters
-    static void initialize(void);
     static void initialize(IntegrationMethod::type method); // Call doInitialize() and set Method
-    static void reset(double time_step_, double sample_Rate_ = 0);
-    void registerState(State* state);
+    static void reset(double time_step_, 
+                      double sample_rate_ = 0);
 
     // Functionality
     static IntegrationMethod* create(void);
+    static IntegrationMethod* create(State* state_);
     void updateState(void);
     void updateClock(void);
 
   protected:
     // Member Variables
     static IntegrationMethod::type Method;
-    static double Time_Curennt;
+    static double Time_Current;
     static double Time_Next;
     static double Time_Step;
     static double Sample_Rate;
@@ -73,7 +73,6 @@ namespace kernel
 
     // Setters
     virtual void doInitialize(void);
-    virtual void doRegisterState(State* state);
 
     // Functionality
     virtual void doUpdateState(void) = 0;

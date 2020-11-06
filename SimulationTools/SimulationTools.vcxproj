@@ -145,6 +145,7 @@
     <ClInclude Include="..\Source\Kernel\state.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Source\Kernel\integration_method.cpp" />
     <ClCompile Include="..\Source\Kernel\state.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
