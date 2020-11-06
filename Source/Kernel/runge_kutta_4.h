@@ -37,7 +37,7 @@ namespace kernel
     double k2;
     double k3;
     double k4;
-    static unsigned short int rkStep;
+    static unsigned short int RK_Step;
 
     // Interface Implementation
     void doUpdateState(void) override final;

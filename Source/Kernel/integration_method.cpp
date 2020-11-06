@@ -3,10 +3,6 @@
 
 // Inclusions
 #include <cmath>
-//#include <cstdlib>
-//#include <ctime>
-//#include <iostream>
-//#include <stdexcept>
 #include "config_kernel.h"
 #include "integration_method.h"
 

@@ -7,7 +7,8 @@
 
 namespace kernel
 {
-  // Error Precision
+  // Sample Precision
+  // TODO: Rename this better
   static const double EPS = 1e-6;
 }
 

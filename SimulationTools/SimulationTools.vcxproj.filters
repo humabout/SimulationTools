@@ -39,5 +39,8 @@
     <ClCompile Include="..\Source\Kernel\integration_method.cpp">
       <Filter>Kernel</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\Kernel\runge_kutta_4.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

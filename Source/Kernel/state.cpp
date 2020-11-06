@@ -196,6 +196,11 @@ double kernel::State::get(void) const
   return *x;
 }
 
+double kernel::State::getDerrivative(void) const
+{
+  return *dx;
+}
+
 double& kernel::State::getReference(void) const
 {
   return (*x);

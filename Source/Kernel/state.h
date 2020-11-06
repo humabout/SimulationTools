@@ -42,6 +42,7 @@ namespace kernel
 
     // Getters
     double  get(void) const;
+    double  getDerrivative(void) const;
     double& getReference(void) const;
 
     // Setters

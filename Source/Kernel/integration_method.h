@@ -71,6 +71,8 @@ namespace kernel
     static double Sample_Rate;
     static bool   Is_Ready;
 
+    State* X; // TODO: Needs a better name!
+
     // Setters
     virtual void doInitialize(void);
 
