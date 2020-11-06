@@ -6,6 +6,7 @@
 
 
 // Inclusions
+#include <cstddef>
 #include "integration_method.h"
 
 
@@ -29,6 +30,8 @@ namespace kernel
   public:
     // Constructors
     State();
+    State(double& x_, double& dx_);
+    State(double& x_, State& dx_);
     State(const State& that);
 
     // Destructor
@@ -38,19 +41,30 @@ namespace kernel
     void operator= (const State& that);
 
     // Getters
-    double get(void) const;
+    double  get(void) const;
+    double& getReference(void) const;
 
     // Setters
-    void set(double* x_,
-             double* dx_);
+    void initialize(double x);
+
+    // Factory
+    static State* create(double& x_, double& dx_);
+    static State* create(double& x_, State& dx_);
+    static State* create(const State& state_);
 
     // Functionality
-    void propagate(void);
+    void updateClock(void);
+    void updateState(void);
+
+    // Sampling
+    bool isNewSample(void);
+    bool isNewSample(double sample_rate_);
 
   protected:
     // State Variables
     double* x;
     double* dx;
+    bool Owns_Derrivative;
 
     // Integration Method
     kernel::IntegrationMethod* Integrator;

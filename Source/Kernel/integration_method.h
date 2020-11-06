@@ -47,31 +47,38 @@ namespace kernel
     // Getters
     static double getTime(void);
     static double getTimeStep(void);
-    static bool   isTimeToReport(void);
+    static double getSampleRate(void);
+    static bool   isTimeToSample(void);
+    static bool   isTimeToSample(double sample_rate_);
 
     // Setters
     static void initialize(void);
     static void initialize(IntegrationMethod::type method); // Call doInitialize() and set Method
+    static void reset(double time_step_, double sample_Rate_ = 0);
     void registerState(State* state);
 
     // Functionality
     static IntegrationMethod* create(void);
-    void propagate(void);
+    void updateState(void);
+    void updateClock(void);
 
   protected:
     // Member Variables
     static IntegrationMethod::type Method;
-    static double Time;
+    static double Time_Curennt;
+    static double Time_Next;
     static double Time_Step;
-    static double Write_Rate;
-    static bool   Is_Time_To_Report;
+    static double Sample_Rate;
+    static bool   Is_Ready;
 
     // Setters
     virtual void doInitialize(void);
     virtual void doRegisterState(State* state);
 
     // Functionality
-    virtual void doPropagate(void) = 0;
+    virtual void doUpdateState(void) = 0;
+    virtual void doUpdateClock() = 0;
+
   }; // !IntegrationMethod
 
 
