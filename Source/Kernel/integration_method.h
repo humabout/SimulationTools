@@ -52,9 +52,32 @@ namespace kernel
     static bool   isTimeToSample(double sample_rate_);
 
     // Setters
-    static void initialize(IntegrationMethod::type method); // Call doInitialize() and set Method
+    // TODO: initialize should ideally be available globally, but different 
+    // child classes need different things initialized. Static methods cannot 
+    // be made virtual and overridden by child classes, so this presents some 
+    // problems.
+    //
+    // THE GOAL IS TO NOT NEED TO CALL A FUNCTION ON A SPECIFIC STATE TO 
+    // INITIALIZE ALL OF THE STATES
+    //
+    // From Stack Overflow:
+    // I ran into this problem the other day : I had some classes full of static 
+    // methods but I wanted to use inheritanceand virtual methodsand reduce code 
+    // repetition.My solution was :
+    //
+    // Instead of using static methods, use a singleton with virtual methods.
+    //
+    // In other words, each class should contain a static method that you call
+    // to get a pointer to a single, shared instance of the class.You can make
+    // the true constructors private or protected so that outside code can't 
+    // misuse it by creating additional instances.
+    //
+    // In practice, using a singleton is a lot like using static methods 
+    // except that you can take advantage of inheritanceand virtual methods.
+    static void initialize(IntegrationMethod::type method);
     static void reset(double time_step_, 
                       double sample_rate_ = 0);
+    static void setSampleRate(double sample_rate_);
 
     // Functionality
     static IntegrationMethod* create(void);
@@ -74,7 +97,7 @@ namespace kernel
     State* X; // TODO: Needs a better name!
 
     // Setters
-    virtual void doInitialize(void);
+    virtual static void doInitialize(void);
 
     // Functionality
     virtual void doUpdateState(void) = 0;

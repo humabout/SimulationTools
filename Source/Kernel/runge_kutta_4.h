@@ -10,6 +10,13 @@
 #include "integration_method.h"
 
 
+// Forward Declarations
+namespace kernel
+{
+  class State;
+}
+
+
 //----------------------------------------------------------------------------
 // Name:    kernel
 // Purpose: This namespace holds all parts of the simulation kernel.
@@ -30,6 +37,13 @@ namespace kernel
     static double Time_RK;
     static double Half_Time_Step;
 
+    // Constructors
+    RungeKutta4();
+    RungeKutta4(State* state_);
+
+    // Destructor
+    ~RungeKutta4();
+
   private:
     // Members Variables
     double x0;
@@ -48,4 +62,10 @@ namespace kernel
 
 
 } // !kernel
+
+
+ // Forward Declaration Inclusions
+#include "state.h"
+
+
 #endif // !RUNGE_KUTTA_4_H
