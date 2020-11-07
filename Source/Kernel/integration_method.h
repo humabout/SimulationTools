@@ -45,8 +45,8 @@ namespace kernel
     ~IntegrationMethod();
 
     // Getters
-    static double getTime(void);
-    static double getTimeStep(void);
+    static double time(void);
+    static double timestep(void);
     static bool   isReady(void);
 
     // Setters

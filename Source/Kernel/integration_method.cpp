@@ -188,13 +188,13 @@ void kernel::IntegrationMethod::updateState(State* state)
 //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 // GETTERS
 //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-double kernel::IntegrationMethod::getTime(void)
+double kernel::IntegrationMethod::time(void)
 {
   return Time_Current;
 }
 
 
-double kernel::IntegrationMethod::getTimeStep(void)
+double kernel::IntegrationMethod::timestep(void)
 {
   return Time_Step;
 }

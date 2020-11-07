@@ -86,6 +86,7 @@ void kernel::RungeKutta4::doUpdateState(State* state)
   case 3:
     k4 = dx;
     x = x0 + Time_Step * (k1 + 2 * k2 + 2 * k3 + k4) / 6;
+    *(state->x) = x;
     break;
   default:
     break;
