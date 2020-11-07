@@ -42,8 +42,6 @@ namespace kernel
 
     // Getters
     double  get(void) const;
-    double  getDerrivative(void) const;
-    double& getReference(void) const;
 
     // Setters
     void initialize(double x);
@@ -54,12 +52,7 @@ namespace kernel
     static State* create(const State& state_);
 
     // Functionality
-    void updateClock(void);
-    void updateState(void);
-
-    // Sampling
-    bool isNewSample(void);
-    bool isNewSample(double sample_rate_);
+    void propagate(void);
 
   private:
     // State Variables

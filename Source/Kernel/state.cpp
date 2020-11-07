@@ -58,7 +58,7 @@ kernel::State::State(double& x_,
                      State&  dx_)
 {
   this->x                = &x_;
-  this->dx               = &(dx_.getReference());
+  this->dx               = dx_.x;
   this->Owns_Derrivative = false;
   this->Integrator       = kernel::IntegrationMethod::create(this);
 }
@@ -128,30 +128,6 @@ void kernel::State::initialize(double x_)
 
 
 //----------------------------------------------------------------------------
-// Name:    isNewSample
-// Purpose: This method checks if there is a new sample available. It forwards
-//          the call to the integrator, which handles tracking time as part of
-//          its operation.
-// TODO:    Consider breaking timekeeping into its own object. This will 
-//          ensure that everything stays synced to whatever it should and can 
-//          be expanded to handle asynchronous events.
-//----------------------------------------------------------------------------
-bool kernel::State::isNewSample(void)
-{
-  return Integrator->isTimeToSample();
-}
-
-
-//----------------------------------------------------------------------------
-// Name:    isNewSample (overload)
-//----------------------------------------------------------------------------
-bool kernel::State::isNewSample(double sample_rate_)
-{
-  return Integrator->isTimeToSample(sample_rate_);
-}
-
-
-//----------------------------------------------------------------------------
 // Name:    operator=
 // Purpose: Assignment Operator.
 //----------------------------------------------------------------------------
@@ -165,24 +141,12 @@ void kernel::State::operator= (const State& that)
 
 
 //----------------------------------------------------------------------------
-// Name:    updateClock
-// Purpose: This method updates the clock. 
-// TODO:    Evaluate if this is even needed here. I think it is an internal
-//          thing for the integration method.
-//----------------------------------------------------------------------------
-void kernel::State::updateClock(void)
-{
-  Integrator->updateClock();
-}
-
-
-//----------------------------------------------------------------------------
-// Name:    updateState
+// Name:    propagate
 // Purpose: This method propagates the state forward one time step. It is part
 //          of a strategy pattern and forwards the call to the Integrator to
 //          execute based on whatever type of IntegrationMethod is being used.
 //----------------------------------------------------------------------------
-void kernel::State::updateState(void)
+void kernel::State::propagate(void)
 {
   Integrator->updateState();
 }
@@ -194,14 +158,4 @@ void kernel::State::updateState(void)
 double kernel::State::get(void) const
 {
   return *x;
-}
-
-double kernel::State::getDerrivative(void) const
-{
-  return *dx;
-}
-
-double& kernel::State::getReference(void) const
-{
-  return (*x);
 }
