@@ -10,6 +10,14 @@
 #include "integration_method.h"
 
 
+// Forward Declarations
+namespace kernel
+{
+  class IntegrationMethod;
+  class RungeKutta4;
+}
+
+
 //----------------------------------------------------------------------------
 // Name:    kernel
 // Purpose: This namespace holds all parts of the simulation kernel.
@@ -63,11 +71,24 @@ namespace kernel
     // Integration Method
     kernel::IntegrationMethod* Integrator;
 
+    // Friend Classes
+    // These classes are considered friend classes because they alone need 
+    // access to the value of the state and state derrivative. If there is a 
+    // way to give access to only those two values, I'd rather do that. For 
+    // now, making integrators, which exist solely to modify the state value, 
+    // full access will work.
+    friend IntegrationMethod;
+    friend RungeKutta4;
 
   }; // !StateInterface
   
 
 } // !kernel
+
+
+// Forward Declaration Inclusions
+#include "integration_method.h"
+#include "runge_kutta_4.h"
 
 
 #endif // !STATE_H

@@ -12,9 +12,7 @@
 // Static Variables
 kernel::IntegrationMethod::type kernel::IntegrationMethod::Method;
 double                          kernel::IntegrationMethod::Time_Current;
-double                          kernel::IntegrationMethod::Time_Next = 0;
 double                          kernel::IntegrationMethod::Time_Step;
-double                          kernel::IntegrationMethod::Sample_Rate;
 bool                            kernel::IntegrationMethod::Is_Ready = true;
 
 
@@ -24,7 +22,7 @@ bool                            kernel::IntegrationMethod::Is_Ready = true;
 //----------------------------------------------------------------------------
 kernel::IntegrationMethod::IntegrationMethod()
 {
-  This_State = NULL;
+  // Nothing to initialize.
 }
 
 
@@ -76,41 +74,10 @@ kernel::IntegrationMethod* kernel::IntegrationMethod::create(kernel::State* stat
   case type::Velocity_Verlet:
     // return new VelocityVerlet(state_);
   case type::RK4:
-    return new RungeKutta4(state_);
+    return new RungeKutta4();
   default:
-    return new RungeKutta4(state_);
+    return new RungeKutta4();
   }
-}
-
-
-//----------------------------------------------------------------------------
-// Name:    doInitialize
-// Purpose: This implements the Initialize() interface by setting all static
-//          variables to zero.
-//----------------------------------------------------------------------------
-void kernel::IntegrationMethod::doInitialize(void)
-{
-  IntegrationMethod::Time_Current = 0;
-  IntegrationMethod::Is_Ready = true;
-  // RK4 also does these:
-  //RungeKutta4::rkStep = 0;
-  //RungeKutta4::Time_RK = 0;
-}
-
-
-//----------------------------------------------------------------------------
-// Name:    doReset
-// Purpose: This implements the reset() interface by resetting the timestep, 
-//          and if provided, the sample rate for the simulation, and 
-//          recalculates the next time to integrate.
-//----------------------------------------------------------------------------
-void kernel::IntegrationMethod::doReset(double time_step_,
-  double sample_rate_)
-{
-  IntegrationMethod::Time_Step = time_step_;
-  IntegrationMethod::Sample_Rate = sample_rate_;
-  // Overload in RK4 also does this:
-  //RungeKutta4::Half_Time_Step = 0.5 * Time_Step;
 }
 
 
@@ -126,6 +93,10 @@ void kernel::IntegrationMethod::initialize(kernel::IntegrationMethod::type metho
 }
 
 
+// Commenting out anything related to determining when to sample. This doesn't
+// have anything to do with propagating states, so it will sit here as a 
+// comment until it an be moved to a more appropriate place.
+/*
 //----------------------------------------------------------------------------
 // Name:    isTimeToSample
 // Purpose: This checks if a new sample is ready based on the global sample
@@ -174,6 +145,7 @@ bool kernel::IntegrationMethod::isTimeToSample(double sample_rate_)
     return false;
   }
 }
+*/
 
 
 //----------------------------------------------------------------------------
@@ -181,10 +153,9 @@ bool kernel::IntegrationMethod::isTimeToSample(double sample_rate_)
 // Purpose: This resets the timestep, and if provided, the sample rate for the 
 //          simulation, and recalculates the next time to integrate.
 //----------------------------------------------------------------------------
-void kernel::IntegrationMethod::reset(double time_step_,
-                                      double sample_rate_ = 0)
+void kernel::IntegrationMethod::reset(double time_step_)
 {
-  doReset(time_step_, sample_rate_);
+  doReset(time_step_);
 }
 
 
@@ -208,9 +179,9 @@ void kernel::IntegrationMethod::updateClock(void)
 //          implementation as part of the template pattern so that specific 
 //          integration methods can set exactly how to update the state.
 //----------------------------------------------------------------------------
-void kernel::IntegrationMethod::updateState(void)
+void kernel::IntegrationMethod::updateState(State* state)
 {
-  doUpdateState();
+  doUpdateState(state);
 }
 
 
@@ -228,17 +199,7 @@ double kernel::IntegrationMethod::getTimeStep(void)
   return Time_Step;
 }
 
-
-double kernel::IntegrationMethod::getSampleRate(void)
+bool kernel::IntegrationMethod::isReady(void)
 {
-  return Sample_Rate;
-}
-
-
-//<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-// SETTERS
-//<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-void kernel::IntegrationMethod::setSampleRate(double sample_rate_)
-{
-  Sample_Rate = sample_rate_;
+  return Is_Ready;
 }

@@ -47,9 +47,7 @@ namespace kernel
     // Getters
     static double getTime(void);
     static double getTimeStep(void);
-    static double getSampleRate(void);
-    static bool   isTimeToSample(void);
-    static bool   isTimeToSample(double sample_rate_);
+    static bool   isReady(void);
 
     // Setters
     // TODO: initialize should ideally be available globally, but different 
@@ -74,37 +72,41 @@ namespace kernel
     //
     // In practice, using a singleton is a lot like using static methods 
     // except that you can take advantage of inheritanceand virtual methods.
+    //
+    // Notes: If we use dependency injection to have each state feed itself as
+    // an argument to the propagate method, then we might only need one copy 
+    // of the integrator, making it singleton-like and allowing the above 
+    // advice to be used. It also let's only instantiate a single copy of 
+    // this, which will save memory and runtime in an area where it may speed 
+    // things up. If nothing else, it gives flexibility at a time in 
+    // development where that is crucial for iterating. Once everything 
+    // stabilitizes, we can revisit this idea and see if there are performance
+    // gains to be had by giving each state a dedicated integrator object or 
+    // even making integration part of the state itself.
     void initialize(IntegrationMethod::type method);
-    void reset(double time_step_, 
-                      double sample_rate_ = 0);
-    static void setSampleRate(double sample_rate_);
+    void reset(double time_step_);
 
     // Functionality
     static IntegrationMethod* create(void);
     static IntegrationMethod* create(State* state_);
-    void updateState(void);
+    void updateState(State* state);
     void updateClock(void);
 
   protected:
     // Member Variables
     static IntegrationMethod::type Method;
     static double Time_Current;
-    static double Time_Next;
     static double Time_Step;
-    static double Sample_Rate;
     static bool   Is_Ready;
-
-    State* This_State;
 
     // Setters
     // TODO: Make these pure eventually
-    virtual void doInitialize(void);
-    virtual void doReset(double time_step_,
-                         double sample_rate_);
+    virtual void doInitialize(void) = 0;
+    virtual void doReset(double time_step_) = 0;
 
     // Functionality
-    virtual void doUpdateState(void) = 0;
-    virtual void doUpdateClock() = 0;
+    virtual void doUpdateState(State* state) = 0;
+    virtual void doUpdateClock(void) = 0;
 
   }; // !IntegrationMethod
 

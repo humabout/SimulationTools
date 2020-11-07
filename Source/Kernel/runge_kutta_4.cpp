@@ -19,23 +19,6 @@ kernel::RungeKutta4::RungeKutta4()
   this->k3      = 0;
   this->k4      = 0;
   this->RK_Step = 0;
-  This_State = NULL;
-}
-
-
-//----------------------------------------------------------------------------
-// Name:    RungeKutta4
-// Purpose: Constructor overload. This sets the state to be updated.
-//----------------------------------------------------------------------------
-kernel::RungeKutta4::RungeKutta4(State* state_)
-{
-  this->x0 =      0;
-  this->k1 =      0;
-  this->k2 =      0;
-  this->k3 =      0;
-  this->k4 =      0;
-  this->RK_Step = 0;
-  This_State = state_;
 }
 
 
@@ -50,7 +33,11 @@ kernel::RungeKutta4::~RungeKutta4()
 }
 
 
-// TODO: Needs a description
+//----------------------------------------------------------------------------
+// Name:    doInitialize
+// Purpose: This method implements the initialization of static variables for
+//          the sake of syncronizing the integration of all states.
+//----------------------------------------------------------------------------
 void kernel::RungeKutta4::doInitialize()
 {
   IntegrationMethod::Time_Current = 0;
@@ -60,12 +47,14 @@ void kernel::RungeKutta4::doInitialize()
 }
 
 
-// TODO: Needs a description
-void kernel::RungeKutta4::doReset(double time_step_,
-                                  double sample_rate_)
+//----------------------------------------------------------------------------
+// Name:    doReset
+// Purpose: This method implements the resetting of the time step, and for the
+//          purposes of RK4, the half time step, to the provided value.
+//----------------------------------------------------------------------------
+void kernel::RungeKutta4::doReset(double time_step_)
 {
   IntegrationMethod::Time_Step = time_step_;
-  IntegrationMethod::Sample_Rate = sample_rate_;
   RungeKutta4::Half_Time_Step = 0.5 * Time_Step;
 }
 
@@ -75,10 +64,10 @@ void kernel::RungeKutta4::doReset(double time_step_,
 // Purpose: This propagates the state forward one time step using the Runge
 //          Kutta 4 method.
 //----------------------------------------------------------------------------
-void kernel::RungeKutta4::doUpdateState(void)
+void kernel::RungeKutta4::doUpdateState(State* state)
 {
-  double x = This_State->get();
-  double dx = This_State->getDerrivative();
+  double x = *(state->x);
+  double dx = *(state->dx);
   switch (RK_Step)
   {
   case 0:
@@ -110,10 +99,17 @@ void kernel::RungeKutta4::doUpdateState(void)
 //----------------------------------------------------------------------------
 void kernel::RungeKutta4::doUpdateClock(void)
 {
-  // Update the RK step based on where in teh rk4 loop the algorithm currently is
+  // Update the RK step based on where in the rk4 loop the algorithm currently 
+  // is.
   switch (RK_Step)
   {
   case 0:
+    Is_Ready = true;
+    Time_Current = Time_RK;
+    break;
+  case 1:
+    Time_Current = false;
+    break;
   case 2:
     Time_RK += Half_Time_Step;
     break;
@@ -122,16 +118,4 @@ void kernel::RungeKutta4::doUpdateClock(void)
   }
   RK_Step++;
   RK_Step = RK_Step % 4;
-
-  // Updates whether or not it may be time to sample
-  bool is_first_iteration = (RK_Step == 0);
-  Is_Ready = (is_first_iteration) && 
-             (abs(Time_Next - Time_Current) < kernel::Sample_Time_Error);
-
-  // Updates the next current time and next rk4 time to update, provided something doesn't drive that to occur sooner
-  if (is_first_iteration)
-  {
-    Time_Current = Time_RK;
-    Time_Next += Time_Step;
-  }
 }

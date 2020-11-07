@@ -148,7 +148,7 @@ void kernel::State::operator= (const State& that)
 //----------------------------------------------------------------------------
 void kernel::State::propagate(void)
 {
-  Integrator->updateState();
+  Integrator->updateState(this);
 }
 
 

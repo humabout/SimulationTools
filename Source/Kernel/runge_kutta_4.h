@@ -39,7 +39,6 @@ namespace kernel
 
     // Constructors
     RungeKutta4();
-    RungeKutta4(State* state_);
 
     // Destructor
     ~RungeKutta4();
@@ -54,11 +53,10 @@ namespace kernel
     static unsigned short int RK_Step;
 
     void doInitialize() override;
-    void doReset(double time_step_,
-                 double sample_rate_) override;
+    void doReset(double time_step_) override;
 
     // Interface Implementation
-    void doUpdateState(void) override final;
+    void doUpdateState(State* state) override final;
     void doUpdateClock(void) override final;
 
 
