@@ -6,7 +6,6 @@
 
 
 // Inclusions
-#include "config_kernel.h"
 #include "integration_method.h"
 
 
@@ -33,10 +32,6 @@ namespace kernel
   class RungeKutta4 : public IntegrationMethod
   {
   public:
-    // Members Variables
-    static double Time_RK;
-    static double Half_Time_Step;
-
     // Constructors
     RungeKutta4();
 
@@ -50,6 +45,9 @@ namespace kernel
     double k2;
     double k3;
     double k4;
+
+    static double             Time_RK;
+    static double             Half_Time_Step;
     static unsigned short int RK_Step;
 
     void doInitialize() override;

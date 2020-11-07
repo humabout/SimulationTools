@@ -25,9 +25,6 @@
     <ClInclude Include="..\Source\Kernel\integration_method.h">
       <Filter>Kernel</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\Kernel\config_kernel.h">
-      <Filter>Kernel</Filter>
-    </ClInclude>
     <ClInclude Include="..\Source\Kernel\runge_kutta_4.h">
       <Filter>Kernel</Filter>
     </ClInclude>
@@ -42,5 +39,6 @@
     <ClCompile Include="..\Source\Kernel\runge_kutta_4.cpp">
       <Filter>Kernel</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\main.cpp" />
   </ItemGroup>
 </Project>

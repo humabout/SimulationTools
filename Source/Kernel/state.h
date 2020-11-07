@@ -6,14 +6,12 @@
 
 
 // Inclusions
-#include <cstddef>
 #include "integration_method.h"
 
 
 // Forward Declarations
 namespace kernel
 {
-  class IntegrationMethod;
   class RungeKutta4;
 }
 
@@ -87,7 +85,6 @@ namespace kernel
 
 
 // Forward Declaration Inclusions
-#include "integration_method.h"
 #include "runge_kutta_4.h"
 
 

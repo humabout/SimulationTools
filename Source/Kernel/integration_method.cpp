@@ -3,7 +3,6 @@
 
 // Inclusions
 #include <cmath>
-#include "config_kernel.h"
 #include "integration_method.h"
 #include "runge_kutta_4.h"
 

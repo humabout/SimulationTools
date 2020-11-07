@@ -3,8 +3,15 @@
 
 // Inclusions
 #include <cmath>
-#include "config_kernel.h"
+#include "integration_method.h"
 #include "runge_kutta_4.h"
+#include "state.h"
+
+
+// Initializing Static Variables
+double             kernel::RungeKutta4::Time_RK;
+double             kernel::RungeKutta4::Half_Time_Step;
+unsigned short int kernel::RungeKutta4::RK_Step;
 
 
 //----------------------------------------------------------------------------
@@ -73,19 +80,19 @@ void kernel::RungeKutta4::doUpdateState(State* state)
   case 0:
     x0 = x;
     k1 = dx;
-    x = x0 + Half_Time_Step * k1;
+    x = x0 + RungeKutta4::Half_Time_Step * k1;
     break;
   case 1:
     k2 = dx;
-    x = x0 + Half_Time_Step * k2;
+    x = x0 + RungeKutta4::Half_Time_Step * k2;
     break;
   case 2:
     k3 = dx;
-    x = x0 + Time_Step * k3;
+    x = x0 + IntegrationMethod::Time_Step * k3;
     break;
   case 3:
     k4 = dx;
-    x = x0 + Time_Step * (k1 + 2 * k2 + 2 * k3 + k4) / 6;
+    x = x0 + IntegrationMethod::Time_Step * (k1 + 2 * k2 + 2 * k3 + k4) / 6;
     *(state->x) = x;
     break;
   default:
@@ -105,18 +112,18 @@ void kernel::RungeKutta4::doUpdateClock(void)
   switch (RK_Step)
   {
   case 0:
-    Is_Ready = true;
-    Time_Current = Time_RK;
+    IntegrationMethod::Is_Ready = true;
+    IntegrationMethod::Time_Current = RungeKutta4::Time_RK;
     break;
   case 1:
-    Time_Current = false;
+    IntegrationMethod::Is_Ready = false;
     break;
   case 2:
-    Time_RK += Half_Time_Step;
+    RungeKutta4::Time_RK += RungeKutta4::Half_Time_Step;
     break;
   default:
     break;
   }
-  RK_Step++;
-  RK_Step = RK_Step % 4;
+  RungeKutta4::RK_Step++;
+  RungeKutta4::RK_Step = RungeKutta4::RK_Step % 4;
 }
