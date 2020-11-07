@@ -8,8 +8,7 @@
 namespace kernel
 {
   // Sample Precision
-  // TODO: Rename this better
-  static const double EPS = 1e-6;
+  static const double Sample_Time_Error = 1e-6;
 }
 
 

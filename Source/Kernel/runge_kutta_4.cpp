@@ -125,7 +125,8 @@ void kernel::RungeKutta4::doUpdateClock(void)
 
   // Updates whether or not it may be time to sample
   bool is_first_iteration = (RK_Step == 0);
-  Is_Ready = (is_first_iteration) && (abs(Time_Next - Time_Current) < kernel::EPS);
+  Is_Ready = (is_first_iteration) && 
+             (abs(Time_Next - Time_Current) < kernel::Sample_Time_Error);
 
   // Updates the next current time and next rk4 time to update, provided something doesn't drive that to occur sooner
   if (is_first_iteration)

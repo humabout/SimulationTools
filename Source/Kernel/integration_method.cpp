@@ -147,8 +147,8 @@ bool kernel::IntegrationMethod::isTimeToSample(double sample_rate_)
   if (Is_Ready)
   {
     // Calculating the next sample time before the next inegration time
-    double sample_time = floor((Time_Current + kernel::EPS) / sample_rate_ + 1)
-      * sample_rate_;
+    double sample_time = floor((Time_Current + kernel::Sample_Time_Error) /
+                         sample_rate_ + 1) * sample_rate_;
 
     // If the next sample is before the next integration time, set the next 
     // integration time to the next sample time and update it.
@@ -167,7 +167,7 @@ bool kernel::IntegrationMethod::isTimeToSample(double sample_rate_)
 
     // Check if it truly is time to sample based on updates
     double time_sample_error = Time_Current - sample_time + sample_rate_;
-    return (time_sample_error < kernel::EPS);
+    return (time_sample_error < kernel::Sample_Time_Error);
   }
   else
   {
