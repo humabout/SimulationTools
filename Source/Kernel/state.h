@@ -61,7 +61,7 @@ namespace kernel
     bool isNewSample(void);
     bool isNewSample(double sample_rate_);
 
-  protected:
+  private:
     // State Variables
     double* x;
     double* dx;
