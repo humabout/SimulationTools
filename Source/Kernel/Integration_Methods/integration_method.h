@@ -50,6 +50,7 @@ namespace kernel
     static bool   isReady(void);
 
     // Setters
+    static void setIntegrationMethod(IntegrationMethod::type method_);
     // TODO: initialize should ideally be available globally, but different 
     // child classes need different things initialized. Static methods cannot 
     // be made virtual and overridden by child classes, so this presents some 
@@ -83,13 +84,13 @@ namespace kernel
     // stabilitizes, we can revisit this idea and see if there are performance
     // gains to be had by giving each state a dedicated integrator object or 
     // even making integration part of the state itself.
-    void initialize(IntegrationMethod::type method);
+    void initialize();
     void reset(double time_step_);
 
     // Functionality
     static IntegrationMethod* create(void);
     static IntegrationMethod* create(State* state_);
-    void updateState(State* state);
+    void updateState(State* state_);
     void updateClock(void);
 
   protected:
@@ -99,6 +100,7 @@ namespace kernel
     static double Time_Step;
     static bool   Is_Ready;
 
+  private:
     // Setters
     // TODO: Make these pure eventually
     virtual void doInitialize(void) = 0;
@@ -115,7 +117,7 @@ namespace kernel
 
 
 // Forward Declaration Inclusions
-#include "state.h"
+#include "..\state.h"
 
 
 #endif // !INTEGRATION_METHOD_H

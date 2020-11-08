@@ -85,10 +85,9 @@ kernel::IntegrationMethod* kernel::IntegrationMethod::create(kernel::State* stat
 // Purpose: This implements the Initialize() interface by setting all static
 //          variables to zero.
 //----------------------------------------------------------------------------
-void kernel::IntegrationMethod::initialize(kernel::IntegrationMethod::type method_)
+void kernel::IntegrationMethod::initialize()
 {
   doInitialize();
-  Method = method_;
 }
 
 
@@ -178,9 +177,9 @@ void kernel::IntegrationMethod::updateClock(void)
 //          implementation as part of the template pattern so that specific 
 //          integration methods can set exactly how to update the state.
 //----------------------------------------------------------------------------
-void kernel::IntegrationMethod::updateState(State* state)
+void kernel::IntegrationMethod::updateState(State* state_)
 {
-  doUpdateState(state);
+  doUpdateState(state_);
 }
 
 
@@ -201,4 +200,13 @@ double kernel::IntegrationMethod::timestep(void)
 bool kernel::IntegrationMethod::isReady(void)
 {
   return Is_Ready;
+}
+
+
+//<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+// SETTERS
+//<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+void kernel::IntegrationMethod::setIntegrationMethod(kernel::IntegrationMethod::type method_)
+{
+  Method = method_;
 }

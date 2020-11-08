@@ -17,34 +17,46 @@
     <Filter Include="Utilities\Math Library">
       <UniqueIdentifier>{532dcefd-a685-45e4-8c1f-1710fb2517ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Kernel\Integration Methods">
+      <UniqueIdentifier>{aa20c5f8-ffa4-45b3-8e60-cd0ee8906737}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kernel\End Conditions">
+      <UniqueIdentifier>{d78676a6-5027-4292-83af-65b5cd3316d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\Kernel\state.h">
       <Filter>Kernel</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\Kernel\integration_method.h">
-      <Filter>Kernel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Kernel\runge_kutta_4.h">
-      <Filter>Kernel</Filter>
-    </ClInclude>
     <ClInclude Include="..\Source\Kernel\block.h">
       <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Kernel\sim_loop.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Kernel\Integration_Methods\integration_method.h">
+      <Filter>Kernel\Integration Methods</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Kernel\Integration_Methods\runge_kutta_4.h">
+      <Filter>Kernel\Integration Methods</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Kernel\state.cpp">
       <Filter>Kernel</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Kernel\integration_method.cpp">
-      <Filter>Kernel</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Kernel\runge_kutta_4.cpp">
-      <Filter>Kernel</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\main.cpp" />
     <ClCompile Include="..\Source\Kernel\block.cpp">
       <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Kernel\sim_loop.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Kernel\Integration_Methods\integration_method.cpp">
+      <Filter>Kernel\Integration Methods</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Kernel\Integration_Methods\runge_kutta_4.cpp">
+      <Filter>Kernel\Integration Methods</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

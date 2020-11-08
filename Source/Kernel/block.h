@@ -10,9 +10,6 @@
 #include "state.h"
 
 
-// Forward Declarations
-
-
 //------------------------------------------------------------------------------
 // Name:    kernel
 // Purpose: This namespace holds all parts of the simulation kernel.

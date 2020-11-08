@@ -14,18 +14,15 @@
 kernel::Block::~Block()
 {
   std::vector<State*>::iterator state;
-  for (
-    state = States.begin();
-    state != States.end();
-    state++
-    )
+  for (state = States.begin();
+       state != States.end();
+       state++)
   {
     delete (*state);
   }
 }
 
 
-// TODO: Write this description
 //------------------------------------------------------------------------------
 // Name:    add
 // Purpose: This method adds a new state to the block.
@@ -53,7 +50,6 @@ void kernel::Block::add(State* state_)
 }
 
 
-// TODO: Write this description
 //------------------------------------------------------------------------------
 // Name:    operator<<
 // Purpose: This adds a new state to the block.
@@ -64,20 +60,18 @@ void kernel::Block::operator<< (State* state_)
 }
 
 
-// TODO: Write this description
 //------------------------------------------------------------------------------
 // Name:    doPropagate
 // Purpose: This method implements the default behavior for propagating the 
 //          state of the block forward one time step.
+// TODO:    Make this run state->propagate() in a loop until integration is over? Perhapse this needs to be done at the simulation level.
 //------------------------------------------------------------------------------
 void kernel::Block::doPropagate(void)
 {
   std::vector<State*>::iterator state;
-  for (
-    state = States.begin();
-    state != States.end();
-    state++
-    )
+  for (state = States.begin();
+       state != States.end();
+       state++)
   {
     (*state)->propagate();
   }
