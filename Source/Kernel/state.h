@@ -49,10 +49,6 @@ namespace kernel
     // Getters
     double  get(void) const;
 
-    // Setters
-    // TODO:    This method may not be necessary. Consider stripping it out.
-    void initialize(double x);
-
     // Factory
     static State* create(double& x_, double& dx_);
     static State* create(double& x_, State& dx_);

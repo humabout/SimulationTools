@@ -17,11 +17,8 @@ kernel::SimLoop::SimLoop()
 {
   Time_Step = 0;
   Time_Max  = 0;
-
-  // TODO:  This implementation is really screaming "Use a strategy 
-  //        pattern!"
   IntegrationMethod::setIntegrationMethod(IntegrationMethod::type::RK4);
-  Integrator = IntegrationMethod::create();
+  Integrator = IntegrationMethod::instance();
 }
 
 
@@ -39,11 +36,8 @@ kernel::SimLoop::SimLoop(double                  time_step_,
   Time_Step = time_max_;
   Time_Max = time_max_;
   Blocks = blocks_;
-
-  // TODO:  This implementation is really screaming "Use a strategy 
-  //        pattern!"
   IntegrationMethod::setIntegrationMethod(integration_method_);
-  Integrator = IntegrationMethod::create();
+  Integrator = IntegrationMethod::instance();
 }
 
 
@@ -54,7 +48,8 @@ kernel::SimLoop::SimLoop(double                  time_step_,
 //------------------------------------------------------------------------------
 kernel::SimLoop::~SimLoop()
 {
-  delete Integrator;
+  // This deletes the IntegrationMethod instance to free memory.
+  IntegrationMethod::resetInstance();
 }
 
 
@@ -80,7 +75,14 @@ void kernel::SimLoop::add(Block* block_)
 //------------------------------------------------------------------------------
 bool kernel::SimLoop::isEnd(void) const 
 { 
-  return (Integrator->time() > Time_Max); 
+  if (IntegrationMethod::isReady())
+  {
+    return (Integrator->time() > Time_Max);
+  }
+  else
+  {
+    return false;
+  }
 }
 
 
@@ -111,7 +113,6 @@ void kernel::SimLoop::operator<< (Block* block_)
 void kernel::SimLoop::run(void)
 {
   // Initialize the simulation
-  // TODO:  Should this be its own function?
   Integrator->initialize();
   Integrator->reset(Time_Step);
 
@@ -125,7 +126,6 @@ void kernel::SimLoop::run(void)
   }
 
   // Execute the simulation loop
-  // TODO:  Somewhere in here is where we might want to check when the integrator has computed the actual value.
   while (!isEnd())
   {
     // Updating any state-dependent information

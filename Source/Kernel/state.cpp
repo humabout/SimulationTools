@@ -106,18 +106,6 @@ kernel::State* kernel::State::create(const kernel::State& state_)
 
 
 //----------------------------------------------------------------------------
-// Name:    initialize
-// Purpose: This method initializes state to a given initial condition.
-// Inputs:  The state's initial condition
-// TODO:    This method may not be necessary. Consider stripping it out.
-//----------------------------------------------------------------------------
-void kernel::State::initialize(double x_)
-{
-  *x = x_;
-}
-
-
-//----------------------------------------------------------------------------
 // Name:    operator=
 // Purpose: Assignment Operator.
 //----------------------------------------------------------------------------

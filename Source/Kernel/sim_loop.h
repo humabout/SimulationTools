@@ -8,10 +8,6 @@
 // Inclusions
 #include <vector>
 #include "block.h"
-// TODO:  There are a lot of decisions to make surrounding how to handle the 
-//        integration method yet to be made. Those presented here are not final 
-//        in any way, but simply provide a functioning solution. In an ideal 
-//        world, this will be made far more consistent across the board.
 #include "Integration_Methods/integration_method.h"
 
 

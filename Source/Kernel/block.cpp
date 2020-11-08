@@ -76,8 +76,6 @@ void kernel::Block::add(State* state_)
 // Name:    doPropagate
 // Purpose: This method implements the default behavior for propagating the 
 //          state of the block forward one time step.
-// TODO:    Make this run state->propagate() in a loop until integration is 
-//          over? Perhapse this needs to be done at the simulation level.
 //------------------------------------------------------------------------------
 void kernel::Block::doPropagate(void)
 {
