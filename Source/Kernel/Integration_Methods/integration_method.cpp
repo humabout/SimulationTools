@@ -4,6 +4,7 @@
 // Inclusions
 #include <cmath>
 #include "integration_method.h"
+#include "euler_method.h"
 #include "runge_kutta_4.h"
 
 
@@ -30,11 +31,11 @@ kernel::IntegrationMethod* kernel::IntegrationMethod::instance(void)
     switch (Method)
     {
     case type::Euler:
-      // return new Euler(state_);
+      Instance = new EulerMethod();
     case type::RK2:
-      // return new RungeKutta2(state_);
+      // return new RungeKutta2();
     case type::Velocity_Verlet:
-      // return new VelocityVerlet(state_);
+      // return new VelocityVerlet();
     case type::RK4:
       Instance = new RungeKutta4();
     default:

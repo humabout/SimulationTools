@@ -40,6 +40,9 @@
     <ClInclude Include="..\Source\Kernel\Integration_Methods\runge_kutta_4.h">
       <Filter>Kernel\Integration Methods</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\Kernel\Integration_Methods\euler_method.h">
+      <Filter>Kernel\Integration Methods</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Kernel\state.cpp">
@@ -56,6 +59,9 @@
       <Filter>Kernel\Integration Methods</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Kernel\Integration_Methods\runge_kutta_4.cpp">
+      <Filter>Kernel\Integration Methods</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Kernel\Integration_Methods\euler_method.cpp">
       <Filter>Kernel\Integration Methods</Filter>
     </ClCompile>
   </ItemGroup>

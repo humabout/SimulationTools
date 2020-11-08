@@ -16,7 +16,7 @@ unsigned short int kernel::RungeKutta4::RK_Step;
 
 //----------------------------------------------------------------------------
 // Name:    RungeKutta4
-// Purpose: Default constructor. Sets the pointer to NULL.
+// Purpose: Default constructor.
 //----------------------------------------------------------------------------
 kernel::RungeKutta4::RungeKutta4()
 {

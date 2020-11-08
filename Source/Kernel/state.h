@@ -12,6 +12,7 @@
 // Forward Declarations
 namespace kernel
 {
+  class EulerMethod;
   class RungeKutta4;
 }
 
@@ -72,6 +73,7 @@ namespace kernel
     // now, making integrators, which exist solely to modify the state value, 
     // full access will work.
     friend IntegrationMethod;
+    friend EulerMethod;
     friend RungeKutta4;
 
   }; // !StateInterface
@@ -81,6 +83,7 @@ namespace kernel
 
 
 // Forward Declaration Inclusions
+#include "Integration_Methods/euler_method.h"
 #include "Integration_Methods\runge_kutta_4.h"
 
 
