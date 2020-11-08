@@ -39,17 +39,7 @@ namespace kernel
     SimLoop(double                  time_step_,
             double                  time_max_,
             std::vector<Block*>     blocks_,
-            IntegrationMethod::type integration_method_)
-    {
-      Time_Step = time_max_;
-      Time_Max  = time_max_;
-      Blocks    = blocks_;
-
-      // TODO:  This implementation is really screaming "Use a strategy 
-      //        pattern!"
-      IntegrationMethod::setIntegrationMethod(integration_method_);
-      Integrator = IntegrationMethod::create();
-    }
+            IntegrationMethod::type integration_method_);
 
     // Destructor
     ~SimLoop();
@@ -70,7 +60,7 @@ namespace kernel
     //        it will add flexibility.
 
     // Functionality
-    bool isEnd(void) const { return (Integrator->time() > Time_Max); }
+    bool isEnd(void) const;
 
   }; // !SimLoop
 
