@@ -50,6 +50,7 @@ namespace kernel
     double  get(void) const;
 
     // Setters
+    // TODO:    This method may not be necessary. Consider stripping it out.
     void initialize(double x);
 
     // Factory
@@ -64,7 +65,6 @@ namespace kernel
     // State Variables
     double* x;
     double* dx;
-    bool Owns_Derrivative;
 
     // Integration Method
     kernel::IntegrationMethod* Integrator;

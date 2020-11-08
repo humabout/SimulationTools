@@ -12,10 +12,9 @@
 //----------------------------------------------------------------------------
 kernel::State::State()
 {
-  *(this->x)             = 0;
-  *(this->dx)            = 0;
-  this->Owns_Derrivative = true;
-  this->Integrator       = kernel::IntegrationMethod::create();
+  *(this->x)             = NULL;
+  *(this->dx)            = NULL;
+  this->Integrator       = kernel::IntegrationMethod::instance();
 }
 
 
@@ -40,8 +39,7 @@ kernel::State::State(double& x_,
 {
   this->x                = &x_;
   this->dx               = &dx_;
-  this->Owns_Derrivative = true;
-  this->Integrator       = kernel::IntegrationMethod::create();
+  this->Integrator       = kernel::IntegrationMethod::instance();
 }
 
 
@@ -56,32 +54,21 @@ kernel::State::State(double& x_,
 {
   this->x                = &x_;
   this->dx               = dx_.x;
-  this->Owns_Derrivative = false;
-  this->Integrator       = kernel::IntegrationMethod::create();
+  this->Integrator       = kernel::IntegrationMethod::instance();
 }
 
 
 //----------------------------------------------------------------------------
 // Name:    ~State
-// Purpose: This object owns its own value and is responsible for deleting it.
-//          It may or may not own its own derrivative, but if it does, it also
-//          deallocates that memory.
-// TODO:    Need to be careful that states actually do own their own state 
-//          value. It may be better from a user standpoint if blocks own all 
-//          values they declare or instantiate and states just propagate them.
-//          Otherwise, the user will have to know which values the state owns 
-//          and which the block owns. This is probalby inviting fiddliness.
+// Purpose: This object does not own its own state or state derrivative. These
+//          are merely linked to via reference for the sake of propagating 
+//          them. The values' owners are responsible for deleting them, if
+//          they live on heap. As a result, this object owns nothing and does
+//          not need to delete anything.
 //----------------------------------------------------------------------------
 kernel::State::~State()
 {
-  if (x != NULL)
-  {
-    delete x;
-  }
-  if (dx != NULL && Owns_Derrivative)
-  {
-    delete dx;
-  }
+  // Does nothing.
 }
 
 
@@ -122,6 +109,7 @@ kernel::State* kernel::State::create(const kernel::State& state_)
 // Name:    initialize
 // Purpose: This method initializes state to a given initial condition.
 // Inputs:  The state's initial condition
+// TODO:    This method may not be necessary. Consider stripping it out.
 //----------------------------------------------------------------------------
 void kernel::State::initialize(double x_)
 {
@@ -137,7 +125,6 @@ void kernel::State::operator= (const State& that)
 {
   this->x = that.x;
   this->dx = that.dx;
-  this->Owns_Derrivative = that.Owns_Derrivative;
   this->Integrator = that.Integrator;
 }
 
