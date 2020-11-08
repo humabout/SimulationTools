@@ -64,9 +64,14 @@ namespace kernel
     static IntegrationMethod::type Method;
 
     // Singleton Pattern
-    static IntegrationMethod*      Instance;
+    static IntegrationMethod* Instance;
 
-  private:
+    // Enforcing Singleton Pattern
+    IntegrationMethod() {}
+    IntegrationMethod(const IntegrationMethod& that) {}
+    IntegrationMethod& operator= (const IntegrationMethod& that) {}
+    ~IntegrationMethod() {}
+
     // Setters
     virtual void doInitialize(void) = 0;
     virtual void doReset(double time_step_) = 0;
@@ -74,12 +79,6 @@ namespace kernel
     // Functionality
     virtual void doUpdateState(State* state) = 0;
     virtual void doUpdateClock(void) = 0;
-
-    // Enforcing Singleton Pattern
-    IntegrationMethod() {}
-    IntegrationMethod(const IntegrationMethod& that) {}
-    IntegrationMethod& operator= (const IntegrationMethod& that) {}
-    ~IntegrationMethod() {}
 
   }; // !IntegrationMethod
 

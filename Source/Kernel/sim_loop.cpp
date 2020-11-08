@@ -30,12 +30,10 @@ kernel::SimLoop::SimLoop()
 //------------------------------------------------------------------------------
 kernel::SimLoop::SimLoop(double                  time_step_,
                          double                  time_max_,
-                         std::vector<Block*>     blocks_,
                          IntegrationMethod::type integration_method_)
 {
   Time_Step = time_max_;
   Time_Max = time_max_;
-  Blocks = blocks_;
   IntegrationMethod::setIntegrationMethod(integration_method_);
   Integrator = IntegrationMethod::instance();
 }

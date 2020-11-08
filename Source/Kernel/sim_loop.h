@@ -34,7 +34,6 @@ namespace kernel
     SimLoop();
     SimLoop(double                  time_step_,
             double                  time_max_,
-            std::vector<Block*>     blocks_,
             IntegrationMethod::type integration_method_);
 
     // Destructor
