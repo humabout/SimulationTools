@@ -9,74 +9,39 @@
 
 
 // Static Variables
-kernel::IntegrationMethod::type kernel::IntegrationMethod::Method;
+kernel::IntegrationMethod::type kernel::IntegrationMethod::Method = kernel::IntegrationMethod::type::RK4;
 double                          kernel::IntegrationMethod::Time_Current;
 double                          kernel::IntegrationMethod::Time_Step;
 bool                            kernel::IntegrationMethod::Is_Ready = true;
+kernel::IntegrationMethod*      kernel::IntegrationMethod::Instance = NULL;
 
 
 //----------------------------------------------------------------------------
-// Name:    IntegrationMethod
-// Purpose: Default Constructor.
+// Name:    instance
+// Purpose: This getter returns a pointer to the only instance of this class.
+//          If the instance has not yet been instantiated, this method will
+//          create a single instance of an integration method based on the
+//          type currently set and return it.
 //----------------------------------------------------------------------------
-kernel::IntegrationMethod::IntegrationMethod()
+kernel::IntegrationMethod* kernel::IntegrationMethod::instance(void)
 {
-  // Nothing to initialize.
-}
-
-
-//----------------------------------------------------------------------------
-// Name:    ~IntegrationMethod
-// Purpose: Destructor. This interface has no memory to deallocate.
-//----------------------------------------------------------------------------
-kernel::IntegrationMethod::~IntegrationMethod()
-{
-  // Nothing to dealocate.
-}
-
-
-//----------------------------------------------------------------------------
-// Name:    create
-// Purpose: Factory method that returns an instance of the correct type of
-//          integration method based on the global integration method being
-//          used.
-//----------------------------------------------------------------------------
-kernel::IntegrationMethod* kernel::IntegrationMethod::create(void)
-{
-  switch (Method)
+  if (Instance == NULL)
   {
-  case type::Euler:
-    // return new Euler();
-  case type::RK2:
-    // return new RungeKutta2();
-  case type::Velocity_Verlet:
-    // return new VelocityVerlet();
-  case type::RK4:
-    return new RungeKutta4();
-  default:
-    return new RungeKutta4();
+    switch (Method)
+    {
+    case type::Euler:
+      // return new Euler(state_);
+    case type::RK2:
+      // return new RungeKutta2(state_);
+    case type::Velocity_Verlet:
+      // return new VelocityVerlet(state_);
+    case type::RK4:
+      Instance = new RungeKutta4();
+    default:
+      Instance = new RungeKutta4();
+    }
   }
-}
-
-
-//----------------------------------------------------------------------------
-// Name:    create (overload)
-//----------------------------------------------------------------------------
-kernel::IntegrationMethod* kernel::IntegrationMethod::create(kernel::State* state_)
-{
-  switch (Method)
-  {
-  case type::Euler:
-    // return new Euler(state_);
-  case type::RK2:
-    // return new RungeKutta2(state_);
-  case type::Velocity_Verlet:
-    // return new VelocityVerlet(state_);
-  case type::RK4:
-    return new RungeKutta4();
-  default:
-    return new RungeKutta4();
-  }
+  return Instance;
 }
 
 
@@ -158,6 +123,37 @@ void kernel::IntegrationMethod::reset(double time_step_)
 
 
 //----------------------------------------------------------------------------
+// Name:    resetInstance
+// Purpose: This clears the old integration instance and prepares to generate
+//          a new one.
+//----------------------------------------------------------------------------
+void kernel::IntegrationMethod::resetInstance(void)
+{
+  // Removing the old Instance
+  if (Instance != NULL)
+  {
+    delete Instance;
+  }
+
+  // Set to NULL so instance() will still work.
+  Instance = NULL;
+}
+
+
+//----------------------------------------------------------------------------
+// Name:    setIntegrationMethod
+// Purpose: This clears the old integration instance and sets a new method so
+//          that the next time an instance is requested, the new method will
+//          generated and returned.
+//----------------------------------------------------------------------------
+void kernel::IntegrationMethod::setIntegrationMethod(kernel::IntegrationMethod::type method_)
+{
+  IntegrationMethod::Method = method_;
+  IntegrationMethod::resetInstance();
+}
+
+
+//----------------------------------------------------------------------------
 // Name:    updateClock
 // Purpose: This updates the shared clock used by the integrator to execute 
 //          its algorithm. It defers actual implementation as part of the 
@@ -191,7 +187,6 @@ double kernel::IntegrationMethod::time(void)
   return Time_Current;
 }
 
-
 double kernel::IntegrationMethod::timestep(void)
 {
   return Time_Step;
@@ -200,13 +195,4 @@ double kernel::IntegrationMethod::timestep(void)
 bool kernel::IntegrationMethod::isReady(void)
 {
   return Is_Ready;
-}
-
-
-//<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-// SETTERS
-//<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-void kernel::IntegrationMethod::setIntegrationMethod(kernel::IntegrationMethod::type method_)
-{
-  Method = method_;
 }

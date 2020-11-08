@@ -71,13 +71,14 @@ void kernel::RungeKutta4::doReset(double time_step_)
 // Purpose: This propagates the state forward one time step using the Runge
 //          Kutta 4 method.
 //----------------------------------------------------------------------------
-void kernel::RungeKutta4::doUpdateState(State* state)
+void kernel::RungeKutta4::doUpdateState(State* state_)
 {
-  double x = *(state->x);
-  double dx = *(state->dx);
+  double x = *(state_->x);
+  double dx = *(state_->dx);
   switch (RK_Step)
   {
   case 0:
+    IntegrationMethod::Is_Ready = false;
     x0 = x;
     k1 = dx;
     x = x0 + RungeKutta4::Half_Time_Step * k1;
@@ -93,7 +94,8 @@ void kernel::RungeKutta4::doUpdateState(State* state)
   case 3:
     k4 = dx;
     x = x0 + IntegrationMethod::Time_Step * (k1 + 2 * k2 + 2 * k3 + k4) / 6;
-    *(state->x) = x;
+    *(state_->x) = x;
+    IntegrationMethod::Is_Ready = true;
     break;
   default:
     break;
@@ -112,11 +114,9 @@ void kernel::RungeKutta4::doUpdateClock(void)
   switch (RK_Step)
   {
   case 0:
-    IntegrationMethod::Is_Ready = true;
     IntegrationMethod::Time_Current = RungeKutta4::Time_RK;
     break;
   case 1:
-    IntegrationMethod::Is_Ready = false;
     break;
   case 2:
     RungeKutta4::Time_RK += RungeKutta4::Half_Time_Step;

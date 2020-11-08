@@ -37,12 +37,8 @@ namespace kernel
       Velocity_Verlet = 3,
       RK4 = 4
     };
-
-    // Constructor
-    IntegrationMethod();
-
-    // Destructor
-    ~IntegrationMethod();
+    // Destructor-like 
+    static void resetInstance(void);
 
     // Getters
     static double time(void);
@@ -51,64 +47,39 @@ namespace kernel
 
     // Setters
     static void setIntegrationMethod(IntegrationMethod::type method_);
-    // TODO: initialize should ideally be available globally, but different 
-    // child classes need different things initialized. Static methods cannot 
-    // be made virtual and overridden by child classes, so this presents some 
-    // problems.
-    //
-    // THE GOAL IS TO NOT NEED TO CALL A FUNCTION ON A SPECIFIC STATE TO 
-    // INITIALIZE ALL OF THE STATES
-    //
-    // From Stack Overflow:
-    // I ran into this problem the other day : I had some classes full of static 
-    // methods but I wanted to use inheritanceand virtual methodsand reduce code 
-    // repetition.My solution was :
-    //
-    // Instead of using static methods, use a singleton with virtual methods.
-    //
-    // In other words, each class should contain a static method that you call
-    // to get a pointer to a single, shared instance of the class.You can make
-    // the true constructors private or protected so that outside code can't 
-    // misuse it by creating additional instances.
-    //
-    // In practice, using a singleton is a lot like using static methods 
-    // except that you can take advantage of inheritanceand virtual methods.
-    //
-    // Notes: If we use dependency injection to have each state feed itself as
-    // an argument to the propagate method, then we might only need one copy 
-    // of the integrator, making it singleton-like and allowing the above 
-    // advice to be used. It also let's only instantiate a single copy of 
-    // this, which will save memory and runtime in an area where it may speed 
-    // things up. If nothing else, it gives flexibility at a time in 
-    // development where that is crucial for iterating. Once everything 
-    // stabilitizes, we can revisit this idea and see if there are performance
-    // gains to be had by giving each state a dedicated integrator object or 
-    // even making integration part of the state itself.
     void initialize();
     void reset(double time_step_);
 
     // Functionality
-    static IntegrationMethod* create(void);
-    static IntegrationMethod* create(State* state_);
+    static IntegrationMethod* instance(void);
     void updateState(State* state_);
     void updateClock(void);
 
   protected:
     // Member Variables
+    // TODO:  Do these need to be static anymore? I don't think so...
+    static double                  Time_Current;
+    static double                  Time_Step;
+    static bool                    Is_Ready;
     static IntegrationMethod::type Method;
-    static double Time_Current;
-    static double Time_Step;
-    static bool   Is_Ready;
+
+    // Singleton Pattern
+    static IntegrationMethod*      Instance;
 
   private:
     // Setters
-    // TODO: Make these pure eventually
     virtual void doInitialize(void) = 0;
     virtual void doReset(double time_step_) = 0;
 
     // Functionality
     virtual void doUpdateState(State* state) = 0;
     virtual void doUpdateClock(void) = 0;
+
+    // Enforcing Singleton Pattern
+    IntegrationMethod() {}
+    IntegrationMethod(const IntegrationMethod& that) {}
+    IntegrationMethod& operator= (const IntegrationMethod& that) {}
+    ~IntegrationMethod() {}
 
   }; // !IntegrationMethod
 

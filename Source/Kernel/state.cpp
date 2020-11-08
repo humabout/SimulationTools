@@ -15,7 +15,7 @@ kernel::State::State()
   *(this->x)             = 0;
   *(this->dx)            = 0;
   this->Owns_Derrivative = true;
-  this->Integrator       = kernel::IntegrationMethod::create(this);
+  this->Integrator       = kernel::IntegrationMethod::create();
 }
 
 
@@ -41,7 +41,7 @@ kernel::State::State(double& x_,
   this->x                = &x_;
   this->dx               = &dx_;
   this->Owns_Derrivative = true;
-  this->Integrator       = kernel::IntegrationMethod::create(this);
+  this->Integrator       = kernel::IntegrationMethod::create();
 }
 
 
@@ -57,7 +57,7 @@ kernel::State::State(double& x_,
   this->x                = &x_;
   this->dx               = dx_.x;
   this->Owns_Derrivative = false;
-  this->Integrator       = kernel::IntegrationMethod::create(this);
+  this->Integrator       = kernel::IntegrationMethod::create();
 }
 
 
