@@ -49,8 +49,8 @@ namespace kernel
 
     // Functionality
     void initialize(void);
-    void update(void);
     void propagate(void);
+    void update(void);
 
   protected:
     // Stores all states associated wtih this block
