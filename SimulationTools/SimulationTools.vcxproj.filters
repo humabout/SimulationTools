@@ -28,6 +28,9 @@
     <ClInclude Include="..\Source\Kernel\runge_kutta_4.h">
       <Filter>Kernel</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\Kernel\block.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Kernel\state.cpp">
@@ -40,5 +43,8 @@
       <Filter>Kernel</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\main.cpp" />
+    <ClCompile Include="..\Source\Kernel\block.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

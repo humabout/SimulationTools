@@ -66,6 +66,11 @@ kernel::State::State(double& x_,
 // Purpose: This object owns its own value and is responsible for deleting it.
 //          It may or may not own its own derrivative, but if it does, it also
 //          deallocates that memory.
+// TODO:    Need to be careful that states actually do own their own state 
+//          value. It may be better from a user standpoint if blocks own all 
+//          values they declare or instantiate and states just propagate them.
+//          Otherwise, the user will have to know which values the state owns 
+//          and which the block owns. This is probalby inviting fiddliness.
 //----------------------------------------------------------------------------
 kernel::State::~State()
 {

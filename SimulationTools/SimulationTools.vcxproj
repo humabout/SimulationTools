@@ -139,11 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Source\Kernel\block.h" />
     <ClInclude Include="..\Source\Kernel\integration_method.h" />
     <ClInclude Include="..\Source\Kernel\runge_kutta_4.h" />
     <ClInclude Include="..\Source\Kernel\state.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Source\Kernel\block.cpp" />
     <ClCompile Include="..\Source\Kernel\integration_method.cpp" />
     <ClCompile Include="..\Source\Kernel\runge_kutta_4.cpp" />
     <ClCompile Include="..\Source\Kernel\state.cpp" />
