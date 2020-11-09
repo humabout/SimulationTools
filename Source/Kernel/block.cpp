@@ -24,7 +24,7 @@ kernel::Block::Block()
 //------------------------------------------------------------------------------
 kernel::Block::Block(const Block& that)
 {
-  (*this) = that;
+  this->States = that.States;
 }
 
 
@@ -108,16 +108,6 @@ void kernel::Block::initialize(void)
 void kernel::Block::operator<< (State* state_)
 {
   add(state_);
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    operator=
-// Purpose: Assignment Operator.
-//------------------------------------------------------------------------------
-void kernel::Block::operator= (const Block& that)
-{
-  this->States = that.States;
 }
 
 

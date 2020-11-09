@@ -24,7 +24,9 @@ kernel::State::State()
 //----------------------------------------------------------------------------
 kernel::State::State(const State& that)
 {
-  *this = that;
+  this->x = that.x;
+  this->dx = that.dx;
+  this->Integrator = that.Integrator;
 }
 
 
@@ -109,11 +111,9 @@ kernel::State* kernel::State::create(const kernel::State& state_)
 // Name:    operator=
 // Purpose: Assignment Operator.
 //----------------------------------------------------------------------------
-void kernel::State::operator= (const State& that)
+kernel::State& kernel::State::operator= (const State& that)
 {
-  this->x = that.x;
-  this->dx = that.dx;
-  this->Integrator = that.Integrator;
+  return *new State(that);
 }
 
 

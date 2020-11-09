@@ -44,7 +44,6 @@ namespace kernel
     void add(State* state_);
 
     // Operators
-    void operator= (const Block& that);
     void operator<< (State* state_);
 
     // Functionality

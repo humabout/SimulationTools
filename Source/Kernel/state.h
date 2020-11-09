@@ -45,7 +45,7 @@ namespace kernel
     ~State();
 
     // Assignment Operator
-    void operator= (const State& that);
+    State& operator= (const State& that);
 
     // Getters
     double  get(void) const;
