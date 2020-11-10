@@ -17,7 +17,7 @@ kernel::SimLoop::SimLoop()
 {
   Time_Step = 0;
   Time_Max  = 0;
-  IntegrationMethod::setIntegrationMethod(IntegrationMethod::type::RK4);
+  Integrator->setMethod(IntegrationMethod::type::RK4);
   Integrator = IntegrationMethod::instance();
 }
 
@@ -34,7 +34,7 @@ kernel::SimLoop::SimLoop(double                  time_step_,
 {
   Time_Step = time_max_;
   Time_Max = time_max_;
-  IntegrationMethod::setIntegrationMethod(integration_method_);
+  Integrator->setMethod(integration_method_);
   Integrator = IntegrationMethod::instance();
 }
 
@@ -73,7 +73,7 @@ void kernel::SimLoop::add(Block* block_)
 //------------------------------------------------------------------------------
 bool kernel::SimLoop::isEnd(void) const 
 { 
-  if (IntegrationMethod::isReady())
+  if (Integrator->isReady())
   {
     return (Integrator->time() > Time_Max);
   }

@@ -41,12 +41,12 @@ namespace kernel
     static void resetInstance(void);
 
     // Getters
-    static double time(void);
-    static double timestep(void);
-    static bool   isReady(void);
+    double time(void);
+    double timestep(void);
+    bool   isReady(void);
 
     // Setters
-    static void setIntegrationMethod(IntegrationMethod::type method_);
+    void setMethod(IntegrationMethod::type method_);
     void initialize();
     void reset(double time_step_);
 
@@ -58,18 +58,16 @@ namespace kernel
   protected:
     // Member Variables
     // TODO:  Do these need to be static anymore? I don't think so...
-    static double                  Time_Current;
-    static double                  Time_Step;
-    static bool                    Is_Ready;
+    double                         Time_Current;
+    double                         Time_Step;
+    bool                           Is_Ready;
     static IntegrationMethod::type Method;
 
     // Singleton Pattern
     static IntegrationMethod* Instance;
 
     // Enforcing Singleton Pattern
-    IntegrationMethod() {}
-    IntegrationMethod(const IntegrationMethod& that) {}
-    IntegrationMethod& operator= (const IntegrationMethod& that) {}
+    IntegrationMethod();
     ~IntegrationMethod() {}
 
     // Setters

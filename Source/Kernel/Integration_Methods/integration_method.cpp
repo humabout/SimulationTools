@@ -10,11 +10,21 @@
 
 
 // Static Variables
-kernel::IntegrationMethod::type kernel::IntegrationMethod::Method = kernel::IntegrationMethod::type::RK4;
-double                          kernel::IntegrationMethod::Time_Current;
-double                          kernel::IntegrationMethod::Time_Step;
-bool                            kernel::IntegrationMethod::Is_Ready = true;
+kernel::IntegrationMethod::type kernel::IntegrationMethod::Method;
 kernel::IntegrationMethod*      kernel::IntegrationMethod::Instance = NULL;
+
+
+//----------------------------------------------------------------------------
+// Name:    instance
+// Purpose: This getter returns a pointer to the only instance of this class.
+//----------------------------------------------------------------------------
+kernel::IntegrationMethod::IntegrationMethod()
+{
+  Method = kernel::IntegrationMethod::type::RK4;
+  Time_Current = 0;
+  Time_Step    = 0;
+  Is_Ready     = true;
+}
 
 
 //----------------------------------------------------------------------------
@@ -28,7 +38,7 @@ kernel::IntegrationMethod* kernel::IntegrationMethod::instance(void)
 {
   if (Instance == NULL)
   {
-    switch (Method)
+    switch (IntegrationMethod::Method)
     {
     case type::Euler:
       Instance = new EulerMethod();
@@ -142,12 +152,12 @@ void kernel::IntegrationMethod::resetInstance(void)
 
 
 //----------------------------------------------------------------------------
-// Name:    setIntegrationMethod
+// Name:    setMethod
 // Purpose: This clears the old integration instance and sets a new method so
 //          that the next time an instance is requested, the new method will
 //          generated and returned.
 //----------------------------------------------------------------------------
-void kernel::IntegrationMethod::setIntegrationMethod(kernel::IntegrationMethod::type method_)
+void kernel::IntegrationMethod::setMethod(kernel::IntegrationMethod::type method_)
 {
   IntegrationMethod::Method = method_;
   IntegrationMethod::resetInstance();
