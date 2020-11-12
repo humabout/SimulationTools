@@ -33,14 +33,14 @@ kernel::Block::Block(const Block& that)
 // Purpose: Destructor. Delete all States owned by this Block.
 //------------------------------------------------------------------------------
 kernel::Block::~Block()
-{
+{/*S
   std::vector<State*>::iterator state;
   for (state = States.begin();
        state != States.end();
        state++)
   {
     delete (*state);
-  }
+  }*/
 }
 
 

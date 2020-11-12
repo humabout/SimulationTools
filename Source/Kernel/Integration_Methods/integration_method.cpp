@@ -13,7 +13,7 @@
 double                          kernel::IntegrationMethod::Time_Current;
 double                          kernel::IntegrationMethod::Time_Step;
 bool                            kernel::IntegrationMethod::Is_Ready = true;
-kernel::IntegrationMethod::type kernel::IntegrationMethod::Method;
+kernel::IntegrationMethod::type kernel::IntegrationMethod::Method = kernel::IntegrationMethod::type::RK4;
 
 
 //----------------------------------------------------------------------------
@@ -22,7 +22,6 @@ kernel::IntegrationMethod::type kernel::IntegrationMethod::Method;
 //----------------------------------------------------------------------------
 kernel::IntegrationMethod::IntegrationMethod()
 {
-  Method = kernel::IntegrationMethod::type::RK4;
   Time_Current = 0;
   Time_Step    = 0;
   Is_Ready     = true;
@@ -36,18 +35,12 @@ kernel::IntegrationMethod::IntegrationMethod()
 //----------------------------------------------------------------------------
 kernel::IntegrationMethod* kernel::IntegrationMethod::create(void)
 {
-  switch (IntegrationMethod::Method)
+  switch (kernel::IntegrationMethod::Method)
   {
   case type::Euler:
     return new EulerMethod();
-  case type::RK2:
-    // return new RungeKutta2();
-  case type::Velocity_Verlet:
-    // return new VelocityVerlet();
-  case type::RK4:
-    //return new RungeKutta4();
   default:
-    //return new RungeKutta4();
+    return NULL;
   }
 }
 

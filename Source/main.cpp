@@ -46,7 +46,7 @@ int main()
   *test << X;
   *test << dX;
 
-  kernel::SimLoop sim(max_time, time_step, kernel::IntegrationMethod::type::Euler);
+  kernel::SimLoop sim(time_step, max_time, kernel::IntegrationMethod::type::Euler);
   sim.add(test);
   sim.run();
 

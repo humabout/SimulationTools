@@ -18,7 +18,7 @@ kernel::SimLoop::SimLoop()
   Time_Step = 0;
   Time_Max  = 0;
   Integrator->setMethod(IntegrationMethod::type::RK4);
-  Integrator = IntegrationMethod::instance();
+  Integrator = IntegrationMethod::create();
 }
 
 
@@ -32,10 +32,10 @@ kernel::SimLoop::SimLoop(double                  time_step_,
                          double                  time_max_,
                          IntegrationMethod::type integration_method_)
 {
-  Time_Step = time_max_;
+  Time_Step = time_step_;
   Time_Max = time_max_;
   Integrator->setMethod(integration_method_);
-  Integrator = IntegrationMethod::instance();
+  Integrator = IntegrationMethod::create();
 }
 
 
@@ -46,8 +46,10 @@ kernel::SimLoop::SimLoop(double                  time_step_,
 //------------------------------------------------------------------------------
 kernel::SimLoop::~SimLoop()
 {
-  // This deletes the IntegrationMethod instance to free memory.
-  IntegrationMethod::resetInstance();
+  if (Integrator != NULL)
+  {
+    delete Integrator;
+  }
 }
 
 
@@ -73,7 +75,7 @@ void kernel::SimLoop::add(Block* block_)
 //------------------------------------------------------------------------------
 bool kernel::SimLoop::isEnd(void) const 
 { 
-  if (Integrator->isReady())
+  if (kernel::IntegrationMethod::isReady())
   {
     return (Integrator->time() > Time_Max);
   }
