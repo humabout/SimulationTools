@@ -36,6 +36,7 @@ int main()
   x = 0;
   dx = 0;
   ddx = 1;
+  kernel::IntegrationMethod::setMethod(kernel::IntegrationMethod::type::Euler);
 
   // Instantiating Test Objects
   kernel::State* dX = kernel::State::create(dx, ddx);

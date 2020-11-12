@@ -10,8 +10,10 @@
 
 
 // Static Variables
+double                          kernel::IntegrationMethod::Time_Current;
+double                          kernel::IntegrationMethod::Time_Step;
+bool                            kernel::IntegrationMethod::Is_Ready = true;
 kernel::IntegrationMethod::type kernel::IntegrationMethod::Method;
-kernel::IntegrationMethod*      kernel::IntegrationMethod::Instance = NULL;
 
 
 //----------------------------------------------------------------------------
@@ -28,31 +30,25 @@ kernel::IntegrationMethod::IntegrationMethod()
 
 
 //----------------------------------------------------------------------------
-// Name:    instance
-// Purpose: This getter returns a pointer to the only instance of this class.
-//          If the instance has not yet been instantiated, this method will
-//          create a single instance of an integration method based on the
-//          type currently set and return it.
+// Name:    create
+// Purpose: This factory creates and returns an instance of the integration 
+//          method currently set in Method.
 //----------------------------------------------------------------------------
-kernel::IntegrationMethod* kernel::IntegrationMethod::instance(void)
+kernel::IntegrationMethod* kernel::IntegrationMethod::create(void)
 {
-  if (Instance == NULL)
+  switch (IntegrationMethod::Method)
   {
-    switch (IntegrationMethod::Method)
-    {
-    case type::Euler:
-      Instance = new EulerMethod();
-    case type::RK2:
-      // return new RungeKutta2();
-    case type::Velocity_Verlet:
-      // return new VelocityVerlet();
-    case type::RK4:
-      Instance = new RungeKutta4();
-    default:
-      Instance = new RungeKutta4();
-    }
+  case type::Euler:
+    return new EulerMethod();
+  case type::RK2:
+    // return new RungeKutta2();
+  case type::Velocity_Verlet:
+    // return new VelocityVerlet();
+  case type::RK4:
+    //return new RungeKutta4();
+  default:
+    //return new RungeKutta4();
   }
-  return Instance;
 }
 
 
@@ -134,24 +130,6 @@ void kernel::IntegrationMethod::reset(double time_step_)
 
 
 //----------------------------------------------------------------------------
-// Name:    resetInstance
-// Purpose: This clears the old integration instance and prepares to generate
-//          a new one.
-//----------------------------------------------------------------------------
-void kernel::IntegrationMethod::resetInstance(void)
-{
-  // Removing the old Instance
-  if (Instance != NULL)
-  {
-    delete Instance;
-  }
-
-  // Set to NULL so instance() will still work.
-  Instance = NULL;
-}
-
-
-//----------------------------------------------------------------------------
 // Name:    setMethod
 // Purpose: This clears the old integration instance and sets a new method so
 //          that the next time an instance is requested, the new method will
@@ -160,7 +138,6 @@ void kernel::IntegrationMethod::resetInstance(void)
 void kernel::IntegrationMethod::setMethod(kernel::IntegrationMethod::type method_)
 {
   IntegrationMethod::Method = method_;
-  IntegrationMethod::resetInstance();
 }
 
 

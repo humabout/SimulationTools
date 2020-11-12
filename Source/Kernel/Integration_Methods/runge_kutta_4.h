@@ -47,9 +47,9 @@ namespace kernel
     double k4;
 
     // TODO:  Do these need to be static anymore? I don't think so...
-    double             Time_RK;
-    double             Half_Time_Step;
-    unsigned short int RK_Step;
+    static double             Time_RK;
+    static double             Half_Time_Step;
+    static unsigned short int RK_Step;
 
     // Interface Implementation
     void doInitialize() override;

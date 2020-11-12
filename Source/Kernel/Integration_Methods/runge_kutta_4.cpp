@@ -8,6 +8,12 @@
 #include "..\state.h"
 
 
+// Static Variables
+double             kernel::RungeKutta4::Time_RK;
+double             kernel::RungeKutta4::Half_Time_Step;
+unsigned short int kernel::RungeKutta4::RK_Step = 0;
+
+
 //----------------------------------------------------------------------------
 // Name:    RungeKutta4
 // Purpose: Default constructor.
@@ -19,7 +25,6 @@ kernel::RungeKutta4::RungeKutta4()
   this->k2      = 0;
   this->k3      = 0;
   this->k4      = 0;
-  this->RK_Step = 0;
 }
 
 
@@ -41,10 +46,10 @@ kernel::RungeKutta4::~RungeKutta4()
 //----------------------------------------------------------------------------
 void kernel::RungeKutta4::doInitialize()
 {
-  Time_Current = 0;
-  Is_Ready = true;
-  RK_Step = 0;
-  Time_RK = 0;
+  kernel::IntegrationMethod::Time_Current = 0;
+  kernel::IntegrationMethod::Is_Ready = true;
+  kernel::RungeKutta4::RK_Step = 0;
+  kernel::RungeKutta4::Time_RK = 0;
 }
 
 
@@ -55,8 +60,8 @@ void kernel::RungeKutta4::doInitialize()
 //----------------------------------------------------------------------------
 void kernel::RungeKutta4::doReset(double time_step_)
 {
-  Time_Step = time_step_;
-  Half_Time_Step = 0.5 * Time_Step;
+  kernel::IntegrationMethod::Time_Step = time_step_;
+  kernel::RungeKutta4::Half_Time_Step = 0.5 * Time_Step;
 }
 
 
@@ -69,27 +74,27 @@ void kernel::RungeKutta4::doUpdateState(State* state_)
 {
   double x = *(state_->x);
   double dx = *(state_->dx);
-  switch (RK_Step)
+  switch (kernel::RungeKutta4::RK_Step)
   {
   case 0:
-    Is_Ready = false;
+    kernel::IntegrationMethod::Is_Ready = false;
     x0 = x;
     k1 = dx;
-    x = x0 + Half_Time_Step * k1;
+    x = x0 + kernel::RungeKutta4::Half_Time_Step * k1;
     break;
   case 1:
     k2 = dx;
-    x = x0 + Half_Time_Step * k2;
+    x = x0 + kernel::RungeKutta4::Half_Time_Step * k2;
     break;
   case 2:
     k3 = dx;
-    x = x0 + Time_Step * k3;
+    x = x0 + kernel::IntegrationMethod::Time_Step * k3;
     break;
   case 3:
     k4 = dx;
-    x = x0 + Time_Step * (k1 + 2 * k2 + 2 * k3 + k4) / 6;
+    x = x0 + kernel::IntegrationMethod::Time_Step * (k1 + 2 * k2 + 2 * k3 + k4) / 6;
     *(state_->x) = x;
-    Is_Ready = true;
+    kernel::IntegrationMethod::Is_Ready = true;
     break;
   default:
     break;
@@ -105,19 +110,19 @@ void kernel::RungeKutta4::doUpdateClock(void)
 {
   // Update the RK step based on where in the rk4 loop the algorithm currently 
   // is.
-  switch (RK_Step)
+  switch (kernel::RungeKutta4::RK_Step)
   {
   case 0:
-    Time_Current = Time_RK;
+    kernel::IntegrationMethod::Time_Current = kernel::RungeKutta4::Time_RK;
     break;
   case 1:
     break;
   case 2:
-    Time_RK += Half_Time_Step;
+    kernel::RungeKutta4::Time_RK += kernel::RungeKutta4::Half_Time_Step;
     break;
   default:
     break;
   }
-  RK_Step++;
-  RK_Step = RK_Step % 4;
+  kernel::RungeKutta4::RK_Step++;
+  kernel::RungeKutta4::RK_Step = kernel::RungeKutta4::RK_Step % 4;
 }

@@ -37,10 +37,10 @@
     <ClInclude Include="..\Source\Kernel\Integration_Methods\integration_method.h">
       <Filter>Kernel\Integration Methods</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\Kernel\Integration_Methods\runge_kutta_4.h">
+    <ClInclude Include="..\Source\Kernel\Integration_Methods\euler_method.h">
       <Filter>Kernel\Integration Methods</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\Kernel\Integration_Methods\euler_method.h">
+    <ClInclude Include="..\Source\Kernel\Integration_Methods\runge_kutta_4.h">
       <Filter>Kernel\Integration Methods</Filter>
     </ClInclude>
   </ItemGroup>
@@ -58,10 +58,10 @@
     <ClCompile Include="..\Source\Kernel\Integration_Methods\integration_method.cpp">
       <Filter>Kernel\Integration Methods</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Kernel\Integration_Methods\runge_kutta_4.cpp">
+    <ClCompile Include="..\Source\Kernel\Integration_Methods\euler_method.cpp">
       <Filter>Kernel\Integration Methods</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Kernel\Integration_Methods\euler_method.cpp">
+    <ClCompile Include="..\Source\Kernel\Integration_Methods\runge_kutta_4.cpp">
       <Filter>Kernel\Integration Methods</Filter>
     </ClCompile>
   </ItemGroup>

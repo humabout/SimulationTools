@@ -37,38 +37,34 @@ namespace kernel
       Velocity_Verlet = 3,
       RK4 = 4
     };
-    // Destructor-like 
-    static void resetInstance(void);
+
+    // Constructor
+    IntegrationMethod();
+
+    // Destructor
+    ~IntegrationMethod() {}
 
     // Getters
-    double time(void);
-    double timestep(void);
-    bool   isReady(void);
+    static double time(void);
+    static double timestep(void);
+    static bool   isReady(void);
 
     // Setters
-    void setMethod(IntegrationMethod::type method_);
+    static void setMethod(IntegrationMethod::type method_);
     void initialize();
     void reset(double time_step_);
 
     // Functionality
-    static IntegrationMethod* instance(void);
+    static IntegrationMethod* create(void);
     void updateState(State* state_);
     void updateClock(void);
 
   protected:
     // Member Variables
-    // TODO:  Do these need to be static anymore? I don't think so...
-    double                         Time_Current;
-    double                         Time_Step;
-    bool                           Is_Ready;
+    static double                  Time_Current;
+    static double                  Time_Step;
+    static bool                    Is_Ready;
     static IntegrationMethod::type Method;
-
-    // Singleton Pattern
-    static IntegrationMethod* Instance;
-
-    // Enforcing Singleton Pattern
-    IntegrationMethod();
-    ~IntegrationMethod() {}
 
     // Setters
     virtual void doInitialize(void) = 0;

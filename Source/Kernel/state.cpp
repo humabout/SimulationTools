@@ -14,7 +14,7 @@ kernel::State::State()
 {
   *(this->x)             = NULL;
   *(this->dx)            = NULL;
-  this->Integrator       = kernel::IntegrationMethod::instance();
+  this->Integrator       = kernel::IntegrationMethod::create();
 }
 
 
@@ -41,7 +41,7 @@ kernel::State::State(double& x_,
 {
   this->x                = &x_;
   this->dx               = &dx_;
-  this->Integrator       = kernel::IntegrationMethod::instance();
+  this->Integrator       = kernel::IntegrationMethod::create();
 }
 
 
@@ -56,7 +56,7 @@ kernel::State::State(double& x_,
 {
   this->x                = &x_;
   this->dx               = dx_.x;
-  this->Integrator       = kernel::IntegrationMethod::instance();
+  this->Integrator       = kernel::IntegrationMethod::create();
 }
 
 

@@ -32,8 +32,8 @@ kernel::EulerMethod::~EulerMethod()
 //----------------------------------------------------------------------------
 void kernel::EulerMethod::doInitialize()
 {
-  Time_Current = 0;
-  Is_Ready = true;
+  IntegrationMethod::Time_Current = 0;
+  IntegrationMethod::Is_Ready = true;
 }
 
 
@@ -44,7 +44,7 @@ void kernel::EulerMethod::doInitialize()
 //----------------------------------------------------------------------------
 void kernel::EulerMethod::doReset(double time_step_)
 {
-  Time_Step = time_step_;
+  IntegrationMethod::Time_Step = time_step_;
 }
 
 
@@ -55,8 +55,8 @@ void kernel::EulerMethod::doReset(double time_step_)
 //----------------------------------------------------------------------------
 void kernel::EulerMethod::doUpdateState(State* state_)
 {
-  (*state_->x) += Time_Step * (*state_->dx);
-  Is_Ready = true;
+  (*state_->x) += IntegrationMethod::Time_Step * (*state_->dx);
+  IntegrationMethod::Is_Ready = true;
 }
 
 
@@ -66,5 +66,5 @@ void kernel::EulerMethod::doUpdateState(State* state_)
 //----------------------------------------------------------------------------
 void kernel::EulerMethod::doUpdateClock(void)
 {
-  Time_Current += Time_Step;
+  IntegrationMethod::Time_Current += IntegrationMethod::Time_Step;
 }
