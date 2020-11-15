@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\Kernel\block.h" />
+    <ClInclude Include="..\Source\Kernel\config.h" />
     <ClInclude Include="..\Source\Kernel\Integration_Methods\euler_method.h" />
     <ClInclude Include="..\Source\Kernel\Integration_Methods\integration_method.h" />
     <ClInclude Include="..\Source\Kernel\Integration_Methods\runge_kutta_4.h" />

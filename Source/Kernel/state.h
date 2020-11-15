@@ -48,7 +48,7 @@ namespace kernel
     State& operator= (const State& that);
 
     // Getters
-    double  get(void) const;
+    double get(void) const;
 
     // Factory
     static State* create(double& x_, double& dx_);

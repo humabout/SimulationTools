@@ -43,8 +43,10 @@ int main()
   kernel::State* X = kernel::State::create(x, *dX);
 
   kernel::Block* test = new BlockTest();
-  *test << X;
+  // Note that the order of adding matters here! The derrivative must be added before the state.
+  // TODO: Find a way to remove this sensitivity.
   *test << dX;
+  *test << X;
 
   kernel::SimLoop sim(time_step, max_time, kernel::IntegrationMethod::type::Euler);
   sim.add(test);

@@ -53,9 +53,6 @@ namespace kernel
 
   protected:
     // Stores all states associated wtih this block
-    // TODO:  Consider whether or not this needs to store pointers or if we can
-    //        somehow store this on the stack, since that should be faster to
-    //        access.
     std::vector<State*> States;
 
   private:

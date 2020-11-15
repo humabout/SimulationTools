@@ -2,10 +2,12 @@
 
 
 // Inclusions
+#include <iostream>
 #include <vector>
 #include "block.h"
 #include "Integration_Methods/integration_method.h"
 #include "sim_loop.h"
+#include "config.h"
 
 
 //------------------------------------------------------------------------------
@@ -65,7 +67,7 @@ void kernel::SimLoop::add(Block* block_)
 
 
 //------------------------------------------------------------------------------
-// Name:    add
+// Name:    isEnd
 // Purpose: This method checks if the simulation has met any end conditions and
 //          returns true if it has.
 // CURRENT: The end condition checked is if the simulation has exceeded its max
@@ -77,7 +79,9 @@ bool kernel::SimLoop::isEnd(void) const
 { 
   if (kernel::IntegrationMethod::isReady())
   {
-    return (Integrator->time() > Time_Max);
+    bool isPastMaxTime = ((Time_Max - Integrator->time()) < 
+                          kernel::TIME_ERROR_TOLERANCE);
+    return (isPastMaxTime);
   }
   else
   {

@@ -46,7 +46,8 @@ namespace kernel
     double k3;
     double k4;
 
-    // TODO:  Do these need to be static anymore? I don't think so...
+    // Static Variables
+    // These keep all instances of the integrator in sync with each other
     static double             Time_RK;
     static double             Half_Time_Step;
     static unsigned short int RK_Step;
