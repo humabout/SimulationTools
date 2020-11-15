@@ -46,6 +46,12 @@
     <ClInclude Include="..\Source\Kernel\config.h">
       <Filter>Kernel</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\Kernel\End_Conditions\end_condition.h">
+      <Filter>Kernel\End Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Kernel\End_Conditions\max_time_exceeded.h">
+      <Filter>Kernel\End Conditions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Kernel\state.cpp">
@@ -66,6 +72,9 @@
     </ClCompile>
     <ClCompile Include="..\Source\Kernel\Integration_Methods\runge_kutta_4.cpp">
       <Filter>Kernel\Integration Methods</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Kernel\End_Conditions\max_time_exceeded.cpp">
+      <Filter>Kernel\End Conditions</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

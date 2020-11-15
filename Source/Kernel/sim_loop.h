@@ -8,6 +8,7 @@
 // Inclusions
 #include <vector>
 #include "block.h"
+#include "End_Conditions/end_condition.h"
 #include "Integration_Methods/integration_method.h"
 
 
@@ -33,14 +34,14 @@ namespace kernel
     // Constructors
     SimLoop();
     SimLoop(double                  time_step_,
-            double                  time_max_,
             IntegrationMethod::type integration_method_);
 
     // Destructor
     ~SimLoop();
 
     // Functionality
-    void add(Block* block_);
+    void addBlock(Block* block_);
+    void addEndCondition(EndCondition* end_condition_);
     void operator<< (Block* block_);
     void run(void);
 
@@ -48,11 +49,8 @@ namespace kernel
     // Member Variables
     IntegrationMethod*  Integrator;
     std::vector<Block*> Blocks;
+    std::vector<EndCondition*> End_Conditions;
     double              Time_Step;
-    double              Time_Max;
-    // TODO:  Create and add a list of EndCondition objects that are checked to 
-    //        see if end conditions are met. This might be tricky to set up, but
-    //        it will add flexibility.
 
     // Functionality
     bool isEnd(void) const;

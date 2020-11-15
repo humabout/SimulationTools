@@ -2,12 +2,12 @@
 
 
 // Inclusions
-#include <iostream>
+#include <cstddef>
 #include <vector>
 #include "block.h"
+#include "config.h"
 #include "Integration_Methods/integration_method.h"
 #include "sim_loop.h"
-#include "config.h"
 
 
 //------------------------------------------------------------------------------
@@ -18,7 +18,6 @@
 kernel::SimLoop::SimLoop()
 {
   Time_Step = 0;
-  Time_Max  = 0;
   Integrator->setMethod(IntegrationMethod::type::RK4);
   Integrator = IntegrationMethod::create();
 }
@@ -31,11 +30,9 @@ kernel::SimLoop::SimLoop()
 //          Maximum Simulated Time [s]
 //------------------------------------------------------------------------------
 kernel::SimLoop::SimLoop(double                  time_step_,
-                         double                  time_max_,
                          IntegrationMethod::type integration_method_)
 {
   Time_Step = time_step_;
-  Time_Max = time_max_;
   Integrator->setMethod(integration_method_);
   Integrator = IntegrationMethod::create();
 }
@@ -56,13 +53,23 @@ kernel::SimLoop::~SimLoop()
 
 
 //------------------------------------------------------------------------------
-// Name:    add
+// Name:    addBlock
 // Purpose: This method adds a block to the simulation for updating and 
 //          propagation.
 //------------------------------------------------------------------------------
-void kernel::SimLoop::add(Block* block_)
+void kernel::SimLoop::addBlock(Block* block_)
 {
   Blocks.push_back(block_);
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    addEndCondition
+// Purpose: This method adds an end condition to the simulation for checking.
+//------------------------------------------------------------------------------
+void kernel::SimLoop::addEndCondition(EndCondition* end_condition_)
+{
+  End_Conditions.push_back(end_condition_);
 }
 
 
@@ -72,21 +79,28 @@ void kernel::SimLoop::add(Block* block_)
 //          returns true if it has.
 // CURRENT: The end condition checked is if the simulation has exceeded its max
 //          simulated time.
-// TODO:    This will eventually return the results of OR on all EndCondition
-//          objects in the sim's end conditions list.
 //------------------------------------------------------------------------------
 bool kernel::SimLoop::isEnd(void) const 
-{ 
-  if (kernel::IntegrationMethod::isReady())
+{
+  // Check all end conditions when the sim is ready for evaluation and reporting
+  std::vector<EndCondition*>::const_iterator condition = End_Conditions.begin();
+  while (kernel::IntegrationMethod::isReady() && 
+         condition != End_Conditions.end()    )
   {
-    bool isPastMaxTime = ((Time_Max - Integrator->time()) < 
-                          kernel::TIME_ERROR_TOLERANCE);
-    return (isPastMaxTime);
+    // Stop checking as soon as an end condition is not met
+    if ((*condition)->met())
+    {
+      return true;
+    }
+    // Otherwise move on to the next end condition
+    else
+    {
+      condition++;
+    }
   }
-  else
-  {
-    return false;
-  }
+
+  // If we got this far, all end conditions were checked and none were met
+  return false;
 }
 
 
@@ -98,7 +112,7 @@ bool kernel::SimLoop::isEnd(void) const
 //------------------------------------------------------------------------------
 void kernel::SimLoop::operator<< (Block* block_)
 {
-  add(block_);
+  addBlock(block_);
 }
 
 

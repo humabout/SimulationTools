@@ -7,6 +7,7 @@
 #include "Kernel/state.h"
 #include "Kernel/block.h"
 #include "Kernel/sim_loop.h"
+#include "Kernel/End_Conditions/max_time_exceeded.h"
 
 class BlockTest : public kernel::Block
 {
@@ -48,8 +49,12 @@ int main()
   *test << dX;
   *test << X;
 
-  kernel::SimLoop sim(time_step, max_time, kernel::IntegrationMethod::type::Euler);
-  sim.add(test);
+  // Build Sim
+  kernel::SimLoop sim(time_step, kernel::IntegrationMethod::type::Euler);
+  sim.addEndCondition(new kernel::MaxTimeExceeded(max_time));
+  sim.addBlock(test);
+
+  // Run Sim
   sim.run();
 
   // Reporting the End Result
