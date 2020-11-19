@@ -52,6 +52,9 @@
     <ClInclude Include="..\Source\Kernel\End_Conditions\max_time_exceeded.h">
       <Filter>Kernel\End Conditions</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\Utilities\Math\vector_3d.h">
+      <Filter>Utilities\Math Library</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Kernel\state.cpp">
