@@ -55,6 +55,9 @@
     <ClInclude Include="..\Source\Utilities\Math\vector_3d.h">
       <Filter>Utilities\Math Library</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\Utilities\Math\math_config.h">
+      <Filter>Utilities\Math Library</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Kernel\state.cpp">
