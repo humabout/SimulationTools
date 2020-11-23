@@ -52,10 +52,10 @@
     <ClInclude Include="..\Source\Kernel\End_Conditions\max_time_exceeded.h">
       <Filter>Kernel\End Conditions</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\Utilities\Math\vector_3d.h">
+    <ClInclude Include="..\Source\Utilities\Math\math_config.h">
       <Filter>Utilities\Math Library</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\Utilities\Math\math_config.h">
+    <ClInclude Include="..\Source\Utilities\Math\vector.h">
       <Filter>Utilities\Math Library</Filter>
     </ClInclude>
   </ItemGroup>
