@@ -23,8 +23,7 @@ namespace math
   //----------------------------------------------------------------------------
   // Name:    Vector
   // Purpose: This class holds a vector in R3 and all of the operators and 
-  //          methods that operate on 3-vectors within the context of geometric
-  //          algebra and calculus.
+  //          methods that operate on 3-vectors.
   //----------------------------------------------------------------------------
   class Vector
   {
@@ -232,6 +231,7 @@ namespace math
                    (this->e[2]) * (this->e[2]) );
     }
 
+
     // Normalize
     void normalize(void)
     {
@@ -241,6 +241,7 @@ namespace math
     {
       return (*this) / (this->magnitude());
     }
+
     
     // Zeroize
     void zeroize(void)

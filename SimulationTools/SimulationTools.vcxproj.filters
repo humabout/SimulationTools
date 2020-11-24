@@ -58,6 +58,9 @@
     <ClInclude Include="..\Source\Utilities\Math\vector.h">
       <Filter>Utilities\Math Library</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\Utilities\Math\matrix.h">
+      <Filter>Utilities\Math Library</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Kernel\state.cpp">
