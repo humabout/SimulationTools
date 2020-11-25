@@ -28,6 +28,25 @@ namespace math
   class Vector
   {
   public:
+    // Data
+    union
+    {
+      double e[3];
+      struct
+      {
+        double x;
+        double y;
+        double z;
+      };
+      struct
+      {
+        double e1;
+        double e2;
+        double e3;
+      };
+    };
+    
+
     // Constructors
     Vector()
     {
@@ -61,18 +80,6 @@ namespace math
 
 
     // Accessors
-    double& x(void)
-    {
-      return this->e[0];
-    }
-    double& y(void)
-    {
-      return this->e[1];
-    }
-    double& z(void)
-    {
-      return this->e[2];
-    }
     double& operator[](unsigned int element_)
     {
       return e[element_];
@@ -105,9 +112,9 @@ namespace math
              double y_,
              double z_)
     {
-      this->e[0] = x_;
-      this->e[1] = y_;
-      this->e[2] = z_;
+      this->x = x_;
+      this->y = y_;
+      this->z = z_;
     }
     void set(const std::array<double, 3> v_)
     {
@@ -250,8 +257,6 @@ namespace math
     }
     
   private:
-    // Data
-    double e[3];
 
 
   }; // !Vector
