@@ -80,6 +80,21 @@ namespace math
       return row[row_];
     }
 
+    Vector& row(unsigned int row_)
+    {
+      // Indexed from zero
+      return row[row_];
+    }
+
+    Vector& column(unsigned int col_)
+    {
+      // Indexed from zero
+      Vector(e[col_],
+             e[col_ + 3],
+             e[col_ + 6]);
+
+    }
+
 
     // Setters
     void operator=(const Matrix& m_)
@@ -222,8 +237,52 @@ namespace math
     }
 
     // Transpose
-    // Inverse
+    Matrix transpose(void)
+    {
+      return Matrix(this->e11, this->e21, this->e31,
+                    this->e12, this->e22, this->e32,
+                    this->e13, this->e23, this->e33);
+    }
+
     // Determinant
+    double determinant(void)
+    {
+      return e11 * (e22 * e33 - e23 * e32) +
+             e12 * (e31 * e23 - e33 * e21) +
+             e13 * (e21 * e32 - e31 * e23);
+    }
+
+    
+    // Inverse
+    virtual Matrix inverse(void)
+    {
+      //Calculating Determinant
+      double det = this->determinant();
+
+      // Verifying the matrix is invertible
+      assert(abs(det) > math::DIVIDE_BY_ZERO_TOLERANCE);
+
+      // Calculating Adjoint Matrix
+      Matrix adjoint(e22 * e33 - e21 * e12,
+                     e13 * e31 - e12 * e22,
+                     e12 * e23 - e13 * e22,
+
+                     e23 * e31 - e21 * e33,
+                     e11 * e33 - e13 * e31,
+                     e21 * e13 - e11 * e23,
+
+                     e21 * e32 - e31 * e22,
+                     e31 * e12 - e11 * e32,
+                     e11 * e22 - e21 * e12);
+      return adjoint / det;
+    }
+
+    virtual void invert(void)
+    {
+      *this = this->inverse();
+    }
+
+
     // Zeroize
     void zeroize(void)
     {
