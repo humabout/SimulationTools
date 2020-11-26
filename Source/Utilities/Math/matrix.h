@@ -68,11 +68,13 @@ namespace math
       set(m_);
     }
 
+
     // Destructor
     ~Matrix()
     {
       // Nothing to delete.
     }
+
 
     // Accessors
     Vector& operator[](unsigned int row_)
