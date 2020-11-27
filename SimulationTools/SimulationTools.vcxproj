@@ -148,6 +148,7 @@
     <ClInclude Include="..\Source\Kernel\Integration_Methods\runge_kutta_4.h" />
     <ClInclude Include="..\Source\Kernel\sim_loop.h" />
     <ClInclude Include="..\Source\Kernel\state.h" />
+    <ClInclude Include="..\Source\Utilities\Math\Direction_Cosine_Matrices\direction_cosine_matrix.h" />
     <ClInclude Include="..\Source\Utilities\Math\math_config.h" />
     <ClInclude Include="..\Source\Utilities\Math\matrix.h" />
     <ClInclude Include="..\Source\Utilities\Math\vector.h" />
@@ -161,6 +162,7 @@
     <ClCompile Include="..\Source\Kernel\sim_loop.cpp" />
     <ClCompile Include="..\Source\Kernel\state.cpp" />
     <ClCompile Include="..\Source\main.cpp" />
+    <ClCompile Include="..\Source\Utilities\Math\Direction_Cosine_Matrices\direction_cosine_matrix.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
