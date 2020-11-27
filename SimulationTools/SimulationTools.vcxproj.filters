@@ -23,9 +23,6 @@
     <Filter Include="Kernel\End Conditions">
       <UniqueIdentifier>{d78676a6-5027-4292-83af-65b5cd3316d7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Utilities\Math Library\DCMs">
-      <UniqueIdentifier>{32f22d13-ebf2-4093-84e6-4a47f615bc91}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\Kernel\state.h">
@@ -64,9 +61,6 @@
     <ClInclude Include="..\Source\Utilities\Math\matrix.h">
       <Filter>Utilities\Math Library</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\Utilities\Math\Direction_Cosine_Matrices\direction_cosine_matrix.h">
-      <Filter>Utilities\Math Library\DCMs</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Kernel\state.cpp">
@@ -90,9 +84,6 @@
     </ClCompile>
     <ClCompile Include="..\Source\Kernel\End_Conditions\max_time_exceeded.cpp">
       <Filter>Kernel\End Conditions</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Utilities\Math\Direction_Cosine_Matrices\direction_cosine_matrix.cpp">
-      <Filter>Utilities\Math Library\DCMs</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -70,7 +70,7 @@ namespace math
 
 
     // Destructor
-    virtual ~Matrix()
+    ~Matrix()
     {
       // Nothing to delete.
     }
@@ -222,7 +222,6 @@ namespace math
                     this->e31 * v_.e1 + this->e32 * v_.e2 + this->e33 * v_.e3);
     }
 
-
     // Matrix Multiplication
     Matrix operator*(const Matrix& m_)
     {
@@ -239,7 +238,6 @@ namespace math
                     this->e31 * m_.e13 + this->e32 * m_.e23 + this->e33 * m_.e33);
     }
 
-
     // Transpose
     Matrix transpose(void)
     {
@@ -247,7 +245,6 @@ namespace math
                     this->e12, this->e22, this->e32,
                     this->e13, this->e23, this->e33);
     }
-
 
     // Determinant
     double determinant(void)
@@ -259,15 +256,7 @@ namespace math
 
     
     // Inverse
-    Matrix inverse(void)
-    {
-      Matrix inverse(*this);
-      inverse.invert();
-      return inverse;
-    }
-
-
-    virtual void invert(void)
+    virtual Matrix inverse(void)
     {
       //Calculating Determinant
       double det = this->determinant();
@@ -279,15 +268,20 @@ namespace math
       Matrix adjoint(e22 * e33 - e21 * e12,
                      e13 * e31 - e12 * e22,
                      e12 * e23 - e13 * e22,
-                     
+
                      e23 * e31 - e21 * e33,
                      e11 * e33 - e13 * e31,
                      e21 * e13 - e11 * e23,
-                     
+
                      e21 * e32 - e31 * e22,
                      e31 * e12 - e11 * e32,
                      e11 * e22 - e21 * e12);
-      *this = adjoint / det;
+      return adjoint / det;
+    }
+
+    virtual void invert(void)
+    {
+      *this = this->inverse();
     }
 
 
