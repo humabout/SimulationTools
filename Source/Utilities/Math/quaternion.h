@@ -10,13 +10,13 @@
 #include <cassert>
 #include <vector>
 #include "math_config.h"
+#include "matrix.h"
 #include "vector.h"
 
 
 // Forward Declarations
 namespace math
 {
-  class EulerAngles;
   class DCM;
 }
 
@@ -68,8 +68,7 @@ namespace math
                const Vector& v_);
     Quaternion(const Vector& axis_,
                double        rotation_);
-    //Quaternion(const EulerAngles& angles_);
-    //Quaternion(const DCM& dcm_);
+    Quaternion(const Matrix& dcm_);
     Quaternion(const Vector& q_);
     Quaternion(const Quaternion& q_);
     Quaternion(const std::array<double, 4>& q_);
@@ -92,8 +91,7 @@ namespace math
 
     // Setters
     void set(const std::array<double, 4>& q_);
-    //void set(const DCM& dcm_);
-    //void set(const EulerAngles& angles_);
+    void set(const Matrix& dcm_);
     void set(const Quaternion& q_);
     void set(const Vector& q_);
     void set(const std::vector<double>& q_);
@@ -171,10 +169,6 @@ namespace math
 
 
 } // !math
-
-
-// Forward Declaration Inclusions
-// TODO: Add these in once they are made
 
 
 #endif // !QUATERNION_H
