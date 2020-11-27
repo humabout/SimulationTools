@@ -48,6 +48,7 @@ namespace math
       };
     };
 
+
     // Construtors
     Matrix()
     {
@@ -131,6 +132,7 @@ namespace math
     {
       (*this) = m_;
     }
+
 
     // Comparison Operators
     bool operator==(const Matrix& m_)
@@ -222,6 +224,7 @@ namespace math
                     this->e31 * v_.e1 + this->e32 * v_.e2 + this->e33 * v_.e3);
     }
 
+
     // Matrix Multiplication
     Matrix operator*(const Matrix& m_)
     {
@@ -238,6 +241,7 @@ namespace math
                     this->e31 * m_.e13 + this->e32 * m_.e23 + this->e33 * m_.e33);
     }
 
+
     // Transpose
     Matrix transpose(void)
     {
@@ -245,6 +249,7 @@ namespace math
                     this->e12, this->e22, this->e32,
                     this->e13, this->e23, this->e33);
     }
+
 
     // Determinant
     double determinant(void)
@@ -256,7 +261,7 @@ namespace math
 
     
     // Inverse
-    virtual Matrix inverse(void)
+    Matrix inverse(void)
     {
       //Calculating Determinant
       double det = this->determinant();
@@ -279,7 +284,7 @@ namespace math
       return adjoint / det;
     }
 
-    virtual void invert(void)
+    void invert(void)
     {
       *this = this->inverse();
     }
