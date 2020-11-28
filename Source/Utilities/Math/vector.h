@@ -12,6 +12,13 @@
 #include "math_config.h"
 
 
+// Forward Declarations
+namespace
+{
+  class Quaternion;
+}
+
+
 //------------------------------------------------------------------------------
 // Name:    math
 // Purpose: This namespace holds all math objects, functions, and constants.
@@ -256,7 +263,12 @@ namespace math
       set(0, 0, 0);
     }
     
-  private:
+    
+    // Rotation Operators
+    Quaternion rotatedBy(const Quaternion& q_)
+    {
+      return Quaternion(*this).rotatedBy(q_);
+    }
 
 
   }; // !Vector
@@ -273,6 +285,10 @@ namespace math
 
 
 } // !math
+
+
+// Forward Declaration Inclusions
+#include "quaternion.h"
 
 
 #endif // !VECTOR_H
