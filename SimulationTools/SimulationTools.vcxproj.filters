@@ -52,9 +52,6 @@
     <ClInclude Include="..\Source\Kernel\End_Conditions\max_time_exceeded.h">
       <Filter>Kernel\End Conditions</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\Utilities\Math\math_config.h">
-      <Filter>Utilities\Math Library</Filter>
-    </ClInclude>
     <ClInclude Include="..\Source\Utilities\Math\vector.h">
       <Filter>Utilities\Math Library</Filter>
     </ClInclude>
@@ -62,6 +59,12 @@
       <Filter>Utilities\Math Library</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\Utilities\Math\quaternion.h">
+      <Filter>Utilities\Math Library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Utilities\Math\math_config.h">
+      <Filter>Utilities\Math Library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Utilities\Math\math_constants.h">
       <Filter>Utilities\Math Library</Filter>
     </ClInclude>
   </ItemGroup>
