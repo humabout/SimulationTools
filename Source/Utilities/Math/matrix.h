@@ -48,7 +48,6 @@ namespace math
       };
     };
 
-
     // Construtors
     Matrix()
     {
@@ -81,21 +80,6 @@ namespace math
     Vector& operator[](unsigned int row_)
     {
       return row[row_];
-    }
-
-    Vector& row(unsigned int row_)
-    {
-      // Indexed from zero
-      return row[row_];
-    }
-
-    Vector& column(unsigned int col_)
-    {
-      // Indexed from zero
-      Vector(e[col_],
-             e[col_ + 3],
-             e[col_ + 6]);
-
     }
 
 
@@ -132,7 +116,6 @@ namespace math
     {
       (*this) = m_;
     }
-
 
     // Comparison Operators
     bool operator==(const Matrix& m_)
@@ -224,7 +207,6 @@ namespace math
                     this->e31 * v_.e1 + this->e32 * v_.e2 + this->e33 * v_.e3);
     }
 
-
     // Matrix Multiplication
     Matrix operator*(const Matrix& m_)
     {
@@ -241,13 +223,19 @@ namespace math
                     this->e31 * m_.e13 + this->e32 * m_.e23 + this->e33 * m_.e33);
     }
 
-
     // Transpose
     Matrix transpose(void)
     {
       return Matrix(this->e11, this->e21, this->e31,
                     this->e12, this->e22, this->e32,
                     this->e13, this->e23, this->e33);
+    }
+
+
+    // Trace
+    double trace(void) const
+    {
+      return e11 + e22 + e33;
     }
 
 
@@ -261,7 +249,7 @@ namespace math
 
     
     // Inverse
-    Matrix inverse(void)
+    virtual Matrix inverse(void)
     {
       //Calculating Determinant
       double det = this->determinant();
@@ -284,7 +272,7 @@ namespace math
       return adjoint / det;
     }
 
-    void invert(void)
+    virtual void invert(void)
     {
       *this = this->inverse();
     }
