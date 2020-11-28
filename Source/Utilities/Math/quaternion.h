@@ -37,6 +37,7 @@ namespace math
   //----------------------------------------------------------------------------
   class Quaternion
   {
+  public:
     // Data
     union
     {
@@ -170,20 +171,24 @@ namespace math
     void zeroize();
 
 
+    // Rotation Operation
+    Quaternion rotatedBy(const Quaternion& q_) const;
+
+
   }; // !Quaternion
 
 
-  // Scalar Multiplication
-  Quaternion operator*(double            s_,
-                       const Quaternion& q_);
-
-
-  // Vector Quotient
-  Quaternion operator/(math::Vector lhs,
-                       math::Vector rhs);
-
-
 } // !math
+
+
+// Scalar Multiplication
+math::Quaternion operator*(double                  s_,
+                           const math::Quaternion& q_);
+
+
+// Vector Quotient
+math::Quaternion operator/(const math::Vector& lhs,
+                           const math::Vector& rhs);
 
 
 #endif // !QUATERNION_H

@@ -563,78 +563,104 @@ math::Quaternion math::Quaternion::conjugate(void) const
 
 
 //------------------------------------------------------------------------------
-// Name:    
-// Purpose: 
+// Name:    inverse
+// Purpose: Returns the inverse of the quaternion.
 //------------------------------------------------------------------------------
+math::Quaternion math::Quaternion::inverse(void) const
+{
+  return this->conjugate() / this->norm();
+}
 
 
 //------------------------------------------------------------------------------
-// Name:    
-// Purpose: 
+// Name:    invert
+// Purpose: Sets this quaternion equal to its inverse.
 //------------------------------------------------------------------------------
+void math::Quaternion::invert(void)
+{
+  *this = this->inverse();
+}
 
 
 //------------------------------------------------------------------------------
-// Name:    
-// Purpose: 
+// Name:    rotatedBy
+// Purpose: Returns a quaternion rotated by the provided quaternion. If the 
+//          input is not a versor, it is made one.
 //------------------------------------------------------------------------------
+math::Quaternion math::Quaternion::rotatedBy(const Quaternion& q_) const
+{
+  // Ensuring that the provided quaternion is a versor
+  Quaternion R = q_.versor();
+  return R * (*this) * R.inverse();  
+}
 
 
 //------------------------------------------------------------------------------
-// Name:    
-// Purpose: 
+// Name:    operator*
+// Purpose: Returns the scalar pre-product of the quaternion.
 //------------------------------------------------------------------------------
+math::Quaternion operator*(double                  s_,
+                           const math::Quaternion& q_)
+{
+  return q_ * s_;
+}
 
 
 //------------------------------------------------------------------------------
-// Name:    
-// Purpose: 
+// Name:    operator/
+// Purpose: Returns the quaternion quotient of two vectors.
 //------------------------------------------------------------------------------
+math::Quaternion operator/(const math::Vector& lhs,
+                           const math::Vector& rhs)
+{
+  return math::Quaternion (lhs) / math::Quaternion(rhs);
+}
 
 
 //------------------------------------------------------------------------------
-// Name:    
-// Purpose: 
+// Name:    operator*
+// Purpose: Returns the pre-product of this quaternion and the argument.
+//          [this * arg]
 //------------------------------------------------------------------------------
+math::Quaternion math::Quaternion::operator*(const Quaternion& q_) const
+{
+  return Quaternion(
+    this->w * q_.w - this->x * q_.x - this->y * q_.y - this->z * q_.z,
+    this->w * q_.x + this->x * q_.w + this->y * q_.z - this->z * q_.y,
+    this->w * q_.y - this->x * q_.z + this->y * q_.w + this->z * q_.x,
+    this->w * q_.z + this->x * q_.y - this->y * q_.x + this->z * q_.w
+  );
+}
 
 
 //------------------------------------------------------------------------------
-// Name:    
-// Purpose: 
+// Name:    operator*=
+// Purpose: Sets this quaternion equal to the pre-product of itself and the
+//          argument. [this = this * arg]
 //------------------------------------------------------------------------------
+void math::Quaternion::operator*=(const Quaternion& q_)
+{
+  *this = *this * q_;
+}
 
 
 //------------------------------------------------------------------------------
-// Name:    
-// Purpose: 
+// Name:    operator/
+// Purpose: Returns the post-quotient of this quaternion and the argument.
+//          [this * (1/arg)]
 //------------------------------------------------------------------------------
+math::Quaternion math::Quaternion::operator/(const Quaternion& q_) const
+{
+  return *this * q_.inverse();
+}
 
 
 //------------------------------------------------------------------------------
-// Name:    
-// Purpose: 
+// Name:    operator/=
+// Purpose: Sets this quaternion equal to the post-quotient of itself and the
+//          argument [this = this * (1/arg)]
 //------------------------------------------------------------------------------
-
-
-//------------------------------------------------------------------------------
-// Name:    
-// Purpose: 
-//------------------------------------------------------------------------------
-
-
-//------------------------------------------------------------------------------
-// Name:    
-// Purpose: 
-//------------------------------------------------------------------------------
-
-
-//------------------------------------------------------------------------------
-// Name:    
-// Purpose: 
-//------------------------------------------------------------------------------
-
-
-//------------------------------------------------------------------------------
-// Name:    
-// Purpose: 
-//------------------------------------------------------------------------------
+void math::Quaternion::operator/=(const Quaternion& q_)
+{
+  *this = *this / q_;
+}
