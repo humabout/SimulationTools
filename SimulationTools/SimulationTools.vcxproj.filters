@@ -91,5 +91,8 @@
     <ClCompile Include="..\Source\Utilities\Math\quaternion.cpp">
       <Filter>Utilities\Math Library</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\Utilities\Math\vector.cpp">
+      <Filter>Utilities\Math Library</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
