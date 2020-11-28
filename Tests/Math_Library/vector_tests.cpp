@@ -120,7 +120,46 @@ TEST(VectorTests, SetterVectorwiseTest)
 
 
 // Comparison Operator Tests
+TEST(VectorTests, OperatorIsEqualTest1)
+{
+  math::Vector a(1, 2, 3);
+  math::Vector b(a);
+  EXPECT_TRUE(a == b);
+}
+TEST(VectorTests, OperatorIsEqualTest2)
+{
+  math::Vector a(1, 2, 3);
+  math::Vector b(a);
+  b.e1 = 9;
+  EXPECT_FALSE(a == b);
+}
+TEST(VectorTests, OperatorIsEqualTest3)
+{
+  math::Vector a(1, 2, 3);
+  math::Vector b(a);
+  b.e2 = 9;
+  EXPECT_FALSE(a == b);
+}
+TEST(VectorTests, OperatorIsEqualTest4)
+{
+  math::Vector a(1, 2, 3);
+  math::Vector b(a);
+  b.e3 = 9;
+  EXPECT_FALSE(a == b);
+}
+
+
 // Unary Negative Test
+TEST(VectorTests, OperatorUnaryMinusTest)
+{
+  math::Vector test(1, 2, 3);
+  test = -test;
+  EXPECT_DOUBLE_EQ(test.x, -1);
+  EXPECT_DOUBLE_EQ(test.y, -2);
+  EXPECT_DOUBLE_EQ(test.z, -3);
+}
+
+
 // Addition Test
 // Subtraction Test
 // Scalar Multiplication Test
@@ -129,4 +168,14 @@ TEST(VectorTests, SetterVectorwiseTest)
 // Cross Product Test
 // Magnitude Test
 // Normalization Test
+
+
 // Zeroize Test
+TEST(VectorTests, ZeroizeTest)
+{
+  math::Vector test(1, 2, 3);
+  test.zeroize();
+  EXPECT_DOUBLE_EQ(test.x, 0);
+  EXPECT_DOUBLE_EQ(test.y, 0);
+  EXPECT_DOUBLE_EQ(test.z, 0);
+}
