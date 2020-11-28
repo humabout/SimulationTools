@@ -15,10 +15,6 @@
 
 
 // Forward Declarations
-namespace math
-{
-  class DCM;
-}
 
 
 //------------------------------------------------------------------------------
@@ -36,6 +32,8 @@ namespace math
   //          because this container's elements are expected to be accessed 
   //          often, and this provides that in a syntax that is easily followed
   //          from a mathematical point of view.
+  // NOTE:    This is a left-chain Hamiltonian quaternion.
+  // TODO:    Clean up these comments and make it read better.
   //----------------------------------------------------------------------------
   class Quaternion
   {
@@ -81,8 +79,15 @@ namespace math
 
     // Assignment Operator
     void operator=(const Quaternion& q_);
-    void operator=(const std::array<double, 4>& q_);
-    void operator=(const std::vector<double>& q_);
+
+
+    // Conversion Operator
+    // TODO:  Overload this operator to convert Quaternions into other objects, 
+    //        too.
+    void operator<<(const Vector& v_);
+    void operator<<(const std::array<double, 4>& q_);
+    void operator<<(const std::vector<double>& q_);
+    void operator<<(const Matrix& dcm_);
 
 
     // Accessor
@@ -105,54 +110,59 @@ namespace math
              double z_);
 
     // Unary -
-    Quaternion operator-();
+    Quaternion operator-() const;
+
+
+    // Comparison Operators
+    bool operator==(const Quaternion& q_) const;
+    bool operator!=(const Quaternion& q_) const;
 
 
     // Addition & Subtraction
-    Quaternion operator+(const Quaternion& q_);
+    Quaternion operator+(const Quaternion& q_) const;
     void       operator+=(const Quaternion& q_);
-    Quaternion operator-(const Quaternion& q_);
+    Quaternion operator-(const Quaternion& q_) const;
     void       operator-=(const Quaternion& q_);
 
 
     // Scalar Multiplication & Division
-    Quaternion operator*(double s_);
+    Quaternion operator*(double s_) const;
     void       operator*=(double s_);
-    Quaternion operator/(double s_);
+    Quaternion operator/(double s_) const;
     void       operator/=(double s_);
 
 
     // Quaternion Pre-Multiplication (this * q_)
-    Quaternion operator*(const Quaternion& q_);
+    Quaternion operator*(const Quaternion& q_) const;
     void       operator*=(const Quaternion& q_);
 
 
-    // Quaternion Pre-Division ((1/q_) * this)
-    Quaternion operator/(const Quaternion& q_);
+    // Quaternion Post-Division (this * (1/q_))
+    Quaternion operator/(const Quaternion& q_) const;
     void       operator/=(const Quaternion& q_);
 
 
     // Magnitude (Tensor)
-    double magnitude(void);
-    double tensor(void);
+    double magnitude(void) const;
+    double tensor(void) const;
 
 
     // Quaternion Norm (w*w + x*x + y*y + z*z)
-    double norm(void);
+    double norm(void) const;
 
 
     // Unit (Versor)
-    void normalize(void);
-    Quaternion unit(void);
-    Quaternion versor(void);
+    void unitize(void);
+    Quaternion unit(void) const;
+    Quaternion versor(void) const;
 
 
     // Quaternion Conjugate
-    Quaternion conjugate(void);
+    Quaternion conjugate(void) const;
 
 
     // Quaternion Inverse
-    Quaternion inverse(void);
+    Quaternion inverse(void) const;
     void       invert(void);
 
 
@@ -161,6 +171,11 @@ namespace math
 
 
   }; // !Quaternion
+
+
+  // Scalar Multiplication
+  Quaternion operator*(double            s_,
+                       const Quaternion& q_);
 
 
   // Vector Quotient

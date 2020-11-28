@@ -82,21 +82,6 @@ namespace math
       return row[row_];
     }
 
-    Vector& row(unsigned int row_)
-    {
-      // Indexed from zero
-      return row[row_];
-    }
-
-    Vector& column(unsigned int col_)
-    {
-      // Indexed from zero
-      Vector(e[col_],
-             e[col_ + 3],
-             e[col_ + 6]);
-
-    }
-
 
     // Setters
     void operator=(const Matrix& m_)
@@ -245,6 +230,14 @@ namespace math
                     this->e12, this->e22, this->e32,
                     this->e13, this->e23, this->e33);
     }
+
+
+    // Trace
+    double trace(void) const
+    {
+      return e11 + e22 + e33;
+    }
+
 
     // Determinant
     double determinant(void)
