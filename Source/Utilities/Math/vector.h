@@ -131,13 +131,13 @@ namespace math
 
 
     // Comparison Operators
-    bool operator==(const Vector& v_)
+    bool operator==(const Vector& v_) const
     {
       return ( (this->e[0] == v_.e[0]) &&
                (this->e[1] == v_.e[1]) &&
                (this->e[2] == v_.e[2]) );
     }
-    bool operator!=(const Vector& v_)
+    bool operator!=(const Vector& v_) const
     {
       return ( (this->e[0] != v_.e[0]) ||
                (this->e[1] != v_.e[1]) ||
@@ -146,7 +146,7 @@ namespace math
 
 
     // Unary -
-    Vector operator-()
+    Vector operator-() const
     {
       return Vector( -this->e[0],
                      -this->e[1],
@@ -155,7 +155,7 @@ namespace math
 
 
     // Addition & Subtraction
-    Vector operator+(const Vector& v_)
+    Vector operator+(const Vector& v_) const
     {
       return Vector( this->e[0] + v_.e[0],
                      this->e[1] + v_.e[1],
@@ -165,7 +165,7 @@ namespace math
     {
       (*this) = (*this) + v_;
     }
-    Vector operator-(const Vector& v_)
+    Vector operator-(const Vector& v_) const
     {
       return Vector( this->e[0] - v_.e[0],
                      this->e[1] - v_.e[1],
@@ -178,7 +178,7 @@ namespace math
 
 
     // Scalar Multiplication & Division
-    Vector operator*(double s_)
+    Vector operator*(double s_) const
     {
       return Vector( s_ * this->e[0],
                      s_ * this->e[1],
@@ -188,7 +188,7 @@ namespace math
     {
       (*this) = (*this) * s_;
     }
-    Vector operator/(const double& s_)
+    Vector operator/(const double& s_) const
     {
       // TODO: Make this more robust against division by near-zero. Perahps
       //       divide by a default value if near zero?
@@ -202,25 +202,25 @@ namespace math
 
 
     // Dot Product
-    double dot(const Vector& v_)
+    double dot(const Vector& v_) const
     {
       return this->e[0] * v_.e[0] +
              this->e[1] + v_.e[1] +
              this->e[2] + v_.e[2];
     }
-    double operator*(const Vector& v_)
+    double operator*(const Vector& v_) const
     {
       return this->dot(v_);
     }
 
     // Cross Product
-    Vector cross(const Vector& v_)
+    Vector cross(const Vector& v_) const
     {
       return Vector( (this->e[1]) * v_.e[2] - (this->e[2]) * v_.e[1],
                      (this->e[2]) * v_.e[0] - (this->e[0]) * v_.e[2],
                      (this->e[0]) * v_.e[1] - (this->e[1]) * v_.e[0]);
     }
-    Vector operator%(const Vector& v_)
+    Vector operator%(const Vector& v_) const
     {
       return this->cross(v_);
     }
@@ -231,7 +231,7 @@ namespace math
 
 
     // Magnitude
-    double magnitude(void)
+    double magnitude(void) const
     {
       return sqrt( (this->e[0]) * (this->e[0]) +
                    (this->e[1]) * (this->e[1]) +
@@ -244,7 +244,7 @@ namespace math
     {
       (*this) = this->unit();
     }
-    Vector unit(void)
+    Vector unit(void) const
     {
       return (*this) / (this->magnitude());
     }
