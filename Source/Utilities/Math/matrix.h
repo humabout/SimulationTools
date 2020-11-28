@@ -6,9 +6,7 @@
 
 
 // Inclusions
-#include <array>
 #include <cassert>
-#include <vector>
 #include "math_config.h"
 #include "vector.h"
 
@@ -36,6 +34,12 @@ namespace math
       Vector row[3];
       struct
       {
+        Vector row_1;
+        Vector row_2;
+        Vector row_3;
+      };
+      struct
+      {
         double e11;
         double e12;
         double e13;
@@ -49,251 +53,90 @@ namespace math
     };
 
     // Construtors
-    Matrix()
-    {
-      zeroize();
-    }
-
+    Matrix();
     Matrix(double e11_, double e12_, double e13_,
            double e21_, double e22_, double e23_,
-           double e31_, double e32_, double e33_)
-    {
-      set(e11_, e12_, e13_,
-          e21_, e22_, e23_,
-          e31_, e32_, e33_);
-    }
-
-    Matrix(const Matrix& m_)
-    {
-      set(m_);
-    }
+           double e31_, double e32_, double e33_);
+    Matrix(const Matrix& m_);
 
 
     // Destructor
-    ~Matrix()
-    {
-      // Nothing to delete.
-    }
+    ~Matrix();
 
 
     // Accessors
-    Vector& operator[](unsigned int row_)
-    {
-      return row[row_];
-    }
+    Vector& operator[](unsigned int row_);
 
 
     // Setters
-    void operator=(const Matrix& m_)
-    {
-      this->e11 = m_.e11;
-      this->e12 = m_.e12;
-      this->e13 = m_.e13;
-      this->e21 = m_.e21;
-      this->e22 = m_.e22;
-      this->e23 = m_.e23;
-      this->e31 = m_.e31;
-      this->e32 = m_.e32;
-      this->e33 = m_.e33;
-    }
-
+    void operator=(const Matrix& m_);
     void set(double e11_, double e12_, double e13_,
              double e21_, double e22_, double e23_,
-             double e31_, double e32_, double e33_)
-    {
-      this->e11 = e11_;
-      this->e12 = e12_;
-      this->e13 = e13_;
-      this->e21 = e21_;
-      this->e22 = e22_;
-      this->e23 = e23_;
-      this->e31 = e31_;
-      this->e32 = e32_;
-      this->e33 = e33_;
-    }
-
-    void set(const Matrix& m_)
-    {
-      (*this) = m_;
-    }
+             double e31_, double e32_, double e33_);
+    void set(const Matrix& m_);
+    void setRows(const Vector& row_1_,
+                 const Vector& row_2_,
+                 const Vector& row_3_);
+    void setColumns(const Vector& col_1_,
+                    const Vector& col_2_,
+                    const Vector& col_3_);
 
     // Comparison Operators
-    bool operator==(const Matrix& m_)
-    {
-      for (unsigned int i = 0; i < 9; i++)
-      {
-        if (this->e[i] != m_.e[i])
-        {
-          return false;
-        }
-      }
-      return true;
-    }
-
-    bool operator!=(const Matrix& m_)
-    {
-      return !(*this == m_);
-    }
+    bool operator==(const Matrix& m_) const;
+    bool operator!=(const Matrix& m_) const;
 
 
     // Unary -
-    Matrix operator-()
-    {
-      return Matrix(-e11, -e12, -e13,
-                    -e21, -e22, -e23,
-                    -e31, -e32, -e33);
-    }
+    Matrix operator-() const;
 
 
     // Addition & Subtraction
-    Matrix operator+(const Matrix& m_)
-    {
-      return Matrix(this->e11 + m_.e11, this->e12 + m_.e12, this->e13 + m_.e13,
-                    this->e21 + m_.e21, this->e22 + m_.e22, this->e23 + m_.e23,
-                    this->e31 + m_.e31, this->e32 + m_.e32, this->e33 + m_.e33);
-    }
-
-    void operator+=(const Matrix& m_)
-    {
-      *this = *this + m_;
-    }
-
-    Matrix operator-(const Matrix& m_)
-    {
-      return Matrix(this->e11 - m_.e11, this->e12 - m_.e12, this->e13 - m_.e13,
-                    this->e21 - m_.e21, this->e22 - m_.e22, this->e23 - m_.e23,
-                    this->e31 - m_.e31, this->e32 - m_.e32, this->e33 - m_.e33);
-    }
-
-    void operator-=(const Matrix& m_)
-    {
-      *this = *this - m_;
-    }
+    Matrix operator+(const Matrix& m_) const;
+    void operator+=(const Matrix& m_);
+    Matrix operator-(const Matrix& m_) const;
+    void operator-=(const Matrix& m_);
 
 
     // Scalar Multiplication & Division
     // NOTE: Scalar right-multiplication is defined in an override for doubles.
-    Matrix operator*(double s_)
-    {
-      return Matrix(this->e11 * s_, this->e12 * s_, this->e13 * s_,
-                    this->e21 * s_, this->e22 * s_, this->e23 * s_,
-                    this->e31 * s_, this->e32 * s_, this->e33 * s_);
-    }
-
-    void operator*=(double s_)
-    {
-      *this = *this * s_;
-    }
-
-    Matrix operator/(double s_)
-    {
-      // TODO: Make this more robust against division by near-zero. Perahps
-      //       divide by a default value if near zero?
-      assert(abs(s_) < math::DIVIDE_BY_ZERO_TOLERANCE);
-      return (*this) * (1 / s_);
-    }
-
-    void operator/=(double s_)
-    {
-      *this = *this / s_;
-    }
+    Matrix operator*(double s_) const;
+    void operator*=(double s_);
+    Matrix operator/(double s_) const;
+    void operator/=(double s_);
 
 
     // Vector Multiplication
-    Vector operator*(const Vector& v_)
-    {
-      return Vector(this->e11 * v_.e1 + this->e12 * v_.e2 + this->e13 * v_.e3,
-                    this->e21 * v_.e1 + this->e22 * v_.e2 + this->e23 * v_.e3,
-                    this->e31 * v_.e1 + this->e32 * v_.e2 + this->e33 * v_.e3);
-    }
+    Vector operator*(const Vector& v_) const;
+
 
     // Matrix Multiplication
-    Matrix operator*(const Matrix& m_)
-    {
-      return Matrix(this->e11 * m_.e11 + this->e12 * m_.e21 + this->e13 * m_.e31,
-                    this->e11 * m_.e12 + this->e12 * m_.e22 + this->e13 * m_.e32,
-                    this->e11 * m_.e13 + this->e12 * m_.e23 + this->e13 * m_.e33,
+    Matrix operator*(const Matrix& m_) const;
+    void operator*=(const Matrix& m_);
 
-                    this->e21 * m_.e11 + this->e22 * m_.e21 + this->e23 * m_.e31,
-                    this->e21 * m_.e12 + this->e22 * m_.e22 + this->e23 * m_.e32,
-                    this->e21 * m_.e13 + this->e22 * m_.e23 + this->e23 * m_.e33,
-
-                    this->e31 * m_.e11 + this->e32 * m_.e21 + this->e33 * m_.e31,
-                    this->e31 * m_.e12 + this->e32 * m_.e22 + this->e33 * m_.e32,
-                    this->e31 * m_.e13 + this->e32 * m_.e23 + this->e33 * m_.e33);
-    }
 
     // Transpose
-    Matrix transpose(void)
-    {
-      return Matrix(this->e11, this->e21, this->e31,
-                    this->e12, this->e22, this->e32,
-                    this->e13, this->e23, this->e33);
-    }
+    Matrix transpose(void) const;
 
 
     // Trace
-    double trace(void) const
-    {
-      return e11 + e22 + e33;
-    }
+    double trace(void) const;
 
 
     // Determinant
-    double determinant(void)
-    {
-      return e11 * (e22 * e33 - e23 * e32) +
-             e12 * (e31 * e23 - e33 * e21) +
-             e13 * (e21 * e32 - e31 * e23);
-    }
+    double determinant(void) const;
 
     
     // Inverse
-    virtual Matrix inverse(void)
-    {
-      //Calculating Determinant
-      double det = this->determinant();
-
-      // Verifying the matrix is invertible
-      assert(abs(det) > math::DIVIDE_BY_ZERO_TOLERANCE);
-
-      // Calculating Adjoint Matrix
-      Matrix adjoint(e22 * e33 - e21 * e12,
-                     e13 * e31 - e12 * e22,
-                     e12 * e23 - e13 * e22,
-
-                     e23 * e31 - e21 * e33,
-                     e11 * e33 - e13 * e31,
-                     e21 * e13 - e11 * e23,
-
-                     e21 * e32 - e31 * e22,
-                     e31 * e12 - e11 * e32,
-                     e11 * e22 - e21 * e12);
-      return adjoint / det;
-    }
-
-    virtual void invert(void)
-    {
-      *this = this->inverse();
-    }
+    Matrix inverse(void) const;
+    void invert(void);
 
 
     // Zeroize
-    void zeroize(void)
-    {
-      this->set(0, 0, 0,
-                0, 0, 0,
-                0, 0, 0);
-    }
+    void zeroize(void);
 
 
     // Identity
-    static Matrix identity(void)
-    {
-      return Matrix(1, 0, 0,
-                    0, 1, 0,
-                    0, 0, 1);
-    }
+    static Matrix identity(void);
 
 
   private:
@@ -302,16 +145,12 @@ namespace math
   }; // !Matrix
 
 
-  // Right-Multiplication of Matrices by Doubles
-  Matrix operator*(double s_, const Matrix& m_)
-  {
-    return Matrix(m_.e11 * s_, m_.e12 * s_, m_.e13 * s_,
-                  m_.e21 * s_, m_.e22 * s_, m_.e23 * s_,
-                  m_.e31 * s_, m_.e32 * s_, m_.e33 * s_);
-  }
-
-
 } // !math
+
+
+// Right-Multiplication of Matrices by Doubles
+math::Matrix operator*(double              s_, 
+                       const math::Matrix& m_);
 
 
 
