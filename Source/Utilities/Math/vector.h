@@ -6,9 +6,6 @@
 
 
 // Inclusions
-#include <array>
-#include <cassert>
-#include <vector>
 #include "math_config.h"
 
 
@@ -59,8 +56,6 @@ namespace math
     Vector(double x_,
            double y_,
            double z_);
-    Vector(const std::array<double, 3>& v_);
-    Vector(const std::vector<double>& v_);
     Vector(const Vector& v_);
 
 
@@ -76,18 +71,10 @@ namespace math
     void operator=(const Vector& v_);
 
 
-    // Conversion Operator
-    // TODO: Should this just be an assignment operator?
-    void operator<<(const std::array<double, 3>& v_);
-    void operator<<(const std::vector<double>& v_);
-
-
     // Setters
     void set(double x_,
              double y_,
              double z_);
-    void set(const std::array<double, 3> v_);
-    void set(const std::vector<double> v_);
     void set(const Vector& v_);
 
 

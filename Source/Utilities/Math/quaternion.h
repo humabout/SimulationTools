@@ -6,15 +6,8 @@
 
 
 // Inclusions
-#include <array>
-#include <cassert>
-#include <vector>
-#include "math_config.h"
 #include "matrix.h"
 #include "vector.h"
-
-
-// Forward Declarations
 
 
 //------------------------------------------------------------------------------
@@ -70,8 +63,6 @@ namespace math
     Quaternion(const Matrix& dcm_);
     Quaternion(const Vector& q_);
     Quaternion(const Quaternion& q_);
-    Quaternion(const std::array<double, 4>& q_);
-    Quaternion(const std::vector<double>& q_);
 
 
     // Destructor
@@ -86,8 +77,6 @@ namespace math
     // TODO:  Overload this operator to convert Quaternions into other objects, 
     //        too.
     void operator<<(const Vector& v_);
-    void operator<<(const std::array<double, 4>& q_);
-    void operator<<(const std::vector<double>& q_);
     void operator<<(const Matrix& dcm_);
 
 
@@ -96,11 +85,9 @@ namespace math
 
 
     // Setters
-    void set(const std::array<double, 4>& q_);
     void set(const Matrix& dcm_);
     void set(const Quaternion& q_);
     void set(const Vector& q_);
-    void set(const std::vector<double>& q_);
     void set(double        s_,
              const Vector& v_);
     void set(const Vector& axis_,

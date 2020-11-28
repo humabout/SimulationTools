@@ -2,9 +2,8 @@
 
 
 // Inclusions
-#include <array>
 #include <cassert>
-#include <vector>
+#include <cmath>
 #include "math_config.h"
 #include "quaternion.h"
 #include "vector.h"
@@ -43,29 +42,6 @@ math::Vector::Vector(double x_,
 
 
 //------------------------------------------------------------------------------
-// Name:    Vector
-// Purpose: Constructor Overload. Sets the elements of the vector to those in
-//          the provided std::array.
-//------------------------------------------------------------------------------
-math::Vector::Vector(const std::array<double, 3>& v_)
-{
-  this->set(v_);
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    Vector
-// Purpose: Constructor Overload. Sets the vector's elements to those in the
-//          provided std::vector. Validation of the std::vector's size is done
-//          at the set() level.
-//------------------------------------------------------------------------------
-math::Vector::Vector(const std::vector<double>& v_)
-{
-  this->set(v_);
-}
-
-
-//------------------------------------------------------------------------------
 // Name:    ~Vector
 // Purpose: Destructor. This objet owns nothing and deletes nothing.
 //------------------------------------------------------------------------------
@@ -98,33 +74,6 @@ void math::Vector::operator=(const Vector& v_)
 
 
 //------------------------------------------------------------------------------
-// Name:    operator<<
-// Purpose: Conversion Operator. Converts a std::array into a Vector.
-//------------------------------------------------------------------------------
-void math::Vector::operator<<(const std::array<double, 3>& v_)
-{
-  this->e[0] = v_[0];
-  this->e[1] = v_[1];
-  this->e[2] = v_[2];
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    operator<<
-// Purpose: Conversion Operator. Converts a std::vector into a Vector.
-//------------------------------------------------------------------------------
-void math::Vector::operator<<(const std::vector<double>& v_)
-{
-  // TODO: Make more robust and remove this assert. This shouldn't crash the
-  //       programs just because a bad vector was provided.
-  assert(v_.size() == 3);
-  this->e[0] = v_[0];
-  this->e[1] = v_[1];
-  this->e[2] = v_[2];
-}
-
-
-//------------------------------------------------------------------------------
 // Name:    set
 // Purpose: Sets the elements of this vector equal to those values provieded.
 //------------------------------------------------------------------------------
@@ -135,28 +84,6 @@ void math::Vector::set(double x_,
   this->x = x_;
   this->y = y_;
   this->z = z_;
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    set
-// Purpose: Converts the provided std::array to a Vector and stores it in this
-//          one.
-//------------------------------------------------------------------------------
-void math::Vector::set(const std::array<double, 3> v_)
-{
-  *this << v_;
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    set
-// Purpose: Converts the provided std::vector to a Vector and stores it in this
-//          one.
-//------------------------------------------------------------------------------
-void math::Vector::set(const std::vector<double> v_)
-{
-  *this << v_;
 }
 
 

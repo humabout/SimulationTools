@@ -3,8 +3,10 @@
 
 // Inclusions
 #include <algorithm>
-#include "quaternion.h"
+#include <cassert>
+#include "math_config.h"
 #include "matrix.h"
+#include "quaternion.h"
 #include "vector.h"
 
 
@@ -23,28 +25,6 @@ math::Quaternion::Quaternion()
 // Purpose: Copy Constructor
 //------------------------------------------------------------------------------
 math::Quaternion::Quaternion(const Quaternion& q_)
-{
-  this->set(q_);
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    Quaternion
-// Purpose: Constructor Overload. For std::arrays.
-//------------------------------------------------------------------------------
-math::Quaternion::Quaternion(const std::array<double, 4>& q_)
-{
-  this->set(q_);
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    Quaternion
-// Purpose: Constructor Overload. Builds a quaternion from a vector of doubles
-//          with all validation for the correct number of elements done at the 
-//          set() level.
-//------------------------------------------------------------------------------
-math::Quaternion::Quaternion(const std::vector<double>& q_)
 {
   this->set(q_);
 }
@@ -148,39 +128,6 @@ void math::Quaternion::operator<<(const Vector& v_)
 
 
 //------------------------------------------------------------------------------
-// Name:    Operator<<
-// Purpose: Converts the the argument to a Quaternion and stores it in this
-//          quaternion. This is an operator version of the set() method.
-//------------------------------------------------------------------------------
-void math::Quaternion::operator<<(const std::array<double, 4>& q_)
-{
-  this->e[0] = q_[0];
-  this->e[1] = q_[1];
-  this->e[2] = q_[2];
-  this->e[3] = q_[3];
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    Operator<<
-// Purpose: Converts the the argument to a Quaternion and stores it in this
-//          quaternion. This is an operator version of the set() method.
-//------------------------------------------------------------------------------
-void math::Quaternion::operator<<(const std::vector<double>& q_)
-{
-  // Validating the number of elements in the vector
-  // TODO: Make this more robust. Forcing a crash may not be the best option.
-  assert(q_.size() == 4);
-
-  // 
-  this->e[0] = q_[0];
-  this->e[1] = q_[1];
-  this->e[2] = q_[2];
-  this->e[3] = q_[3];
-}
-
-
-//------------------------------------------------------------------------------
 // Name:    operator<<
 // Purpose: Builds a quaternion from the provided DCM. This produces a 
 //          Hamiltonian Left Chain quaternion (p' = q*p*q^-1).
@@ -227,17 +174,6 @@ void math::Quaternion::operator<<(const Matrix& dcm_)
 
 //------------------------------------------------------------------------------
 // Name:    set
-// Purpose: Treats the given array as a quaternion and sets this one equal to 
-//          that.
-//------------------------------------------------------------------------------
-void math::Quaternion::set(const std::array<double, 4>& q_)
-{
-  *this << q_;
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    set
 // Purpose: Treats the given matrix as a DCM and converts it to a quaternion. It
 //          then sets this quaternion to that result.
 //------------------------------------------------------------------------------
@@ -263,17 +199,6 @@ void math::Quaternion::set(const Quaternion& q_)
 //          vector.
 //------------------------------------------------------------------------------
 void math::Quaternion::set(const Vector& q_)
-{
-  *this << q_;
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    set
-// Purpose: Treats the given std::vector as a quaternion and sets this one equal
-//          to that.
-//------------------------------------------------------------------------------
-void math::Quaternion::set(const std::vector<double>& q_)
 {
   *this << q_;
 }
