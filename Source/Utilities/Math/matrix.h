@@ -11,6 +11,13 @@
 #include "vector.h"
 
 
+// Forward Declaration
+namespace math
+{
+  class Quaternion;
+}
+
+
 //------------------------------------------------------------------------------
 // Name:    math
 // Purpose: This namespace holds all math objects, functions, and constants.
@@ -80,6 +87,11 @@ namespace math
     void setColumns(const Vector& col_1_,
                     const Vector& col_2_,
                     const Vector& col_3_);
+
+
+    // Conversion Operator
+    void operator<<(const Quaternion& q_);
+
 
     // Comparison Operators
     bool operator==(const Matrix& m_) const;
@@ -153,6 +165,8 @@ math::Matrix operator*(double              s_,
                        const math::Matrix& m_);
 
 
+// Forward Declaration Inclusion
+#include "quaternion.h"
 
 
 #endif // !MATRIX_H

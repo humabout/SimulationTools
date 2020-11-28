@@ -286,7 +286,7 @@ double math::Vector::magnitude(void) const
 // Name:    normalize
 // Purpose: Normalizes this vector.
 //------------------------------------------------------------------------------
-void math::Vector::normalize(void)
+void math::Vector::unitize(void)
 {
   *this = this->unit();
 }
@@ -309,17 +309,6 @@ math::Vector math::Vector::unit(void) const
 void math::Vector::zeroize(void)
 {
   this->set(0, 0, 0);
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    rotatedBy
-// Purpose: Rotates this vector by the provided quaternion. It normalizes the
-//          quaternion provided and returns a quaternion.
-//------------------------------------------------------------------------------
-math::Quaternion math::Vector::rotatedBy(const Quaternion& q_)
-{
-  return Quaternion(*this).rotatedBy(q_);
 }
 
 

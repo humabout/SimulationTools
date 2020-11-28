@@ -6,8 +6,14 @@
 
 
 // Inclusions
-#include "matrix.h"
 #include "vector.h"
+
+
+// Forward Declarations
+namespace
+{
+  class Matrix;
+}
 
 
 //------------------------------------------------------------------------------
@@ -73,12 +79,12 @@ namespace math
     void operator=(const Quaternion& q_);
 
 
-    // Conversion Operator
+    // Conversion Operators
     // TODO:  Overload this operator to convert Quaternions into other objects, 
     //        too.
     void operator<<(const Vector& v_);
     void operator<<(const Matrix& dcm_);
-
+    Matrix getDCM(void) const;
 
     // Accessor
     double& operator[](unsigned int element_);
@@ -176,6 +182,10 @@ math::Quaternion operator*(double                  s_,
 // Vector Quotient
 math::Quaternion operator/(const math::Vector& lhs,
                            const math::Vector& rhs);
+
+
+// Forward Declaration Inclusions
+#include "matrix.h"
 
 
 #endif // !QUATERNION_H

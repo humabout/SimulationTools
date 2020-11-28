@@ -231,7 +231,7 @@ void math::Quaternion::set(const Vector& axis_,
 
   // Ensuring that the axis is a unit vector
   Vector axis = axis_;
-  axis.normalize();
+  axis.unitize();
 
   // Building the Quaternion
   this->w = half_cos;
@@ -588,4 +588,30 @@ math::Quaternion math::Quaternion::operator/(const Quaternion& q_) const
 void math::Quaternion::operator/=(const Quaternion& q_)
 {
   *this = *this / q_;
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    operator/=
+// Purpose: Generates and returns a DCM from this quaternion. If it is not a 
+//          versor, it is made one, first.
+//------------------------------------------------------------------------------
+math::Matrix math::Quaternion::getDCM(void) const
+{
+  // Ensuring that a versor is used.
+  Quaternion versor = this->versor();
+
+  // Building the matrix
+  double wx = versor.w * versor.x;
+  double wy = versor.w * versor.y;
+  double wz = versor.w * versor.z;
+  double xx = versor.x * versor.x;
+  double xy = versor.x * versor.y;
+  double xz = versor.x * versor.z;
+  double yy = versor.y * versor.y;
+  double yz = versor.y * versor.z;
+  double zz = versor.z * versor.z;
+  return Matrix( 1 - 2 * (yy - zz),     2 * (xy - wz),     2 * (xz + wy),
+                     2 * (xy + wz), 1 - 2 * (xx - zz),     2 * (yz - wx),
+                     2 * (xz - wy),     2 * (yz + wx), 1 - 2 * (xx - yy) );
 }

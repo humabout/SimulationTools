@@ -3,8 +3,10 @@
 
 // Inclusions
 #include <cassert>
+#include <cmath>
 #include "math_config.h"
 #include "matrix.h"
+#include "quaternion.h"
 #include "vector.h"
 
 
@@ -424,4 +426,15 @@ void math::Matrix::zeroize(void)
   this->set(0, 0, 0, 
             0, 0, 0, 
             0, 0, 0);
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    operator<<
+// Purpose: Generates a DCM from the given quaternion and stores it in this 
+//          matrix.
+//------------------------------------------------------------------------------
+void math::Matrix::operator<<(const Quaternion& q_)
+{
+  *this = q_.getDCM();
 }
