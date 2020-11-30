@@ -161,13 +161,271 @@ TEST(VectorTests, OperatorUnaryMinusTest)
 
 
 // Addition Test
+TEST(VectorTests, AdditionTest1)
+{
+  math::Vector u(1, 2, 3);
+  math::Vector v(4, 5, 6);
+  math::Vector w(5, 7, 9);
+  EXPECT_TRUE((u + v) == w);
+}
+TEST(VectorTests, AdditionTest2)
+{
+  math::Vector u(1, 2, 3);
+  math::Vector v(4, 5, 6);
+  math::Vector w = u + v;
+  u += v;
+  EXPECT_TRUE(u == w);
+}
+TEST(VectorTests, AdditionTest3)
+{
+  math::Vector u(1, 2, 3);
+  math::Vector v(4, 5, 6);
+  EXPECT_TRUE((u + v) == (v + u));
+}
+
+
 // Subtraction Test
+TEST(VectorTests, SubtractionTest1)
+{
+  math::Vector u(1, 2, 3);
+  math::Vector v(4, 5, 6);
+  math::Vector w(-3, -3, -3);
+  EXPECT_TRUE((u - v) == w);
+}
+TEST(VectorTests, SubtractionTest2)
+{
+  math::Vector u(1, 2, 3);
+  math::Vector v(4, 5, 6);
+  math::Vector w = u - v;
+  u -= v;
+  EXPECT_TRUE(u == w);
+}
+
+
 // Scalar Multiplication Test
+TEST(VectorTests, ScalarMultiplicationTest1)
+{
+  math::Vector u(1, 2, 3);
+  math::Vector v(2, 4, 6);
+  double s = 2;
+  EXPECT_TRUE(u * s == v);
+}
+TEST(VectorTests, ScalarMultiplicationTest2)
+{
+  math::Vector u(1, 2, 3);
+  math::Vector v(2, 4, 6);
+  double s = 2;
+  EXPECT_TRUE(s * u == v);
+}
+TEST(VectorTests, ScalarMultiplicationTest3)
+{
+  math::Vector u(1, 2, 3);
+  math::Vector v(2, 4, 6);
+  double s = 2;
+  u *= s;
+  EXPECT_TRUE(u == v);
+}
+
+
 // Scalar Division Test
+TEST(VectorTests, ScalarDivisionTest1)
+{
+  math::Vector u(2, 4, 6);
+  math::Vector v(1, 2, 3);
+  double s = 2;
+  EXPECT_TRUE(u / s == v);
+}
+// TODO:  Make tests for catching division by zero.
+//        May need to replace the assert with a throw.
+TEST(VectorTests, ScalarDivisionTest2)
+{
+  math::Vector u(2, 4, 6);
+  math::Vector v(1, 2, 3);
+  double s = 2;
+  u /= s;
+  EXPECT_TRUE(u == v);
+}
+// TODO:  Make tests for catching division by zero.
+//        May need to replace the assert with a throw.
+
 // Dot Product Test
+TEST(VectorTests, DotProductTest1)
+{
+  math::Vector u(1, 2, 3);
+  math::Vector v(4, 5, 6);
+  EXPECT_DOUBLE_EQ(u.dot(v), 32);
+}
+TEST(VectorTests, DotProductTest2)
+{
+  math::Vector u(1, 2, 3);
+  math::Vector v(4, 5, 6);
+  EXPECT_DOUBLE_EQ(u * v, 32);
+}
+TEST(VectorTests, DotProductTest3)
+{
+  math::Vector u(1, 2, 3);
+  math::Vector v(4, 5, 6);
+  EXPECT_DOUBLE_EQ(u * -v, -32);
+}
+TEST(VectorTests, DotProductTest4)
+{
+  math::Vector u(1, 2, 3);
+  math::Vector v(4, 5, 6);
+  EXPECT_DOUBLE_EQ(-u * v, -32);
+}
+TEST(VectorTests, DotProductTest5)
+{
+  math::Vector u(1, 2, 3);
+  math::Vector v(4, 5, 6);
+  EXPECT_DOUBLE_EQ(u.dot(v), (u * v));
+}
+
+
 // Cross Product Test
+TEST(VectorTests, CrossProductTest1)
+{
+  math::Vector i(1, 0, 0);
+  math::Vector j(0, 1, 0);
+  math::Vector k(0, 0, 1);
+  
+  EXPECT_TRUE(i.cross(j) == k);
+}
+TEST(VectorTests, CrossProductTest2)
+{
+  math::Vector i(1, 0, 0);
+  math::Vector j(0, 1, 0);
+  math::Vector k(0, 0, 1);
+
+  EXPECT_TRUE(j.cross(k) == i);
+}
+TEST(VectorTests, CrossProductTest3)
+{
+  math::Vector i(1, 0, 0);
+  math::Vector j(0, 1, 0);
+  math::Vector k(0, 0, 1);
+
+  EXPECT_TRUE(k.cross(i) == j);
+}
+TEST(VectorTests, CrossProductTest4)
+{
+  math::Vector i(1, 0, 0);
+  math::Vector j(0, 1, 0);
+  math::Vector k(0, 0, 1);
+
+  EXPECT_TRUE(k.cross(j) == -i);
+}
+TEST(VectorTests, CrossProductTest5)
+{
+  math::Vector i(1, 0, 0);
+  math::Vector j(0, 1, 0);
+  math::Vector k(0, 0, 1);
+
+  EXPECT_TRUE(i.cross(k) == -j);
+}
+TEST(VectorTests, CrossProductTest6)
+{
+  math::Vector i(1, 0, 0);
+  math::Vector j(0, 1, 0);
+  math::Vector k(0, 0, 1);
+
+  EXPECT_TRUE(j.cross(i) == -k);
+}
+TEST(VectorTests, CrossProductTest7)
+{
+  math::Vector u(1, 2, 3);
+  math::Vector v(4, 5, 6);
+
+  EXPECT_TRUE(u.cross(v) == (u % v));
+}
+TEST(VectorTests, CrossProductTest8)
+{
+  math::Vector u(1, 2, 3);
+  math::Vector v(4, 5, 6);
+  math::Vector w;
+  w = u % v;
+  u %= v;
+
+  EXPECT_TRUE(u == w);
+}
+
+
 // Magnitude Test
+TEST(VectorTests, MagnitudeTest1)
+{
+  math::Vector test;
+  EXPECT_DOUBLE_EQ(test.magnitude(), 0);
+}
+TEST(VectorTests, MagnitudeTest2)
+{
+  math::Vector test(10, 0, 0);
+  EXPECT_DOUBLE_EQ(test.magnitude(), 10);
+}
+TEST(VectorTests, MagnitudeTest3)
+{
+  math::Vector test(0, 10, 0);
+  EXPECT_DOUBLE_EQ(test.magnitude(), 10);
+}
+TEST(VectorTests, MagnitudeTest4)
+{
+  math::Vector test(0, 0, 10);
+  EXPECT_DOUBLE_EQ(test.magnitude(), 10);
+}
+
+
 // Normalization Test
+TEST(VectorTests, UnitizeTest1)
+{
+  math::Vector test(2, 0, 0);
+  test.unitize();
+  EXPECT_DOUBLE_EQ(test.x, 1);
+  EXPECT_DOUBLE_EQ(test.y, 0);
+  EXPECT_DOUBLE_EQ(test.z, 0);
+}
+TEST(VectorTests, UnitizeTest2)
+{
+  math::Vector test(0, 2, 0);
+  test.unitize();
+  EXPECT_DOUBLE_EQ(test.x, 0);
+  EXPECT_DOUBLE_EQ(test.y, 1);
+  EXPECT_DOUBLE_EQ(test.z, 0);
+}
+TEST(VectorTests, UnitizeTest3)
+{
+  math::Vector test(0, 0, 2);
+  test.unitize();
+  EXPECT_DOUBLE_EQ(test.x, 0);
+  EXPECT_DOUBLE_EQ(test.y, 0);
+  EXPECT_DOUBLE_EQ(test.z, 1);
+}
+// TODO:  Make a test for catching division by zero.
+//        May need to replace the assert with a throw.
+
+TEST(VectorTests, UnitVectorTest1)
+{
+  math::Vector test(2, 0, 0);
+  math::Vector unit = test.unit();
+  EXPECT_DOUBLE_EQ(unit.x, 1);
+  EXPECT_DOUBLE_EQ(unit.y, 0);
+  EXPECT_DOUBLE_EQ(unit.z, 0);
+}
+TEST(VectorTests, UnitVectorTest2)
+{
+  math::Vector test(0, 2, 0);
+  math::Vector unit = test.unit();
+  EXPECT_DOUBLE_EQ(unit.x, 0);
+  EXPECT_DOUBLE_EQ(unit.y, 1);
+  EXPECT_DOUBLE_EQ(unit.z, 0);
+}
+TEST(VectorTests, UnitVectorTest3)
+{
+  math::Vector test(0, 0, 2);
+  math::Vector unit = test.unit();
+  EXPECT_DOUBLE_EQ(unit.x, 0);
+  EXPECT_DOUBLE_EQ(unit.y, 0);
+  EXPECT_DOUBLE_EQ(unit.z, 1);
+}
+// TODO:  Make a test for catching division by zero.
+//        May need to replace the assert with a throw.
 
 
 // Zeroize Test
