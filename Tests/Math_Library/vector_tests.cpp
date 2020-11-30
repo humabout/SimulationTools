@@ -235,8 +235,6 @@ TEST(VectorTests, ScalarDivisionTest1)
   double s = 2;
   EXPECT_TRUE(u / s == v);
 }
-// TODO:  Make tests for catching division by zero.
-//        May need to replace the assert with a throw.
 TEST(VectorTests, ScalarDivisionTest2)
 {
   math::Vector u(2, 4, 6);
@@ -245,8 +243,12 @@ TEST(VectorTests, ScalarDivisionTest2)
   u /= s;
   EXPECT_TRUE(u == v);
 }
-// TODO:  Make tests for catching division by zero.
-//        May need to replace the assert with a throw.
+TEST(VecorTests, DivideByZeroTest)
+{
+  math::Vector u(1, 2, 3);
+  double s = 0;
+  EXPECT_THROW(u / s, std::runtime_error);
+}
 
 // Dot Product Test
 TEST(VectorTests, DotProductTest1)
@@ -396,11 +398,7 @@ TEST(VectorTests, UnitizeTest3)
   EXPECT_DOUBLE_EQ(test.x, 0);
   EXPECT_DOUBLE_EQ(test.y, 0);
   EXPECT_DOUBLE_EQ(test.z, 1);
-}
-// TODO:  Make a test for catching division by zero.
-//        May need to replace the assert with a throw.
-
-TEST(VectorTests, UnitVectorTest1)
+}TEST(VectorTests, UnitVectorTest1)
 {
   math::Vector test(2, 0, 0);
   math::Vector unit = test.unit();
@@ -424,8 +422,6 @@ TEST(VectorTests, UnitVectorTest3)
   EXPECT_DOUBLE_EQ(unit.y, 0);
   EXPECT_DOUBLE_EQ(unit.z, 1);
 }
-// TODO:  Make a test for catching division by zero.
-//        May need to replace the assert with a throw.
 
 
 // Zeroize Test
