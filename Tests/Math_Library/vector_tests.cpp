@@ -243,7 +243,7 @@ TEST(VectorTests, ScalarDivisionTest2)
   u /= s;
   EXPECT_TRUE(u == v);
 }
-TEST(VecorTests, DivideByZeroTest)
+TEST(VectorTests, DivideByZeroTest)
 {
   math::Vector u(1, 2, 3);
   double s = 0;
