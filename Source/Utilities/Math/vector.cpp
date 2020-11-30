@@ -2,8 +2,8 @@
 
 
 // Inclusions
-#include <cassert>
 #include <cmath>
+#include <stdexcept>
 #include "math_config.h"
 #include "quaternion.h"
 #include "vector.h"
@@ -202,9 +202,11 @@ void math::Vector::operator*=(double s_)
 //------------------------------------------------------------------------------
 math::Vector math::Vector::operator/(const double& s_) const
 {
-  // TODO: Make this more robust against division by near-zero. Perahps
-  //       divide by a default value if near zero?
-  assert(abs(s_) > math::DIVIDE_BY_ZERO_TOLERANCE);
+  if (abs(s_) <= math::DIVIDE_BY_ZERO_TOLERANCE)
+  {
+    throw std::runtime_error("Warning: Division by near-zero may result in an unstable answer.");
+  }
+
   return *this * (1 / s_);
 }
 
