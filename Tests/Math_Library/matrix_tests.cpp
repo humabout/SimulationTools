@@ -219,4 +219,19 @@ TEST(MatrixTests, OperatorUnaryTest)
 // Determinant Tests
 // Inverse Tests
 // Zeroize Test
+TEST(MatrixTests, ZeroizeTest)
+{
+  math::Matrix zero(0, 0, 0, 0, 0, 0, 0, 0, 0);
+  math::Matrix test(0, 1, 2, 3, 4, 5, 6, 7, 8);
+  test.zeroize();
+  EXPECT_TRUE(test == zero);
+}
+
+
 // Identity Test
+TEST(MatrixTests, IdentityTest)
+{
+  math::Matrix I(1, 0, 0, 0, 1, 0, 0, 0, 1);
+  math::Matrix test = math::Matrix::identity();
+  EXPECT_TRUE(test == I);
+}
