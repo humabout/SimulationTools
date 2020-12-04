@@ -6,7 +6,6 @@
 
 
 // Inclusions
-#include <cassert>
 #include "math_config.h"
 #include "vector.h"
 
@@ -39,12 +38,6 @@ namespace math
     {
       double e[9];
       Vector row[3];
-      struct
-      {
-        Vector row_1;
-        Vector row_2;
-        Vector row_3;
-      };
       struct
       {
         double e11;
@@ -87,10 +80,6 @@ namespace math
     void setColumns(const Vector& col_1_,
                     const Vector& col_2_,
                     const Vector& col_3_);
-
-
-    // Conversion Operator
-    void operator<<(const Quaternion& q_);
 
 
     // Comparison Operators
@@ -166,7 +155,7 @@ math::Matrix operator*(double              s_,
 
 
 // Forward Declaration Inclusion
-#include "quaternion.h"
+//#include "quaternion.h"
 
 
 #endif // !MATRIX_H

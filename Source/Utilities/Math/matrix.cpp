@@ -121,9 +121,9 @@ void math::Matrix::setRows(const Vector& row_1_,
                            const Vector& row_2_,
                            const Vector& row_3_)
 {
-  this->row_1 = row_1_;
-  this->row_2 = row_2_;
-  this->row_3 = row_3_;
+  this->row[0] = row_1_;
+  this->row[1] = row_2_;
+  this->row[2] = row_3_;
 }
 
 
@@ -135,10 +135,9 @@ void math::Matrix::setColumns(const Vector& col_1_,
                               const Vector& col_2_,
                               const Vector& col_3_)
 {
-  this->row_1 = col_1_;
-  this->row_2 = col_2_;
-  this->row_3 = col_3_;
-  this->transpose();
+  this->set(col_1_.e1, col_2_.e1, col_3_.e1,
+            col_1_.e2, col_2_.e2, col_3_.e2,
+            col_1_.e3, col_2_.e3, col_3_.e3);
 }
 
 
@@ -426,15 +425,4 @@ void math::Matrix::zeroize(void)
   this->set(0, 0, 0, 
             0, 0, 0, 
             0, 0, 0);
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    operator<<
-// Purpose: Generates a DCM from the given quaternion and stores it in this 
-//          matrix.
-//------------------------------------------------------------------------------
-void math::Matrix::operator<<(const Quaternion& q_)
-{
-  *this = q_.getDCM();
 }

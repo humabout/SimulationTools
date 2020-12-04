@@ -89,8 +89,7 @@ TEST(VectorTests, OperatorAccessorTest)
 TEST(VectorTests, OperatorAssignmentTest)
 {
   math::Vector a(1, 2, 3);
-  math::Vector b;
-  b = a;
+  math::Vector b = a;
   EXPECT_DOUBLE_EQ(b.x, a.x);
   EXPECT_DOUBLE_EQ(b.y, a.y);
   EXPECT_DOUBLE_EQ(b.z, a.z);

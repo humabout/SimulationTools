@@ -6,14 +6,8 @@
 
 
 // Inclusions
+#include "matrix.h"
 #include "vector.h"
-
-
-// Forward Declarations
-namespace
-{
-  class Matrix;
-}
 
 
 //------------------------------------------------------------------------------
@@ -182,10 +176,6 @@ math::Quaternion operator*(double                  s_,
 // Vector Quotient
 math::Quaternion operator/(const math::Vector& lhs,
                            const math::Vector& rhs);
-
-
-// Forward Declaration Inclusions
-#include "matrix.h"
 
 
 #endif // !QUATERNION_H
