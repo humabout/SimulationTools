@@ -209,15 +209,124 @@ TEST(MatrixTests, OperatorUnaryTest)
 
 
 // Addition Tests
+TEST(MatrixTests, AdditionTest1)
+{
+  math::Matrix A(1, 1, 1, 1, 1, 1, 1, 1, 1);
+  math::Matrix B(2, 2, 2, 2, 2, 2, 2, 2, 2);
+  EXPECT_TRUE((A + B) == math::Matrix(3, 3, 3, 3, 3, 3, 3, 3, 3));
+}
+TEST(MatrixTests, AdditionTest2)
+{
+  math::Matrix A(1, 1, 1, 1, 1, 1, 1, 1, 1);
+  math::Matrix test(2, 2, 2, 2, 2, 2, 2, 2, 2);
+  test += A;
+  EXPECT_TRUE(test == math::Matrix(3, 3, 3, 3, 3, 3, 3, 3, 3));
+}
+
+
 // Subtraction Tests
+TEST(MatrixTests, SubtractionTest1)
+{
+  math::Matrix A(0, 2, 4, 6, 8, 10, 12, 14, 16);
+  math::Matrix B(0, 1, 2, 3, 4, 5, 6, 7, 8);
+  math::Matrix test = A - B;
+  TestElements(test);
+}
+TEST(MatrixTests, SubtractionTest2)
+{
+  math::Matrix test(0, 2, 4, 6, 8, 10, 12, 14, 16);
+  math::Matrix A(0, 1, 2, 3, 4, 5, 6, 7, 8);
+  test -= A;
+  TestElements(test);
+}
+
 // Scalar Multiplication Tests
+TEST(MatrixTests, MultiplicationScalarTest1)
+{
+  math::Matrix A(0, 2, 4, 6, 8, 10, 12, 14, 16);
+  math::Matrix test = A * 0.5;
+  TestElements(test);
+}
+TEST(MatrixTests, MultiplicationScalarTest2)
+{
+  math::Matrix A(0, 2, 4, 6, 8, 10, 12, 14, 16);
+  math::Matrix test = 0.5 * A;
+  TestElements(test);
+}
+TEST(MatrixTests, MultiplicationScalarTest3)
+{
+  math::Matrix test(0, 2, 4, 6, 8, 10, 12, 14, 16);
+  test *= 0.5;
+  TestElements(test);
+}
+
+
 // Scalar Division Tests
+TEST(MatrixTests, DivisionScalarTest1)
+{
+  math::Matrix A(0, 2, 4, 6, 8, 10, 12, 14, 16);
+  math::Matrix test = A / 2;
+  TestElements(test);
+}
+TEST(MatrixTests, DivisionScalarTest2)
+{
+  math::Matrix test(0, 2, 4, 6, 8, 10, 12, 14, 16);
+  test /= 2;
+  TestElements(test);
+}
+TEST(MatrixTests, DivisionScalarTest3)
+{
+  math::Matrix A(1, 2, 3, 4, 5, 6, 7, 8, 9);
+  double s = 0;
+  EXPECT_THROW(A / s, std::runtime_error);
+}
+
+
 // Matrix-Vector Multiplication Tests
 // Matrix-Matrix Multiplication Tests
+
+
 // Transpose Test
+TEST(MatrixTests, TransposeTest)
+{
+  math::Matrix test(0, 1, 2, 3, 4, 5, 6, 7, 8);
+  math::Matrix trans = test.transpose();
+  EXPECT_TRUE(trans == math::Matrix(0, 3, 6, 1, 4, 7, 2, 5, 8));
+}
+
+
 // Trace Test
+TEST(MatrixTests, TraceTest)
+{
+  math::Matrix test(0, 1, 2,
+                    3, 4, 5,
+                    6, 7, 8);
+  EXPECT_DOUBLE_EQ(test.trace(), 12);
+}
+
+
 // Determinant Tests
+TEST(MatrixTests, DeterminantTest)
+{
+  math::Matrix test(-2, 3, -1, 5, -1, 4, 4, -8, 2);
+  EXPECT_DOUBLE_EQ(test.determinant(), -6);
+}
+
+
 // Inverse Tests
+TEST(MatrixTests, InverseTest)
+{
+  math::Matrix test(0, -3, -2, 1, -4, -2, -3, 4, 1);
+  EXPECT_TRUE(test.inverse() == math::Matrix(4, -5, -2, 5, -6, -2, -8, 9, 3));
+}
+TEST(MatrixTests, InvertTest)
+{
+  math::Matrix test(0, -3, -2, 1, -4, -2, -3, 4, 1);
+  test.invert();
+  EXPECT_TRUE(test == math::Matrix(4, -5, -2, 5, -6, -2, -8, 9, 3));
+}
+
+
 // Zeroize Test
 TEST(MatrixTests, ZeroizeTest)
 {

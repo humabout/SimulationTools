@@ -2,8 +2,8 @@
 
 
 // Inclusions
-#include <cassert>
 #include <cmath>
+#include <stdexcept>
 #include "math_config.h"
 #include "matrix.h"
 #include "quaternion.h"
@@ -254,7 +254,11 @@ void math::Matrix::operator*=(double s_)
 math::Matrix math::Matrix::operator/(double s_) const
 {
   // Checking if this quotient exists.
-  assert(abs(s_) > math::DIVIDE_BY_ZERO_TOLERANCE);
+  if (abs(s_) <= math::DIVIDE_BY_ZERO_TOLERANCE)
+  {
+    throw std::runtime_error("Warning: Division by near-zero may result in an unstable answer.");
+  }
+
   return *this * (1 / s_);
 }
 
@@ -362,7 +366,12 @@ math::Matrix math::Matrix::inverse(void) const
   double det = this->determinant();
 
   // Verifying the matrix is invertible
-  assert(abs(det) > math::DIVIDE_BY_ZERO_TOLERANCE);
+  // TODO:  This probably needs to end up a function somewhere to avoid repeating
+  //        this code everywhere.
+  if (abs(det) <= math::DIVIDE_BY_ZERO_TOLERANCE)
+  {
+    throw std::runtime_error("Warning: Division by near-zero may result in an unstable answer.");
+  }
 
   // Calculating Adjoint Matrix
   Matrix adjoint(e22 * e33 - e21 * e12,
