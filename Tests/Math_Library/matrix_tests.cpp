@@ -283,7 +283,45 @@ TEST(MatrixTests, DivisionScalarTest3)
 
 
 // Matrix-Vector Multiplication Tests
+TEST(MatrixTests, MultiplicationVectorTest1)
+{
+  math::Vector x(1, 2, 3);
+  math::Matrix A(0, 0, 1,
+                 0, 1, 0,
+                 1, 0, 0);
+  math::Vector b(3, 2, 1);
+  EXPECT_TRUE(A * x == b);
+}
+TEST(MatrixTests, MultiplicationVectorTest2)
+{
+  math::Vector x(1, 2, 3);
+  math::Matrix A(0, 1,  0,
+                 1, 0,  0,
+                 0, 0, -1);
+  math::Vector b(2, 1, -3);
+  EXPECT_TRUE(A * x == b);
+}
+
+
 // Matrix-Matrix Multiplication Tests
+TEST(MatrixTests, MultiplicationMatrixTest1)
+{
+  math::Matrix A(0, 1, 2, 3, 4, 5, 6, 7, 8);
+  math::Matrix I = math::Matrix::identity();
+  EXPECT_TRUE(I * A == A);
+}
+TEST(MatrixTests, MultiplicationMatrixTest2)
+{
+  math::Matrix A(0, 1, 2, 3, 4, 5, 6, 7, 8);
+  math::Matrix zero;
+  EXPECT_TRUE(zero * A == zero);
+}
+TEST(MatrixTests, MultiplicationMatrixTest3)
+{
+  math::Matrix A(0, 1, 2, 3, 4, 5, 6, 7, 8);
+  math::Matrix B(8, 7, 6, 5, 4, 3, 2, 1, 0);
+  EXPECT_TRUE(A * B == math::Matrix(9, 6, 3, 54, 42, 30, 99, 78, 57));
+}
 
 
 // Transpose Test

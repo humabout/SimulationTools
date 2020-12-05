@@ -348,9 +348,9 @@ double math::Matrix::trace(void) const
 //------------------------------------------------------------------------------
 double math::Matrix::determinant(void) const
 {
-  return e11 * (e22 * e33 - e23 * e32) +
-         e12 * (e31 * e23 - e33 * e21) +
-         e13 * (e21 * e32 - e31 * e23);
+  return (  e11 * (e22 * e33 - e32 * e23)
+          - e21 * (e12 * e33 - e32 * e13)
+          + e31 * (e12 * e23 - e22 * e13) );
 }
 
 
@@ -374,17 +374,9 @@ math::Matrix math::Matrix::inverse(void) const
   }
 
   // Calculating Adjoint Matrix
-  Matrix adjoint(e22 * e33 - e21 * e12,
-    e13 * e31 - e12 * e22,
-    e12 * e23 - e13 * e22,
-
-    e23 * e31 - e21 * e33,
-    e11 * e33 - e13 * e31,
-    e21 * e13 - e11 * e23,
-
-    e21 * e32 - e31 * e22,
-    e31 * e12 - e11 * e32,
-    e11 * e22 - e21 * e12);
+  Matrix adjoint( (e33 * e22 - e23 * e32), -(e12 * e33 - e13 * e32),  (e12 * e23 - e22 * e13),
+                 -(e21 * e33 - e31 * e23),  (e11 * e33 - e31 * e13), -(e11 * e23 - e21 * e13),
+                  (e21 * e32 - e31 * e22), -(e11 * e32 - e31 * e12),  (e11 * e22 - e21 * e12) );
   return adjoint / det;
 }
 
