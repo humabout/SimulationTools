@@ -80,6 +80,7 @@ namespace math
     void operator<<(const Matrix& dcm_);
     Matrix getDCM(void) const;
 
+
     // Accessor
     double& operator[](unsigned int element_);
 
@@ -96,6 +97,7 @@ namespace math
              double x_,
              double y_,
              double z_);
+
 
     // Unary -
     Quaternion operator-() const;

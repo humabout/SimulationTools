@@ -14,7 +14,6 @@ TEST(VectorTests, DataArrayLetterTest)
   EXPECT_DOUBLE_EQ(test.e[1], test.y);
   EXPECT_DOUBLE_EQ(test.e[2], test.z);
 }
-
 TEST(VectorTests, DataArrayElementTest)
 {
   math::Vector test;
@@ -25,7 +24,6 @@ TEST(VectorTests, DataArrayElementTest)
   EXPECT_DOUBLE_EQ(test.e[1], test.e2);
   EXPECT_DOUBLE_EQ(test.e[2], test.e3);
 }
-
 TEST(VectorTests, DataLetterElementTest)
 {
   math::Vector test;
@@ -46,7 +44,6 @@ TEST(VectorTests, ConstructorDefaultTest)
   EXPECT_DOUBLE_EQ(test.y, 0);
   EXPECT_DOUBLE_EQ(test.z, 0);
 }
-
 TEST(VectorTests, ConstructorElementwiseTest)
 {
   math::Vector test(1, 2, 3);
@@ -54,7 +51,6 @@ TEST(VectorTests, ConstructorElementwiseTest)
   EXPECT_DOUBLE_EQ(test.y, 2);
   EXPECT_DOUBLE_EQ(test.z, 3);
 }
-
 TEST(VectorTests, ConstructorCopyTest)
 {
   math::Vector copy(1, 2, 3);
@@ -105,8 +101,6 @@ TEST(VectorTests, SetterElementwiseTest)
   EXPECT_DOUBLE_EQ(test.y, 2);
   EXPECT_DOUBLE_EQ(test.z, 3);
 }
-
-
 TEST(VectorTests, SetterVectorwiseTest)
 {
   math::Vector values(1, 2, 3);

@@ -9,6 +9,9 @@
     <ClCompile Include="Math_Library\matrix_tests.cpp">
       <Filter>Math Library Tests</Filter>
     </ClCompile>
+    <ClCompile Include="Math_Library\quaternion_tests.cpp">
+      <Filter>Math Library Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
