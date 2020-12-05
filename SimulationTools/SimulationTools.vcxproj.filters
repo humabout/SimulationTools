@@ -52,6 +52,21 @@
     <ClInclude Include="..\Source\Kernel\End_Conditions\max_time_exceeded.h">
       <Filter>Kernel\End Conditions</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\Utilities\Math\vector.h">
+      <Filter>Utilities\Math Library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Utilities\Math\matrix.h">
+      <Filter>Utilities\Math Library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Utilities\Math\quaternion.h">
+      <Filter>Utilities\Math Library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Utilities\Math\math_config.h">
+      <Filter>Utilities\Math Library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Utilities\Math\math_constants.h">
+      <Filter>Utilities\Math Library</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Kernel\state.cpp">
@@ -75,6 +90,15 @@
     </ClCompile>
     <ClCompile Include="..\Source\Kernel\End_Conditions\max_time_exceeded.cpp">
       <Filter>Kernel\End Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Utilities\Math\quaternion.cpp">
+      <Filter>Utilities\Math Library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Utilities\Math\vector.cpp">
+      <Filter>Utilities\Math Library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Utilities\Math\matrix.cpp">
+      <Filter>Utilities\Math Library</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
