@@ -48,7 +48,7 @@ math::Quaternion::Quaternion(const Matrix& dcm_)
 //------------------------------------------------------------------------------
 math::Quaternion::Quaternion(const Vector& v_)
 {
-  this->set(v);
+  this->set(v_);
 }
 
 
@@ -198,9 +198,9 @@ void math::Quaternion::set(const Quaternion& q_)
 // Purpose: Sets this quaternion to a pure quaternion built from the provided
 //          vector.
 //------------------------------------------------------------------------------
-void math::Quaternion::set(const Vector& q_)
+void math::Quaternion::set(const Vector& v_)
 {
-  *this << q_;
+  *this << v_;
 }
 
 

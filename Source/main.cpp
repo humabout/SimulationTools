@@ -9,6 +9,8 @@
 #include "Kernel/sim_loop.h"
 #include "Kernel/End_Conditions/max_time_exceeded.h"
 
+#include "Utilities/Math/quaternion.h"
+
 class BlockTest : public kernel::Block
 {
 public:
@@ -23,6 +25,7 @@ public:
 
 int main()
 {
+/*
   std::cout << "Testing Simulation Kernel...\n\n";
 
   // Setting test inputs
@@ -66,6 +69,10 @@ int main()
   delete X;
   delete dX;
   delete test;
+  */
+
+  math::Vector v_(1, 2, 3);
+  math::Quaternion test(v_);
 
 
   return 0;

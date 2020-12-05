@@ -61,7 +61,7 @@ namespace math
     Quaternion(const Vector& axis_,
                double        rotation_);
     Quaternion(const Matrix& dcm_);
-    Quaternion(const Vector& q_);
+    Quaternion(const Vector& v_);
     Quaternion(const Quaternion& q_);
 
 
