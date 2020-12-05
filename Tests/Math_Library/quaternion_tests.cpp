@@ -5,6 +5,7 @@
 #include "../pch.h"
 #include "../../Source/Utilities/Math/quaternion.h"
 #include "../../Source/Utilities/Math/quaternion.cpp"
+#include "../../Source/Utilities/Math/math_constants.h"
 
 
 // Union Tests
@@ -70,11 +71,40 @@ TEST(QuaternionTests, ConstructorScalarversorTest)
 }
 TEST(QuaternionTests, ConstructorEuleraxisTest)
 {
-  // TODO: Find a suitable example to trust and make this test
+  math::Vector x(1, 0, 0);
+  math::Quaternion qx(x, math::HALF_PI);
+  EXPECT_DOUBLE_EQ(qx.w, sqrt(0.5));
+  EXPECT_DOUBLE_EQ(qx.x, sqrt(0.5));
+  EXPECT_DOUBLE_EQ(qx.y, 0);
+  EXPECT_DOUBLE_EQ(qx.z, 0);
+
+  math::Vector y(0, 1, 0);
+  math::Quaternion qy(y, math::HALF_PI);
+  EXPECT_DOUBLE_EQ(qy.w, sqrt(0.5));
+  EXPECT_DOUBLE_EQ(qy.x, 0);
+  EXPECT_DOUBLE_EQ(qy.y, sqrt(0.5));
+  EXPECT_DOUBLE_EQ(qy.z, 0);
+
+  math::Vector z(0, 0, 1);
+  math::Quaternion qz(z, math::HALF_PI);
+  EXPECT_DOUBLE_EQ(qz.w, sqrt(0.5));
+  EXPECT_DOUBLE_EQ(qz.x, 0);
+  EXPECT_DOUBLE_EQ(qz.y, 0);
+  EXPECT_DOUBLE_EQ(qz.z, sqrt(0.5));
 }
-TEST(QuaternionTests, ConstructorDCMTest)
+TEST(QuaternionTests, ConstructorDcmTest)
 {
-  // TODO: Find a suitable example to trust and make this test
+  math::Matrix dcm(  6.0/23,   2.0/115, 111.0/115,
+                    22.0/23,   3.0/23,   -6.0/23,
+                    -3.0/23, 114.0/115,   2.0/115 );
+  math::Quaternion test(dcm);
+
+  math::Quaternion truth(9, 8, 7, 6);
+  truth.unitize();
+  EXPECT_DOUBLE_EQ(test.w, truth.w);
+  EXPECT_DOUBLE_EQ(test.x, truth.x);
+  EXPECT_DOUBLE_EQ(test.y, truth.y);
+  EXPECT_DOUBLE_EQ(test.z, truth.z);
 }
 TEST(QuaternionTests, ConstructorVectorTest)
 {
@@ -136,7 +166,18 @@ TEST(QuaternionTests, OperatorConvertVecToQuatTest)
 }
 TEST(QuaternionTests, OperatorConvertDcmToQuatTest)
 {
-  // TODO: Find a suitable example to trust and make this test
+  math::Matrix dcm(  6.0 / 23,   2.0 / 115, 111.0 / 115,
+                    22.0 / 23,   3.0 / 23,   -6.0 / 23,
+                    -3.0 / 23, 114.0 / 115,   2.0 / 115);
+  math::Quaternion test;
+  test << dcm;
+
+  math::Quaternion truth(9, 8, 7, 6);
+  truth.unitize();
+  EXPECT_DOUBLE_EQ(test.w, truth.w);
+  EXPECT_DOUBLE_EQ(test.x, truth.x);
+  EXPECT_DOUBLE_EQ(test.y, truth.y);
+  EXPECT_DOUBLE_EQ(test.z, truth.z);
 }
 
 
@@ -144,22 +185,70 @@ TEST(QuaternionTests, OperatorConvertDcmToQuatTest)
 TEST(QuaternionTests, SetterElementwiseTest)
 {
   math::Quaternion test;
+  test.set(1, 2, 3, 4);
+  EXPECT_DOUBLE_EQ(test.w, 1);
+  EXPECT_DOUBLE_EQ(test.x, 2);
+  EXPECT_DOUBLE_EQ(test.y, 3);
+  EXPECT_DOUBLE_EQ(test.z, 4);
 }
 TEST(QuaternionTests, SetterscalarvectorTest)
 {
   math::Quaternion test;
+  test.set(1, math::Vector(2, 3, 4));
+  EXPECT_DOUBLE_EQ(test.w, 1);
+  EXPECT_DOUBLE_EQ(test.x, 2);
+  EXPECT_DOUBLE_EQ(test.y, 3);
+  EXPECT_DOUBLE_EQ(test.z, 4);
 }
 TEST(QuaternionTests, SetterVectorTest)
 {
-  math::Quaternion test;
+  math::Quaternion test(9,9,9,9);
+  test.set(math::Vector(1, 2, 3));
+  EXPECT_DOUBLE_EQ(test.w, 0);
+  EXPECT_DOUBLE_EQ(test.x, 1);
+  EXPECT_DOUBLE_EQ(test.y, 2);
+  EXPECT_DOUBLE_EQ(test.z, 3);
 }
 TEST(QuaternionTests, SetterEulerAxesTest)
 {
-  // TODO: Find a suitable example to trust and make this test
+  math::Vector x(1, 0, 0);
+  math::Quaternion qx;
+  qx.set(x, math::HALF_PI);
+  EXPECT_DOUBLE_EQ(qx.w, sqrt(0.5));
+  EXPECT_DOUBLE_EQ(qx.x, sqrt(0.5));
+  EXPECT_DOUBLE_EQ(qx.y, 0);
+  EXPECT_DOUBLE_EQ(qx.z, 0);
+
+  math::Vector y(0, 1, 0);
+  math::Quaternion qy;
+  qy.set(y, math::HALF_PI);
+  EXPECT_DOUBLE_EQ(qy.w, sqrt(0.5));
+  EXPECT_DOUBLE_EQ(qy.x, 0);
+  EXPECT_DOUBLE_EQ(qy.y, sqrt(0.5));
+  EXPECT_DOUBLE_EQ(qy.z, 0);
+
+  math::Vector z(0, 0, 1);
+  math::Quaternion qz;
+  qz.set(z, math::HALF_PI);
+  EXPECT_DOUBLE_EQ(qz.w, sqrt(0.5));
+  EXPECT_DOUBLE_EQ(qz.x, 0);
+  EXPECT_DOUBLE_EQ(qz.y, 0);
+  EXPECT_DOUBLE_EQ(qz.z, sqrt(0.5));
 }
 TEST(QuaternionTests, SetterDcmTest)
 {
-  // TODO: Find a suitable example to trust and make this test
+  math::Matrix dcm( 6.0 / 23,   2.0 / 115, 111.0 / 115,
+                   22.0 / 23,   3.0 / 23,   -6.0 / 23,
+                   -3.0 / 23, 114.0 / 115,   2.0 / 115);
+  math::Quaternion test;
+  test.set(dcm);
+
+  math::Quaternion truth(9, 8, 7, 6);
+  truth.unitize();
+  EXPECT_DOUBLE_EQ(test.w, truth.w);
+  EXPECT_DOUBLE_EQ(test.x, truth.x);
+  EXPECT_DOUBLE_EQ(test.y, truth.y);
+  EXPECT_DOUBLE_EQ(test.z, truth.z);
 }
 
 
@@ -304,30 +393,56 @@ TEST(QuaternionTests, DivisionScalarTest3)
 // Quaternion Pre-Product Tests
 TEST(QuaternionTests, MultiplicationQuatTest1)
 {
-  // TODO: Find a suitable example to trust and make this test
+  math::Quaternion p(1, 2, 3, 4);
+  math::Quaternion q(9, 8, 7, 6);
+  math::Quaternion test = p * q;
+  EXPECT_TRUE(test == math::Quaternion(-52, 16, 54, 32));
 }
 TEST(QuaternionTests, MultiplicationQuatTest2)
 {
-  // TODO: Find a suitable example to trust and make this test
+  math::Quaternion test(1, 2, 3, 4);
+  math::Quaternion q(9, 8, 7, 6);
+  test *= q;
+  EXPECT_TRUE(test == math::Quaternion(-52, 16, 54, 32));
 }
 
 
 // Quaternion Post-Division Tests
 TEST(QuaternionTests, DivisionQuatTest1)
 {
-  // TODO: Find a suitable example to trust and make this test
+  math::Quaternion p(-52, 16, 54, 32);
+  math::Quaternion q(9, 8, 7, 6);
+  math::Quaternion test = p / q;
+  EXPECT_DOUBLE_EQ(test.w, 1.0);
+  EXPECT_DOUBLE_EQ(test.x, 2.0);
+  EXPECT_DOUBLE_EQ(test.y, 3.0);
+  EXPECT_DOUBLE_EQ(test.z, 4.0);
 }
 TEST(QuaternionTests, DivisionQuatTest2)
 {
-  // TODO: Find a suitable example to trust and make this test
+  math::Quaternion test(-52, 16, 54, 32);
+  math::Quaternion q(9, 8, 7, 6);
+  test /= q;
+  EXPECT_DOUBLE_EQ(test.w, 1.0);
+  EXPECT_DOUBLE_EQ(test.x, 2.0);
+  EXPECT_DOUBLE_EQ(test.y, 3.0);
+  EXPECT_DOUBLE_EQ(test.z, 4.0);
 }
 
 
 // Vector Quotient Tests
-
 TEST(QuaternionTests, DivisionVectorTest)
 {
-  // TODO: Find a suitable example to trust and make this test
+  math::Quaternion p(0, 1, 2, 3);
+  math::Quaternion q(0, 4, -6, 8);
+  math::Quaternion truth = p / q;
+  math::Vector u(1, 2, 3);
+  math::Vector v(4, -6, 8);
+  math::Quaternion test = u / v;
+  EXPECT_DOUBLE_EQ(test.w, truth.w);
+  EXPECT_DOUBLE_EQ(test.x, truth.x);
+  EXPECT_DOUBLE_EQ(test.y, truth.y);
+  EXPECT_DOUBLE_EQ(test.z, truth.z);
 }
 
 
@@ -396,7 +511,7 @@ TEST(QuaternionTests, ConjugateTest)
 {
   math::Quaternion q(1, 2, 3, 4);
   math::Quaternion test = q.conjugate();
-  EXPECT_DOUBLE_EQ(test.s,  1);
+  EXPECT_DOUBLE_EQ(test.w,  1);
   EXPECT_DOUBLE_EQ(test.x, -2);
   EXPECT_DOUBLE_EQ(test.y, -3);
   EXPECT_DOUBLE_EQ(test.z, -4);
@@ -405,21 +520,34 @@ TEST(QuaternionTests, ConjugateTest)
 
 
 // Inverse Tests
-TEST(QuaternionTests, InverseTest1)
+TEST(QuaternionTests, InverseTest)
 {
-  // TODO: Find a suitable example to trust and make this test
+  math::Quaternion p(9, 8, 7, 6);  math::Quaternion test = p.conjugate() / p.norm();
+  EXPECT_DOUBLE_EQ(test.w,  9.0 / 230);
+  EXPECT_DOUBLE_EQ(test.x, -8.0 / 230);
+  EXPECT_DOUBLE_EQ(test.y, -7.0 / 230);
+  EXPECT_DOUBLE_EQ(test.z, -6.0 / 230);
+  
+  test = test.inverse();
+  EXPECT_DOUBLE_EQ(test.w, 9.0);
+  EXPECT_DOUBLE_EQ(test.x, 8.0);
+  EXPECT_DOUBLE_EQ(test.y, 7.0);
+  EXPECT_DOUBLE_EQ(test.z, 6.0);
 }
-TEST(QuaternionTests, InverseTest2)
+TEST(QuaternionTests, InvertTest)
 {
-  // TODO: Find a suitable example to trust and make this test
-}
-TEST(QuaternionTests, InvertTest1)
-{
-  // TODO: Find a suitable example to trust and make this test
-}
-TEST(QuaternionTests, InvertTest2)
-{
-  // TODO: Find a suitable example to trust and make this test
+  math::Quaternion test(9, 8, 7, 6);
+  test.invert();
+  EXPECT_DOUBLE_EQ(test.w,  9.0 / 230);
+  EXPECT_DOUBLE_EQ(test.x, -8.0 / 230);
+  EXPECT_DOUBLE_EQ(test.y, -7.0 / 230);
+  EXPECT_DOUBLE_EQ(test.z, -6.0 / 230);
+
+  test.invert();
+  EXPECT_DOUBLE_EQ(test.w, 9.0);
+  EXPECT_DOUBLE_EQ(test.x, 8.0);
+  EXPECT_DOUBLE_EQ(test.y, 7.0);
+  EXPECT_DOUBLE_EQ(test.z, 6.0);
 }
 
 
@@ -438,9 +566,27 @@ TEST(QuaternionTests, ZeroizeTest)
 // Rotation Tests
 TEST(QuaternionTests, RotateByTest1)
 {
-  // TODO: This will need a reliable example to test against.
+  math::Vector x(1, 0, 0);
+  math::Quaternion R(x, math::HALF_PI);
+
+  math::Quaternion p(0, 0, 1, 0);
+  p = p.rotatedBy(R);
+  EXPECT_DOUBLE_EQ(p.w, 0);
+  EXPECT_DOUBLE_EQ(p.x, 0);
+  EXPECT_DOUBLE_EQ(p.y, 0);
+  EXPECT_DOUBLE_EQ(p.z, 1);
 }
 TEST(QuaternionTests, RotateByTest2)
 {
-  // TODO: This will need a reliable example to test against.
+  math::Vector x(1, 0, 0);
+  math::Quaternion R(x, math::HALF_PI);
+
+  math::Quaternion p(0, 0, 1, 0);
+  p = p.rotatedBy(R);
+  p = p.rotatedBy(R.inverse());
+
+  EXPECT_DOUBLE_EQ(p.w, 0);
+  EXPECT_DOUBLE_EQ(p.x, 0);
+  EXPECT_DOUBLE_EQ(p.y, 1);
+  EXPECT_DOUBLE_EQ(p.z, 0);
 }

@@ -3,7 +3,7 @@
 
 // Inclusions
 #include <algorithm>
-#include <cassert>
+#include <stdexcept>
 #include "math_config.h"
 #include "matrix.h"
 #include "quaternion.h"
@@ -388,8 +388,10 @@ math::Quaternion math::Quaternion::operator/(double s_) const
 {
   // Check to make sure the denominator is not so close to zero that the result
   // becomes unstable.
-  // TODO:  Make this more robust. Perhaps have a default divisor or answer?
-  assert(abs(s_) > math::DIVIDE_BY_ZERO_TOLERANCE);
+  if (abs(s_) <= math::DIVIDE_BY_ZERO_TOLERANCE)
+  {
+    throw std::runtime_error("Warning: Division by near-zero may result in an unstable answer.");
+  }
 
   // Perform Division
   return *this * (1 / s_);
@@ -458,8 +460,10 @@ math::Quaternion math::Quaternion::unit(void) const
 
   // Checking if the tensor is too close to zero to be stable. This is done here
   // rather than in the impending division so the error will throw from here.
-  // TODO: Make this more robust.
-  assert(mag > math::DIVIDE_BY_ZERO_TOLERANCE);
+  if (abs(mag) <= math::DIVIDE_BY_ZERO_TOLERANCE)
+  {
+    throw std::runtime_error("Warning: Division by near-zero may result in an unstable answer.");
+  }
 
   // Normalize the quaternion.
   return *this / mag;

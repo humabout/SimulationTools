@@ -10,6 +10,7 @@
 #include "Kernel/End_Conditions/max_time_exceeded.h"
 
 #include "Utilities/Math/quaternion.h"
+#include "Utilities/Math/math_constants.h"
 
 class BlockTest : public kernel::Block
 {
@@ -71,8 +72,10 @@ int main()
   delete test;
   */
 
-  math::Vector v_(1, 2, 3);
-  math::Quaternion test(v_);
+  math::Quaternion p(0, 0, 1, 0);
+  math::Quaternion R(math::Vector(1, 0, 0), math::HALF_PI);
+  p = p.rotatedBy(R);
+  std::cout << p.w << "  " << p.x << "  " << p.y << "  " << p.z << "\n";
 
 
   return 0;
