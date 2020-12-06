@@ -74,11 +74,30 @@ namespace math
 
 
     // Conversion Operators
-    // TODO:  Overload this operator to convert Quaternions into other objects, 
-    //        too.
     void operator<<(const Vector& v_);
     void operator<<(const Matrix& dcm_);
+    // TODO:  Break the implementation into the source file & test
+    friend math::Vector& operator<<(Vector& v_, const Quaternion& q_)
+    {
+      v_ = q_.getAxis();
+      return v_;
+    }
+    friend math::Matrix& operator<<(Matrix& v_, const Quaternion& q_)
+    {
+      v_ = q_.getDCM();
+      return v_;
+    }
+
     Matrix getDCM(void) const;
+
+    math::Vector getAxis(void) const
+    {
+      return math::Vector(x, y, z).unit();
+    }
+    double getAngle(void) const
+    {
+      return 2 * acos(w);
+    }
 
 
     // Accessor
