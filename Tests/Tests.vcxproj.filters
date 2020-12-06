@@ -15,6 +15,9 @@
     <ClCompile Include="Kernel_Tests\state_euler_tests.cpp">
       <Filter>Kernel Tests</Filter>
     </ClCompile>
+    <ClCompile Include="Kernel_Tests\max_time_exceeded_test.cpp">
+      <Filter>Kernel Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
