@@ -76,28 +76,9 @@ namespace math
     // Conversion Operators
     void operator<<(const Vector& v_);
     void operator<<(const Matrix& dcm_);
-    // TODO:  Break the implementation into the source file & test
-    friend math::Vector& operator<<(Vector& v_, const Quaternion& q_)
-    {
-      v_ = q_.getAxis();
-      return v_;
-    }
-    friend math::Matrix& operator<<(Matrix& v_, const Quaternion& q_)
-    {
-      v_ = q_.getDCM();
-      return v_;
-    }
-
     Matrix getDCM(void) const;
-
-    math::Vector getAxis(void) const
-    {
-      return math::Vector(x, y, z).unit();
-    }
-    double getAngle(void) const
-    {
-      return 2 * acos(w);
-    }
+    Vector getAxis(void) const;
+    double getAngle(void) const;
 
 
     // Accessor
@@ -189,14 +170,43 @@ namespace math
 } // !math
 
 
-// Scalar Multiplication
+//------------------------------------------------------------------------------
+// Name:    Scalar Multiplication
+//------------------------------------------------------------------------------
 math::Quaternion operator*(double                  s_,
                            const math::Quaternion& q_);
 
 
-// Vector Quotient
+//------------------------------------------------------------------------------
+// Name:    Vector Quotient
+//------------------------------------------------------------------------------
 math::Quaternion operator/(const math::Vector& lhs,
                            const math::Vector& rhs);
+
+
+//------------------------------------------------------------------------------
+// Name:    operator<<
+// Purpose: Extracts the axis of rotation vector from a quaternion and returns
+//          it. This is the closest thing to converting a quaternion to a vector
+//          that exists.
+// TODO:    Decide if this is really keeping with the semantic meaning of <<
+//------------------------------------------------------------------------------
+math::Vector& operator<<(math::Vector& out, const math::Quaternion& q_)
+{
+  out = q_.getAxis();
+  return out;
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    operator<<
+// Purpose: Converts the quaternion to a DCM and returns the matrix.
+//------------------------------------------------------------------------------
+math::Matrix& operator<<(math::Matrix& out, const math::Quaternion& q_)
+{
+  out = q_.getDCM();
+  return out;
+}
 
 
 #endif // !QUATERNION_H

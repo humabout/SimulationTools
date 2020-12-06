@@ -619,3 +619,24 @@ math::Matrix math::Quaternion::getDCM(void) const
                      2 * (xy + wz), 1 - 2 * (xx - zz),     2 * (yz - wx),
                      2 * (xz - wy),     2 * (yz + wx), 1 - 2 * (xx - yy) );
 }
+
+
+//------------------------------------------------------------------------------
+// Name:    getAxis
+// Purpose: Returns the axis of rotation vector of the quaternion.
+//------------------------------------------------------------------------------
+math::Vector math::Quaternion::getAxis(void) const
+{
+  return math::Vector(this->x, this->y, this->z).unit();
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    getAngle
+// Purpose: Returns the angle through which the quaternion rotates vectors, in
+//          radians.
+//------------------------------------------------------------------------------
+double math::Quaternion::getAngle(void) const
+{
+  return 2 * acos(w);
+}
