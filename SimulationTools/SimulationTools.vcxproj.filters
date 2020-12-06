@@ -23,6 +23,9 @@
     <Filter Include="Kernel\End Conditions">
       <UniqueIdentifier>{d78676a6-5027-4292-83af-65b5cd3316d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Kernel\States">
+      <UniqueIdentifier>{301302d7-f237-4507-9c58-90185d5d5233}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\Kernel\state.h">
@@ -64,6 +67,12 @@
     <ClInclude Include="..\Source\Utilities\Math\math_constants.h">
       <Filter>Utilities\Math Library</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\Kernel\States\state.h">
+      <Filter>Kernel\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Kernel\States\state_euler.h">
+      <Filter>Kernel\States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Kernel\state.cpp">
@@ -93,6 +102,12 @@
     </ClCompile>
     <ClCompile Include="..\Source\Utilities\Math\matrix.cpp">
       <Filter>Utilities\Math Library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Kernel\States\state.cpp">
+      <Filter>Kernel\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Kernel\States\state_euler.cpp">
+      <Filter>Kernel\States</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
