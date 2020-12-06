@@ -54,7 +54,7 @@ namespace kernel
     static bool   isReady(void);
 
     // Setters
-    static  void setMethod(State::type method_);
+    static  void setIntegrationMethod(State::type method_);
 
     // Factory
     static State* create(double& x_, double& dx_);

@@ -17,7 +17,7 @@
 kernel::SimLoop::SimLoop()
 {
   Time_Step = 0;
-  Integrator->setMethod(State::type::euler);
+  Integrator->setIntegrationMethod(State::type::euler);
   Integrator = State::create(*new double, *new double);
 }
 
@@ -32,7 +32,7 @@ kernel::SimLoop::SimLoop(double      time_step_,
                          State::type integration_method_)
 {
   Time_Step = time_step_;
-  Integrator->setMethod(integration_method_);
+  Integrator->setIntegrationMethod(integration_method_);
   Integrator = State::create(*new double, *new double);
 }
 

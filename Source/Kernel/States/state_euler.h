@@ -25,7 +25,6 @@ namespace kernel
   {
   public:
     // Constructor
-    StateEuler();
     StateEuler(double& x_, 
                double& dx_);
     StateEuler(double& x_, 

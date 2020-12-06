@@ -7,8 +7,8 @@
 #include "States\state_euler.h"
 
 // Static Variables
-double              kernel::State::Time_Current;
-double              kernel::State::Time_Step;
+double              kernel::State::Time_Current = 0.0;
+double              kernel::State::Time_Step = 0.0;
 bool                kernel::State::Is_Ready = true;
 kernel::State::type kernel::State::Method   = kernel::State::type::euler;
 
@@ -134,7 +134,7 @@ kernel::State* kernel::State::create(const kernel::State& state_)
 //          that the next time an instance is requested, the new method will
 //          generated and returned.
 //----------------------------------------------------------------------------
-void kernel::State::setMethod(kernel::State::type method_)
+void kernel::State::setIntegrationMethod(kernel::State::type method_)
 {
   State::Method = method_;
 }
