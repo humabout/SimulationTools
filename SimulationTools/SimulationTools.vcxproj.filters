@@ -17,9 +17,6 @@
     <Filter Include="Utilities\Math Library">
       <UniqueIdentifier>{532dcefd-a685-45e4-8c1f-1710fb2517ed}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Kernel\Integration Methods">
-      <UniqueIdentifier>{aa20c5f8-ffa4-45b3-8e60-cd0ee8906737}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Kernel\End Conditions">
       <UniqueIdentifier>{d78676a6-5027-4292-83af-65b5cd3316d7}</UniqueIdentifier>
     </Filter>

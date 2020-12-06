@@ -23,5 +23,8 @@
     <Filter Include="Math Library Tests">
       <UniqueIdentifier>{16df062e-53b9-42b1-9851-1a4f1715e802}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Kernel">
+      <UniqueIdentifier>{aa0f1806-efa5-4386-b333-af3a8d182241}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
