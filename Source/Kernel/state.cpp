@@ -4,6 +4,13 @@
 // Inclusions
 #include <cstddef>
 #include "state.h"
+#include "States\state_euler.h"
+
+// Static Variables
+double              kernel::State::Time_Current;
+double              kernel::State::Time_Step;
+bool                kernel::State::Is_Ready = true;
+kernel::State::type kernel::State::Method   = kernel::State::type::euler;
 
 
 //----------------------------------------------------------------------------
@@ -12,9 +19,8 @@
 //----------------------------------------------------------------------------
 kernel::State::State()
 {
-  *(this->x)             = NULL;
-  *(this->dx)            = NULL;
-  this->Integrator       = kernel::IntegrationMethod::create();
+  this->x  = NULL;
+  this->dx = NULL;
 }
 
 
@@ -24,9 +30,8 @@ kernel::State::State()
 //----------------------------------------------------------------------------
 kernel::State::State(const State& that)
 {
-  this->x = that.x;
+  this->x  = that.x;
   this->dx = that.dx;
-  this->Integrator = that.Integrator;
 }
 
 
@@ -36,12 +41,11 @@ kernel::State::State(const State& that)
 //          derrivative is passed in as a reference, this state does not own 
 //          it.
 //----------------------------------------------------------------------------
-kernel::State::State(double& x_, 
+kernel::State::State(double& x_,
                      double& dx_)
 {
-  this->x                = &x_;
-  this->dx               = &dx_;
-  this->Integrator       = kernel::IntegrationMethod::create();
+  this->x  = &x_;
+  this->dx = &dx_;
 }
 
 
@@ -51,12 +55,11 @@ kernel::State::State(double& x_,
 //          derrivative is the value of another state, this state does not own
 //          its derrivative.
 //----------------------------------------------------------------------------
-kernel::State::State(double& x_, 
+kernel::State::State(double& x_,
                      State&  dx_)
 {
-  this->x                = &x_;
-  this->dx               = dx_.x;
-  this->Integrator       = kernel::IntegrationMethod::create();
+  this->x  = &x_;
+  this->dx = dx_.x;
 }
 
 
@@ -82,19 +85,31 @@ kernel::State::~State()
 //          The state derrivative
 //----------------------------------------------------------------------------
 kernel::State* kernel::State::create(double& x_,
-  double& dx_)
+                                     double& dx_)
 {
-  return new State(x_, dx_);
+  switch (kernel::State::Method)
+  {
+  case State::type::euler:
+    return new StateEuler(x_, dx_);
+  default:
+    return NULL;
+  }
 }
 
 
 //----------------------------------------------------------------------------
 // Name:    create (overload)
 //----------------------------------------------------------------------------
-kernel::State* kernel::State::create(double& x_,
-  kernel::State& dx_)
+kernel::State* kernel::State::create(double&        x_,
+                                     kernel::State& dx_)
 {
-  return new State(x_, dx_);
+  switch (kernel::State::Method)
+  {
+  case type::euler:
+    return new StateEuler(x_, dx_);
+  default:
+    return NULL;
+  }
 }
 
 
@@ -103,36 +118,42 @@ kernel::State* kernel::State::create(double& x_,
 //----------------------------------------------------------------------------
 kernel::State* kernel::State::create(const kernel::State& state_)
 {
-  return new State(state_);
+  switch (kernel::State::Method)
+  {
+  case type::euler:
+    return new StateEuler(state_);
+  default:
+    return NULL;
+  }
 }
 
 
 //----------------------------------------------------------------------------
-// Name:    operator=
-// Purpose: Assignment Operator.
+// Name:    setMethod
+// Purpose: This clears the old integration instance and sets a new method so
+//          that the next time an instance is requested, the new method will
+//          generated and returned.
 //----------------------------------------------------------------------------
-kernel::State& kernel::State::operator= (const State& that)
+void kernel::State::setMethod(kernel::State::type method_)
 {
-  return *new State(that);
-}
-
-
-//----------------------------------------------------------------------------
-// Name:    propagate
-// Purpose: This method propagates the state forward one time step. It is part
-//          of a strategy pattern and forwards the call to the Integrator to
-//          execute based on whatever type of IntegrationMethod is being used.
-//----------------------------------------------------------------------------
-void kernel::State::propagate(void)
-{
-  Integrator->updateState(this);
+  State::Method = method_;
 }
 
 
 //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 // GETTERS
 //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-double kernel::State::get(void) const
+double kernel::State::time(void)
 {
-  return *x;
+  return Time_Current;
+}
+
+double kernel::State::timestep(void)
+{
+  return Time_Step;
+}
+
+bool kernel::State::isReady(void)
+{
+  return Is_Ready;
 }

@@ -5,7 +5,7 @@
 #include <cstddef>
 #include "max_time_exceeded.h"
 #include "../config.h"
-#include "../Integration_Methods/integration_method.h"
+#include "../state.h"
 
 
 
@@ -46,6 +46,6 @@ kernel::MaxTimeExceeded::~MaxTimeExceeded()
 //------------------------------------------------------------------------------
 bool kernel::MaxTimeExceeded::met(void)
 {  
-  double time_current = kernel::IntegrationMethod::time();
+  double time_current = kernel::State::time();
   return ((Time_Max - time_current) < kernel::TIME_ERROR_TOLERANCE);
 }

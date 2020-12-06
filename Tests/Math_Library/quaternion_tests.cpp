@@ -162,7 +162,12 @@ TEST(QuaternionTests, OperatorAssignmentTest)
 // Conversion Operator Tests
 TEST(QuaternionTests, OperatorConvertVecToQuatTest)
 {
-  // TODO: Find a suitable example to trust and make this test
+  math::Quaternion test(9, 9, 9, 9);
+  test << math::Vector(1, 2, 3);
+  EXPECT_DOUBLE_EQ(test.w, 0);
+  EXPECT_DOUBLE_EQ(test.x, 1);
+  EXPECT_DOUBLE_EQ(test.y, 2);
+  EXPECT_DOUBLE_EQ(test.z, 3);
 }
 TEST(QuaternionTests, OperatorConvertDcmToQuatTest)
 {

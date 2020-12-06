@@ -6,7 +6,7 @@
 
 
 // Inclusions
-#include "state.h"
+#include "..\state.h"
 
 
 //----------------------------------------------------------------------------
@@ -28,9 +28,9 @@ namespace kernel
     StateEuler();
     StateEuler(double& x_, 
                double& dx_);
-    StateEuler(double&      x_, 
-               StateEuler&  dx_);
-    StateEuler(const StateEuler& that);
+    StateEuler(double& x_, 
+               State&  dx_);
+    StateEuler(const State& that);
 
     // Destructor
     ~StateEuler();
@@ -38,7 +38,7 @@ namespace kernel
     // Functionality
     void initialize(void) override final;
     void reset(double time_step_) override final;
-    void updateState(State* state_) override final;
+    void updateState(void) override final;
     void updateClock(void) override final;
 
 

@@ -26,7 +26,7 @@ public:
 
 int main()
 {
-/*
+
   std::cout << "Testing Simulation Kernel...\n\n";
 
   // Setting test inputs
@@ -41,7 +41,7 @@ int main()
   x = 0;
   dx = 0;
   ddx = 1;
-  kernel::IntegrationMethod::setMethod(kernel::IntegrationMethod::type::Euler);
+  kernel::State::setMethod(kernel::State::type::euler);
 
   // Instantiating Test Objects
   kernel::State* dX = kernel::State::create(dx, ddx);
@@ -54,7 +54,7 @@ int main()
   *test << X;
 
   // Build Sim
-  kernel::SimLoop sim(time_step, kernel::IntegrationMethod::type::Euler);
+  kernel::SimLoop sim(time_step, kernel::State::type::euler);
   sim.addEndCondition(new kernel::MaxTimeExceeded(max_time));
   sim.addBlock(test);
 
@@ -70,13 +70,6 @@ int main()
   delete X;
   delete dX;
   delete test;
-  */
-
-  math::Quaternion p(0, 0, 1, 0);
-  math::Quaternion R(math::Vector(1, 0, 0), math::HALF_PI);
-  p = p.rotatedBy(R);
-  std::cout << p.w << "  " << p.x << "  " << p.y << "  " << p.z << "\n";
-
 
   return 0;
 }

@@ -9,7 +9,6 @@
 #include <vector>
 #include "block.h"
 #include "End_Conditions/end_condition.h"
-#include "Integration_Methods/integration_method.h"
 
 
 //------------------------------------------------------------------------------
@@ -33,8 +32,8 @@ namespace kernel
   public:
     // Constructors
     SimLoop();
-    SimLoop(double                  time_step_,
-            IntegrationMethod::type integration_method_);
+    SimLoop(double      time_step_,
+            State::type integration_method_);
 
     // Destructor
     ~SimLoop();
@@ -43,14 +42,15 @@ namespace kernel
     void addBlock(Block* block_);
     void addEndCondition(EndCondition* end_condition_);
     void operator<< (Block* block_);
+    void operator<< (EndCondition* condition_);
     void run(void);
 
   private:
     // Member Variables
-    IntegrationMethod*  Integrator;
-    std::vector<Block*> Blocks;
+    kernel::State*             Integrator;
+    std::vector<Block*>        Blocks;
     std::vector<EndCondition*> End_Conditions;
-    double              Time_Step;
+    double                     Time_Step;
 
     // Functionality
     bool isEnd(void) const;

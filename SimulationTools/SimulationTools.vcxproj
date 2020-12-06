@@ -143,11 +143,8 @@
     <ClInclude Include="..\Source\Kernel\config.h" />
     <ClInclude Include="..\Source\Kernel\End_Conditions\end_condition.h" />
     <ClInclude Include="..\Source\Kernel\End_Conditions\max_time_exceeded.h" />
-    <ClInclude Include="..\Source\Kernel\Integration_Methods\euler_method.h" />
-    <ClInclude Include="..\Source\Kernel\Integration_Methods\integration_method.h" />
     <ClInclude Include="..\Source\Kernel\sim_loop.h" />
     <ClInclude Include="..\Source\Kernel\state.h" />
-    <ClInclude Include="..\Source\Kernel\States\state.h" />
     <ClInclude Include="..\Source\Kernel\States\state_euler.h" />
     <ClInclude Include="..\Source\Utilities\Math\math_constants.h" />
     <ClInclude Include="..\Source\Utilities\Math\math_config.h" />
@@ -158,11 +155,8 @@
   <ItemGroup>
     <ClCompile Include="..\Source\Kernel\block.cpp" />
     <ClCompile Include="..\Source\Kernel\End_Conditions\max_time_exceeded.cpp" />
-    <ClCompile Include="..\Source\Kernel\Integration_Methods\euler_method.cpp" />
-    <ClCompile Include="..\Source\Kernel\Integration_Methods\integration_method.cpp" />
     <ClCompile Include="..\Source\Kernel\sim_loop.cpp" />
     <ClCompile Include="..\Source\Kernel\state.cpp" />
-    <ClCompile Include="..\Source\Kernel\States\state.cpp" />
     <ClCompile Include="..\Source\Kernel\States\state_euler.cpp" />
     <ClCompile Include="..\Source\main.cpp" />
     <ClCompile Include="..\Source\Utilities\Math\matrix.cpp" />

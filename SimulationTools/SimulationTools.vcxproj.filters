@@ -28,20 +28,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Source\Kernel\state.h">
-      <Filter>Kernel</Filter>
-    </ClInclude>
     <ClInclude Include="..\Source\Kernel\block.h">
       <Filter>Kernel</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\Kernel\sim_loop.h">
       <Filter>Kernel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Kernel\Integration_Methods\integration_method.h">
-      <Filter>Kernel\Integration Methods</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Kernel\Integration_Methods\euler_method.h">
-      <Filter>Kernel\Integration Methods</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\Kernel\config.h">
       <Filter>Kernel</Filter>
@@ -67,29 +58,20 @@
     <ClInclude Include="..\Source\Utilities\Math\math_constants.h">
       <Filter>Utilities\Math Library</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\Kernel\States\state.h">
-      <Filter>Kernel\States</Filter>
-    </ClInclude>
     <ClInclude Include="..\Source\Kernel\States\state_euler.h">
       <Filter>Kernel\States</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\Kernel\state.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Source\Kernel\state.cpp">
-      <Filter>Kernel</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\main.cpp" />
     <ClCompile Include="..\Source\Kernel\block.cpp">
       <Filter>Kernel</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Kernel\sim_loop.cpp">
       <Filter>Kernel</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Kernel\Integration_Methods\integration_method.cpp">
-      <Filter>Kernel\Integration Methods</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Kernel\Integration_Methods\euler_method.cpp">
-      <Filter>Kernel\Integration Methods</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Kernel\End_Conditions\max_time_exceeded.cpp">
       <Filter>Kernel\End Conditions</Filter>
@@ -103,11 +85,11 @@
     <ClCompile Include="..\Source\Utilities\Math\matrix.cpp">
       <Filter>Utilities\Math Library</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Kernel\States\state.cpp">
-      <Filter>Kernel\States</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Kernel\States\state_euler.cpp">
       <Filter>Kernel\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Kernel\state.cpp">
+      <Filter>Kernel</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

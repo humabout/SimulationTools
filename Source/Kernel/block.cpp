@@ -50,7 +50,7 @@ kernel::Block::~Block()
 //------------------------------------------------------------------------------
 void kernel::Block::add(double& x_, double& dx_)
 {
-  States.push_back(new State(x_, dx_));
+  States.push_back(State::create(x_, dx_));
 }
 
 
@@ -59,7 +59,7 @@ void kernel::Block::add(double& x_, double& dx_)
 //------------------------------------------------------------------------------
 void kernel::Block::add(double& x_, State& dx_)
 {
-  States.push_back(new State(x_, dx_));
+  States.push_back(State::create(x_, dx_));
 }
 
 
@@ -84,7 +84,7 @@ void kernel::Block::doPropagate(void)
        state != States.end();
        state++)
   {
-    (*state)->propagate();
+    (*state)->updateState();
   }
 }
 

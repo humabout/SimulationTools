@@ -33,8 +33,8 @@ kernel::StateEuler::StateEuler(double& x_,
 // Name:    StateEuler
 // Purpose: Constructor Overload.
 //------------------------------------------------------------------------------
-kernel::StateEuler::StateEuler(double&             x_,
-                               kernel::StateEuler& dx_)
+kernel::StateEuler::StateEuler(double&        x_,
+                               kernel::State& dx_)
 {
   this->x  = &x_;
   this->dx = dx_.x;
@@ -45,7 +45,7 @@ kernel::StateEuler::StateEuler(double&             x_,
 // Name:    StateEuler
 // Purpose: Copy Constructor.
 //------------------------------------------------------------------------------
-kernel::StateEuler::StateEuler(const kernel::StateEuler& that)
+kernel::StateEuler::StateEuler(const kernel::State& that)
 {
   this->x  = that.x;
   this->dx = that.dx;
@@ -90,7 +90,7 @@ void kernel::StateEuler::reset(double time_step_)
 // Purpose: This propagates the state forward one time step using the Euler's
 //          method.
 //------------------------------------------------------------------------------
-void kernel::StateEuler::updateState(State* state_)
+void kernel::StateEuler::updateState(void)
 {
   (*this->x) += State::Time_Step * (*this->dx);
   State::Is_Ready = true;

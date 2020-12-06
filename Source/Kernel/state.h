@@ -5,15 +5,10 @@
 #define STATE_H
 
 
-// Inclusions
-#include "Integration_Methods\integration_method.h"
-
-
 // Forward Declarations
 namespace kernel
 {
-  class EulerMethod;
-  class RungeKutta4;
+  class StateEuler;
 }
 
 
@@ -27,28 +22,39 @@ namespace kernel
 
   //--------------------------------------------------------------------------
   // Name:    State
-  // Purpose: This class represents a single state that is responsible for
-  //          propagating itself. It uses a strategy pattern to provide
-  //          flexibility in the integration method used, while ensuring that
-  //          all states use the same method.
+  // Purpose: This class provides the interface and basic necessities for 
+  //          propagating state variables. Each child class implements a 
+  //          specific integration method.
   //--------------------------------------------------------------------------
   class State
   {
   public:
+    // Enum
+    enum class type
+    {
+      euler = 1,
+      rk2   = 2,
+      rk4   = 3
+    };
+
     // Constructors
     State();
-    State(double& x_, double& dx_);
-    State(double& x_, State& dx_);
+    State(double& x_, 
+          double& dx_);
+    State(double& x_, 
+          State& dx_);
     State(const State& that);
 
     // Destructor
-    ~State();
-
-    // Assignment Operator
-    State& operator= (const State& that);
+    virtual ~State();
 
     // Getters
-    double get(void) const;
+    static double time(void);
+    static double timestep(void);
+    static bool   isReady(void);
+
+    // Setters
+    static  void setMethod(State::type method_);
 
     // Factory
     static State* create(double& x_, double& dx_);
@@ -56,33 +62,34 @@ namespace kernel
     static State* create(const State& state_);
 
     // Functionality
-    void propagate(void);
+    virtual void initialize() = 0;
+    virtual void reset(double time_step_) = 0;
+    virtual void updateState(void) = 0;
+    virtual void updateClock(void) = 0;
 
-  private:
+  protected:
+    // Member Variables
+    static double Time_Current;
+    static double Time_Step;
+    static bool   Is_Ready;
+    static type   Method;
+
     // State Variables
     double* x;
     double* dx;
 
-    // Integration Method
-    kernel::IntegrationMethod* Integrator;
+    // Friend Child Classes
+    friend StateEuler;
 
-    // Friend Classes
-    // These classes are considered friend classes because they alone need 
-    // access to the value of the state and state derrivative. If there is a 
-    // way to give access to only those two values, I'd rather do that. For 
-    // now, making integrators, which exist solely to modify the state value, 
-    // full access will work.
-    friend IntegrationMethod;
-    friend EulerMethod;
 
   }; // !StateInterface
-  
+
 
 } // !kernel
 
 
 // Forward Declaration Inclusions
-#include "Integration_Methods/euler_method.h"
+#include "States\state_euler.h"
 
 
 #endif // !STATE_H

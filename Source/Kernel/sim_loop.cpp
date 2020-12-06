@@ -6,7 +6,6 @@
 #include <vector>
 #include "block.h"
 #include "config.h"
-#include "Integration_Methods/integration_method.h"
 #include "sim_loop.h"
 
 
@@ -18,8 +17,8 @@
 kernel::SimLoop::SimLoop()
 {
   Time_Step = 0;
-  Integrator->setMethod(IntegrationMethod::type::RK4);
-  Integrator = IntegrationMethod::create();
+  Integrator->setMethod(State::type::euler);
+  Integrator = State::create(*new double, *new double);
 }
 
 
@@ -29,12 +28,12 @@ kernel::SimLoop::SimLoop()
 // Inputs:  Time Step [s]
 //          Maximum Simulated Time [s]
 //------------------------------------------------------------------------------
-kernel::SimLoop::SimLoop(double                  time_step_,
-                         IntegrationMethod::type integration_method_)
+kernel::SimLoop::SimLoop(double      time_step_,
+                         State::type integration_method_)
 {
   Time_Step = time_step_;
   Integrator->setMethod(integration_method_);
-  Integrator = IntegrationMethod::create();
+  Integrator = State::create(*new double, *new double);
 }
 
 
@@ -84,7 +83,7 @@ bool kernel::SimLoop::isEnd(void) const
 {
   // Check all end conditions when the sim is ready for evaluation and reporting
   std::vector<EndCondition*>::const_iterator condition = End_Conditions.begin();
-  while (kernel::IntegrationMethod::isReady() && 
+  while (kernel::State::isReady() && 
          condition != End_Conditions.end()    )
   {
     // Stop checking as soon as an end condition is not met
@@ -104,7 +103,6 @@ bool kernel::SimLoop::isEnd(void) const
 }
 
 
-
 //------------------------------------------------------------------------------
 // Name:    operator<<
 // Purpose: This operator adds a block to the simulation for updating and 
@@ -117,16 +115,24 @@ void kernel::SimLoop::operator<< (Block* block_)
 
 
 //------------------------------------------------------------------------------
+// Name:    operator<<
+// Purpose: This operator adds an end condition to the simulation for checking
+//          simulation termination.
+//------------------------------------------------------------------------------
+void kernel::SimLoop::operator<< (EndCondition* condition_)
+{
+  addEndCondition(condition_);
+}
+
+
+//------------------------------------------------------------------------------
 // Name:    run
 // Purpose: This runs the simulation loop from initializing the simulation to
 //          propagating it, to determining when it should end.
-// TODO:    This will likely grow with time to encompass some message passing
+// Note:    This will likely grow with time to encompass some message passing
 //          both into and out of the loop. This will allow outside routines to
 //          pass controls into the simulation, and let the simulation output
 //          data and events.
-//
-//          Interestingly, if this is done, it is "just" a render step away from
-//          being a game.
 //------------------------------------------------------------------------------
 void kernel::SimLoop::run(void)
 {
