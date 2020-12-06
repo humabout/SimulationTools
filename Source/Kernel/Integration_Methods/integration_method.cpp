@@ -5,7 +5,6 @@
 #include <cmath>
 #include "integration_method.h"
 #include "euler_method.h"
-#include "runge_kutta_4.h"
 
 
 

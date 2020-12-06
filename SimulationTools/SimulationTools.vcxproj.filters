@@ -40,9 +40,6 @@
     <ClInclude Include="..\Source\Kernel\Integration_Methods\euler_method.h">
       <Filter>Kernel\Integration Methods</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\Kernel\Integration_Methods\runge_kutta_4.h">
-      <Filter>Kernel\Integration Methods</Filter>
-    </ClInclude>
     <ClInclude Include="..\Source\Kernel\config.h">
       <Filter>Kernel</Filter>
     </ClInclude>
@@ -83,9 +80,6 @@
       <Filter>Kernel\Integration Methods</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Kernel\Integration_Methods\euler_method.cpp">
-      <Filter>Kernel\Integration Methods</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Kernel\Integration_Methods\runge_kutta_4.cpp">
       <Filter>Kernel\Integration Methods</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Kernel\End_Conditions\max_time_exceeded.cpp">
