@@ -74,7 +74,6 @@ namespace kernel
     // full access will work.
     friend IntegrationMethod;
     friend EulerMethod;
-    friend RungeKutta4;
 
   }; // !StateInterface
   
@@ -84,7 +83,6 @@ namespace kernel
 
 // Forward Declaration Inclusions
 #include "Integration_Methods/euler_method.h"
-#include "Integration_Methods\runge_kutta_4.h"
 
 
 #endif // !STATE_H
