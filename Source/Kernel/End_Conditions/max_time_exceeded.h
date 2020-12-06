@@ -32,7 +32,7 @@ namespace kernel
     ~MaxTimeExceeded();
 
     // Functionality
-    bool met(void);
+    bool met(void) override;
 
   private:
     double  Time_Max;

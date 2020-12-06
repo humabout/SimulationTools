@@ -23,7 +23,7 @@ namespace kernel
   {
   public:
     // Destructor
-    ~EndCondition() { /* TODO: I am far too lazy to write this in a source file */ }
+    virtual ~EndCondition() { /* TODO: I am far too lazy to write this in a source file */ }
 
     // Functionality
     virtual bool met(void) = 0;

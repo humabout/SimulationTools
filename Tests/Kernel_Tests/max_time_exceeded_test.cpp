@@ -6,16 +6,12 @@
 #include "../../Source/Kernel/End_Conditions/end_condition.h"
 #include "../../Source/Kernel/End_Conditions/max_time_exceeded.h"
 #include "../../Source/Kernel/End_Conditions/max_time_exceeded.cpp"
-#include "../../Source/Kernel/state.h"
-#include "../../Source/Kernel/state.cpp"
-#include "../../Source/Kernel/States/state_euler.h"
-#include "../../Source/Kernel/States/state_euler.cpp"
 
 
 // Fixture
 struct MaxTimeExceededTests : public ::testing::Test
 {
-  kernel::EndCondition* test;
+  kernel::EndCondition* condition;
   kernel::StateEuler*   state;
   double* x;
   double* dx;
@@ -32,7 +28,7 @@ struct MaxTimeExceededTests : public ::testing::Test
     state->reset(1);
 
     // Declaring the unit under test
-    test = new kernel::MaxTimeExceeded(1);
+    condition = new kernel::MaxTimeExceeded(1);
   }
 
   virtual void TearDown()
@@ -40,7 +36,7 @@ struct MaxTimeExceededTests : public ::testing::Test
     delete x;
     delete dx;
     delete state;
-    delete test;
+    delete condition;
   }
 };
 
@@ -48,10 +44,11 @@ struct MaxTimeExceededTests : public ::testing::Test
 // Testing MaxTimeExceeded
 TEST_F(MaxTimeExceededTests, EndConditionNotMetTest)
 {
-  EXPECT_FALSE(test->met());
+  EXPECT_FALSE(condition->met());
 }
 TEST_F(MaxTimeExceededTests, EndConditionMetTest)
 {
   state->updateClock();
-  EXPECT_TRUE(test->met());
+  EXPECT_TRUE(condition->met());
 }
+
