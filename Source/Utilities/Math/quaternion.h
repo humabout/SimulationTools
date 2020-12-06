@@ -77,8 +77,6 @@ namespace math
     void operator<<(const Vector& v_);
     void operator<<(const Matrix& dcm_);
     Matrix getDCM(void) const;
-    Vector getAxis(void) const;
-    double getAngle(void) const;
 
 
     // Accessor
@@ -182,31 +180,6 @@ math::Quaternion operator*(double                  s_,
 //------------------------------------------------------------------------------
 math::Quaternion operator/(const math::Vector& lhs,
                            const math::Vector& rhs);
-
-
-//------------------------------------------------------------------------------
-// Name:    operator<<
-// Purpose: Extracts the axis of rotation vector from a quaternion and returns
-//          it. This is the closest thing to converting a quaternion to a vector
-//          that exists.
-// TODO:    Decide if this is really keeping with the semantic meaning of <<
-//------------------------------------------------------------------------------
-math::Vector& operator<<(math::Vector& out, const math::Quaternion& q_)
-{
-  out = q_.getAxis();
-  return out;
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    operator<<
-// Purpose: Converts the quaternion to a DCM and returns the matrix.
-//------------------------------------------------------------------------------
-math::Matrix& operator<<(math::Matrix& out, const math::Quaternion& q_)
-{
-  out = q_.getDCM();
-  return out;
-}
 
 
 #endif // !QUATERNION_H
