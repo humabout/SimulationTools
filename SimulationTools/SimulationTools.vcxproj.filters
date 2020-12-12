@@ -8,9 +8,6 @@
     <Filter Include="Kernel">
       <UniqueIdentifier>{b7000b3a-ab19-441f-ac2d-2af6a1d1cf49}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Blocks">
-      <UniqueIdentifier>{012ba69e-1cbe-406b-bd02-7445500eaca8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Utilities">
       <UniqueIdentifier>{c62448e1-d487-4910-a1e6-3850c91b678e}</UniqueIdentifier>
     </Filter>
@@ -22,6 +19,9 @@
     </Filter>
     <Filter Include="Kernel\States">
       <UniqueIdentifier>{301302d7-f237-4507-9c58-90185d5d5233}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kernel\Clocks">
+      <UniqueIdentifier>{0d6ea74b-4e26-46b0-af13-1f945cfe544c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
