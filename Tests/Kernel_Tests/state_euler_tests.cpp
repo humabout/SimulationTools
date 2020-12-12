@@ -75,7 +75,7 @@ TEST_F(StateEulerTests, InitializationTest)
 
 
 // UpdateState Tests
-TEST_F(StateEulerTests, UpdateStateTEst)
+TEST_F(StateEulerTests, UpdateStateTest)
 {
   test->initialize();
   test->reset(1);
