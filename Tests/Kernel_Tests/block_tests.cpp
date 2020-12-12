@@ -47,8 +47,8 @@ struct BlockTests : public ::testing::Test
   double z;
   double dz;
 
-  kernel::State* s1;
-  kernel::State* s2;
+  std::shared_ptr<kernel::State> s1;
+  std::shared_ptr<kernel::State> s2;
   BlockTest* test;
 
   virtual void SetUp()
@@ -60,8 +60,6 @@ struct BlockTests : public ::testing::Test
 
   virtual void TearDown()
   {
-    if (s1 != nullptr) { delete s1; }
-    if (s2 != nullptr) { delete s2; }
     if (test != nullptr) { delete test; }
   }
 };
@@ -93,7 +91,7 @@ TEST_F(BlockTests, PropagateTest)
   test->add(x, dx);
 
   y = 10;   dy = -1;  ddy = 0;
-  test->add(y, *s1);
+  test->add(y, s1);
 
   z = 0;    dz = 5;
   test->add(s2);

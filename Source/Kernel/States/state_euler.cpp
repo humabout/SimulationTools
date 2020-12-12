@@ -22,22 +22,22 @@ kernel::StateEuler::StateEuler(double& x_,
 // Name:    StateEuler
 // Purpose: Constructor Overload.
 //------------------------------------------------------------------------------
-kernel::StateEuler::StateEuler(double&        x_,
-                               kernel::State& dx_)
+kernel::StateEuler::StateEuler(double&                               x_,
+                               const std::shared_ptr<kernel::State>& dx_)
 {
   this->x  = &x_;
-  this->dx = dx_.x;
+  this->dx = dx_->x;
 }
 
 
 //------------------------------------------------------------------------------
 // Name:    StateEuler
-// Purpose: Copy Constructor.
+// Purpose: Constructor Overload.
 //------------------------------------------------------------------------------
-kernel::StateEuler::StateEuler(const kernel::State& that)
+kernel::StateEuler::StateEuler(const std::shared_ptr<kernel::State>& that)
 {
-  this->x  = that.x;
-  this->dx = that.dx;
+  this->x  = that->x;
+  this->dx = that->dx;
 }
 
 

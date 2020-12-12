@@ -39,15 +39,11 @@ kernel::SimLoop::SimLoop(double      time_step_,
 
 //------------------------------------------------------------------------------
 // Name:    ~SimLoop
-// Purpose: Destructor. This object owns Integrator and is responsible for 
-//          freeing that memory.
+// Purpose: Destructor. This object owns nothing and deletes nothing.
 //------------------------------------------------------------------------------
 kernel::SimLoop::~SimLoop()
 {
-  if (Integrator != NULL)
-  {
-    delete Integrator;
-  }
+  // Does nothing.
 }
 
 

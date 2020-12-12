@@ -47,10 +47,10 @@ namespace kernel
 
   private:
     // Member Variables
-    kernel::State*             Integrator;
-    std::vector<Block*>        Blocks;
-    std::vector<EndCondition*> End_Conditions;
-    double                     Time_Step;
+    std::shared_ptr<kernel::State> Integrator;
+    std::vector<Block*>            Blocks;
+    std::vector<EndCondition*>     End_Conditions;
+    double                         Time_Step;
 
     // Functionality
     bool isEnd(void) const;

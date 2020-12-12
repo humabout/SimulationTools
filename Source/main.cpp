@@ -26,7 +26,7 @@ public:
 
 int main()
 {
-
+  /*
   std::cout << "Testing Simulation Kernel...\n\n";
 
   // Setting test inputs
@@ -70,6 +70,7 @@ int main()
   delete X;
   delete dX;
   delete test;
+  */
 
   return 0;
 }

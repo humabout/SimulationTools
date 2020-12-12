@@ -6,6 +6,7 @@
 
 
 // Inclusions
+#include <memory>
 #include "..\state.h"
 
 
@@ -27,9 +28,9 @@ namespace kernel
     // Constructor
     StateEuler(double& x_, 
                double& dx_);
-    StateEuler(double& x_, 
-               State&  dx_);
-    StateEuler(const State& that);
+    StateEuler(double&                               x_, 
+               const std::shared_ptr<kernel::State>& dx_);
+    StateEuler(const std::shared_ptr<kernel::State>& that);
 
     // Destructor
     ~StateEuler();
