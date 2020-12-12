@@ -38,10 +38,12 @@ kernel::Block::~Block()
   std::vector<State*>::iterator state;
   for (state = States.begin();
        state != States.end();
-       state++)
+       ++state)
   {
-    delete (*state);
-  }*/
+    delete *state;
+    *state = nullptr;
+  }
+  */
 }
 
 

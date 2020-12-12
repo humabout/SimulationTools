@@ -6,6 +6,7 @@
 
 
 // Inclusions
+#include <memory>
 #include <vector>
 #include "state.h"
 

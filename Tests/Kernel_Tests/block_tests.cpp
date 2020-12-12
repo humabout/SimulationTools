@@ -23,6 +23,7 @@ public:
   {
     this->States = that.States;
   }
+  ~BlockTest() { kernel::Block::~Block(); };
 
 private:
   void doInitialize(void) override final
@@ -39,9 +40,12 @@ private:
 struct BlockTests : public ::testing::Test
 {
   double x;
-  double y;
   double dx;
+  double y;
   double dy;
+  double ddy;
+  double z;
+  double dz;
 
   kernel::State* s1;
   kernel::State* s2;
@@ -49,19 +53,55 @@ struct BlockTests : public ::testing::Test
 
   virtual void SetUp()
   {
-    x = 0;
-    y = 10;
-    dx = 1;
-    dy = -1;
-    s1 = kernel::State::create(x, dx);
-    s2 = kernel::State::create(y, dy);
     test = new BlockTest;
+    s1 = kernel::State::create(dy, ddy);
+    s2 = kernel::State::create(z, dz);
   }
 
   virtual void TearDown()
   {
-    if (test != NULL) { delete test; }
-    if (s1   != NULL) { delete s1; }
-    if (s2   != NULL) { delete s2; }
+    if (s1 != nullptr) { delete s1; }
+    if (s2 != nullptr) { delete s2; }
+    if (test != nullptr) { delete test; }
   }
 };
+
+
+// Initialize Test
+TEST_F(BlockTests, InitializeTest)
+{
+  test->initialize();
+  EXPECT_TRUE(test->isInitialized);
+}
+
+
+// Update Test
+TEST_F(BlockTests, UpdateTest)
+{
+  test->update();
+  EXPECT_TRUE(test->isUpdated);
+}
+
+
+// Propagate Tests
+TEST_F(BlockTests, PropagateTest)
+{
+  s1->initialize();
+  s1->reset(1);
+
+  x = 0;    dx = 1;
+  test->add(x, dx);
+
+  y = 10;   dy = -1;  ddy = 0;
+  test->add(y, *s1);
+
+  z = 0;    dz = 5;
+  test->add(s2);
+  test->propagate();
+
+  EXPECT_DOUBLE_EQ(x, 1);
+  EXPECT_DOUBLE_EQ(dx, 1);
+  EXPECT_DOUBLE_EQ(y, 9);
+  EXPECT_DOUBLE_EQ(dy, -1);
+  EXPECT_DOUBLE_EQ(z, 5);
+}
