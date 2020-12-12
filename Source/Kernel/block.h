@@ -41,11 +41,11 @@ namespace kernel
 
     // Adding States
     void add(double& x_, double& dx_);
-    void add(double& x_, State& dx_);
-    void add(State* state_);
+    void add(double& x_, const std::shared_ptr<State>& dx_);
+    void add(const std::shared_ptr<State>& state_);
 
     // Operators
-    void operator<< (State* state_);
+    void operator<< (const std::shared_ptr<State>& state_);
 
     // Functionality
     void initialize(void);
@@ -54,7 +54,7 @@ namespace kernel
 
   protected:
     // Stores all states associated wtih this block
-    std::vector<State*> States;
+    std::vector< std::shared_ptr<State> > States;
 
   private:
 

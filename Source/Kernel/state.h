@@ -5,6 +5,10 @@
 #define STATE_H
 
 
+// Inclusions
+#include <memory>
+
+
 // Forward Declarations
 namespace kernel
 {
@@ -57,9 +61,9 @@ namespace kernel
     static  void setIntegrationMethod(State::type method_);
 
     // Factory
-    static State* create(double& x_, double& dx_);
-    static State* create(double& x_, State& dx_);
-    static State* create(const State& state_);
+    static std::shared_ptr<State> create(double& x_, double& dx_);
+    static std::shared_ptr<State> create(double& x_, State& dx_);
+    static std::shared_ptr<State> create(const State& state_);
 
     // Functionality
     virtual void initialize() = 0;

@@ -3,6 +3,7 @@
 
 // Inclusions
 #include <cstddef>
+#include <memory>
 #include "state.h"
 #include "States\state_euler.h"
 
@@ -84,13 +85,13 @@ kernel::State::~State()
 // Inputs:  The state
 //          The state derrivative
 //----------------------------------------------------------------------------
-kernel::State* kernel::State::create(double& x_,
-                                     double& dx_)
+std::shared_ptr<kernel::State> kernel::State::create(double& x_,
+                                                     double& dx_)
 {
   switch (kernel::State::Method)
   {
   case State::type::euler:
-    return new StateEuler(x_, dx_);
+    return std::shared_ptr<kernel::State>( new StateEuler(x_, dx_) );
   default:
     return NULL;
   }
@@ -100,13 +101,13 @@ kernel::State* kernel::State::create(double& x_,
 //----------------------------------------------------------------------------
 // Name:    create (overload)
 //----------------------------------------------------------------------------
-kernel::State* kernel::State::create(double&        x_,
-                                     kernel::State& dx_)
+std::shared_ptr<kernel::State> kernel::State::create(double&        x_,
+                                                     kernel::State& dx_)
 {
   switch (kernel::State::Method)
   {
   case type::euler:
-    return new StateEuler(x_, dx_);
+    return std::shared_ptr<kernel::State>(new StateEuler(x_, dx_));
   default:
     return NULL;
   }
@@ -116,12 +117,12 @@ kernel::State* kernel::State::create(double&        x_,
 //----------------------------------------------------------------------------
 // Name:    create (overload)
 //----------------------------------------------------------------------------
-kernel::State* kernel::State::create(const kernel::State& state_)
+std::shared_ptr<kernel::State> kernel::State::create(const kernel::State& state_)
 {
   switch (kernel::State::Method)
   {
   case type::euler:
-    return new StateEuler(state_);
+    return std::shared_ptr<kernel::State>(new StateEuler(state_));
   default:
     return NULL;
   }

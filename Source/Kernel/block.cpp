@@ -2,6 +2,7 @@
 
 
 // Inclusions
+#include <memory>
 #include <vector>
 #include "block.h"
 #include "state.h"
@@ -30,20 +31,11 @@ kernel::Block::Block(const Block& that)
 
 //------------------------------------------------------------------------------
 // Name:    ~Block
-// Purpose: Destructor. Delete all States owned by this Block.
+// Purpose: Destructor. This object owns nothing and deletes nothing.
 //------------------------------------------------------------------------------
 kernel::Block::~Block()
 {
-  /*
-  std::vector<State*>::iterator state;
-  for (state = States.begin();
-       state != States.end();
-       ++state)
-  {
-    delete *state;
-    *state = nullptr;
-  }
-  */
+
 }
 
 
@@ -60,7 +52,7 @@ void kernel::Block::add(double& x_, double& dx_)
 //------------------------------------------------------------------------------
 // Name:    add (overload)
 //------------------------------------------------------------------------------
-void kernel::Block::add(double& x_, State& dx_)
+void kernel::Block::add(double& x_, const std::shared_ptr<State>& dx_)
 {
   States.push_back(State::create(x_, dx_));
 }
@@ -69,7 +61,7 @@ void kernel::Block::add(double& x_, State& dx_)
 //------------------------------------------------------------------------------
 // Name:    add (overload)
 //------------------------------------------------------------------------------
-void kernel::Block::add(State* state_)
+void kernel::Block::add(const std::shared_ptr<State>& state_)
 {
   States.push_back(state_);
 }
@@ -82,7 +74,7 @@ void kernel::Block::add(State* state_)
 //------------------------------------------------------------------------------
 void kernel::Block::doPropagate(void)
 {
-  std::vector<State*>::iterator state;
+  std::vector< std::shared_ptr<State> >::iterator state;
   for (state = States.begin();
        state != States.end();
        state++)
@@ -108,7 +100,7 @@ void kernel::Block::initialize(void)
 // Name:    operator<<
 // Purpose: This adds a new state to the block.
 //------------------------------------------------------------------------------
-void kernel::Block::operator<< (State* state_)
+void kernel::Block::operator<< (const std::shared_ptr<State>& state_)
 {
   add(state_);
 }
