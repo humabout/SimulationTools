@@ -2,6 +2,7 @@
 
 
 // Inclusions
+#include <memory>
 #include "../pch.h"
 #include "../../Source/Kernel/End_Conditions/end_condition.h"
 #include "../../Source/Kernel/End_Conditions/max_time_exceeded.h"
@@ -11,32 +12,20 @@
 // Fixture
 struct MaxTimeExceededTests : public ::testing::Test
 {
-  kernel::EndCondition* condition;
-  kernel::StateEuler*   state;
-  double* x;
-  double* dx;
+  std::shared_ptr<kernel::EndCondition> condition;
+  std::shared_ptr<kernel::SimClock> clock;
 
   virtual void SetUp()
   {
     // Setting up an state for propagating time
-    x = new double;
-    dx = new double;
-    state = new kernel::StateEuler(*x, *dx);
-    *x = 0;
-    *dx = 1;
-    state->initialize();
-    state->reset(1);
+    clock = kernel::SimClock::create(kernel::SimClock::type::simple_synchronous);
 
     // Declaring the unit under test
-    condition = new kernel::MaxTimeExceeded(1);
+    condition = std::shared_ptr <kernel::EndCondition>(new kernel::MaxTimeExceeded(1));
   }
 
   virtual void TearDown()
   {
-    delete x;
-    delete dx;
-    delete state;
-    delete condition;
   }
 };
 
@@ -48,7 +37,9 @@ TEST_F(MaxTimeExceededTests, EndConditionNotMetTest)
 }
 TEST_F(MaxTimeExceededTests, EndConditionMetTest)
 {
-  state->updateClock();
+  clock->initialize();
+  clock->reset(2);
+  clock->advance();
   EXPECT_TRUE(condition->met());
 }
 

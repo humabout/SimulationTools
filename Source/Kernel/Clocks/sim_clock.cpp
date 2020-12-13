@@ -8,9 +8,9 @@
 
 
 // Static Variable Declarations
-double kernel::SimClock::Time_Current  = 0.0;
-double kernel::SimClock::Time_Step     = 0.0;
-double kernel::SimClock::Max_Time_Step = 0.0;
+double kernel::SimClock::Time_Current;
+double kernel::SimClock::Time_Step;
+double kernel::SimClock::Max_Time_Step;
 
 
 //------------------------------------------------------------------------------
@@ -19,7 +19,9 @@ double kernel::SimClock::Max_Time_Step = 0.0;
 //------------------------------------------------------------------------------
 kernel::SimClock::SimClock()
 {
-  // Does Nothing
+  Time_Current = 0;
+  Time_Step = 0;
+  Max_Time_Step = 0;
 }
 
 
@@ -89,10 +91,10 @@ void kernel::SimClock::reset(double max_time_step_)
 //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 double kernel::SimClock::time(void)
 {
-  return Time_Current;
+  return SimClock::Time_Current;
 }
 
 double kernel::SimClock::timestep(void)
 {
-  return Time_Step;
+  return SimClock::Time_Step;
 }

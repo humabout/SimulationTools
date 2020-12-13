@@ -34,9 +34,9 @@ namespace kernel
 
   private:
     // Functionality Implementations
-    void doAdvance(void);
-    void doInitialize(void);
-    void doReset(double max_time_step_);
+    void doAdvance(void) override;
+    void doInitialize(void) override;
+    void doReset(double max_time_step_) override;
 
 
   }; // !SimpleSynchronousClock

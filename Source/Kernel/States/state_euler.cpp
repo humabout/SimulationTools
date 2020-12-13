@@ -71,6 +71,6 @@ void kernel::StateEuler::initialize(void)
 //------------------------------------------------------------------------------
 void kernel::StateEuler::updateState(void)
 {
-  (*this->x) += kernel::SimClock::timestep() * (*this->dx);
+  *(this->x) += kernel::SimClock::timestep() * *(this->dx);
   State::Is_Ready = true;
 }

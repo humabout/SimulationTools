@@ -5,6 +5,8 @@
 #include "../pch.h"
 #include "../../Source/Kernel/block.h"
 #include "../../Source/Kernel/block.cpp"
+#include "../../Source/Kernel/Clocks/sim_clock.h"
+#include "../../Source/Kernel/Clocks/sim_clock.cpp"
 
 
 // Making a Test Block
@@ -46,14 +48,16 @@ struct BlockTests : public ::testing::Test
   double ddy;
   double z;
   double dz;
-
+  
   std::shared_ptr<kernel::State> s1;
   std::shared_ptr<kernel::State> s2;
+  std::shared_ptr<kernel::SimClock> clock;
   BlockTest* test;
 
   virtual void SetUp()
   {
     test = new BlockTest;
+    clock = kernel::SimClock::create(kernel::SimClock::type::simple_synchronous);
     s1 = kernel::State::create(dy, ddy);
     s2 = kernel::State::create(z, dz);
   }
@@ -85,7 +89,7 @@ TEST_F(BlockTests, UpdateTest)
 TEST_F(BlockTests, PropagateTest)
 {
   s1->initialize();
-  s1->reset(1);
+  clock->reset(1);
 
   x = 0;    dx = 1;
   test->add(x, dx);

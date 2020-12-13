@@ -32,7 +32,7 @@ kernel::SimpleSynchronousClock::~SimpleSynchronousClock()
 //------------------------------------------------------------------------------
 void kernel::SimpleSynchronousClock::doAdvance(void)
 {
-  this->doAdvance();
+  Time_Current += Time_Step;
 }
 
 
