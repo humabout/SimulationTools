@@ -94,13 +94,13 @@ kernel::State::~State()
 // Inputs:  The state
 //          The state derrivative
 //----------------------------------------------------------------------------
-std::shared_ptr<kernel::State> kernel::State::create(double& x_,
+kernel::State::pointer kernel::State::create(double& x_,
                                                      double& dx_)
 {
   switch (kernel::State::Method)
   {
   case State::type::euler:
-    return std::shared_ptr<kernel::State>( new StateEuler(x_, dx_) );
+    return State::pointer( new StateEuler(x_, dx_) );
   default:
     return NULL;
   }
@@ -110,13 +110,13 @@ std::shared_ptr<kernel::State> kernel::State::create(double& x_,
 //----------------------------------------------------------------------------
 // Name:    create (overload)
 //----------------------------------------------------------------------------
-std::shared_ptr<kernel::State> kernel::State::create(double&               x_,
-                                                     const State::pointer& dx_)
+kernel::State::pointer kernel::State::create(double&               x_,
+                                             const State::pointer& dx_)
 {
   switch (kernel::State::Method)
   {
   case type::euler:
-    return std::shared_ptr<kernel::State>(new StateEuler(x_, dx_));
+    return State::pointer(new StateEuler(x_, dx_));
   default:
     return NULL;
   }
@@ -126,12 +126,12 @@ std::shared_ptr<kernel::State> kernel::State::create(double&               x_,
 //----------------------------------------------------------------------------
 // Name:    create (overload)
 //----------------------------------------------------------------------------
-std::shared_ptr<kernel::State> kernel::State::create(const State::pointer& state_)
+kernel::State::pointer kernel::State::create(const State::pointer& state_)
 {
   switch (kernel::State::Method)
   {
   case type::euler:
-    return std::shared_ptr<kernel::State>(new StateEuler(state_));
+    return State::pointer(new StateEuler(state_));
   default:
     return NULL;
   }

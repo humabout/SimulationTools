@@ -63,11 +63,11 @@ namespace kernel
     static void setIntegrationMethod(State::type method_);
 
     // Factory
-    static std::shared_ptr<State> create(double& x_, 
-                                         double& dx_);
-    static std::shared_ptr<State> create(double&               x_, 
-                                         const State::pointer& dx_);
-    static std::shared_ptr<State> create(const State::pointer& state_);
+    static State::pointer create(double& x_, 
+                                 double& dx_);
+    static State::pointer create(double&               x_,
+                                 const State::pointer& dx_);
+    static State::pointer create(const State::pointer& state_);
 
     // Functionality
     virtual void initialize() = 0;
