@@ -74,8 +74,6 @@ namespace math
 
 
     // Conversion Operators
-    // TODO:  Overload this operator to convert Quaternions into other objects, 
-    //        too.
     void operator<<(const Vector& v_);
     void operator<<(const Matrix& dcm_);
     Matrix getDCM(void) const;
@@ -170,12 +168,16 @@ namespace math
 } // !math
 
 
-// Scalar Multiplication
+//------------------------------------------------------------------------------
+// Name:    Scalar Multiplication
+//------------------------------------------------------------------------------
 math::Quaternion operator*(double                  s_,
                            const math::Quaternion& q_);
 
 
-// Vector Quotient
+//------------------------------------------------------------------------------
+// Name:    Vector Quotient
+//------------------------------------------------------------------------------
 math::Quaternion operator/(const math::Vector& lhs,
                            const math::Vector& rhs);
 

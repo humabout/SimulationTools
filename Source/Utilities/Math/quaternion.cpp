@@ -606,6 +606,7 @@ math::Matrix math::Quaternion::getDCM(void) const
   Quaternion versor = this->versor();
 
   // Building the matrix
+  double ww = versor.w * versor.w;
   double wx = versor.w * versor.x;
   double wy = versor.w * versor.y;
   double wz = versor.w * versor.z;
@@ -615,7 +616,18 @@ math::Matrix math::Quaternion::getDCM(void) const
   double yy = versor.y * versor.y;
   double yz = versor.y * versor.z;
   double zz = versor.z * versor.z;
-  return Matrix( 1 - 2 * (yy - zz),     2 * (xy - wz),     2 * (xz + wy),
-                     2 * (xy + wz), 1 - 2 * (xx - zz),     2 * (yz - wx),
-                     2 * (xz - wy),     2 * (yz + wx), 1 - 2 * (xx - yy) );
+  return Matrix( (ww + xx - yy - zz),       2 * (xy - wz),       2 * (xz + wy),
+                       2 * (xy + wz), (ww - xx + yy - zz),       2 * (yz - wx),
+                       2 * (xz - wy),       2 * (yz + wx), (ww - xx - yy + zz) );
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    operator<<
+// Purpose: Converts the quaternion to a DCM and returns the matrix.
+//------------------------------------------------------------------------------
+math::Matrix& operator<<(math::Matrix& out, const math::Quaternion& q_)
+{
+  out = q_.getDCM();
+  return out;
 }

@@ -160,15 +160,6 @@ TEST(QuaternionTests, OperatorAssignmentTest)
 
 
 // Conversion Operator Tests
-TEST(QuaternionTests, OperatorConvertVecToQuatTest)
-{
-  math::Quaternion test(9, 9, 9, 9);
-  test << math::Vector(1, 2, 3);
-  EXPECT_DOUBLE_EQ(test.w, 0);
-  EXPECT_DOUBLE_EQ(test.x, 1);
-  EXPECT_DOUBLE_EQ(test.y, 2);
-  EXPECT_DOUBLE_EQ(test.z, 3);
-}
 TEST(QuaternionTests, OperatorConvertDcmToQuatTest)
 {
   math::Matrix dcm(  6.0 / 23,   2.0 / 115, 111.0 / 115,
@@ -183,6 +174,43 @@ TEST(QuaternionTests, OperatorConvertDcmToQuatTest)
   EXPECT_DOUBLE_EQ(test.x, truth.x);
   EXPECT_DOUBLE_EQ(test.y, truth.y);
   EXPECT_DOUBLE_EQ(test.z, truth.z);
+}
+TEST(QuaternionTests, OperatorConvertQuatToDcmTest1)
+{
+  math::Matrix truth( 6.0 / 23,   2.0 / 115, 111.0 / 115,
+                     22.0 / 23,   3.0 / 23,   -6.0 / 23,
+                     -3.0 / 23, 114.0 / 115,   2.0 / 115);
+  math::Quaternion q(9, 8, 7, 6);
+  math::Matrix test = q.getDCM();
+
+  EXPECT_NEAR(test.e11, truth.e11, 1e-15);
+  EXPECT_NEAR(test.e12, truth.e12, 1e-15);
+  EXPECT_NEAR(test.e13, truth.e13, 1e-15);
+  EXPECT_NEAR(test.e21, truth.e21, 1e-15);
+  EXPECT_NEAR(test.e22, truth.e22, 1e-15);
+  EXPECT_NEAR(test.e23, truth.e23, 1e-15);
+  EXPECT_NEAR(test.e31, truth.e31, 1e-15);
+  EXPECT_NEAR(test.e32, truth.e32, 1e-15);
+  EXPECT_NEAR(test.e33, truth.e33, 1e-15);
+}
+TEST(QuaternionTests, OperatorConvertQuatToDcmTest2)
+{
+  math::Matrix truth( 6.0 / 23,   2.0 / 115, 111.0 / 115,
+                     22.0 / 23,   3.0 / 23,   -6.0 / 23,
+                     -3.0 / 23, 114.0 / 115,   2.0 / 115);
+  math::Quaternion q(9, 8, 7, 6);
+  math::Matrix test;
+  test << q;
+
+  EXPECT_NEAR(test.e11, truth.e11, 1e-15);
+  EXPECT_NEAR(test.e12, truth.e12, 1e-15);
+  EXPECT_NEAR(test.e13, truth.e13, 1e-15);
+  EXPECT_NEAR(test.e21, truth.e21, 1e-15);
+  EXPECT_NEAR(test.e22, truth.e22, 1e-15);
+  EXPECT_NEAR(test.e23, truth.e23, 1e-15);
+  EXPECT_NEAR(test.e31, truth.e31, 1e-15);
+  EXPECT_NEAR(test.e32, truth.e32, 1e-15);
+  EXPECT_NEAR(test.e33, truth.e33, 1e-15);
 }
 
 
@@ -594,4 +622,11 @@ TEST(QuaternionTests, RotateByTest2)
   EXPECT_DOUBLE_EQ(p.x, 0);
   EXPECT_DOUBLE_EQ(p.y, 1);
   EXPECT_DOUBLE_EQ(p.z, 0);
+}
+
+
+// Conversion Tests
+TEST(QuaternionTests, ConversionQuatToDcmTest1)
+{
+
 }
