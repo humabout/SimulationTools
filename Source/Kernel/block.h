@@ -32,6 +32,10 @@ namespace kernel
   class Block
   {
   public:
+    // Typedefs
+    typedef std::shared_ptr<Block> pointer;
+
+
     // Constructors
     Block();
     Block(const Block& that);
@@ -41,8 +45,8 @@ namespace kernel
 
     // Adding States
     void add(double& x_, double& dx_);
-    void add(double& x_, const std::shared_ptr<State>& dx_);
-    void add(const std::shared_ptr<State>& state_);
+    void add(double& x_, const State::pointer& dx_);
+    void add(const State::pointer& state_);
 
     // Operators
     void operator<< (const std::shared_ptr<State>& state_);

@@ -33,6 +33,9 @@ namespace kernel
   class State
   {
   public:
+    // Typedefs
+    typedef std::shared_ptr<State> pointer;
+
     // Enum
     enum class type
     {
@@ -46,8 +49,8 @@ namespace kernel
     State(double& x_, 
           double& dx_);
     State(double&                       x_, 
-          const std::shared_ptr<State>& dx_);
-    State(const std::shared_ptr<State>& that);
+          const State::pointer& dx_);
+    State(const State::pointer& that);
     State(const State& that);
 
     // Destructor
@@ -62,9 +65,9 @@ namespace kernel
     // Factory
     static std::shared_ptr<State> create(double& x_, 
                                          double& dx_);
-    static std::shared_ptr<State> create(double&                       x_, 
-                                         const std::shared_ptr<State>& dx_);
-    static std::shared_ptr<State> create(const std::shared_ptr<State>& state_);
+    static std::shared_ptr<State> create(double&               x_, 
+                                         const State::pointer& dx_);
+    static std::shared_ptr<State> create(const State::pointer& state_);
 
     // Functionality
     virtual void initialize() = 0;

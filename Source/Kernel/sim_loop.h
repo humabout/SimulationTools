@@ -43,18 +43,18 @@ namespace kernel
     ~SimLoop();
 
     // Functionality
-    void addBlock(Block* block_);
-    void addEndCondition(EndCondition* end_condition_);
-    void operator<< (Block* block_);
-    void operator<< (EndCondition* condition_);
+    void addBlock(Block::pointer block_);
+    void addEndCondition(EndCondition::pointer end_condition_);
+    void operator<< (Block::pointer block_);
+    void operator<< (EndCondition::pointer condition_);
     void run(void);
 
   private:
     // Member Variables
-    std::shared_ptr<kernel::SimClock> Clock;
-    std::vector<Block*>               Blocks;
-    std::vector<EndCondition*>        End_Conditions;
-    double                            Time_Step;
+    SimClock::pointer                  Clock;
+    std::vector<Block::pointer>        Blocks;
+    std::vector<EndCondition::pointer> End_Conditions;
+    double                             Time_Step;
 
     // Functionality
     bool isEnd(void) const;

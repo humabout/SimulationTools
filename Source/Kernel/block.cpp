@@ -52,7 +52,7 @@ void kernel::Block::add(double& x_, double& dx_)
 //------------------------------------------------------------------------------
 // Name:    add (overload)
 //------------------------------------------------------------------------------
-void kernel::Block::add(double& x_, const std::shared_ptr<State>& dx_)
+void kernel::Block::add(double& x_, const State::pointer& dx_)
 {
   States.push_back(State::create(x_, dx_));
 }
@@ -61,7 +61,7 @@ void kernel::Block::add(double& x_, const std::shared_ptr<State>& dx_)
 //------------------------------------------------------------------------------
 // Name:    add (overload)
 //------------------------------------------------------------------------------
-void kernel::Block::add(const std::shared_ptr<State>& state_)
+void kernel::Block::add(const State::pointer& state_)
 {
   States.push_back(state_);
 }

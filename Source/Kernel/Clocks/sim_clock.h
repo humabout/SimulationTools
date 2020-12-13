@@ -33,6 +33,9 @@ namespace kernel
   class SimClock
   {
   public:
+    // Typedefs
+    typedef std::shared_ptr<SimClock> pointer;
+
     // Enum for clock type
     enum class type
     {

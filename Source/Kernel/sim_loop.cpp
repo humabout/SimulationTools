@@ -69,7 +69,7 @@ kernel::SimLoop::~SimLoop()
 // Purpose: This method adds a block to the simulation for updating and 
 //          propagation.
 //------------------------------------------------------------------------------
-void kernel::SimLoop::addBlock(Block* block_)
+void kernel::SimLoop::addBlock(Block::pointer block_)
 {
   Blocks.push_back(block_);
 }
@@ -79,7 +79,7 @@ void kernel::SimLoop::addBlock(Block* block_)
 // Name:    addEndCondition
 // Purpose: This method adds an end condition to the simulation for checking.
 //------------------------------------------------------------------------------
-void kernel::SimLoop::addEndCondition(EndCondition* end_condition_)
+void kernel::SimLoop::addEndCondition(EndCondition::pointer end_condition_)
 {
   End_Conditions.push_back(end_condition_);
 }
@@ -95,7 +95,7 @@ void kernel::SimLoop::addEndCondition(EndCondition* end_condition_)
 bool kernel::SimLoop::isEnd(void) const 
 {
   // Check all end conditions when the sim is ready for evaluation and reporting
-  std::vector<EndCondition*>::const_iterator condition = End_Conditions.begin();
+  std::vector<EndCondition::pointer>::const_iterator condition = End_Conditions.begin();
   while (kernel::State::isReady() && 
          condition != End_Conditions.end()    )
   {
@@ -121,7 +121,7 @@ bool kernel::SimLoop::isEnd(void) const
 // Purpose: This operator adds a block to the simulation for updating and 
 //          propagation.
 //------------------------------------------------------------------------------
-void kernel::SimLoop::operator<< (Block* block_)
+void kernel::SimLoop::operator<< (Block::pointer block_)
 {
   addBlock(block_);
 }
@@ -132,7 +132,7 @@ void kernel::SimLoop::operator<< (Block* block_)
 // Purpose: This operator adds an end condition to the simulation for checking
 //          simulation termination.
 //------------------------------------------------------------------------------
-void kernel::SimLoop::operator<< (EndCondition* condition_)
+void kernel::SimLoop::operator<< (EndCondition::pointer condition_)
 {
   addEndCondition(condition_);
 }
@@ -154,7 +154,7 @@ void kernel::SimLoop::run(void)
   Clock->reset(Time_Step);
 
   // Initialize all blocks
-  std::vector<Block*>::iterator current_block;
+  std::vector< Block::pointer >::iterator current_block;
   for (current_block = Blocks.begin(); 
        current_block != Blocks.end(); 
        current_block++)

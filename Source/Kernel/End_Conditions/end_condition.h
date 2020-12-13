@@ -5,6 +5,10 @@
 #define END_CONDITION_H
 
 
+// Inclusions
+#include <memory>
+
+
 //------------------------------------------------------------------------------
 // Name:    kernel
 // Purpose: This namespace holds all parts of the simulation kernel.
@@ -22,6 +26,9 @@ namespace kernel
   class EndCondition
   {
   public:
+    // Typedefs
+    typedef std::shared_ptr<EndCondition> pointer;
+
     // Destructor
     virtual ~EndCondition() { /* TODO: I am far too lazy to write this in a source file */ }
 

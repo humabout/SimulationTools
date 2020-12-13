@@ -38,7 +38,7 @@ kernel::State::State(const State& that)
 // Name:    State
 // Purpose: Makes State from a shared_ptr that points at a State.
 //----------------------------------------------------------------------------
-kernel::State::State(const std::shared_ptr<State>& that)
+kernel::State::State(const State::pointer& that)
 {
   this->x  = that->x;
   this->dx = that->dx;
@@ -65,8 +65,8 @@ kernel::State::State(double& x_,
 //          derrivative is the value of another state, this state does not own
 //          its derrivative.
 //----------------------------------------------------------------------------
-kernel::State::State(double&                       x_,
-                     const std::shared_ptr<State>& dx_)
+kernel::State::State(double&               x_,
+                     const State::pointer& dx_)
 {
   this->x  = &x_;
   this->dx = dx_->x;
@@ -110,8 +110,8 @@ std::shared_ptr<kernel::State> kernel::State::create(double& x_,
 //----------------------------------------------------------------------------
 // Name:    create (overload)
 //----------------------------------------------------------------------------
-std::shared_ptr<kernel::State> kernel::State::create(double&                       x_,
-                                                     const std::shared_ptr<State>& dx_)
+std::shared_ptr<kernel::State> kernel::State::create(double&               x_,
+                                                     const State::pointer& dx_)
 {
   switch (kernel::State::Method)
   {
@@ -126,7 +126,7 @@ std::shared_ptr<kernel::State> kernel::State::create(double&                    
 //----------------------------------------------------------------------------
 // Name:    create (overload)
 //----------------------------------------------------------------------------
-std::shared_ptr<kernel::State> kernel::State::create(const std::shared_ptr<State>& state_)
+std::shared_ptr<kernel::State> kernel::State::create(const State::pointer& state_)
 {
   switch (kernel::State::Method)
   {
