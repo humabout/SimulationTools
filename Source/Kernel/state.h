@@ -57,10 +57,10 @@ namespace kernel
     virtual ~State();
 
     // Getters
-    static bool   isReady(void);
+    static bool isReady(void);
 
     // Setters
-    static  void setIntegrationMethod(State::type method_);
+    static void setIntegrationMethod(State::type method_);
 
     // Factory
     static std::shared_ptr<State> create(double& x_, 
@@ -75,8 +75,8 @@ namespace kernel
 
   protected:
     // Member Variables
-    static bool   Is_Ready;
-    static type   Method;
+    static bool Is_Ready;
+    static type Method;
 
     // State Variables
     double* x;

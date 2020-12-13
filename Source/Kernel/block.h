@@ -64,7 +64,7 @@ namespace kernel
 
     // Functionality
     virtual void doInitialize(void) = 0;
-    virtual void doUpdate(void) = 0;
+    virtual void doUpdate(void)     = 0;
     virtual void doPropagate(void);
 
   };
