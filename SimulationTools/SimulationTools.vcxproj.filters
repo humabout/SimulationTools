@@ -61,6 +61,12 @@
     <ClInclude Include="..\Source\Kernel\state.h">
       <Filter>Kernel</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\Kernel\Clocks\sim_clock.h">
+      <Filter>Kernel\Clocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Kernel\Clocks\simple_synchronous_clock.h">
+      <Filter>Kernel\Clocks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />
@@ -87,6 +93,12 @@
     </ClCompile>
     <ClCompile Include="..\Source\Kernel\state.cpp">
       <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Kernel\Clocks\sim_clock.cpp">
+      <Filter>Kernel\Clocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Kernel\Clocks\simple_synchronous_clock.cpp">
+      <Filter>Kernel\Clocks</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

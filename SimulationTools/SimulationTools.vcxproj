@@ -140,6 +140,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\Kernel\block.h" />
+    <ClInclude Include="..\Source\Kernel\Clocks\simple_synchronous_clock.h" />
+    <ClInclude Include="..\Source\Kernel\Clocks\sim_clock.h" />
     <ClInclude Include="..\Source\Kernel\config.h" />
     <ClInclude Include="..\Source\Kernel\End_Conditions\end_condition.h" />
     <ClInclude Include="..\Source\Kernel\End_Conditions\max_time_exceeded.h" />
@@ -154,6 +156,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Kernel\block.cpp" />
+    <ClCompile Include="..\Source\Kernel\Clocks\simple_synchronous_clock.cpp" />
+    <ClCompile Include="..\Source\Kernel\Clocks\sim_clock.cpp" />
     <ClCompile Include="..\Source\Kernel\End_Conditions\max_time_exceeded.cpp" />
     <ClCompile Include="..\Source\Kernel\sim_loop.cpp" />
     <ClCompile Include="..\Source\Kernel\state.cpp" />
