@@ -5,6 +5,10 @@
 #define SIM_CLOCK_H
 
 
+// Inclusions
+#include <memory>
+
+
 //------------------------------------------------------------------------------
 // Name:    kernel
 // Purpose: This namespace holds all parts of the simulation kernel.
@@ -50,7 +54,7 @@ namespace kernel
 
 
     // Factory Method
-    static SimClock* create(type clock_type_);
+    static std::shared_ptr<kernel::SimClock> create(type clock_type_);
     
 
     // Functionality

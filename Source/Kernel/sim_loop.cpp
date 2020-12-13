@@ -11,14 +11,14 @@
 
 //------------------------------------------------------------------------------
 // Name:    SimLoop
-// Purpose: Default Constructor. The integrator type defaults to RK4 unless set
-//          otherwise.
+// Purpose: Default Constructor. The integrator type defaults to Euler unless 
+//          set otherwise.
 //------------------------------------------------------------------------------
 kernel::SimLoop::SimLoop()
 {
   Time_Step = 0;
-  Integrator->setIntegrationMethod(State::type::euler);
-  Integrator = State::create(*new double, *new double);
+  State::setIntegrationMethod(State::type::euler);
+  Clock = SimClock::create(SimClock::type::simple_synchronous);
 }
 
 
@@ -26,14 +26,31 @@ kernel::SimLoop::SimLoop()
 // Name:    SimLoop
 // Purpose: Constructor Overload.
 // Inputs:  Time Step [s]
-//          Maximum Simulated Time [s]
+//          Integration Method
 //------------------------------------------------------------------------------
-kernel::SimLoop::SimLoop(double      time_step_,
+kernel::SimLoop::SimLoop(double      max_time_step_,
                          State::type integration_method_)
 {
-  Time_Step = time_step_;
-  Integrator->setIntegrationMethod(integration_method_);
-  Integrator = State::create(*new double, *new double);
+  Time_Step = max_time_step_;
+  State::setIntegrationMethod(integration_method_);
+  Clock = SimClock::create(SimClock::type::simple_synchronous);
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    SimLoop
+// Purpose: Constructor Overload.
+// Inputs:  Time Step [s]
+//          Integration Method
+//          Clock Type
+//------------------------------------------------------------------------------
+kernel::SimLoop::SimLoop(double         max_time_step_,
+                         State::type    integration_method_,
+                         SimClock::type clock_type_)
+{
+  Time_Step = max_time_step_;
+  State::setIntegrationMethod(integration_method_);
+  Clock = SimClock::create(clock_type_);
 }
 
 
@@ -132,9 +149,9 @@ void kernel::SimLoop::operator<< (EndCondition* condition_)
 //------------------------------------------------------------------------------
 void kernel::SimLoop::run(void)
 {
-  // Initialize the simulation
-  Integrator->initialize();
-  Integrator->reset(Time_Step);
+  // Initialize the clock
+  Clock->initialize();
+  Clock->reset(Time_Step);
 
   // Initialize all blocks
   std::vector<Block*>::iterator current_block;
@@ -165,6 +182,6 @@ void kernel::SimLoop::run(void)
     }
 
     // Updating clock
-    Integrator->updateClock();
+    Clock->advance();
   }
 }

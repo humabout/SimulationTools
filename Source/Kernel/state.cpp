@@ -8,8 +8,6 @@
 #include "States\state_euler.h"
 
 // Static Variables
-double              kernel::State::Time_Current = 0.0;
-double              kernel::State::Time_Step = 0.0;
 bool                kernel::State::Is_Ready = true;
 kernel::State::type kernel::State::Method   = kernel::State::type::euler;
 
@@ -155,16 +153,6 @@ void kernel::State::setIntegrationMethod(kernel::State::type method_)
 //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 // GETTERS
 //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-double kernel::State::time(void)
-{
-  return Time_Current;
-}
-
-double kernel::State::timestep(void)
-{
-  return Time_Step;
-}
-
 bool kernel::State::isReady(void)
 {
   return Is_Ready;

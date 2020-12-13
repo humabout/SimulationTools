@@ -2,6 +2,7 @@
 
 
 // Inclusions
+#include <memory>
 #include "sim_clock.h"
 #include "simple_synchronous_clock.h"
 
@@ -36,14 +37,14 @@ kernel::SimClock::~SimClock()
 // Name:    create
 // Purpose: Factory Method. Returns an instance of the correct sim clock type.
 //------------------------------------------------------------------------------
-kernel::SimClock* kernel::SimClock::create(kernel::SimClock::type type_)
+std::shared_ptr<kernel::SimClock> kernel::SimClock::create(kernel::SimClock::type type_)
 {
   switch (type_)
   {
   case kernel::SimClock::type::simple_synchronous:
-    return new SimpleSynchronousClock;
+    return std::shared_ptr<kernel::SimClock>(new SimpleSynchronousClock);
   default:
-    return new SimpleSynchronousClock;
+    return std::shared_ptr<kernel::SimClock>(new SimpleSynchronousClock);
   }
 }
 

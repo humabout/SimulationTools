@@ -4,6 +4,7 @@
 // Inclusions
 #include <cstddef>
 #include "state_euler.h"
+#include "../Clocks/sim_clock.h"
 
 
 //------------------------------------------------------------------------------
@@ -58,19 +59,8 @@ kernel::StateEuler::~StateEuler()
 //------------------------------------------------------------------------------
 void kernel::StateEuler::initialize(void)
 {
-  State::Time_Current = 0;
+//  State::Time_Current = 0;
   State::Is_Ready = true;
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    reset
-// Purpose: This method implements the resetting of the time step to the 
-//          provided value.
-//------------------------------------------------------------------------------
-void kernel::StateEuler::reset(double time_step_)
-{
-  State::Time_Step = time_step_;
 }
 
 
@@ -81,16 +71,6 @@ void kernel::StateEuler::reset(double time_step_)
 //------------------------------------------------------------------------------
 void kernel::StateEuler::updateState(void)
 {
-  (*this->x) += State::Time_Step * (*this->dx);
+  (*this->x) += kernel::SimClock::timestep() * (*this->dx);
   State::Is_Ready = true;
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    updateClock
-// Purpose: This implements clock updates for use with Euler's method.
-//------------------------------------------------------------------------------
-void kernel::StateEuler::updateClock(void)
-{
-  State::Time_Current += State::Time_Step;
 }

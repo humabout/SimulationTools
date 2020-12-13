@@ -8,6 +8,7 @@
 // Inclusions
 #include <vector>
 #include "block.h"
+#include "Clocks/sim_clock.h"
 #include "End_Conditions/end_condition.h"
 
 
@@ -34,6 +35,9 @@ namespace kernel
     SimLoop();
     SimLoop(double      time_step_,
             State::type integration_method_);
+    SimLoop(double         time_step_,
+            State::type    integration_method_,
+            SimClock::type clock_type_);
 
     // Destructor
     ~SimLoop();
@@ -47,10 +51,10 @@ namespace kernel
 
   private:
     // Member Variables
-    std::shared_ptr<kernel::State> Integrator;
-    std::vector<Block*>            Blocks;
-    std::vector<EndCondition*>     End_Conditions;
-    double                         Time_Step;
+    std::shared_ptr<kernel::SimClock> Clock;
+    std::vector<Block*>               Blocks;
+    std::vector<EndCondition*>        End_Conditions;
+    double                            Time_Step;
 
     // Functionality
     bool isEnd(void) const;

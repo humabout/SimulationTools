@@ -54,8 +54,6 @@ namespace kernel
     virtual ~State();
 
     // Getters
-    static double time(void);
-    static double timestep(void);
     static bool   isReady(void);
 
     // Setters
@@ -70,14 +68,10 @@ namespace kernel
 
     // Functionality
     virtual void initialize() = 0;
-    virtual void reset(double time_step_) = 0;
     virtual void updateState(void) = 0;
-    virtual void updateClock(void) = 0;
 
   protected:
     // Member Variables
-    static double Time_Current;
-    static double Time_Step;
     static bool   Is_Ready;
     static type   Method;
 

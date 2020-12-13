@@ -37,9 +37,7 @@ namespace kernel
 
     // Functionality
     void initialize(void) override final;
-    void reset(double time_step_) override final;
     void updateState(void) override final;
-    void updateClock(void) override final;
 
 
   }; // !StateEuler
