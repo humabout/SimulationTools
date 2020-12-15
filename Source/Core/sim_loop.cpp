@@ -14,7 +14,7 @@
 // Purpose: Default Constructor. The integrator type defaults to Euler unless 
 //          set otherwise.
 //------------------------------------------------------------------------------
-kernel::SimLoop::SimLoop()
+core::SimLoop::SimLoop()
 {
   Time_Step = 0;
   State::setIntegrationMethod(State::type::euler);
@@ -28,7 +28,7 @@ kernel::SimLoop::SimLoop()
 // Inputs:  Time Step [s]
 //          Integration Method
 //------------------------------------------------------------------------------
-kernel::SimLoop::SimLoop(double      max_time_step_,
+core::SimLoop::SimLoop(double      max_time_step_,
                          State::type integration_method_)
 {
   Time_Step = max_time_step_;
@@ -44,7 +44,7 @@ kernel::SimLoop::SimLoop(double      max_time_step_,
 //          Integration Method
 //          Clock Type
 //------------------------------------------------------------------------------
-kernel::SimLoop::SimLoop(double         max_time_step_,
+core::SimLoop::SimLoop(double         max_time_step_,
                          State::type    integration_method_,
                          SimClock::type clock_type_)
 {
@@ -58,7 +58,7 @@ kernel::SimLoop::SimLoop(double         max_time_step_,
 // Name:    ~SimLoop
 // Purpose: Destructor. This object owns nothing and deletes nothing.
 //------------------------------------------------------------------------------
-kernel::SimLoop::~SimLoop()
+core::SimLoop::~SimLoop()
 {
   // Does nothing.
 }
@@ -69,7 +69,7 @@ kernel::SimLoop::~SimLoop()
 // Purpose: This method adds a block to the simulation for updating and 
 //          propagation.
 //------------------------------------------------------------------------------
-void kernel::SimLoop::addBlock(Block::pointer block_)
+void core::SimLoop::addBlock(Block::pointer block_)
 {
   Blocks.push_back(block_);
 }
@@ -79,7 +79,7 @@ void kernel::SimLoop::addBlock(Block::pointer block_)
 // Name:    addEndCondition
 // Purpose: This method adds an end condition to the simulation for checking.
 //------------------------------------------------------------------------------
-void kernel::SimLoop::addEndCondition(EndCondition::pointer end_condition_)
+void core::SimLoop::addEndCondition(EndCondition::pointer end_condition_)
 {
   End_Conditions.push_back(end_condition_);
 }
@@ -92,11 +92,11 @@ void kernel::SimLoop::addEndCondition(EndCondition::pointer end_condition_)
 // CURRENT: The end condition checked is if the simulation has exceeded its max
 //          simulated time.
 //------------------------------------------------------------------------------
-bool kernel::SimLoop::isEnd(void) const 
+bool core::SimLoop::isEnd(void) const 
 {
   // Check all end conditions when the sim is ready for evaluation and reporting
   std::vector<EndCondition::pointer>::const_iterator condition = End_Conditions.begin();
-  while (kernel::State::isReady() && 
+  while (core::State::isReady() && 
          condition != End_Conditions.end()    )
   {
     // Stop checking as soon as an end condition is not met
@@ -121,7 +121,7 @@ bool kernel::SimLoop::isEnd(void) const
 // Purpose: This operator adds a block to the simulation for updating and 
 //          propagation.
 //------------------------------------------------------------------------------
-void kernel::SimLoop::operator<< (Block::pointer block_)
+void core::SimLoop::operator<< (Block::pointer block_)
 {
   addBlock(block_);
 }
@@ -132,7 +132,7 @@ void kernel::SimLoop::operator<< (Block::pointer block_)
 // Purpose: This operator adds an end condition to the simulation for checking
 //          simulation termination.
 //------------------------------------------------------------------------------
-void kernel::SimLoop::operator<< (EndCondition::pointer condition_)
+void core::SimLoop::operator<< (EndCondition::pointer condition_)
 {
   addEndCondition(condition_);
 }
@@ -147,7 +147,7 @@ void kernel::SimLoop::operator<< (EndCondition::pointer condition_)
 //          pass controls into the simulation, and let the simulation output
 //          data and events.
 //------------------------------------------------------------------------------
-void kernel::SimLoop::run(void)
+void core::SimLoop::run(void)
 {
   // Initialize the clock
   Clock->initialize();

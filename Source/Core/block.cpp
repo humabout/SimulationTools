@@ -12,7 +12,7 @@
 // Name:    Block
 // Purpose: Default Constructor.
 //------------------------------------------------------------------------------
-kernel::Block::Block()
+core::Block::Block()
 {
   States.clear();
 }
@@ -23,7 +23,7 @@ kernel::Block::Block()
 // Name:    Block
 // Purpose: Copy Constructor.
 //------------------------------------------------------------------------------
-kernel::Block::Block(const Block& that)
+core::Block::Block(const Block& that)
 {
   this->States = that.States;
 }
@@ -33,7 +33,7 @@ kernel::Block::Block(const Block& that)
 // Name:    ~Block
 // Purpose: Destructor. This object owns nothing and deletes nothing.
 //------------------------------------------------------------------------------
-kernel::Block::~Block()
+core::Block::~Block()
 {
 
 }
@@ -43,7 +43,7 @@ kernel::Block::~Block()
 // Name:    add
 // Purpose: This method adds a new state to the block.
 //------------------------------------------------------------------------------
-void kernel::Block::add(double& x_, double& dx_)
+void core::Block::add(double& x_, double& dx_)
 {
   States.push_back(State::create(x_, dx_));
 }
@@ -52,7 +52,7 @@ void kernel::Block::add(double& x_, double& dx_)
 //------------------------------------------------------------------------------
 // Name:    add (overload)
 //------------------------------------------------------------------------------
-void kernel::Block::add(double& x_, const State::pointer& dx_)
+void core::Block::add(double& x_, const State::pointer& dx_)
 {
   States.push_back(State::create(x_, dx_));
 }
@@ -61,7 +61,7 @@ void kernel::Block::add(double& x_, const State::pointer& dx_)
 //------------------------------------------------------------------------------
 // Name:    add (overload)
 //------------------------------------------------------------------------------
-void kernel::Block::add(const State::pointer& state_)
+void core::Block::add(const State::pointer& state_)
 {
   States.push_back(state_);
 }
@@ -72,7 +72,7 @@ void kernel::Block::add(const State::pointer& state_)
 // Purpose: This method implements the default behavior for propagating the 
 //          state of the block forward one time step.
 //------------------------------------------------------------------------------
-void kernel::Block::doPropagate(void)
+void core::Block::doPropagate(void)
 {
   std::vector< std::shared_ptr<State> >::iterator state;
   for (state = States.begin();
@@ -90,7 +90,7 @@ void kernel::Block::doPropagate(void)
 //          It is part of the template pattern and deferes implementation to
 //          doInitialize().
 //------------------------------------------------------------------------------
-void kernel::Block::initialize(void)
+void core::Block::initialize(void)
 {
   doInitialize();
 }
@@ -100,7 +100,7 @@ void kernel::Block::initialize(void)
 // Name:    operator<<
 // Purpose: This adds a new state to the block.
 //------------------------------------------------------------------------------
-void kernel::Block::operator<< (const std::shared_ptr<State>& state_)
+void core::Block::operator<< (const std::shared_ptr<State>& state_)
 {
   add(state_);
 }
@@ -115,7 +115,7 @@ void kernel::Block::operator<< (const std::shared_ptr<State>& state_)
 //          values. It is part of the template pattern and deferes 
 //          implementation to doPropagate().
 //------------------------------------------------------------------------------
-void kernel::Block::propagate(void)
+void core::Block::propagate(void)
 {
   doPropagate();
 }
@@ -128,7 +128,7 @@ void kernel::Block::propagate(void)
 //          It is part of the template pattern and deferes implementation to 
 //          doUpdate().
 //------------------------------------------------------------------------------
-void kernel::Block::update(void)
+void core::Block::update(void)
 {
   doUpdate();
 }

@@ -10,10 +10,10 @@
 
 
 //------------------------------------------------------------------------------
-// Name:    kernel
-// Purpose: This namespace holds all parts of the simulation kernel.
+// Name:    core
+// Purpose: This namespace holds all parts of the simulation core.
 //------------------------------------------------------------------------------
-namespace kernel
+namespace core
 {
 
 
@@ -57,7 +57,7 @@ namespace kernel
 
 
     // Factory Method
-    static std::shared_ptr<kernel::SimClock> create(type clock_type_);
+    static std::shared_ptr<core::SimClock> create(type clock_type_);
     
 
     // Functionality
@@ -80,7 +80,7 @@ namespace kernel
   };
 
 
-} // !kernel
+} // !core
 
 
 

@@ -10,14 +10,14 @@
 
 
 //----------------------------------------------------------------------------
-// Name:    kernel
-// Purpose: This namespace holds all parts of the simulation kernel.
+// Name:    core
+// Purpose: This namespace holds all parts of the simulation core.
 //----------------------------------------------------------------------------
-namespace kernel
+namespace core
 {
   // Time Error Tolerance
   static const double TIME_ERROR_TOLERANCE = 1e-6; // [s]
 
-} // !kernel
+} // !core
 
 #endif // !KERNEL_CONFIG_H

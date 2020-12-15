@@ -10,10 +10,10 @@
 
 
 //------------------------------------------------------------------------------
-// Name:    kernel
-// Purpose: This namespace holds all parts of the simulation kernel.
+// Name:    core
+// Purpose: This namespace holds all parts of the simulation core.
 //------------------------------------------------------------------------------
-namespace kernel
+namespace core
 {
   //----------------------------------------------------------------------------
   // Name:    SimpleSynchronousClock
@@ -41,7 +41,7 @@ namespace kernel
 
   }; // !SimpleSynchronousClock
 
-} // !kernel
+} // !core
 
 
 #endif // !SIMPLE_SYNCHRONOUS_CLOCK_H

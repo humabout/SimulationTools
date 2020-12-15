@@ -8,15 +8,15 @@
 #include "States\state_euler.h"
 
 // Static Variables
-bool                kernel::State::Is_Ready = true;
-kernel::State::type kernel::State::Method   = kernel::State::type::euler;
+bool                core::State::Is_Ready = true;
+core::State::type core::State::Method   = core::State::type::euler;
 
 
 //----------------------------------------------------------------------------
 // Name:    State
 // Purpose: Default Constructor.
 //----------------------------------------------------------------------------
-kernel::State::State()
+core::State::State()
 {
   this->x  = NULL;
   this->dx = NULL;
@@ -27,7 +27,7 @@ kernel::State::State()
 // Name:    State
 // Purpose: Copy Constructor.
 //----------------------------------------------------------------------------
-kernel::State::State(const State& that)
+core::State::State(const State& that)
 {
   this->x  = that.x;
   this->dx = that.dx;
@@ -38,7 +38,7 @@ kernel::State::State(const State& that)
 // Name:    State
 // Purpose: Makes State from a shared_ptr that points at a State.
 //----------------------------------------------------------------------------
-kernel::State::State(const State::pointer& that)
+core::State::State(const State::pointer& that)
 {
   this->x  = that->x;
   this->dx = that->dx;
@@ -51,7 +51,7 @@ kernel::State::State(const State::pointer& that)
 //          derrivative is passed in as a reference, this state does not own 
 //          it.
 //----------------------------------------------------------------------------
-kernel::State::State(double& x_,
+core::State::State(double& x_,
                      double& dx_)
 {
   this->x  = &x_;
@@ -65,7 +65,7 @@ kernel::State::State(double& x_,
 //          derrivative is the value of another state, this state does not own
 //          its derrivative.
 //----------------------------------------------------------------------------
-kernel::State::State(double&               x_,
+core::State::State(double&               x_,
                      const State::pointer& dx_)
 {
   this->x  = &x_;
@@ -81,7 +81,7 @@ kernel::State::State(double&               x_,
 //          they live on heap. As a result, this object owns nothing and does
 //          not need to delete anything.
 //----------------------------------------------------------------------------
-kernel::State::~State()
+core::State::~State()
 {
   // Does nothing.
 }
@@ -94,10 +94,10 @@ kernel::State::~State()
 // Inputs:  The state
 //          The state derrivative
 //----------------------------------------------------------------------------
-kernel::State::pointer kernel::State::create(double& x_,
+core::State::pointer core::State::create(double& x_,
                                                      double& dx_)
 {
-  switch (kernel::State::Method)
+  switch (core::State::Method)
   {
   case State::type::euler:
     return State::pointer( new StateEuler(x_, dx_) );
@@ -110,10 +110,10 @@ kernel::State::pointer kernel::State::create(double& x_,
 //----------------------------------------------------------------------------
 // Name:    create (overload)
 //----------------------------------------------------------------------------
-kernel::State::pointer kernel::State::create(double&               x_,
+core::State::pointer core::State::create(double&               x_,
                                              const State::pointer& dx_)
 {
-  switch (kernel::State::Method)
+  switch (core::State::Method)
   {
   case type::euler:
     return State::pointer(new StateEuler(x_, dx_));
@@ -126,9 +126,9 @@ kernel::State::pointer kernel::State::create(double&               x_,
 //----------------------------------------------------------------------------
 // Name:    create (overload)
 //----------------------------------------------------------------------------
-kernel::State::pointer kernel::State::create(const State::pointer& state_)
+core::State::pointer core::State::create(const State::pointer& state_)
 {
-  switch (kernel::State::Method)
+  switch (core::State::Method)
   {
   case type::euler:
     return State::pointer(new StateEuler(state_));
@@ -144,7 +144,7 @@ kernel::State::pointer kernel::State::create(const State::pointer& state_)
 //          that the next time an instance is requested, the new method will
 //          generated and returned.
 //----------------------------------------------------------------------------
-void kernel::State::setIntegrationMethod(kernel::State::type method_)
+void core::State::setIntegrationMethod(core::State::type method_)
 {
   State::Method = method_;
 }
@@ -153,7 +153,7 @@ void kernel::State::setIntegrationMethod(kernel::State::type method_)
 //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 // GETTERS
 //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-bool kernel::State::isReady(void)
+bool core::State::isReady(void)
 {
   return Is_Ready;
 }

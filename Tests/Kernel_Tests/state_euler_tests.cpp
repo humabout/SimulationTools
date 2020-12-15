@@ -5,17 +5,17 @@
 #include <cstddef>
 #include <memory>
 #include "../pch.h"
-#include "../../Source/Kernel/state.h"
-#include "../../Source/Kernel/state.cpp"
-#include "../../Source/Kernel/States/state_euler.h"
-#include "../../Source/Kernel/States/state_euler.cpp"
+#include "../../Source/Core/state.h"
+#include "../../Source/Core/state.cpp"
+#include "../../Source/Core/States/state_euler.h"
+#include "../../Source/Core/States/state_euler.cpp"
 
 
 // Test Fixture
 struct StateEulerTests : public ::testing::Test
 {
-  std::shared_ptr<kernel::StateEuler> test;
-  std::shared_ptr<kernel::SimClock> clock;
+  std::shared_ptr<core::StateEuler> test;
+  std::shared_ptr<core::SimClock> clock;
   double x;
   double dx;
 
@@ -23,8 +23,8 @@ struct StateEulerTests : public ::testing::Test
   {
     x  = 0;
     dx = 1;
-    test = std::shared_ptr<kernel::StateEuler>(new kernel::StateEuler(x, dx));
-    clock = kernel::SimClock::create(kernel::SimClock::type::simple_synchronous);
+    test = std::shared_ptr<core::StateEuler>(new core::StateEuler(x, dx));
+    clock = core::SimClock::create(core::SimClock::type::simple_synchronous);
   }
 
   virtual void TearDown()
@@ -38,7 +38,7 @@ struct StateEulerTests : public ::testing::Test
 TEST_F(StateEulerTests, InitializationTest)
 {
   test->initialize();
-  EXPECT_TRUE(kernel::State::isReady());
+  EXPECT_TRUE(core::State::isReady());
 }
 
 
@@ -52,10 +52,10 @@ TEST_F(StateEulerTests, UpdateStateTest)
   test->updateState();
   EXPECT_DOUBLE_EQ(x, 1);
   EXPECT_DOUBLE_EQ(dx, 1);
-  EXPECT_TRUE(kernel::State::isReady());
+  EXPECT_TRUE(core::State::isReady());
 
   test->updateState();
   EXPECT_DOUBLE_EQ(x, 2);
   EXPECT_DOUBLE_EQ(dx, 1);
-  EXPECT_TRUE(kernel::State::isReady());
+  EXPECT_TRUE(core::State::isReady());
 }

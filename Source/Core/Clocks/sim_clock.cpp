@@ -8,16 +8,16 @@
 
 
 // Static Variable Declarations
-double kernel::SimClock::Time_Current;
-double kernel::SimClock::Time_Step;
-double kernel::SimClock::Max_Time_Step;
+double core::SimClock::Time_Current;
+double core::SimClock::Time_Step;
+double core::SimClock::Max_Time_Step;
 
 
 //------------------------------------------------------------------------------
 // Name:    SimClock
 // Purpose: Default Constructor.
 //------------------------------------------------------------------------------
-kernel::SimClock::SimClock()
+core::SimClock::SimClock()
 {
   Time_Current = 0;
   Time_Step = 0;
@@ -29,7 +29,7 @@ kernel::SimClock::SimClock()
 // Name:    ~SimClock
 // Purpose: Destructor. This owns nothing and deletes nothing.
 //------------------------------------------------------------------------------
-kernel::SimClock::~SimClock()
+core::SimClock::~SimClock()
 {
   // Does Nothing
 }
@@ -39,14 +39,14 @@ kernel::SimClock::~SimClock()
 // Name:    create
 // Purpose: Factory Method. Returns an instance of the correct sim clock type.
 //------------------------------------------------------------------------------
-std::shared_ptr<kernel::SimClock> kernel::SimClock::create(kernel::SimClock::type type_)
+std::shared_ptr<core::SimClock> core::SimClock::create(core::SimClock::type type_)
 {
   switch (type_)
   {
-  case kernel::SimClock::type::simple_synchronous:
-    return std::shared_ptr<kernel::SimClock>(new SimpleSynchronousClock);
+  case core::SimClock::type::simple_synchronous:
+    return std::shared_ptr<core::SimClock>(new SimpleSynchronousClock);
   default:
-    return std::shared_ptr<kernel::SimClock>(new SimpleSynchronousClock);
+    return std::shared_ptr<core::SimClock>(new SimpleSynchronousClock);
   }
 }
 
@@ -57,7 +57,7 @@ std::shared_ptr<kernel::SimClock> kernel::SimClock::create(kernel::SimClock::typ
 //          part of the template pattern and forwards the call to doAdvance for 
 //          implementation.
 //------------------------------------------------------------------------------
-void kernel::SimClock::advance(void)
+void core::SimClock::advance(void)
 {
   this->doAdvance();
 }
@@ -68,7 +68,7 @@ void kernel::SimClock::advance(void)
 // Purpose: This method initializes the clock. It is part of the template 
 //          pattern and forwards the call to doInitialize for implementation.
 //------------------------------------------------------------------------------
-void kernel::SimClock::initialize(void)
+void core::SimClock::initialize(void)
 {
   this->doInitialize();
 }
@@ -79,7 +79,7 @@ void kernel::SimClock::initialize(void)
 // Purpose: This method resets the clock's time step. It is part of the template
 //          pattern and forwards the call to doReset for implementation.
 //------------------------------------------------------------------------------
-void kernel::SimClock::reset(double max_time_step_)
+void core::SimClock::reset(double max_time_step_)
 {
   this->doReset(max_time_step_);
 }
@@ -89,12 +89,12 @@ void kernel::SimClock::reset(double max_time_step_)
 //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 // GETTERS
 //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-double kernel::SimClock::time(void)
+double core::SimClock::time(void)
 {
   return SimClock::Time_Current;
 }
 
-double kernel::SimClock::timestep(void)
+double core::SimClock::timestep(void)
 {
   return SimClock::Time_Step;
 }

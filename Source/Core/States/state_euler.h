@@ -11,10 +11,10 @@
 
 
 //----------------------------------------------------------------------------
-// Name:    kernel
-// Purpose: This namespace holds all parts of the simulation kernel.
+// Name:    core
+// Purpose: This namespace holds all parts of the simulation core.
 //----------------------------------------------------------------------------
-namespace kernel
+namespace core
 {
 
 
@@ -29,8 +29,8 @@ namespace kernel
     StateEuler(double& x_, 
                double& dx_);
     StateEuler(double&                               x_, 
-               const std::shared_ptr<kernel::State>& dx_);
-    StateEuler(const std::shared_ptr<kernel::State>& that);
+               const std::shared_ptr<core::State>& dx_);
+    StateEuler(const std::shared_ptr<core::State>& that);
 
     // Destructor
     ~StateEuler();
@@ -43,7 +43,7 @@ namespace kernel
   }; // !StateEuler
 
 
-} // !kernel
+} // !core
 
 
 #endif // !STATE_EULER_H

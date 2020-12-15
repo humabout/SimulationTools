@@ -12,16 +12,16 @@
 
 
 //------------------------------------------------------------------------------
-// Name:    kernel
-// Purpose: This namespace holds all parts of the simulation kernel.
+// Name:    core
+// Purpose: This namespace holds all parts of the simulation core.
 //------------------------------------------------------------------------------
-namespace kernel
+namespace core
 {
 
 
   //----------------------------------------------------------------------------
   // Name:    Block
-  // Purpose: This abstract class exists as part of the simulation kernel and 
+  // Purpose: This abstract class exists as part of the simulation core and 
   //          encapsulates a model, process, or collection thereof that is 
   //          executed once per simulated time step. It defines their interface.
   //          Blocks are responsible for propagating their own states, and 
@@ -70,7 +70,7 @@ namespace kernel
   };
 
 
-} // !kernel
+} // !core
 
 
 #endif // !BLOCk_H

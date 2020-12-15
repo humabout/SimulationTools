@@ -11,7 +11,7 @@
 // Name:    StateEuler
 // Purpose: Constructor Overload.
 //------------------------------------------------------------------------------
-kernel::StateEuler::StateEuler(double& x_,
+core::StateEuler::StateEuler(double& x_,
                                double& dx_)
 {
   this->x  = &x_;
@@ -23,8 +23,8 @@ kernel::StateEuler::StateEuler(double& x_,
 // Name:    StateEuler
 // Purpose: Constructor Overload.
 //------------------------------------------------------------------------------
-kernel::StateEuler::StateEuler(double&                               x_,
-                               const std::shared_ptr<kernel::State>& dx_)
+core::StateEuler::StateEuler(double&                               x_,
+                               const std::shared_ptr<core::State>& dx_)
 {
   this->x  = &x_;
   this->dx = dx_->x;
@@ -35,7 +35,7 @@ kernel::StateEuler::StateEuler(double&                               x_,
 // Name:    StateEuler
 // Purpose: Constructor Overload.
 //------------------------------------------------------------------------------
-kernel::StateEuler::StateEuler(const std::shared_ptr<kernel::State>& that)
+core::StateEuler::StateEuler(const std::shared_ptr<core::State>& that)
 {
   this->x  = that->x;
   this->dx = that->dx;
@@ -46,7 +46,7 @@ kernel::StateEuler::StateEuler(const std::shared_ptr<kernel::State>& that)
 // Name:    ~StateEuler
 // Purpose: Destructor. This class owns nothing and deletes nothing.
 //------------------------------------------------------------------------------
-kernel::StateEuler::~StateEuler()
+core::StateEuler::~StateEuler()
 {
   // Does Nothing
 }
@@ -57,7 +57,7 @@ kernel::StateEuler::~StateEuler()
 // Purpose: This method implements the initialization of static variables for
 //          the sake of syncronizing the integration of all states.
 //------------------------------------------------------------------------------
-void kernel::StateEuler::initialize(void)
+void core::StateEuler::initialize(void)
 {
 //  State::Time_Current = 0;
   State::Is_Ready = true;
@@ -69,8 +69,8 @@ void kernel::StateEuler::initialize(void)
 // Purpose: This propagates the state forward one time step using the Euler's
 //          method.
 //------------------------------------------------------------------------------
-void kernel::StateEuler::updateState(void)
+void core::StateEuler::updateState(void)
 {
-  *(this->x) += kernel::SimClock::timestep() * *(this->dx);
+  *(this->x) += core::SimClock::timestep() * *(this->dx);
   State::Is_Ready = true;
 }

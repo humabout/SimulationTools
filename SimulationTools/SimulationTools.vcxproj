@@ -139,15 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Source\Kernel\block.h" />
-    <ClInclude Include="..\Source\Kernel\Clocks\simple_synchronous_clock.h" />
-    <ClInclude Include="..\Source\Kernel\Clocks\sim_clock.h" />
-    <ClInclude Include="..\Source\Kernel\config.h" />
-    <ClInclude Include="..\Source\Kernel\End_Conditions\end_condition.h" />
-    <ClInclude Include="..\Source\Kernel\End_Conditions\max_time_exceeded.h" />
-    <ClInclude Include="..\Source\Kernel\sim_loop.h" />
-    <ClInclude Include="..\Source\Kernel\state.h" />
-    <ClInclude Include="..\Source\Kernel\States\state_euler.h" />
+    <ClInclude Include="..\Source\Core\block.h" />
+    <ClInclude Include="..\Source\Core\Clocks\simple_synchronous_clock.h" />
+    <ClInclude Include="..\Source\Core\Clocks\sim_clock.h" />
+    <ClInclude Include="..\Source\Core\config.h" />
+    <ClInclude Include="..\Source\Core\End_Conditions\end_condition.h" />
+    <ClInclude Include="..\Source\Core\End_Conditions\max_time_exceeded.h" />
+    <ClInclude Include="..\Source\Core\sim_loop.h" />
+    <ClInclude Include="..\Source\Core\state.h" />
+    <ClInclude Include="..\Source\Core\States\state_euler.h" />
     <ClInclude Include="..\Source\Utilities\Math\math_constants.h" />
     <ClInclude Include="..\Source\Utilities\Math\math_config.h" />
     <ClInclude Include="..\Source\Utilities\Math\matrix.h" />
@@ -155,13 +155,13 @@
     <ClInclude Include="..\Source\Utilities\Math\vector.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Source\Kernel\block.cpp" />
-    <ClCompile Include="..\Source\Kernel\Clocks\simple_synchronous_clock.cpp" />
-    <ClCompile Include="..\Source\Kernel\Clocks\sim_clock.cpp" />
-    <ClCompile Include="..\Source\Kernel\End_Conditions\max_time_exceeded.cpp" />
-    <ClCompile Include="..\Source\Kernel\sim_loop.cpp" />
-    <ClCompile Include="..\Source\Kernel\state.cpp" />
-    <ClCompile Include="..\Source\Kernel\States\state_euler.cpp" />
+    <ClCompile Include="..\Source\Core\block.cpp" />
+    <ClCompile Include="..\Source\Core\Clocks\simple_synchronous_clock.cpp" />
+    <ClCompile Include="..\Source\Core\Clocks\sim_clock.cpp" />
+    <ClCompile Include="..\Source\Core\End_Conditions\max_time_exceeded.cpp" />
+    <ClCompile Include="..\Source\Core\sim_loop.cpp" />
+    <ClCompile Include="..\Source\Core\state.cpp" />
+    <ClCompile Include="..\Source\Core\States\state_euler.cpp" />
     <ClCompile Include="..\Source\main.cpp" />
     <ClCompile Include="..\Source\Utilities\Math\matrix.cpp" />
     <ClCompile Include="..\Source\Utilities\Math\quaternion.cpp" />

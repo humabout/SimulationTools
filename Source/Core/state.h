@@ -10,17 +10,17 @@
 
 
 // Forward Declarations
-namespace kernel
+namespace core
 {
   class StateEuler;
 }
 
 
 //----------------------------------------------------------------------------
-// Name:    kernel
-// Purpose: This namespace holds all parts of the simulation kernel.
+// Name:    core
+// Purpose: This namespace holds all parts of the simulation core.
 //----------------------------------------------------------------------------
-namespace kernel
+namespace core
 {
 
 
@@ -89,7 +89,7 @@ namespace kernel
   }; // !StateInterface
 
 
-} // !kernel
+} // !core
 
 
 // Forward Declaration Inclusions

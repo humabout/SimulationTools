@@ -3,14 +3,14 @@
 
 // Inclusions
 #include "../pch.h"
-#include "../../Source/Kernel/block.h"
-#include "../../Source/Kernel/block.cpp"
-#include "../../Source/Kernel/Clocks/sim_clock.h"
-#include "../../Source/Kernel/Clocks/sim_clock.cpp"
+#include "../../Source/core/block.h"
+#include "../../Source/core/block.cpp"
+#include "../../Source/core/Clocks/sim_clock.h"
+#include "../../Source/core/Clocks/sim_clock.cpp"
 
 
 // Making a Test Block
-class BlockTest : public kernel::Block
+class BlockTest : public core::Block
 {
 public:
   bool isInitialized;
@@ -25,7 +25,7 @@ public:
   {
     this->States = that.States;
   }
-  ~BlockTest() { kernel::Block::~Block(); };
+  ~BlockTest() { core::Block::~Block(); };
 
 private:
   void doInitialize(void) override final
@@ -49,17 +49,17 @@ struct BlockTests : public ::testing::Test
   double z;
   double dz;
   
-  std::shared_ptr<kernel::State> s1;
-  std::shared_ptr<kernel::State> s2;
-  std::shared_ptr<kernel::SimClock> clock;
+  std::shared_ptr<core::State> s1;
+  std::shared_ptr<core::State> s2;
+  std::shared_ptr<core::SimClock> clock;
   BlockTest* test;
 
   virtual void SetUp()
   {
     test = new BlockTest;
-    clock = kernel::SimClock::create(kernel::SimClock::type::simple_synchronous);
-    s1 = kernel::State::create(dy, ddy);
-    s2 = kernel::State::create(z, dz);
+    clock = core::SimClock::create(core::SimClock::type::simple_synchronous);
+    s1 = core::State::create(dy, ddy);
+    s2 = core::State::create(z, dz);
   }
 
   virtual void TearDown()

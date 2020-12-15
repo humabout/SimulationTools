@@ -10,10 +10,10 @@
 
 
 //------------------------------------------------------------------------------
-// Name:    kernel
-// Purpose: This namespace holds all parts of the simulation kernel.
+// Name:    core
+// Purpose: This namespace holds all parts of the simulation core.
 //------------------------------------------------------------------------------
-namespace kernel
+namespace core
 {
 
 
@@ -38,5 +38,5 @@ namespace kernel
   }; // !EndCondition
 
 
-} // !kernel
+} // !core
 #endif // !END_CONDITION_H

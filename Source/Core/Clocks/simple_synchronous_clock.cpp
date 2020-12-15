@@ -9,7 +9,7 @@
 // Name:    SimpleSynchronousClock
 // Purpose: Default Constructor.
 //------------------------------------------------------------------------------
-kernel::SimpleSynchronousClock::SimpleSynchronousClock()
+core::SimpleSynchronousClock::SimpleSynchronousClock()
 {
   // Does Nothing
 }
@@ -19,7 +19,7 @@ kernel::SimpleSynchronousClock::SimpleSynchronousClock()
 // Name:    ~SimpleSynchronousClock
 // Purpose: Destructor. This owns nothing and deletes nothing.
 //------------------------------------------------------------------------------
-kernel::SimpleSynchronousClock::~SimpleSynchronousClock()
+core::SimpleSynchronousClock::~SimpleSynchronousClock()
 {
   // Does Nothing
 }
@@ -30,7 +30,7 @@ kernel::SimpleSynchronousClock::~SimpleSynchronousClock()
 // Purpose: This method implements the advance() method to advance the clock 
 //          time by the current time step. It is part of the template pattern.
 //------------------------------------------------------------------------------
-void kernel::SimpleSynchronousClock::doAdvance(void)
+void core::SimpleSynchronousClock::doAdvance(void)
 {
   Time_Current += Time_Step;
 }
@@ -41,7 +41,7 @@ void kernel::SimpleSynchronousClock::doAdvance(void)
 // Purpose: This method implements the initialize() method to initialize the 
 //          clock's time to zero. It is part of the template pattern.
 //------------------------------------------------------------------------------
-void kernel::SimpleSynchronousClock::doInitialize(void)
+void core::SimpleSynchronousClock::doInitialize(void)
 {
   Time_Current = 0;
 }
@@ -53,7 +53,7 @@ void kernel::SimpleSynchronousClock::doInitialize(void)
 //          maximum time step and update the clock's timestep to that value. It 
 //          is part of the template pattern.
 //------------------------------------------------------------------------------
-void kernel::SimpleSynchronousClock::doReset(double max_time_step_)
+void core::SimpleSynchronousClock::doReset(double max_time_step_)
 {
   Max_Time_Step = max_time_step_;
   Time_Step = Max_Time_Step;
