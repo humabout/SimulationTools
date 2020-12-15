@@ -5,11 +5,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
-#include "Core/state.h"
-#include "Core/block.h"
-#include "Core/sim_loop.h"
-#include "Core/Clocks/sim_clock.h"
-#include "Core/End_Conditions/max_time_exceeded.h"
+#include "simulation_tools.h"
 
 
 class BlockTest : public core::Block
