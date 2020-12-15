@@ -1,25 +1,25 @@
-// simple_synchronous_clock.cpp
+// basic_clock.cpp
 
 
 // Inclusions
-#include "simple_synchronous_clock.h"
+#include "basic_clock.h"
 
 
 //------------------------------------------------------------------------------
-// Name:    SimpleSynchronousClock
+// Name:    BasicClock
 // Purpose: Default Constructor.
 //------------------------------------------------------------------------------
-core::SimpleSynchronousClock::SimpleSynchronousClock()
+core::BasicClock::BasicClock()
 {
   // Does Nothing
 }
 
 
 //------------------------------------------------------------------------------
-// Name:    ~SimpleSynchronousClock
+// Name:    ~BasicClock
 // Purpose: Destructor. This owns nothing and deletes nothing.
 //------------------------------------------------------------------------------
-core::SimpleSynchronousClock::~SimpleSynchronousClock()
+core::BasicClock::~BasicClock()
 {
   // Does Nothing
 }
@@ -30,7 +30,7 @@ core::SimpleSynchronousClock::~SimpleSynchronousClock()
 // Purpose: This method implements the advance() method to advance the clock 
 //          time by the current time step. It is part of the template pattern.
 //------------------------------------------------------------------------------
-void core::SimpleSynchronousClock::doAdvance(void)
+void core::BasicClock::doAdvance(void)
 {
   Time_Current += Time_Step;
 }
@@ -41,7 +41,7 @@ void core::SimpleSynchronousClock::doAdvance(void)
 // Purpose: This method implements the initialize() method to initialize the 
 //          clock's time to zero. It is part of the template pattern.
 //------------------------------------------------------------------------------
-void core::SimpleSynchronousClock::doInitialize(void)
+void core::BasicClock::doInitialize(void)
 {
   Time_Current = 0;
 }
@@ -53,7 +53,7 @@ void core::SimpleSynchronousClock::doInitialize(void)
 //          maximum time step and update the clock's timestep to that value. It 
 //          is part of the template pattern.
 //------------------------------------------------------------------------------
-void core::SimpleSynchronousClock::doReset(double max_time_step_)
+void core::BasicClock::doReset(double max_time_step_)
 {
   Max_Time_Step = max_time_step_;
   Time_Step = Max_Time_Step;

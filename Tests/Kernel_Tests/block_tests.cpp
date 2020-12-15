@@ -57,7 +57,7 @@ struct BlockTests : public ::testing::Test
   virtual void SetUp()
   {
     test = new BlockTest;
-    clock = core::SimClock::create(core::SimClock::type::simple_synchronous);
+    clock = core::SimClock::create(core::SimClock::type::basic);
     s1 = core::State::create(dy, ddy);
     s2 = core::State::create(z, dz);
   }

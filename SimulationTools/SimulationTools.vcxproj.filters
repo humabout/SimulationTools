@@ -64,7 +64,8 @@
     <ClInclude Include="..\Source\Core\Clocks\sim_clock.h">
       <Filter>Core\Clocks</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\Core\Clocks\simple_synchronous_clock.h">
+    <ClInclude Include="..\Source\simulation_tools.h" />
+    <ClInclude Include="..\Source\Core\Clocks\basic_clock.h">
       <Filter>Core\Clocks</Filter>
     </ClInclude>
   </ItemGroup>
@@ -97,7 +98,7 @@
     <ClCompile Include="..\Source\Core\Clocks\sim_clock.cpp">
       <Filter>Core\Clocks</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Core\Clocks\simple_synchronous_clock.cpp">
+    <ClCompile Include="..\Source\Core\Clocks\basic_clock.cpp">
       <Filter>Core\Clocks</Filter>
     </ClCompile>
   </ItemGroup>

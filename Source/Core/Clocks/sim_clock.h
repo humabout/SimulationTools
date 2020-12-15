@@ -39,7 +39,7 @@ namespace core
     // Enum for clock type
     enum class type
     {
-      simple_synchronous = 1
+      basic = 1
     }; // !type
 
 

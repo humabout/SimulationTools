@@ -18,7 +18,7 @@ struct MaxTimeExceededTests : public ::testing::Test
   virtual void SetUp()
   {
     // Setting up an state for propagating time
-    clock = core::SimClock::create(core::SimClock::type::simple_synchronous);
+    clock = core::SimClock::create(core::SimClock::type::basic);
 
     // Declaring the unit under test
     condition = std::shared_ptr <core::EndCondition>(new core::MaxTimeExceeded(1));

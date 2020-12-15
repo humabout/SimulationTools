@@ -24,7 +24,7 @@ struct StateEulerTests : public ::testing::Test
     x  = 0;
     dx = 1;
     test = std::shared_ptr<core::StateEuler>(new core::StateEuler(x, dx));
-    clock = core::SimClock::create(core::SimClock::type::simple_synchronous);
+    clock = core::SimClock::create(core::SimClock::type::basic);
   }
 
   virtual void TearDown()

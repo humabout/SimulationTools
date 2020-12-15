@@ -4,17 +4,17 @@
 // Inclusion
 #include <memory>
 #include "../pch.h"
-#include "../../Source/Core/Clocks/simple_synchronous_clock.h"
-#include "../../Source/Core/Clocks/simple_synchronous_clock.cpp"
+#include "../../Source/Core/Clocks/basic_clock.h"
+#include "../../Source/Core/Clocks/basic_clock.cpp"
 
 
-struct SimpleSynchronousClockTests : public ::testing::Test
+struct BasicClockClockTests : public ::testing::Test
 {
   std::shared_ptr<core::SimClock> clock;
 
   virtual void SetUp()
   {
-    clock = core::SimClock::create(core::SimClock::type::simple_synchronous);
+    clock = core::SimClock::create(core::SimClock::type::basic);
   }
 
   virtual void TearDown()
@@ -25,14 +25,14 @@ struct SimpleSynchronousClockTests : public ::testing::Test
 
 
 // Correct Instantiation
-TEST_F(SimpleSynchronousClockTests, CorrectInstantiationTest)
+TEST_F(BasicClockClockTests, CorrectInstantiationTest)
 {
   EXPECT_DOUBLE_EQ(core::SimClock::time(), 0.0);
   EXPECT_DOUBLE_EQ(core::SimClock::timestep(), 0.0);
 }
 
 // Reset
-TEST_F(SimpleSynchronousClockTests, SetMaxTimestepTest)
+TEST_F(BasicClockClockTests, SetMaxTimestepTest)
 {
   EXPECT_DOUBLE_EQ(core::SimClock::timestep(), 0.0);
 
@@ -44,7 +44,7 @@ TEST_F(SimpleSynchronousClockTests, SetMaxTimestepTest)
 }
 
 // Advance
-TEST_F(SimpleSynchronousClockTests, AdvanceClockTest)
+TEST_F(BasicClockClockTests, AdvanceClockTest)
 {
   clock->initialize();
   EXPECT_DOUBLE_EQ(core::SimClock::time(), 0.0);
@@ -63,7 +63,7 @@ TEST_F(SimpleSynchronousClockTests, AdvanceClockTest)
 
 
 // Initialize
-TEST_F(SimpleSynchronousClockTests, InitializeClockTest)
+TEST_F(BasicClockClockTests, InitializeClockTest)
 {
   clock->reset(1);
   clock->advance();

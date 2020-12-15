@@ -140,7 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\Core\block.h" />
-    <ClInclude Include="..\Source\Core\Clocks\simple_synchronous_clock.h" />
+    <ClInclude Include="..\Source\Core\Clocks\basic_clock.h" />
     <ClInclude Include="..\Source\Core\Clocks\sim_clock.h" />
     <ClInclude Include="..\Source\Core\config.h" />
     <ClInclude Include="..\Source\Core\End_Conditions\end_condition.h" />
@@ -148,6 +148,7 @@
     <ClInclude Include="..\Source\Core\sim_loop.h" />
     <ClInclude Include="..\Source\Core\state.h" />
     <ClInclude Include="..\Source\Core\States\state_euler.h" />
+    <ClInclude Include="..\Source\simulation_tools.h" />
     <ClInclude Include="..\Source\Utilities\Math\math_constants.h" />
     <ClInclude Include="..\Source\Utilities\Math\math_config.h" />
     <ClInclude Include="..\Source\Utilities\Math\matrix.h" />
@@ -156,7 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Core\block.cpp" />
-    <ClCompile Include="..\Source\Core\Clocks\simple_synchronous_clock.cpp" />
+    <ClCompile Include="..\Source\Core\Clocks\basic_clock.cpp" />
     <ClCompile Include="..\Source\Core\Clocks\sim_clock.cpp" />
     <ClCompile Include="..\Source\Core\End_Conditions\max_time_exceeded.cpp" />
     <ClCompile Include="..\Source\Core\sim_loop.cpp" />

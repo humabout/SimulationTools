@@ -4,7 +4,7 @@
 // Inclusions
 #include <memory>
 #include "sim_clock.h"
-#include "simple_synchronous_clock.h"
+#include "basic_clock.h"
 
 
 // Static Variable Declarations
@@ -43,10 +43,10 @@ std::shared_ptr<core::SimClock> core::SimClock::create(core::SimClock::type type
 {
   switch (type_)
   {
-  case core::SimClock::type::simple_synchronous:
-    return std::shared_ptr<core::SimClock>(new SimpleSynchronousClock);
+  case core::SimClock::type::basic:
+    return std::shared_ptr<core::SimClock>(new BasicClock);
   default:
-    return std::shared_ptr<core::SimClock>(new SimpleSynchronousClock);
+    return std::shared_ptr<core::SimClock>(new BasicClock);
   }
 }
 

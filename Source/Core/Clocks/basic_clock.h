@@ -1,4 +1,4 @@
-// simple_synchronous_clock.h
+// basic_clock.h
 
 
 #ifndef SIMPLE_SYNCHRONOUS_CLOCK_H
@@ -16,20 +16,20 @@
 namespace core
 {
   //----------------------------------------------------------------------------
-  // Name:    SimpleSynchronousClock
+  // Name:    BasicClock
   // Purpose: This concretion implements the SimClock interface to create a 
   //          simple clock that does no time stepping to handle simulating 
   //          asynchronous events.
   //----------------------------------------------------------------------------
-  class SimpleSynchronousClock : public SimClock
+  class BasicClock : public SimClock
   {
   public:
     // Constructor
-    SimpleSynchronousClock();
+    BasicClock();
 
 
     // Destructor
-    ~SimpleSynchronousClock();
+    ~BasicClock();
 
 
   private:

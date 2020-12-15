@@ -18,7 +18,7 @@ core::SimLoop::SimLoop()
 {
   Time_Step = 0;
   State::setIntegrationMethod(State::type::euler);
-  Clock = SimClock::create(SimClock::type::simple_synchronous);
+  Clock = SimClock::create(SimClock::type::basic);
 }
 
 
@@ -33,7 +33,7 @@ core::SimLoop::SimLoop(double      max_time_step_,
 {
   Time_Step = max_time_step_;
   State::setIntegrationMethod(integration_method_);
-  Clock = SimClock::create(SimClock::type::simple_synchronous);
+  Clock = SimClock::create(SimClock::type::basic);
 }
 
 
