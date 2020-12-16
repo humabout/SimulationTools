@@ -27,7 +27,7 @@ core::StateEuler::StateEuler(double&                             x_,
                              const std::shared_ptr<core::State>& dx_)
 {
   this->x  = &x_;
-  this->dx = dx_->x_();
+  this->dx = dx_->x;
 }
 
 
@@ -37,8 +37,8 @@ core::StateEuler::StateEuler(double&                             x_,
 //------------------------------------------------------------------------------
 core::StateEuler::StateEuler(const std::shared_ptr<core::State>& that)
 {
-  this->x  = that->x_();
-  this->dx = that->dx_();
+  this->x  = that->x;
+  this->dx = that->dx;
 }
 
 
