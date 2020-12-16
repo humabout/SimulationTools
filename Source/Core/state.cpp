@@ -153,7 +153,15 @@ void core::State::setIntegrationMethod(core::State::type method_)
 //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 // GETTERS
 //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+double* core::State::dx_(void) const
+{
+  return dx;
+}
 bool core::State::isReady(void)
 {
   return Is_Ready;
+}
+double* core::State::x_(void) const
+{
+  return x;
 }

@@ -58,6 +58,8 @@ namespace core
 
     // Getters
     static bool isReady(void);
+    double* x_(void) const;
+    double* dx_(void) const;
 
     // Setters
     static void setIntegrationMethod(State::type method_);
@@ -81,9 +83,6 @@ namespace core
     // State Variables
     double* x;
     double* dx;
-
-    // Friend Child Classes
-    friend StateEuler;
 
 
   }; // !StateInterface

@@ -12,7 +12,7 @@
 // Purpose: Constructor Overload.
 //------------------------------------------------------------------------------
 core::StateEuler::StateEuler(double& x_,
-                               double& dx_)
+                             double& dx_)
 {
   this->x  = &x_;
   this->dx = &dx_;
@@ -23,11 +23,11 @@ core::StateEuler::StateEuler(double& x_,
 // Name:    StateEuler
 // Purpose: Constructor Overload.
 //------------------------------------------------------------------------------
-core::StateEuler::StateEuler(double&                               x_,
-                               const std::shared_ptr<core::State>& dx_)
+core::StateEuler::StateEuler(double&                             x_,
+                             const std::shared_ptr<core::State>& dx_)
 {
   this->x  = &x_;
-  this->dx = dx_->x;
+  this->dx = dx_->x_();
 }
 
 
@@ -37,8 +37,8 @@ core::StateEuler::StateEuler(double&                               x_,
 //------------------------------------------------------------------------------
 core::StateEuler::StateEuler(const std::shared_ptr<core::State>& that)
 {
-  this->x  = that->x;
-  this->dx = that->dx;
+  this->x  = that->x_();
+  this->dx = that->dx_();
 }
 
 
