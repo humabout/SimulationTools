@@ -43,14 +43,6 @@ namespace core
     // Destructor
     virtual ~Block();
 
-    // Adding States
-    void add(double& x_, double& dx_);
-    void add(double& x_, const State::pointer& dx_);
-    void add(const State::pointer& state_);
-
-    // Operators
-    void operator<< (const std::shared_ptr<State>& state_);
-
     // Functionality
     void initialize(void);
     void propagate(void);
@@ -59,6 +51,15 @@ namespace core
   protected:
     // Stores all states associated wtih this block
     std::vector< std::shared_ptr<State> > States;
+
+
+    // Adding States
+    void addState(double& x_, double& dx_);
+    void addState(double& x_, const State::pointer& dx_);
+    void addState(const State::pointer& state_);
+
+    // Operators
+    void operator<< (const std::shared_ptr<State>& state_);
 
   private:
 

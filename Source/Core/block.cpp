@@ -43,7 +43,8 @@ core::Block::~Block()
 // Name:    add
 // Purpose: This method adds a new state to the block.
 //------------------------------------------------------------------------------
-void core::Block::add(double& x_, double& dx_)
+void core::Block::addState(double& x_, 
+                           double& dx_)
 {
   States.push_back(State::create(x_, dx_));
 }
@@ -52,7 +53,8 @@ void core::Block::add(double& x_, double& dx_)
 //------------------------------------------------------------------------------
 // Name:    add (overload)
 //------------------------------------------------------------------------------
-void core::Block::add(double& x_, const State::pointer& dx_)
+void core::Block::addState(double&               x_, 
+                           const State::pointer& dx_)
 {
   States.push_back(State::create(x_, dx_));
 }
@@ -61,7 +63,7 @@ void core::Block::add(double& x_, const State::pointer& dx_)
 //------------------------------------------------------------------------------
 // Name:    add (overload)
 //------------------------------------------------------------------------------
-void core::Block::add(const State::pointer& state_)
+void core::Block::addState(const State::pointer& state_)
 {
   States.push_back(state_);
 }
@@ -102,7 +104,7 @@ void core::Block::initialize(void)
 //------------------------------------------------------------------------------
 void core::Block::operator<< (const std::shared_ptr<State>& state_)
 {
-  add(state_);
+  addState(state_);
 }
 
 

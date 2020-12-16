@@ -13,11 +13,22 @@
 class BlockTest : public core::Block
 {
 public:
+  double x;
+  double dx;
+  double y;
+  double dy;
+  double ddy;
+  double z;
+  double dz;
   bool isInitialized;
   bool isUpdated;
+  std::shared_ptr<core::State> s1;
+  std::shared_ptr<core::State> s2;
 
   BlockTest()
   {
+    s1 = core::State::create(dy, ddy);
+    s2 = core::State::create(z, dz);
     isInitialized = false;
     isUpdated = false;
   }
@@ -30,6 +41,14 @@ public:
 private:
   void doInitialize(void) override final
   {
+    x = 0;    dx = 1;
+    this->addState(x, dx);
+
+    y = 10;   dy = -1;  ddy = 0;
+    this->addState(y, s1);
+
+    z = 0;    dz = 5;
+    this->addState(s2);
     isInitialized = true;
   }
   void doUpdate(void) override final
@@ -41,14 +60,6 @@ private:
 // Fixture
 struct BlockTests : public ::testing::Test
 {
-  double x;
-  double dx;
-  double y;
-  double dy;
-  double ddy;
-  double z;
-  double dz;
-  
   std::shared_ptr<core::State> s1;
   std::shared_ptr<core::State> s2;
   std::shared_ptr<core::SimClock> clock;
@@ -58,8 +69,6 @@ struct BlockTests : public ::testing::Test
   {
     test = new BlockTest;
     clock = core::SimClock::create(core::SimClock::type::basic);
-    s1 = core::State::create(dy, ddy);
-    s2 = core::State::create(z, dz);
   }
 
   virtual void TearDown()
@@ -91,19 +100,12 @@ TEST_F(BlockTests, PropagateTest)
   clock->initialize();
   clock->reset(1);
 
-  x = 0;    dx = 1;
-  test->add(x, dx);
-
-  y = 10;   dy = -1;  ddy = 0;
-  test->add(y, s1);
-
-  z = 0;    dz = 5;
-  test->add(s2);
+  test->initialize();
   test->propagate();
 
-  EXPECT_DOUBLE_EQ(x, 1);
-  EXPECT_DOUBLE_EQ(dx, 1);
-  EXPECT_DOUBLE_EQ(y, 9);
-  EXPECT_DOUBLE_EQ(dy, -1);
-  EXPECT_DOUBLE_EQ(z, 5);
+  EXPECT_DOUBLE_EQ(test->x, 1);
+  EXPECT_DOUBLE_EQ(test->dx, 1);
+  EXPECT_DOUBLE_EQ(test->y, 9);
+  EXPECT_DOUBLE_EQ(test->dy, -1);
+  EXPECT_DOUBLE_EQ(test->z, 5);
 }
