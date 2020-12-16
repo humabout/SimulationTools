@@ -48,7 +48,7 @@ namespace core
     State();
     State(double& x_, 
           double& dx_);
-    State(double&                       x_, 
+    State(double&               x_, 
           const State::pointer& dx_);
     State(const State::pointer& that);
     State(const State& that);
