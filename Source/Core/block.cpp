@@ -79,7 +79,7 @@ void core::Block::doPropagate(void)
        state != States.end();
        state++)
   {
-    (*state)->updateState();
+    (*state)->propagate();
   }
 }
 

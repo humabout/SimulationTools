@@ -72,7 +72,7 @@ namespace core
     static State::pointer create(const State::pointer& state_);
 
     // Functionality
-    virtual void updateState(void) = 0;
+    virtual void propagate(void) = 0;
 
   protected:
     // Member Variables

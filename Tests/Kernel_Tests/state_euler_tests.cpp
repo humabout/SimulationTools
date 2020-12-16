@@ -38,12 +38,12 @@ TEST_F(StateEulerTests, UpdateStateTest)
   clock->initialize();
   clock->reset(1);
 
-  test->updateState();
+  test->propagate();
   EXPECT_DOUBLE_EQ(x, 1);
   EXPECT_DOUBLE_EQ(dx, 1);
   EXPECT_TRUE(core::State::isReady());
 
-  test->updateState();
+  test->propagate();
   EXPECT_DOUBLE_EQ(x, 2);
   EXPECT_DOUBLE_EQ(dx, 1);
   EXPECT_TRUE(core::State::isReady());

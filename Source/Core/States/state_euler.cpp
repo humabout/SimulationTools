@@ -53,11 +53,11 @@ core::StateEuler::~StateEuler()
 
 
 //------------------------------------------------------------------------------
-// Name:    updateState
+// Name:    propagate
 // Purpose: This propagates the state forward one time step using the Euler's
 //          method.
 //------------------------------------------------------------------------------
-void core::StateEuler::updateState(void)
+void core::StateEuler::propagate(void)
 {
   *(this->x) += core::SimClock::timestep() * *(this->dx);
   State::Is_Ready = true;
