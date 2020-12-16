@@ -36,7 +36,6 @@ namespace core
     ~StateEuler();
 
     // Functionality
-    void initialize(void) override final;
     void updateState(void) override final;
 
 

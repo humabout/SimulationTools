@@ -8,7 +8,7 @@
 #include "States\state_euler.h"
 
 // Static Variables
-bool                core::State::Is_Ready = true;
+bool              core::State::Is_Ready = true;
 core::State::type core::State::Method   = core::State::type::euler;
 
 

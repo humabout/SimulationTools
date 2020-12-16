@@ -1,8 +1,8 @@
 // basic_clock.h
 
 
-#ifndef SIMPLE_SYNCHRONOUS_CLOCK_H
-#define SIMPLE_SYNCHRONOUS_CLOCK_H
+#ifndef BASIC_CLOCK_H
+#define BASIC_CLOCK_H
 
 
 // Inclusions
@@ -39,9 +39,9 @@ namespace core
     void doReset(double max_time_step_) override;
 
 
-  }; // !SimpleSynchronousClock
+  }; // !BasicClock
 
 } // !core
 
 
-#endif // !SIMPLE_SYNCHRONOUS_CLOCK_H
+#endif // !BASIC_CLOCK_H

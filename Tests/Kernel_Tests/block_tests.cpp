@@ -88,7 +88,7 @@ TEST_F(BlockTests, UpdateTest)
 // Propagate Tests
 TEST_F(BlockTests, PropagateTest)
 {
-  s1->initialize();
+  clock->initialize();
   clock->reset(1);
 
   x = 0;    dx = 1;

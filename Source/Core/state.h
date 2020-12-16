@@ -72,7 +72,6 @@ namespace core
     static State::pointer create(const State::pointer& state_);
 
     // Functionality
-    virtual void initialize() = 0;
     virtual void updateState(void) = 0;
 
   protected:

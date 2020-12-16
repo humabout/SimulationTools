@@ -53,18 +53,6 @@ core::StateEuler::~StateEuler()
 
 
 //------------------------------------------------------------------------------
-// Name:    initialize
-// Purpose: This method implements the initialization of static variables for
-//          the sake of syncronizing the integration of all states.
-//------------------------------------------------------------------------------
-void core::StateEuler::initialize(void)
-{
-//  State::Time_Current = 0;
-  State::Is_Ready = true;
-}
-
-
-//------------------------------------------------------------------------------
 // Name:    updateState
 // Purpose: This propagates the state forward one time step using the Euler's
 //          method.

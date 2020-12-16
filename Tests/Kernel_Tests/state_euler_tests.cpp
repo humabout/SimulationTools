@@ -32,20 +32,9 @@ struct StateEulerTests : public ::testing::Test
   }
 };
 
-
-
-// Initialization Tests
-TEST_F(StateEulerTests, InitializationTest)
-{
-  test->initialize();
-  EXPECT_TRUE(core::State::isReady());
-}
-
-
 // UpdateState Tests
 TEST_F(StateEulerTests, UpdateStateTest)
 {
-  test->initialize();
   clock->initialize();
   clock->reset(1);
 
