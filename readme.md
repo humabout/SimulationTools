@@ -25,6 +25,13 @@ To install the Nemesis Simulation Toolkit,
 ```
 This example assumes that the nemesis library is contained in a directory called <code>Nemesis</code> found in the same directory as the file including it.
 
+## Additional Information ##
+In addition to this introduction, a [full wiki](https://github.com/humabout/Nemesis/wiki) on this toolkit is available [here](https://github.com/humabout/Nemesis/wiki).
+
+The [wiki](https://github.com/humabout/Nemesis/wiki) includes detailed information on every library, namespace, class, function, variable, and type in the toolkit, plus technical information on how various objects work, explainations of the physics mathematics behind them, and information on how to contribute to this project.
+
+If you have any questions about how to use a part of the library or how anything works, the [wiki](https://github.com/humabout/Nemesis/wiki) should be your first (and, hopefully, last) stop for answers.
+
 ## What's in a name? ##
    _That which we call a rose, / By any other word would smell as sweet._
 
