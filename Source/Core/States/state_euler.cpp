@@ -23,8 +23,8 @@ core::StateEuler::StateEuler(double& x_,
 // Name:    StateEuler
 // Purpose: Constructor Overload.
 //------------------------------------------------------------------------------
-core::StateEuler::StateEuler(double&                               x_,
-                               const std::shared_ptr<core::State>& dx_)
+core::StateEuler::StateEuler(double&                             x_,
+                             const std::shared_ptr<core::State>& dx_)
 {
   this->x  = &x_;
   this->dx = dx_->x;
@@ -71,6 +71,6 @@ void core::StateEuler::initialize(void)
 //------------------------------------------------------------------------------
 void core::StateEuler::updateState(void)
 {
-  *(this->x) += core::SimClock::timestep() * *(this->dx);
+  *(this->x) += core::SimClock::tick() * *(this->dx);
   State::Is_Ready = true;
 }

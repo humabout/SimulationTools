@@ -53,7 +53,7 @@ namespace core
 
     // Accessors
     static double time(void);
-    static double timestep(void);
+    static double tick(void);
 
 
     // Factory Method
@@ -63,20 +63,20 @@ namespace core
     // Functionality
     void advance(void);
     void initialize(void);
-    void reset(double max_time_step_);  // TODO: Find a more appropriate name for this
+    void setMaxTick(double max_tick_);  // TODO: Find a more appropriate name for this
 
 
   protected:
     // Data
     static double Time_Current;
-    static double Time_Step;
-    static double Max_Time_Step;
+    static double Tick;
+    static double Tick_Max;
 
 
     // Functionality Implementations
     virtual void doAdvance(void) = 0;
     virtual void doInitialize(void) = 0;
-    virtual void doReset(double max_time_step_) = 0;
+    virtual void doSetMaxTick(double max_tick_) = 0;
   };
 
 

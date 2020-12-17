@@ -151,7 +151,7 @@ void core::SimLoop::run(void)
 {
   // Initialize the clock
   Clock->initialize();
-  Clock->reset(Time_Step);
+  Clock->setMaxTick(Time_Step);
 
   // Initialize all blocks
   std::vector< Block::pointer >::iterator current_block;

@@ -36,7 +36,7 @@ namespace core
     // Functionality Implementations
     void doAdvance(void) override;
     void doInitialize(void) override;
-    void doReset(double max_time_step_) override;
+    void doSetMaxTick(double max_tick_) override;
 
 
   }; // !SimpleSynchronousClock

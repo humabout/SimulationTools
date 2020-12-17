@@ -32,7 +32,7 @@ core::BasicClock::~BasicClock()
 //------------------------------------------------------------------------------
 void core::BasicClock::doAdvance(void)
 {
-  Time_Current += Time_Step;
+  Time_Current += Tick;
 }
 
 
@@ -48,13 +48,13 @@ void core::BasicClock::doInitialize(void)
 
 
 //------------------------------------------------------------------------------
-// Name:    doReset
-// Purpose: This method implements the reset() method to reset the clock's 
+// Name:    doSetMaxTick
+// Purpose: This method implements the setMaxTick() method to reset the clock's 
 //          maximum time step and update the clock's timestep to that value. It 
 //          is part of the template pattern.
 //------------------------------------------------------------------------------
-void core::BasicClock::doReset(double max_time_step_)
+void core::BasicClock::doSetMaxTick(double max_time_step_)
 {
-  Max_Time_Step = max_time_step_;
-  Time_Step = Max_Time_Step;
+  Tick_Max = max_time_step_;
+  Tick = Tick_Max;
 }

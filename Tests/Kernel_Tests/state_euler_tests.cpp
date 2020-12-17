@@ -47,7 +47,7 @@ TEST_F(StateEulerTests, UpdateStateTest)
 {
   test->initialize();
   clock->initialize();
-  clock->reset(1);
+  clock->setMaxTick(1);
 
   test->updateState();
   EXPECT_DOUBLE_EQ(x, 1);

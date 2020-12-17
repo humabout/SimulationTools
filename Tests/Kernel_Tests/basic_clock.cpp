@@ -28,19 +28,19 @@ struct BasicClockClockTests : public ::testing::Test
 TEST_F(BasicClockClockTests, CorrectInstantiationTest)
 {
   EXPECT_DOUBLE_EQ(core::SimClock::time(), 0.0);
-  EXPECT_DOUBLE_EQ(core::SimClock::timestep(), 0.0);
+  EXPECT_DOUBLE_EQ(core::SimClock::tick(), 0.0);
 }
 
 // Reset
 TEST_F(BasicClockClockTests, SetMaxTimestepTest)
 {
-  EXPECT_DOUBLE_EQ(core::SimClock::timestep(), 0.0);
+  EXPECT_DOUBLE_EQ(core::SimClock::tick(), 0.0);
 
-  clock->reset(1);
-  EXPECT_DOUBLE_EQ(core::SimClock::timestep(), 1.0);
+  clock->setMaxTick(1);
+  EXPECT_DOUBLE_EQ(core::SimClock::tick(), 1.0);
 
-  clock->reset(5.5);
-  EXPECT_DOUBLE_EQ(core::SimClock::timestep(), 5.5);
+  clock->setMaxTick(5.5);
+  EXPECT_DOUBLE_EQ(core::SimClock::tick(), 5.5);
 }
 
 // Advance
@@ -49,14 +49,14 @@ TEST_F(BasicClockClockTests, AdvanceClockTest)
   clock->initialize();
   EXPECT_DOUBLE_EQ(core::SimClock::time(), 0.0);
     
-  clock->reset(1);
+  clock->setMaxTick(1);
   clock->advance();
   EXPECT_DOUBLE_EQ(core::SimClock::time(), 1.0);
 
   clock->advance();
   EXPECT_DOUBLE_EQ(core::SimClock::time(), 2.0);
 
-  clock->reset(2);
+  clock->setMaxTick(2);
   clock->advance();
   EXPECT_DOUBLE_EQ(core::SimClock::time(), 4.0);
 }
@@ -65,7 +65,7 @@ TEST_F(BasicClockClockTests, AdvanceClockTest)
 // Initialize
 TEST_F(BasicClockClockTests, InitializeClockTest)
 {
-  clock->reset(1);
+  clock->setMaxTick(1);
   clock->advance();
   clock->advance();
   clock->advance();

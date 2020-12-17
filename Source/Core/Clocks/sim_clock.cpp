@@ -9,8 +9,8 @@
 
 // Static Variable Declarations
 double core::SimClock::Time_Current;
-double core::SimClock::Time_Step;
-double core::SimClock::Max_Time_Step;
+double core::SimClock::Tick;
+double core::SimClock::Tick_Max;
 
 
 //------------------------------------------------------------------------------
@@ -20,8 +20,8 @@ double core::SimClock::Max_Time_Step;
 core::SimClock::SimClock()
 {
   Time_Current = 0;
-  Time_Step = 0;
-  Max_Time_Step = 0;
+  Tick = 0;
+  Tick_Max = 0;
 }
 
 
@@ -75,13 +75,13 @@ void core::SimClock::initialize(void)
 
 
 //------------------------------------------------------------------------------
-// Name:    reset
+// Name:    setMaxTick
 // Purpose: This method resets the clock's time step. It is part of the template
 //          pattern and forwards the call to doReset for implementation.
 //------------------------------------------------------------------------------
-void core::SimClock::reset(double max_time_step_)
+void core::SimClock::setMaxTick(double max_tick_)
 {
-  this->doReset(max_time_step_);
+  this->doSetMaxTick(max_tick_);
 }
 
 
@@ -94,7 +94,7 @@ double core::SimClock::time(void)
   return SimClock::Time_Current;
 }
 
-double core::SimClock::timestep(void)
+double core::SimClock::tick(void)
 {
-  return SimClock::Time_Step;
+  return SimClock::Tick;
 }

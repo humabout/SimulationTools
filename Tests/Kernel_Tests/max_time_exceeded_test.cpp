@@ -38,7 +38,7 @@ TEST_F(MaxTimeExceededTests, EndConditionNotMetTest)
 TEST_F(MaxTimeExceededTests, EndConditionMetTest)
 {
   clock->initialize();
-  clock->reset(2);
+  clock->setMaxTick(2);
   clock->advance();
   EXPECT_TRUE(condition->met());
 }

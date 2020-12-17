@@ -89,7 +89,7 @@ TEST_F(BlockTests, UpdateTest)
 TEST_F(BlockTests, PropagateTest)
 {
   s1->initialize();
-  clock->reset(1);
+  clock->setMaxTick(1);
 
   x = 0;    dx = 1;
   test->add(x, dx);
