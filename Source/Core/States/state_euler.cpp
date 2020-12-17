@@ -12,7 +12,7 @@
 // Purpose: Constructor Overload.
 //------------------------------------------------------------------------------
 core::StateEuler::StateEuler(double& x_,
-                               double& dx_)
+                             double& dx_)
 {
   this->x  = &x_;
   this->dx = &dx_;
@@ -53,23 +53,11 @@ core::StateEuler::~StateEuler()
 
 
 //------------------------------------------------------------------------------
-// Name:    initialize
-// Purpose: This method implements the initialization of static variables for
-//          the sake of syncronizing the integration of all states.
-//------------------------------------------------------------------------------
-void core::StateEuler::initialize(void)
-{
-//  State::Time_Current = 0;
-  State::Is_Ready = true;
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    updateState
+// Name:    propagate
 // Purpose: This propagates the state forward one time step using the Euler's
 //          method.
 //------------------------------------------------------------------------------
-void core::StateEuler::updateState(void)
+void core::StateEuler::propagate(void)
 {
   *(this->x) += core::SimClock::tick() * *(this->dx);
   State::Is_Ready = true;

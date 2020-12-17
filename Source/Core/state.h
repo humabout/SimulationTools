@@ -48,7 +48,7 @@ namespace core
     State();
     State(double& x_, 
           double& dx_);
-    State(double&                       x_, 
+    State(double&               x_, 
           const State::pointer& dx_);
     State(const State::pointer& that);
     State(const State& that);
@@ -70,8 +70,7 @@ namespace core
     static State::pointer create(const State::pointer& state_);
 
     // Functionality
-    virtual void initialize() = 0;
-    virtual void updateState(void) = 0;
+    virtual void propagate(void) = 0;
 
   protected:
     // Member Variables
@@ -83,6 +82,9 @@ namespace core
     double* dx;
 
     // Friend Child Classes
+    // Note:  This exists to allow child classes full access to the state 
+    //        variable and state derivative without opening up access to them 
+    //        to everyone who can see a State or child thereof.
     friend StateEuler;
 
 

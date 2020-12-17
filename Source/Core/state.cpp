@@ -8,7 +8,7 @@
 #include "States\state_euler.h"
 
 // Static Variables
-bool                core::State::Is_Ready = true;
+bool              core::State::Is_Ready = true;
 core::State::type core::State::Method   = core::State::type::euler;
 
 
@@ -52,7 +52,7 @@ core::State::State(const State::pointer& that)
 //          it.
 //----------------------------------------------------------------------------
 core::State::State(double& x_,
-                     double& dx_)
+                   double& dx_)
 {
   this->x  = &x_;
   this->dx = &dx_;
@@ -66,7 +66,7 @@ core::State::State(double& x_,
 //          its derrivative.
 //----------------------------------------------------------------------------
 core::State::State(double&               x_,
-                     const State::pointer& dx_)
+                   const State::pointer& dx_)
 {
   this->x  = &x_;
   this->dx = dx_->x;
@@ -95,7 +95,7 @@ core::State::~State()
 //          The state derrivative
 //----------------------------------------------------------------------------
 core::State::pointer core::State::create(double& x_,
-                                                     double& dx_)
+                                         double& dx_)
 {
   switch (core::State::Method)
   {
@@ -111,7 +111,7 @@ core::State::pointer core::State::create(double& x_,
 // Name:    create (overload)
 //----------------------------------------------------------------------------
 core::State::pointer core::State::create(double&               x_,
-                                             const State::pointer& dx_)
+                                         const State::pointer& dx_)
 {
   switch (core::State::Method)
   {

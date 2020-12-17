@@ -11,10 +11,26 @@
 class BlockTest : public core::Block
 {
 public:
-  BlockTest() {}
+  double x;
+  double dx;
+  double ddx;
+
+  BlockTest()
+  {
+    x = 0;
+    dx = 0;
+    ddx = 1;
+  }
+
   ~BlockTest() {}
 
-  void doInitialize() override {}
+  void doInitialize() override
+  {
+    core::State::pointer dX = core::State::create(dx, ddx);
+    addState(dX);
+    addState(x, dX);
+
+  }
   void doUpdate() override {}
 
 };
@@ -30,20 +46,8 @@ int main()
   double time_step = 0.01;
 
   // Initial Values
-  double x = 0;
-  double dx = 0;
-  double ddx = 1;
-  core::State::setIntegrationMethod(core::State::type::euler);
-
-  // Instantiating Test Objects
-  std::shared_ptr<core::State> dX = core::State::create(dx, ddx);
-  std::shared_ptr<core::State> X  = core::State::create(x, dX);
-
-  std::shared_ptr <core::Block> test = std::shared_ptr <core::Block>(new BlockTest());
-  // Note that the order of adding matters here! The derrivative must be added before the state.
-  // TODO: Find a way to remove this sensitivity.
-  *test << dX;
-  *test << X;
+  BlockTest* btest = new BlockTest();
+  core::Block::pointer test = core::Block::pointer(btest);
 
   // Build Sim
   core::SimLoop sim(time_step, core::State::type::euler);
@@ -54,9 +58,9 @@ int main()
   sim.run();
 
   // Reporting the End Result
-  std::cout << "x:\t" << std::to_string(x) << "\n";
-  std::cout << "dx:\t" << std::to_string(dx) << "\n";
-  std::cout << "ddx:\t" << std::to_string(ddx) << "\n";  
+  std::cout << "x:\t" << std::to_string(btest->x) << "\n";
+  std::cout << "dx:\t" << std::to_string(btest->dx) << "\n";
+  std::cout << "ddx:\t" << std::to_string(btest->ddx) << "\n";
 
   return 0;
 }

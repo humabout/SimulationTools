@@ -15,7 +15,7 @@
 //------------------------------------------------------------------------------
 core::MaxTimeExceeded::MaxTimeExceeded()
 {
-  Time_Max     = 0;
+  Time_Max = 0;
 }
 
 
@@ -25,7 +25,7 @@ core::MaxTimeExceeded::MaxTimeExceeded()
 //------------------------------------------------------------------------------
 core::MaxTimeExceeded::MaxTimeExceeded(double time_max_)
 {
-  Time_Max     = time_max_;
+  Time_Max = time_max_;
 }
 
 
