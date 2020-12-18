@@ -58,7 +58,6 @@ namespace core
     SimClock::pointer                  Clock;
     std::vector<Block::pointer>        Blocks;
     std::vector<EndCondition::pointer> End_Conditions;
-    double                             Time_Step;
 
     // Functionality
     bool isEnd(void) const;
