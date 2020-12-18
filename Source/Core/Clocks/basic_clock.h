@@ -32,9 +32,8 @@ namespace core
 
   private:
     // Functionality Implementations
-    void doAdvance(void) override;
-    void doInitialize(void) override;
-//    void doSetMaxTick(double max_tick_) override;
+    void doAdvance(void) override final;
+    void doInitialize(void) override final;
 
 
   }; // !BasicClock

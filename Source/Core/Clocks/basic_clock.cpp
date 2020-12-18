@@ -48,17 +48,3 @@ void core::BasicClock::doInitialize(void)
 {
   Time_Current = 0;
 }
-
-/*
-//------------------------------------------------------------------------------
-// Name:    doSetMaxTick
-// Purpose: This method implements the setMaxTick() method to reset the clock's 
-//          maximum time step and update the clock's timestep to that value. It 
-//          is part of the template pattern.
-//------------------------------------------------------------------------------
-void core::BasicClock::doSetMaxTick(double max_time_step_)
-{
-  Tick_Max = max_time_step_;
-  Tick = Tick_Max;
-}
-*/

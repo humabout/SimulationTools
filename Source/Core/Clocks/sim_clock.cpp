@@ -74,18 +74,6 @@ void core::SimClock::initialize(void)
   this->doInitialize();
 }
 
-/*
-//------------------------------------------------------------------------------
-// Name:    setMaxTick
-// Purpose: This method resets the clock's time step. It is part of the template
-//          pattern and forwards the call to doReset for implementation.
-//------------------------------------------------------------------------------
-void core::SimClock::setMaxTick(double max_tick_)
-{
-  this->doSetMaxTick(max_tick_);
-}
-*/
-
 
 //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 // GETTERS
