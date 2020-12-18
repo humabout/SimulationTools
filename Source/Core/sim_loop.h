@@ -6,6 +6,7 @@
 
 
 // Inclusions
+#include <memory>
 #include <vector>
 #include "block.h"
 #include "Clocks/sim_clock.h"
@@ -31,6 +32,9 @@ namespace core
   class SimLoop
   {
   public:
+    // Typedef
+    typedef std::shared_ptr<SimLoop> pointer;
+
     // Constructors
     SimLoop(double      time_step_,
             State::type integration_method_);

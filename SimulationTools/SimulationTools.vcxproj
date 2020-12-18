@@ -159,6 +159,7 @@
     <ClCompile Include="..\Source\Core\block.cpp" />
     <ClCompile Include="..\Source\Core\Clocks\basic_clock.cpp" />
     <ClCompile Include="..\Source\Core\Clocks\sim_clock.cpp" />
+    <ClCompile Include="..\Source\Core\End_Conditions\end_condition.cpp" />
     <ClCompile Include="..\Source\Core\End_Conditions\max_time_exceeded.cpp" />
     <ClCompile Include="..\Source\Core\sim_loop.cpp" />
     <ClCompile Include="..\Source\Core\state.cpp" />
