@@ -13,6 +13,19 @@
 // Name:    SimLoop
 // Purpose: Constructor Overload.
 // Inputs:  Time Step [s]
+//------------------------------------------------------------------------------
+core::SimLoop::SimLoop(double      max_tick_)
+{
+  Time_Step = max_tick_;
+  State::setIntegrationMethod(State::type::euler);
+  Clock = SimClock::create(SimClock::type::basic, max_tick_);
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    SimLoop
+// Purpose: Constructor Overload.
+// Inputs:  Time Step [s]
 //          Integration Method
 //------------------------------------------------------------------------------
 core::SimLoop::SimLoop(double      max_tick_,

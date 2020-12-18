@@ -36,6 +36,7 @@ namespace core
     typedef std::shared_ptr<SimLoop> pointer;
 
     // Constructors
+    SimLoop(double time_step_);
     SimLoop(double      time_step_,
             State::type integration_method_);
     SimLoop(double         time_step_,
