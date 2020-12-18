@@ -64,10 +64,10 @@
     <ClInclude Include="..\Source\Core\Clocks\sim_clock.h">
       <Filter>Core\Clocks</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\simulation_tools.h" />
     <ClInclude Include="..\Source\Core\Clocks\basic_clock.h">
       <Filter>Core\Clocks</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\nemesis.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />
