@@ -32,7 +32,6 @@ namespace core
   {
   public:
     // Constructors
-    SimLoop();
     SimLoop(double      time_step_,
             State::type integration_method_);
     SimLoop(double         time_step_,

@@ -11,29 +11,16 @@
 
 //------------------------------------------------------------------------------
 // Name:    SimLoop
-// Purpose: Default Constructor. The integrator type defaults to Euler unless 
-//          set otherwise.
-//------------------------------------------------------------------------------
-core::SimLoop::SimLoop()
-{
-  Time_Step = 0;
-  State::setIntegrationMethod(State::type::euler);
-  Clock = SimClock::create(SimClock::type::basic);
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    SimLoop
 // Purpose: Constructor Overload.
 // Inputs:  Time Step [s]
 //          Integration Method
 //------------------------------------------------------------------------------
-core::SimLoop::SimLoop(double      max_time_step_,
-                         State::type integration_method_)
+core::SimLoop::SimLoop(double      max_tick_,
+                       State::type integration_method_)
 {
-  Time_Step = max_time_step_;
+  Time_Step = max_tick_;
   State::setIntegrationMethod(integration_method_);
-  Clock = SimClock::create(SimClock::type::basic);
+  Clock = SimClock::create(SimClock::type::basic, max_tick_);
 }
 
 
@@ -44,13 +31,13 @@ core::SimLoop::SimLoop(double      max_time_step_,
 //          Integration Method
 //          Clock Type
 //------------------------------------------------------------------------------
-core::SimLoop::SimLoop(double         max_time_step_,
-                         State::type    integration_method_,
-                         SimClock::type clock_type_)
+core::SimLoop::SimLoop(double         max_tick_,
+                       State::type    integration_method_,
+                       SimClock::type clock_type_)
 {
-  Time_Step = max_time_step_;
+  Time_Step = max_tick_;
   State::setIntegrationMethod(integration_method_);
-  Clock = SimClock::create(clock_type_);
+  Clock = SimClock::create(clock_type_, max_tick_);
 }
 
 
@@ -151,7 +138,6 @@ void core::SimLoop::run(void)
 {
   // Initialize the clock
   Clock->initialize();
-  Clock->setMaxTick(Time_Step);
 
   // Initialize all blocks
   std::vector< Block::pointer >::iterator current_block;

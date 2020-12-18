@@ -7,11 +7,14 @@
 
 //------------------------------------------------------------------------------
 // Name:    BasicClock
-// Purpose: Default Constructor.
+// Purpose: Arithmetic Constructor. Creates a basic clock with a maximum tick as
+//          as provided in the input argument.
+// Inputs:  max_tick [seconds]
 //------------------------------------------------------------------------------
-core::BasicClock::BasicClock()
+core::BasicClock::BasicClock(double max_tick_)
 {
-  // Does Nothing
+  Tick_Max = max_tick_;
+  Tick = Tick_Max;  
 }
 
 
@@ -46,7 +49,7 @@ void core::BasicClock::doInitialize(void)
   Time_Current = 0;
 }
 
-
+/*
 //------------------------------------------------------------------------------
 // Name:    doSetMaxTick
 // Purpose: This method implements the setMaxTick() method to reset the clock's 
@@ -58,3 +61,4 @@ void core::BasicClock::doSetMaxTick(double max_time_step_)
   Tick_Max = max_time_step_;
   Tick = Tick_Max;
 }
+*/

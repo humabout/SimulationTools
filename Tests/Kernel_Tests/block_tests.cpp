@@ -68,7 +68,7 @@ struct BlockTests : public ::testing::Test
   virtual void SetUp()
   {
     test = new BlockTest;
-    clock = core::SimClock::create(core::SimClock::type::basic);
+    clock = core::SimClock::create(core::SimClock::type::basic, 1.0);
   }
 
   virtual void TearDown()
@@ -98,7 +98,6 @@ TEST_F(BlockTests, UpdateTest)
 TEST_F(BlockTests, PropagateTest)
 {
   clock->initialize();
-  clock->setMaxTick(1);
 
   test->initialize();
   test->propagate();

@@ -57,14 +57,13 @@ namespace core
 
 
     // Factory Method
-    static std::shared_ptr<core::SimClock> create(type clock_type_);
+    static SimClock::pointer create(type   clock_type_,
+                                    double max_tick_);
     
 
     // Functionality
     void advance(void);
     void initialize(void);
-    void setMaxTick(double max_tick_);  // TODO: Find a more appropriate name for this
-
 
   protected:
     // Data
@@ -76,7 +75,6 @@ namespace core
     // Functionality Implementations
     virtual void doAdvance(void) = 0;
     virtual void doInitialize(void) = 0;
-    virtual void doSetMaxTick(double max_tick_) = 0;
   };
 
 

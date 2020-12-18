@@ -39,14 +39,15 @@ core::SimClock::~SimClock()
 // Name:    create
 // Purpose: Factory Method. Returns an instance of the correct sim clock type.
 //------------------------------------------------------------------------------
-std::shared_ptr<core::SimClock> core::SimClock::create(core::SimClock::type type_)
+std::shared_ptr<core::SimClock> core::SimClock::create(core::SimClock::type type_,
+                                                       double               max_tick_)
 {
   switch (type_)
   {
   case core::SimClock::type::basic:
-    return std::shared_ptr<core::SimClock>(new BasicClock);
+    return std::shared_ptr<core::SimClock>( new BasicClock(max_tick_) );
   default:
-    return std::shared_ptr<core::SimClock>(new BasicClock);
+    return std::shared_ptr<core::SimClock>( new BasicClock(max_tick_) );
   }
 }
 
@@ -73,7 +74,7 @@ void core::SimClock::initialize(void)
   this->doInitialize();
 }
 
-
+/*
 //------------------------------------------------------------------------------
 // Name:    setMaxTick
 // Purpose: This method resets the clock's time step. It is part of the template
@@ -83,7 +84,7 @@ void core::SimClock::setMaxTick(double max_tick_)
 {
   this->doSetMaxTick(max_tick_);
 }
-
+*/
 
 
 //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>

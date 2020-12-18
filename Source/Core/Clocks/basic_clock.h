@@ -25,18 +25,16 @@ namespace core
   {
   public:
     // Constructor
-    BasicClock();
-
+    BasicClock(double max_tick_);
 
     // Destructor
     ~BasicClock();
-
 
   private:
     // Functionality Implementations
     void doAdvance(void) override;
     void doInitialize(void) override;
-    void doSetMaxTick(double max_tick_) override;
+//    void doSetMaxTick(double max_tick_) override;
 
 
   }; // !BasicClock

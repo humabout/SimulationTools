@@ -24,7 +24,7 @@ struct StateEulerTests : public ::testing::Test
     x  = 0;
     dx = 1;
     test = std::shared_ptr<core::StateEuler>(new core::StateEuler(x, dx));
-    clock = core::SimClock::create(core::SimClock::type::basic);
+    clock = core::SimClock::create(core::SimClock::type::basic, 1.0);
   }
 
   virtual void TearDown()
@@ -36,7 +36,6 @@ struct StateEulerTests : public ::testing::Test
 TEST_F(StateEulerTests, UpdateStateTest)
 {
   clock->initialize();
-  clock->setMaxTick(1);
 
   test->propagate();
   EXPECT_DOUBLE_EQ(x, 1);
