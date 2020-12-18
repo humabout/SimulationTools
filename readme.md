@@ -12,7 +12,7 @@ Advanced users should be have hands-on experience working with object-oriented p
 
 ## Installing Nemesis ##
 To install the Nemesis Simulation Toolkit, 
-1. Download the latest version of [nemesis.zip](https://github.com/humabout/Nemesis/blob/dev/nemesis-00.01.00.zip)
+1. Download the latest version of [nemesis.zip](https://github.com/humabout/Nemesis/blob/master/nemesis-00.01.00.zip)
 2. Unzip nemesis.zip to a location easily accessed by your project. If you find you cannot easily access the libraries, don't worry; you can always move it later by simply copying it to a new location.
 3. Include <code>nemesis.h</code> in you project where you intend to use it. You now have access to the core Nemesis library.<br>
    3.1. If you want access to other libraries within the Nemesis Toolkit, include the associated headers. For a list of these, see [Nemesis Libraries](https://github.com/humabout/Nemesis/wiki/Nemesis-Libraries).
