@@ -51,7 +51,7 @@ int main()
 
   // Build Sim
   core::SimLoop sim(time_step, core::State::type::euler);
-  sim.addEndCondition(std::shared_ptr<core::EndCondition>(new core::MaxTimeExceeded(max_time)));
+  sim.addEndCondition(core::EndCondition::pointer(new core::MaxTimeExceeded(max_time)));
   sim.addBlock(test);
 
   // Run Sim
