@@ -35,11 +35,6 @@ namespace core
     // Typedefs
     typedef std::shared_ptr<Block> pointer;
 
-
-    // Constructors
-    Block();
-    Block(const Block& that);
-
     // Destructor
     virtual ~Block();
 

@@ -8,17 +8,6 @@
 #include "../Clocks/sim_clock.h"
 
 
-
-//------------------------------------------------------------------------------
-// Name:    MaxTimeExceeded
-// Purpose: Default Constructor
-//------------------------------------------------------------------------------
-core::MaxTimeExceeded::MaxTimeExceeded()
-{
-  Time_Max = 0;
-}
-
-
 //------------------------------------------------------------------------------
 // Name:    MaxTimeExceeded
 // Purpose: Default Constructor

@@ -67,8 +67,6 @@ TEST_F(BasicClockClockTests, InitializeClockTest)
   clock->advance();
   clock->advance();
   clock->advance();
-  EXPECT_DOUBLE_EQ(core::SimClock::time(), 4.0);
-
   clock->initialize();
   EXPECT_DOUBLE_EQ(core::SimClock::time(), 0.0);
 }

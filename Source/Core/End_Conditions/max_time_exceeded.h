@@ -25,7 +25,6 @@ namespace core
   {
   public:
     // Constructor
-    MaxTimeExceeded();
     MaxTimeExceeded(double time_max_);
 
     // Destructor

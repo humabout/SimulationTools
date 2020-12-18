@@ -13,67 +13,6 @@ core::State::type core::State::Method   = core::State::type::euler;
 
 
 //----------------------------------------------------------------------------
-// Name:    State
-// Purpose: Default Constructor.
-//----------------------------------------------------------------------------
-core::State::State()
-{
-  this->x  = NULL;
-  this->dx = NULL;
-}
-
-
-//----------------------------------------------------------------------------
-// Name:    State
-// Purpose: Copy Constructor.
-//----------------------------------------------------------------------------
-core::State::State(const State& that)
-{
-  this->x  = that.x;
-  this->dx = that.dx;
-}
-
-
-//----------------------------------------------------------------------------
-// Name:    State
-// Purpose: Makes State from a shared_ptr that points at a State.
-//----------------------------------------------------------------------------
-core::State::State(const State::pointer& that)
-{
-  this->x  = that->x;
-  this->dx = that->dx;
-}
-
-
-//----------------------------------------------------------------------------
-// Name:    State
-// Purpose: Initializes the state variables to those provided. Because the 
-//          derrivative is passed in as a reference, this state does not own 
-//          it.
-//----------------------------------------------------------------------------
-core::State::State(double& x_,
-                   double& dx_)
-{
-  this->x  = &x_;
-  this->dx = &dx_;
-}
-
-
-//----------------------------------------------------------------------------
-// Name:    State
-// Purpose: Initializes the state variables to those provided. Because the 
-//          derrivative is the value of another state, this state does not own
-//          its derrivative.
-//----------------------------------------------------------------------------
-core::State::State(double&               x_,
-                   const State::pointer& dx_)
-{
-  this->x  = &x_;
-  this->dx = dx_->x;
-}
-
-
-//----------------------------------------------------------------------------
 // Name:    ~State
 // Purpose: This object does not own its own state or state derrivative. These
 //          are merely linked to via reference for the sake of propagating 

@@ -13,6 +13,7 @@
 //------------------------------------------------------------------------------
 core::BasicClock::BasicClock(double max_tick_)
 {
+  Time_Current = 0;
   Tick_Max = max_tick_;
   Tick = Tick_Max;  
 }

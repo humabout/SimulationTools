@@ -42,25 +42,17 @@ namespace core
       basic = 1
     }; // !type
 
-
-    // Constructors
-    SimClock();
-
-
     // Destructor
     ~SimClock();
-
 
     // Accessors
     static double time(void);
     static double tick(void);
 
-
     // Factory Method
     static SimClock::pointer create(type   clock_type_,
                                     double max_tick_);
     
-
     // Functionality
     void advance(void);
     void initialize(void);
@@ -70,7 +62,6 @@ namespace core
     static double Time_Current;
     static double Tick;
     static double Tick_Max;
-
 
     // Functionality Implementations
     virtual void doAdvance(void) = 0;

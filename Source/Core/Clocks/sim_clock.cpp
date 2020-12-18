@@ -8,21 +8,9 @@
 
 
 // Static Variable Declarations
-double core::SimClock::Time_Current;
-double core::SimClock::Tick;
-double core::SimClock::Tick_Max;
-
-
-//------------------------------------------------------------------------------
-// Name:    SimClock
-// Purpose: Default Constructor.
-//------------------------------------------------------------------------------
-core::SimClock::SimClock()
-{
-  Time_Current = 0;
-  Tick = 0;
-  Tick_Max = 0;
-}
+double core::SimClock::Time_Current = 0.0;
+double core::SimClock::Tick         = 0.0;
+double core::SimClock::Tick_Max     = 0.0;
 
 
 //------------------------------------------------------------------------------

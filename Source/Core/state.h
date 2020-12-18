@@ -44,15 +44,6 @@ namespace core
       rk4   = 3
     };
 
-    // Constructors
-    State();
-    State(double& x_, 
-          double& dx_);
-    State(double&               x_, 
-          const State::pointer& dx_);
-    State(const State::pointer& that);
-    State(const State& that);
-
     // Destructor
     virtual ~State();
 
