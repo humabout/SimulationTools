@@ -28,16 +28,9 @@ namespace core
   public:
     // Typedefs
     typedef std::shared_ptr<EndCondition> pointer;
-    enum class type
-    {
-      max_time = 1
-    }; // !type
 
     // Destructor
     virtual ~EndCondition() { /* TODO: I am far too lazy to write this in a source file */ }
-
-    // Factory
-    pointer create(type type_);
 
     // Functionality
     virtual bool met(void) = 0;
