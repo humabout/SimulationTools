@@ -153,7 +153,7 @@
     <ClInclude Include="..\Source\Math\matrix.h" />
     <ClInclude Include="..\Source\Math\quaternion.h" />
     <ClInclude Include="..\Source\Math\vector.h" />
-    <ClInclude Include="..\Source\simulation_tools.h" />
+    <ClInclude Include="..\Source\nemesis.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Core\block.cpp" />
