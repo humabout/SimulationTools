@@ -3,8 +3,8 @@
 
 // Inclusions
 #include "../pch.h"
-#include "../../Source/Utilities/Math/matrix.h"
-#include "../../Source/Utilities/Math/matrix.cpp"
+#include "../../Source/Math/matrix.h"
+#include "../../Source/Math/matrix.cpp"
 
 
 // Testing Union

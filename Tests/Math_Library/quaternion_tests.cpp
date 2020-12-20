@@ -3,9 +3,9 @@
 
 // Inclusions
 #include "../pch.h"
-#include "../../Source/Utilities/Math/quaternion.h"
-#include "../../Source/Utilities/Math/quaternion.cpp"
-#include "../../Source/Utilities/Math/math_constants.h"
+#include "../../Source/Math/quaternion.h"
+#include "../../Source/Math/quaternion.cpp"
+#include "../../Source/Math/math_constants.h"
 
 
 // Union Tests

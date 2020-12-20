@@ -5,12 +5,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Utilities">
-      <UniqueIdentifier>{c62448e1-d487-4910-a1e6-3850c91b678e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Utilities\Math Library">
-      <UniqueIdentifier>{532dcefd-a685-45e4-8c1f-1710fb2517ed}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core">
       <UniqueIdentifier>{b7000b3a-ab19-441f-ac2d-2af6a1d1cf49}</UniqueIdentifier>
     </Filter>
@@ -23,23 +17,14 @@
     <Filter Include="Core\Clocks">
       <UniqueIdentifier>{0d6ea74b-4e26-46b0-af13-1f945cfe544c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{974465ee-ac97-4c94-b59b-f8885a574ea6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="File">
+      <UniqueIdentifier>{ed0621e0-9d6c-43fc-9d31-03fa6c46b5af}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Source\Utilities\Math\vector.h">
-      <Filter>Utilities\Math Library</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Utilities\Math\matrix.h">
-      <Filter>Utilities\Math Library</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Utilities\Math\quaternion.h">
-      <Filter>Utilities\Math Library</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Utilities\Math\math_config.h">
-      <Filter>Utilities\Math Library</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Utilities\Math\math_constants.h">
-      <Filter>Utilities\Math Library</Filter>
-    </ClInclude>
     <ClInclude Include="..\Source\Core\block.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -68,18 +53,24 @@
     <ClInclude Include="..\Source\Core\Clocks\basic_clock.h">
       <Filter>Core\Clocks</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\Math\math_config.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Math\math_constants.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Math\matrix.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Math\quaternion.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Math\vector.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />
-    <ClCompile Include="..\Source\Utilities\Math\quaternion.cpp">
-      <Filter>Utilities\Math Library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Utilities\Math\vector.cpp">
-      <Filter>Utilities\Math Library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Utilities\Math\matrix.cpp">
-      <Filter>Utilities\Math Library</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Core\block.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -103,6 +94,15 @@
     </ClCompile>
     <ClCompile Include="..\Source\Core\End_Conditions\end_condition.cpp">
       <Filter>Core\End Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Math\matrix.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Math\quaternion.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Math\vector.cpp">
+      <Filter>Math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

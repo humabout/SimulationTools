@@ -148,12 +148,12 @@
     <ClInclude Include="..\Source\Core\sim_loop.h" />
     <ClInclude Include="..\Source\Core\state.h" />
     <ClInclude Include="..\Source\Core\States\state_euler.h" />
+    <ClInclude Include="..\Source\Math\math_config.h" />
+    <ClInclude Include="..\Source\Math\math_constants.h" />
+    <ClInclude Include="..\Source\Math\matrix.h" />
+    <ClInclude Include="..\Source\Math\quaternion.h" />
+    <ClInclude Include="..\Source\Math\vector.h" />
     <ClInclude Include="..\Source\simulation_tools.h" />
-    <ClInclude Include="..\Source\Utilities\Math\math_constants.h" />
-    <ClInclude Include="..\Source\Utilities\Math\math_config.h" />
-    <ClInclude Include="..\Source\Utilities\Math\matrix.h" />
-    <ClInclude Include="..\Source\Utilities\Math\quaternion.h" />
-    <ClInclude Include="..\Source\Utilities\Math\vector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Core\block.cpp" />
@@ -165,9 +165,9 @@
     <ClCompile Include="..\Source\Core\state.cpp" />
     <ClCompile Include="..\Source\Core\States\state_euler.cpp" />
     <ClCompile Include="..\Source\main.cpp" />
-    <ClCompile Include="..\Source\Utilities\Math\matrix.cpp" />
-    <ClCompile Include="..\Source\Utilities\Math\quaternion.cpp" />
-    <ClCompile Include="..\Source\Utilities\Math\vector.cpp" />
+    <ClCompile Include="..\Source\Math\matrix.cpp" />
+    <ClCompile Include="..\Source\Math\quaternion.cpp" />
+    <ClCompile Include="..\Source\Math\vector.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

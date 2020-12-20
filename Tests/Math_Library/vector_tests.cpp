@@ -1,6 +1,6 @@
 #include "../pch.h"
-#include "../../Source/Utilities/Math/vector.h"
-#include "../../Source/Utilities/Math/vector.cpp"
+#include "../../Source/Math/vector.h"
+#include "../../Source/Math/vector.cpp"
 
 
 // Testing Union
