@@ -148,6 +148,7 @@
     <ClInclude Include="..\Source\Core\sim_loop.h" />
     <ClInclude Include="..\Source\Core\state.h" />
     <ClInclude Include="..\Source\Core\States\state_euler.h" />
+    <ClInclude Include="..\Source\File\file_path.h" />
     <ClInclude Include="..\Source\Math\math_config.h" />
     <ClInclude Include="..\Source\Math\math_constants.h" />
     <ClInclude Include="..\Source\Math\matrix.h" />
