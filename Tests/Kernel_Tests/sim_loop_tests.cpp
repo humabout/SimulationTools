@@ -6,48 +6,41 @@
 #include "../pch.h"
 #include "../../Source/Core/sim_loop.cpp"
 #include "../../Source/Core/sim_loop.h"
-
+#include "../../Source/Core/End_Conditions/max_time_exceeded.h"
 
 // Making a Test Block
-class BlockTest : public core::Block
+class LoopBlockTest : public core::Block
 {
 public:
-  double x;
-  double dx;
-  double y;
-  double dy;
-  double ddy;
-  double z;
-  double dz;
+  double* x;
+  double* dx;
+  double* ddx;
   bool isInitialized;
   bool isUpdated;
-  std::shared_ptr<core::State> s1;
-  std::shared_ptr<core::State> s2;
 
-  BlockTest()
+  LoopBlockTest(double& x_, double& dx_, double& ddx_)
   {
-    s1 = core::State::create(dy, ddy);
-    s2 = core::State::create(z, dz);
+    this->x = &x_;
+    this->dx = &dx_;
+    this->ddx = &ddx_;
+
     isInitialized = false;
     isUpdated = false;
   }
-  BlockTest(const BlockTest& that)
-  {
-    this->States = that.States;
-  }
-  ~BlockTest() { core::Block::~Block(); };
+  ~LoopBlockTest() { core::Block::~Block(); };
 
 private:
   void doInitialize(void) override final
   {
-    x = 0;    dx = 1;
-    this->addState(x, dx);
 
-    y = 10;   dy = -1;  ddy = 0;
-    this->addState(y, s1);
+    *x = 0;
+    *dx = 0;
+    *ddx = 1;
 
-    z = 0;    dz = 5;
-    this->addState(s2);
+    core::State::pointer state = core::State::create(*dx, *ddx);
+    this->addState(state);
+    this->addState(*x, state);
+
     isInitialized = true;
   }
   void doUpdate(void) override final
@@ -62,15 +55,58 @@ struct SimLoopTests : public ::testing::Test
 {
   core::EndCondition::pointer max_time;
   core::SimClock::pointer     clock;
+  core::Block::pointer        block;
+  std::shared_ptr<LoopBlockTest>  access;
   core::SimLoop::pointer      sim;
+  double                      max_tick;
+  double x;
+  double dx;
+  double ddx;
 
   virtual void SetUp()
   {
-    clock = core::SimClock::create(core::SimClock::type::basic, 1.0);
-    max_time = core::EndCondition::
+    max_tick = 0.01;
+
+    core::Block* block_ptr = new LoopBlockTest(x, dx, ddx);
+    block = core::Block::pointer(block_ptr);
+
+    clock = core::SimClock::create( core::SimClock::type::basic, 1.0 );
+
+    core::EndCondition* max_time_ptr = new core::MaxTimeExceeded(10.0);
+    max_time = core::EndCondition::pointer(max_time_ptr);
+
+    sim = nullptr;
   }
 
   virtual void TearDown() { }
 };
 
 
+TEST_F(SimLoopTests, SetupWithAddFooTest)
+{
+  core::SimLoop* sim_ptr = new core::SimLoop(max_tick);
+  sim = core::SimLoop::pointer( sim_ptr );
+  sim->addBlock(block);
+  sim->addEndCondition(max_time);
+
+  sim->run();
+
+  EXPECT_DOUBLE_EQ(ddx, 1);
+  EXPECT_NEAR(dx, 10, 1e-6);
+  EXPECT_NEAR(x, 50, 0.1);
+}
+
+
+TEST_F(SimLoopTests, SetupWithOperatorsTest)
+{
+  core::SimLoop* sim_ptr = new core::SimLoop(max_tick);
+  sim = core::SimLoop::pointer(sim_ptr);
+  *sim << block;
+  *sim << max_time;
+
+  sim->run();
+
+  EXPECT_DOUBLE_EQ(ddx, 1);
+  EXPECT_NEAR(dx, 10, 1e-6);
+  EXPECT_NEAR(x, 50, 0.1);
+}

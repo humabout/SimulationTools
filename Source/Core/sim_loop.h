@@ -36,6 +36,7 @@ namespace core
     typedef std::shared_ptr<SimLoop> pointer;
 
     // Constructors
+    SimLoop(double time_step_);
     SimLoop(double      time_step_,
             State::type integration_method_);
     SimLoop(double         time_step_,
@@ -57,7 +58,6 @@ namespace core
     SimClock::pointer                  Clock;
     std::vector<Block::pointer>        Blocks;
     std::vector<EndCondition::pointer> End_Conditions;
-    double                             Time_Step;
 
     // Functionality
     bool isEnd(void) const;
