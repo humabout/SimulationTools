@@ -30,25 +30,6 @@ void core::Block::addState(double& x_,
 
 
 //------------------------------------------------------------------------------
-// Name:    add (overload)
-//------------------------------------------------------------------------------
-void core::Block::addState(double&               x_, 
-                           const State::pointer& dx_)
-{
-  States.push_back(State::create(x_, dx_));
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    add (overload)
-//------------------------------------------------------------------------------
-void core::Block::addState(const State::pointer& state_)
-{
-  States.push_back(state_);
-}
-
-
-//------------------------------------------------------------------------------
 // Name:    doPropagate
 // Purpose: This method implements the default behavior for propagating the 
 //          state of the block forward one time step.
@@ -74,16 +55,6 @@ void core::Block::doPropagate(void)
 void core::Block::initialize(void)
 {
   doInitialize();
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    operator<<
-// Purpose: This adds a new state to the block.
-//------------------------------------------------------------------------------
-void core::Block::operator<< (const std::shared_ptr<State>& state_)
-{
-  addState(state_);
 }
 
 

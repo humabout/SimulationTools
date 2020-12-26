@@ -28,9 +28,6 @@ namespace core
     // Constructor
     StateEuler(double& x_, 
                double& dx_);
-    StateEuler(double&                               x_, 
-               const std::shared_ptr<core::State>& dx_);
-    StateEuler(const std::shared_ptr<core::State>& that);
 
     // Destructor
     ~StateEuler();

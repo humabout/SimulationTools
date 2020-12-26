@@ -20,29 +20,6 @@ core::StateEuler::StateEuler(double& x_,
 
 
 //------------------------------------------------------------------------------
-// Name:    StateEuler
-// Purpose: Constructor Overload.
-//------------------------------------------------------------------------------
-core::StateEuler::StateEuler(double&                             x_,
-                             const std::shared_ptr<core::State>& dx_)
-{
-  this->x  = &x_;
-  this->dx = dx_->x;
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    StateEuler
-// Purpose: Constructor Overload.
-//------------------------------------------------------------------------------
-core::StateEuler::StateEuler(const std::shared_ptr<core::State>& that)
-{
-  this->x  = that->x;
-  this->dx = that->dx;
-}
-
-
-//------------------------------------------------------------------------------
 // Name:    ~StateEuler
 // Purpose: Destructor. This class owns nothing and deletes nothing.
 //------------------------------------------------------------------------------

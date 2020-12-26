@@ -47,37 +47,6 @@ core::State::pointer core::State::create(double& x_,
 
 
 //----------------------------------------------------------------------------
-// Name:    create (overload)
-//----------------------------------------------------------------------------
-core::State::pointer core::State::create(double&               x_,
-                                         const State::pointer& dx_)
-{
-  switch (core::State::Method)
-  {
-  case type::euler:
-    return State::pointer(new StateEuler(x_, dx_));
-  default:
-    return NULL;
-  }
-}
-
-
-//----------------------------------------------------------------------------
-// Name:    create (overload)
-//----------------------------------------------------------------------------
-core::State::pointer core::State::create(const State::pointer& state_)
-{
-  switch (core::State::Method)
-  {
-  case type::euler:
-    return State::pointer(new StateEuler(state_));
-  default:
-    return NULL;
-  }
-}
-
-
-//----------------------------------------------------------------------------
 // Name:    setMethod
 // Purpose: This clears the old integration instance and sets a new method so
 //          that the next time an instance is requested, the new method will

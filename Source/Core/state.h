@@ -56,9 +56,6 @@ namespace core
     // Factory
     static State::pointer create(double& x_, 
                                  double& dx_);
-    static State::pointer create(double&               x_,
-                                 const State::pointer& dx_);
-    static State::pointer create(const State::pointer& state_);
 
     // Functionality
     virtual void propagate(void) = 0;

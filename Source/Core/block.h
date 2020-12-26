@@ -50,11 +50,6 @@ namespace core
 
     // Adding States
     void addState(double& x_, double& dx_);
-    void addState(double& x_, const State::pointer& dx_);
-    void addState(const State::pointer& state_);
-
-    // Operators
-    void operator<< (const std::shared_ptr<State>& state_);
 
   private:
 
