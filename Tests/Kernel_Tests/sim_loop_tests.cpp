@@ -38,8 +38,8 @@ private:
     *ddx = 1;
 
     core::State::pointer state = core::State::create(*dx, *ddx);
-    this->addState(state);
-    this->addState(*x, state);
+    this->addState(*dx, *ddx);
+    this->addState(*x, *dx);
 
     isInitialized = true;
   }

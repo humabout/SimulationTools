@@ -39,7 +39,43 @@ core::State::pointer core::State::create(double& x_,
   switch (core::State::Method)
   {
   case State::type::euler:
-    return State::pointer( new StateEuler(x_, dx_) );
+    return State::pointer( new StateEuler<double>(x_, dx_) );
+  default:
+    return NULL;
+  }
+}
+
+core::State::pointer core::State::create(math::Vector& x_,
+                                         math::Vector& dx_)
+{
+  switch (core::State::Method)
+  {
+  case State::type::euler:
+    return State::pointer(new StateEuler<math::Vector>(x_, dx_));
+  default:
+    return NULL;
+  }
+}
+
+core::State::pointer core::State::create(math::Quaternion& x_,
+                                         math::Quaternion& dx_)
+{
+  switch (core::State::Method)
+  {
+  case State::type::euler:
+    return State::pointer(new StateEuler<math::Quaternion>(x_, dx_));
+  default:
+    return NULL;
+  }
+}
+
+core::State::pointer core::State::create(math::Matrix& x_,
+                                         math::Matrix& dx_)
+{
+  switch (core::State::Method)
+  {
+  case State::type::euler:
+    return State::pointer(new StateEuler<math::Matrix>(x_, dx_));
   default:
     return NULL;
   }

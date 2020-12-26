@@ -7,6 +7,9 @@
 
 // Inclusions
 #include <memory>
+#include "../Math/matrix.h"
+#include "../Math/quaternion.h"
+#include "../Math/vector.h"
 
 
 //----------------------------------------------------------------------------
@@ -64,6 +67,7 @@ namespace core
     static State::pointer create(math::Matrix& x_,
                                  math::Matrix& dx_);
 
+    virtual void propagate(void) = 0;
   protected:
     // Member Variables
     static bool Is_Ready;

@@ -34,7 +34,7 @@ namespace core
     ~StateEuler();
 
     // Functionality
-    void propagate();
+    void propagate(void);
 
   private:
     T* x;

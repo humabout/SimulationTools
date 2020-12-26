@@ -27,8 +27,6 @@ public:
 
   BlockTest()
   {
-    s1 = core::State::create(dy, ddy);
-    s2 = core::State::create(z, dz);
     isInitialized = false;
     isUpdated = false;
   }
@@ -45,10 +43,11 @@ private:
     this->addState(x, dx);
 
     y = 10;   dy = -1;  ddy = 0;
-    this->addState(y, s1);
+    this->addState(dy, ddy);
+    this->addState(y, dy);
 
     z = 0;    dz = 5;
-    this->addState(s2);
+    this->addState(z, dz);
     isInitialized = true;
   }
   void doUpdate(void) override final
@@ -60,8 +59,6 @@ private:
 // Fixture
 struct BlockTests : public ::testing::Test
 {
-  std::shared_ptr<core::State> s1;
-  std::shared_ptr<core::State> s2;
   std::shared_ptr<core::SimClock> clock;
   BlockTest* test;
 

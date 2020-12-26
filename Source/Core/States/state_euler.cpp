@@ -21,10 +21,10 @@ core::StateEuler<T>::StateEuler(T& x_,
   this->x  = &x_;
   this->dx = &dx_;
 }
-template core::StateEuler<double>::StateEuler(double&, double&);
-template core::StateEuler<math::Vector>::StateEuler(math::Vector&, math::Vector&);
-template core::StateEuler<math::Quaternion>::StateEuler(math::Quaternion&, math::Quaternion&);
-template core::StateEuler<math::Matrix>::StateEuler(math::Matrix&, math::Matrix&);
+template core::StateEuler< double           >::StateEuler(double&,           double&);
+template core::StateEuler< math::Vector     >::StateEuler(math::Vector&,     math::Vector&);
+template core::StateEuler< math::Quaternion >::StateEuler(math::Quaternion&, math::Quaternion&);
+template core::StateEuler< math::Matrix     >::StateEuler(math::Matrix&,     math::Matrix&);
 
 //------------------------------------------------------------------------------
 // Name:    ~StateEuler
@@ -35,10 +35,10 @@ core::StateEuler<T>::~StateEuler()
 {
   // Does Nothing
 }
-template core::StateEuler<double>::~StateEuler();
-template core::StateEuler<math::Vector>::~StateEuler();
-template core::StateEuler<math::Quaternion>::~StateEuler();
-template core::StateEuler<math::Matrix>::~StateEuler();
+template core::StateEuler< double           >::~StateEuler();
+template core::StateEuler< math::Vector     >::~StateEuler();
+template core::StateEuler< math::Quaternion >::~StateEuler();
+template core::StateEuler< math::Matrix     >::~StateEuler();
 
 
 //------------------------------------------------------------------------------
@@ -47,12 +47,12 @@ template core::StateEuler<math::Matrix>::~StateEuler();
 //          method.
 //------------------------------------------------------------------------------
 template <class T>
-void core::StateEuler<T>::propagate()
+void core::StateEuler<T>::propagate(void)
 {
   *(this->x) += core::SimClock::tick() * *(this->dx);
   State::Is_Ready = true;
 }
-template core::StateEuler<double>::propagate();
-template core::StateEuler<math::Vector>::propagate();
-template core::StateEuler<math::Quaternion>::propagate();
-template core::StateEuler<math::Matrix>::propagate();
+template void core::StateEuler< double           >::propagate(void);
+template void core::StateEuler< math::Vector     >::propagate(void);
+template void core::StateEuler< math::Quaternion >::propagate(void);
+template void core::StateEuler< math::Matrix     >::propagate(void);
