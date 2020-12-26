@@ -22,18 +22,23 @@ namespace core
   // Name:    StateEuler
   // Purpose: 
   //--------------------------------------------------------------------------
+  template <class T>
   class StateEuler : public State
   {
   public:
     // Constructor
-    StateEuler(double& x_, 
-               double& dx_);
+    StateEuler(T& x_,
+               T& dx_);
 
     // Destructor
     ~StateEuler();
 
     // Functionality
-    void propagate(void) override final;
+    void propagate();
+
+  private:
+    T* x;
+    T* dx;
 
 
   }; // !StateEuler

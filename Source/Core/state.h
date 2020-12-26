@@ -9,13 +9,6 @@
 #include <memory>
 
 
-// Forward Declarations
-namespace core
-{
-  class StateEuler;
-}
-
-
 //----------------------------------------------------------------------------
 // Name:    core
 // Purpose: This namespace holds all parts of the simulation core.
@@ -26,9 +19,17 @@ namespace core
 
   //--------------------------------------------------------------------------
   // Name:    State
-  // Purpose: This class provides the interface and basic necessities for 
-  //          propagating state variables. Each child class implements a 
-  //          specific integration method.
+  // Purpose: This class provides the static interface for propagating state 
+  //          variables. Each child class will provide a template that 
+  //          implements the following functions for the type defined:
+  //          1. double
+  //          2. math::Vector
+  //          3. math::Quaternion
+  //          4. math::Matrix
+  //
+  //          Each child will also provide a constructor that accepts a state
+  //          variable and state derivative of type T, plus a propagate method
+  //          for integrating the state.
   //--------------------------------------------------------------------------
   class State
   {
@@ -56,24 +57,17 @@ namespace core
     // Factory
     static State::pointer create(double& x_, 
                                  double& dx_);
-
-    // Functionality
-    virtual void propagate(void) = 0;
+    static State::pointer create(math::Vector& x_,
+                                 math::Vector& dx_);
+    static State::pointer create(math::Quaternion& x_,
+                                 math::Quaternion& dx_);
+    static State::pointer create(math::Matrix& x_,
+                                 math::Matrix& dx_);
 
   protected:
     // Member Variables
     static bool Is_Ready;
     static type Method;
-
-    // State Variables
-    double* x;
-    double* dx;
-
-    // Friend Child Classes
-    // Note:  This exists to allow child classes full access to the state 
-    //        variable and state derivative without opening up access to them 
-    //        to everyone who can see a State or child thereof.
-    friend StateEuler;
 
 
   }; // !StateInterface
