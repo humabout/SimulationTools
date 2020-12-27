@@ -7,7 +7,8 @@
 
 // Inclusions
 #include <memory>
-#include "..\state.h"
+#include "../state.h"
+#include "../Clocks/sim_clock.h"
 
 
 //----------------------------------------------------------------------------
@@ -20,7 +21,8 @@ namespace core
 
   //--------------------------------------------------------------------------
   // Name:    StateEuler
-  // Purpose: 
+  // Purpose: This concrete State integrates its state derivative to get its 
+  //          variable using Euler's method.
   //--------------------------------------------------------------------------
   template <class T>
   class StateEuler : public State
@@ -28,13 +30,24 @@ namespace core
   public:
     // Constructor
     StateEuler(T& x_,
-               T& dx_);
+               T& dx_)
+    {
+      this->x  = &x_;
+      this->dx = &dx_;
+    }
 
     // Destructor
-    ~StateEuler();
+    ~StateEuler()
+    {
+      // Does Nothing.
+    }
 
     // Functionality
-    void propagate(void);
+    void propagate(void)
+    {
+      *(this->x) += core::SimClock::tick() * *(this->dx);
+      State::Is_Ready = true;
+    }
 
   private:
     T* x;

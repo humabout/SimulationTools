@@ -7,9 +7,13 @@
 
 // Inclusions
 #include <memory>
-#include "../Math/matrix.h"
-#include "../Math/quaternion.h"
-#include "../Math/vector.h"
+
+
+// Forward Declarations
+namespace core
+{
+  template <class T> class StateEuler;
+}
 
 
 //----------------------------------------------------------------------------
@@ -57,17 +61,28 @@ namespace core
     // Setters
     static void setIntegrationMethod(State::type method_);
 
-    // Factory
-    static State::pointer create(double& x_, 
-                                 double& dx_);
-    static State::pointer create(math::Vector& x_,
-                                 math::Vector& dx_);
-    static State::pointer create(math::Quaternion& x_,
-                                 math::Quaternion& dx_);
-    static State::pointer create(math::Matrix& x_,
-                                 math::Matrix& dx_);
+    //------------------------------------------------------------------------
+    // Name:    create
+    // Purpose: This factory method creates and returns a new state with the 
+    //          provided state and state derrivative.
+    // Inputs:  The state
+    //          The state derrivative
+    //------------------------------------------------------------------------
+    template<class T>
+    static State::pointer create(T& x_, T& dx_)
+    {
+      switch (core::State::Method)
+      {
+      case State::type::euler:
+        return State::pointer(new StateEuler<T>(x_, dx_));
+      default:
+        return NULL;
+      }
+    }
 
+    // Pure Virtual Functionality
     virtual void propagate(void) = 0;
+
   protected:
     // Member Variables
     static bool Is_Ready;

@@ -47,17 +47,25 @@ namespace core
     // Stores all states associated wtih this block
     std::vector< std::shared_ptr<State> > States;
 
-
-    // Adding States
-    void addState(double& x_, double& dx_);
+    //------------------------------------------------------------------------------
+    // Name:    addState
+    // Purpose: This method adds a new state to the block. It forwards the call to 
+    //          placeState for implementation to encapsulate it where it is more 
+    //          easily altered in the future.
+    //------------------------------------------------------------------------------
+    template <class T>
+    void addState(T& x_, T& dx_)
+    {
+      placeState( State::create(x_, dx_) );
+    }
 
   private:
-
     // Functionality
     virtual void doInitialize(void) = 0;
     virtual void doUpdate(void)     = 0;
     virtual void doPropagate(void);
 
+    void placeState(core::State::pointer state_);
   };
 
 

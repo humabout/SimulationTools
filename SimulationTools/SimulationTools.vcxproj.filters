@@ -80,9 +80,6 @@
     <ClCompile Include="..\Source\Core\state.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Core\States\state_euler.cpp">
-      <Filter>Core\States</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Core\End_Conditions\max_time_exceeded.cpp">
       <Filter>Core\End Conditions</Filter>
     </ClCompile>

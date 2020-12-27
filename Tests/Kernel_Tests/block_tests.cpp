@@ -3,10 +3,10 @@
 
 // Inclusions
 #include "../pch.h"
-#include "../../Source/core/block.h"
-#include "../../Source/core/block.cpp"
 #include "../../Source/core/Clocks/sim_clock.h"
 #include "../../Source/core/Clocks/sim_clock.cpp"
+#include "../../Source/core/block.h"
+#include "../../Source/core/block.cpp"
 
 
 // Making a Test Block

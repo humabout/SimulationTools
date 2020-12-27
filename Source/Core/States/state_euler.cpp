@@ -1,6 +1,6 @@
 // state_euler.cpp
 
-
+/*
 // Inclusions
 #include <cstddef>
 #include "state_euler.h"
@@ -56,3 +56,4 @@ template void core::StateEuler< double           >::propagate(void);
 template void core::StateEuler< math::Vector     >::propagate(void);
 template void core::StateEuler< math::Quaternion >::propagate(void);
 template void core::StateEuler< math::Matrix     >::propagate(void);
+*/
