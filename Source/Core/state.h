@@ -12,7 +12,7 @@
 // Forward Declarations
 namespace core
 {
-  class StateEuler;
+  template <class T> class StateEuler;
 }
 
 
@@ -26,9 +26,17 @@ namespace core
 
   //--------------------------------------------------------------------------
   // Name:    State
-  // Purpose: This class provides the interface and basic necessities for 
-  //          propagating state variables. Each child class implements a 
-  //          specific integration method.
+  // Purpose: This class provides the static interface for propagating state 
+  //          variables. Each child class will provide a template that 
+  //          implements the following functions for the type defined:
+  //          1. double
+  //          2. math::Vector
+  //          3. math::Quaternion
+  //          4. math::Matrix
+  //
+  //          Each child will also provide a constructor that accepts a state
+  //          variable and state derivative of type T, plus a propagate method
+  //          for integrating the state.
   //--------------------------------------------------------------------------
   class State
   {
@@ -53,30 +61,32 @@ namespace core
     // Setters
     static void setIntegrationMethod(State::type method_);
 
-    // Factory
-    static State::pointer create(double& x_, 
-                                 double& dx_);
-    static State::pointer create(double&               x_,
-                                 const State::pointer& dx_);
-    static State::pointer create(const State::pointer& state_);
+    //------------------------------------------------------------------------
+    // Name:    create
+    // Purpose: This factory method creates and returns a new state with the 
+    //          provided state and state derrivative.
+    // Inputs:  The state
+    //          The state derrivative
+    //------------------------------------------------------------------------
+    template<class T>
+    static State::pointer create(T& x_, T& dx_)
+    {
+      switch (core::State::Method)
+      {
+      case State::type::euler:
+        return State::pointer(new StateEuler<T>(x_, dx_));
+      default:
+        return NULL;
+      }
+    }
 
-    // Functionality
+    // Pure Virtual Functionality
     virtual void propagate(void) = 0;
 
   protected:
     // Member Variables
     static bool Is_Ready;
     static type Method;
-
-    // State Variables
-    double* x;
-    double* dx;
-
-    // Friend Child Classes
-    // Note:  This exists to allow child classes full access to the state 
-    //        variable and state derivative without opening up access to them 
-    //        to everyone who can see a State or child thereof.
-    friend StateEuler;
 
 
   }; // !StateInterface

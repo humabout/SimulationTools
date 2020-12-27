@@ -26,10 +26,8 @@ public:
 
   void doInitialize() override
   {
-    core::State::pointer dX = core::State::create(dx, ddx);
-    addState(dX);
-    addState(x, dX);
-
+    addState(x, dx, 1);
+    addState(dx, ddx, 2);
   }
   void doUpdate() override {}
 

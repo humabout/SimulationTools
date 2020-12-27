@@ -2,6 +2,7 @@
 
 
 // Inclusions
+#include <map>
 #include <memory>
 #include <vector>
 #include "block.h"
@@ -14,37 +15,20 @@
 //------------------------------------------------------------------------------
 core::Block::~Block()
 {
-
+  // Does Nothing.
 }
 
 
 //------------------------------------------------------------------------------
-// Name:    add
-// Purpose: This method adds a new state to the block.
+// Name:    placeState
+// Purpose: This method figures out where in the vector of States this 
+//          particular state belongs and reorganizes things accordingly.
 //------------------------------------------------------------------------------
-void core::Block::addState(double& x_, 
-                           double& dx_)
+void core::Block::placeState(core::State::pointer state_, 
+                             unsigned int         order_)
 {
-  States.push_back(State::create(x_, dx_));
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    add (overload)
-//------------------------------------------------------------------------------
-void core::Block::addState(double&               x_, 
-                           const State::pointer& dx_)
-{
-  States.push_back(State::create(x_, dx_));
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    add (overload)
-//------------------------------------------------------------------------------
-void core::Block::addState(const State::pointer& state_)
-{
-  States.push_back(state_);
+  // Add State to Map with the order_ as its key.
+  States.insert(state(order_, state_));
 }
 
 
@@ -55,12 +39,12 @@ void core::Block::addState(const State::pointer& state_)
 //------------------------------------------------------------------------------
 void core::Block::doPropagate(void)
 {
-  std::vector< std::shared_ptr<State> >::iterator state;
+  state_list::iterator state;
   for (state = States.begin();
        state != States.end();
        state++)
   {
-    (*state)->propagate();
+    (*state).second->propagate();
   }
 }
 
@@ -74,16 +58,6 @@ void core::Block::doPropagate(void)
 void core::Block::initialize(void)
 {
   doInitialize();
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    operator<<
-// Purpose: This adds a new state to the block.
-//------------------------------------------------------------------------------
-void core::Block::operator<< (const std::shared_ptr<State>& state_)
-{
-  addState(state_);
 }
 
 

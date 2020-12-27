@@ -5,7 +5,6 @@
 #include <cstddef>
 #include <memory>
 #include "state.h"
-#include "States\state_euler.h"
 
 // Static Variables
 bool              core::State::Is_Ready = true;
@@ -23,57 +22,6 @@ core::State::type core::State::Method   = core::State::type::euler;
 core::State::~State()
 {
   // Does nothing.
-}
-
-
-//----------------------------------------------------------------------------
-// Name:    create
-// Purpose: This factory method creates and returns a new state with the 
-//          provided state and state derrivative.
-// Inputs:  The state
-//          The state derrivative
-//----------------------------------------------------------------------------
-core::State::pointer core::State::create(double& x_,
-                                         double& dx_)
-{
-  switch (core::State::Method)
-  {
-  case State::type::euler:
-    return State::pointer( new StateEuler(x_, dx_) );
-  default:
-    return NULL;
-  }
-}
-
-
-//----------------------------------------------------------------------------
-// Name:    create (overload)
-//----------------------------------------------------------------------------
-core::State::pointer core::State::create(double&               x_,
-                                         const State::pointer& dx_)
-{
-  switch (core::State::Method)
-  {
-  case type::euler:
-    return State::pointer(new StateEuler(x_, dx_));
-  default:
-    return NULL;
-  }
-}
-
-
-//----------------------------------------------------------------------------
-// Name:    create (overload)
-//----------------------------------------------------------------------------
-core::State::pointer core::State::create(const State::pointer& state_)
-{
-  switch (core::State::Method)
-  {
-  case type::euler:
-    return State::pointer(new StateEuler(state_));
-  default:
-    return NULL;
-  }
 }
 
 

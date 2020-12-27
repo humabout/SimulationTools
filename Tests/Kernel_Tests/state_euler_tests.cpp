@@ -14,7 +14,7 @@
 // Test Fixture
 struct StateEulerTests : public ::testing::Test
 {
-  std::shared_ptr<core::StateEuler> test;
+  core::State::pointer test;
   std::shared_ptr<core::SimClock> clock;
   double x;
   double dx;
@@ -23,7 +23,7 @@ struct StateEulerTests : public ::testing::Test
   {
     x  = 0;
     dx = 1;
-    test = std::shared_ptr<core::StateEuler>(new core::StateEuler(x, dx));
+    test = core::State::pointer(new core::StateEuler<double>(x, dx));
     clock = core::SimClock::create(core::SimClock::type::basic, 1.0);
   }
 
