@@ -26,9 +26,8 @@ public:
 
   void doInitialize() override
   {
-    addState(dx, ddx);
-    addState(x, dx);
-
+    addState(x, dx, 1);
+    addState(dx, ddx, 2);
   }
   void doUpdate() override {}
 

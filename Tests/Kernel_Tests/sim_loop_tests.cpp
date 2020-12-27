@@ -27,7 +27,10 @@ public:
     isInitialized = false;
     isUpdated = false;
   }
-  ~LoopBlockTest() { core::Block::~Block(); };
+  ~LoopBlockTest()
+  {
+    // Does Nothing
+  };
 
 private:
   void doInitialize(void) override final
@@ -38,8 +41,8 @@ private:
     *ddx = 1;
 
     core::State::pointer state = core::State::create(*dx, *ddx);
-    this->addState(*dx, *ddx);
-    this->addState(*x, *dx);
+    this->addState(*x, *dx, 1);
+    this->addState(*dx, *ddx, 2);
 
     isInitialized = true;
   }

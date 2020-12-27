@@ -22,8 +22,6 @@ public:
   double dz;
   bool isInitialized;
   bool isUpdated;
-  std::shared_ptr<core::State> s1;
-  std::shared_ptr<core::State> s2;
 
   BlockTest()
   {
@@ -34,20 +32,23 @@ public:
   {
     this->States = that.States;
   }
-  ~BlockTest() { core::Block::~Block(); };
+  ~BlockTest()
+  {
+    // Does Nothing
+  };
 
 private:
   void doInitialize(void) override final
   {
     x = 0;    dx = 1;
-    this->addState(x, dx);
+    this->addState(x, dx, 1);
 
     y = 10;   dy = -1;  ddy = 0;
-    this->addState(dy, ddy);
-    this->addState(y, dy);
+    this->addState(dy, ddy, 2);
+    this->addState(y, dy, 1);
 
     z = 0;    dz = 5;
-    this->addState(z, dz);
+    this->addState(z, dz, 1);
     isInitialized = true;
   }
   void doUpdate(void) override final
@@ -60,17 +61,17 @@ private:
 struct BlockTests : public ::testing::Test
 {
   std::shared_ptr<core::SimClock> clock;
-  BlockTest* test;
+  std::shared_ptr<BlockTest> test;
 
   virtual void SetUp()
   {
-    test = new BlockTest;
+    test = std::shared_ptr<BlockTest>(new BlockTest);
     clock = core::SimClock::create(core::SimClock::type::basic, 1.0);
   }
 
   virtual void TearDown()
   {
-    if (test != nullptr) { delete test; }
+    // Does Nothing
   }
 };
 

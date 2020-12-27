@@ -2,6 +2,7 @@
 
 
 // Inclusions
+#include <map>
 #include <memory>
 #include <vector>
 #include "block.h"
@@ -23,18 +24,11 @@ core::Block::~Block()
 // Purpose: This method figures out where in the vector of States this 
 //          particular state belongs and reorganizes things accordingly.
 //------------------------------------------------------------------------------
-void core::Block::placeState(core::State::pointer state_)
+void core::Block::placeState(core::State::pointer state_, 
+                             unsigned int         order_)
 {
-  // This does not currently do what is stated above. That functionality is 
-  // still being worked on
-  States.push_back(state_);
-
-  // NOTES: I might need a struct or some such to hold arrays of each type of 
-  //        state in order to use find() to locate the position of derivatives 
-  //        and reorganize things so the highest derivatives appear frist.
-
-  // NOTES: Another option is to have the user provide the order of derivative
-  //        when adding a state. This could be used to order them.
+  // Add State to Map with the order_ as its key.
+  States.insert(state(order_, state_));
 }
 
 
@@ -45,12 +39,12 @@ void core::Block::placeState(core::State::pointer state_)
 //------------------------------------------------------------------------------
 void core::Block::doPropagate(void)
 {
-  std::vector< std::shared_ptr<State> >::iterator state;
+  state_list::iterator state;
   for (state = States.begin();
        state != States.end();
        state++)
   {
-    (*state)->propagate();
+    (*state).second->propagate();
   }
 }
 
