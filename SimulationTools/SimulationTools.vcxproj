@@ -152,6 +152,7 @@
     <ClInclude Include="..\Source\Math\math_constants.h" />
     <ClInclude Include="..\Source\Math\matrix.h" />
     <ClInclude Include="..\Source\Math\quaternion.h" />
+    <ClInclude Include="..\Source\Math\vec.h" />
     <ClInclude Include="..\Source\Math\vector.h" />
     <ClInclude Include="..\Source\nemesis.h" />
   </ItemGroup>

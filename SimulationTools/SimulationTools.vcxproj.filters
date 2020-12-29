@@ -68,6 +68,9 @@
       <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\nemesis.h" />
+    <ClInclude Include="..\Source\Math\vec.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />
