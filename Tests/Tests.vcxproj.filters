@@ -27,6 +27,9 @@
     <ClCompile Include="Kernel_Tests\state_euler_tests.cpp">
       <Filter>Kernel Tests</Filter>
     </ClCompile>
+    <ClCompile Include="Math_Library\vec_tests.cpp">
+      <Filter>Math Library Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />

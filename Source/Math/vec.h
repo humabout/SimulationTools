@@ -41,10 +41,6 @@ namespace nemesis
     {
       this->zeroize();
     }
-    Vec(T v[N])
-    {
-      this->set(v);
-    }
     Vec(const T(& v)[N])
     {
       this->set(v);
@@ -63,18 +59,11 @@ namespace nemesis
 
 
     // Setters
-    void set(T v[N])
-    {
-      for (unsigned int i = 0; i < N; i++)
-      {
-        this->E[i] = v.E[i];
-      }
-    }
     void set(const T(& v)[N])
     {
       for (unsigned int i = 0; i < N; i++)
       {
-        this->E[i] = v.E[i];
+        this->E[i] = v[i];
       }
     }
     void set(const vec& v)
@@ -88,10 +77,6 @@ namespace nemesis
 
     // Accessors
     T e(unsigned int pos) const
-    {
-      return this->E[pos];
-    }
-    const T e(const unsigned int& pos) const
     {
       return this->E[pos];
     }
@@ -127,10 +112,6 @@ namespace nemesis
     {
       this->set(v);
     }
-    void operator= (T v[N])
-    {
-      this->set(v);
-    }
     void operator= (const T(& v)[N])
     {
       this->set(v);
@@ -138,7 +119,7 @@ namespace nemesis
 
 
     // Comparison Operators
-    bool operator== (const vec& v)
+    bool operator== (const vec& v) const
     {
       for (unsigned int i = 0; i < N; i++)
       {
@@ -149,14 +130,14 @@ namespace nemesis
       }
       return true;
     }
-    bool operator!= (const vec& v)
+    bool operator!= (const vec& v) const
     {
       return !((*this) == v);
     }
 
 
     // Unary Negative
-    vec operator-()
+    vec operator-() const
     {
       Vec<T, N> output;
       for (unsigned int i = 0; i < N; i++)
@@ -168,7 +149,7 @@ namespace nemesis
 
 
     // Addition
-    vec operator+(const vec& v)
+    vec operator+(const vec& v) const
     {
       vec output;
       for (unsigned int i = 0; i < N; i++)
@@ -184,7 +165,7 @@ namespace nemesis
 
 
     // Subtraction
-    vec operator-(const vec& v)
+    vec operator-(const vec& v) const
     {
       return *this + -v;
     }
@@ -195,7 +176,7 @@ namespace nemesis
 
 
     // Scalar Multiplication
-    vec operator* (T s)
+    vec operator* (T s) const
     {
       vec output;
       for (unsigned int i = 0; i < N; i++)
@@ -211,7 +192,7 @@ namespace nemesis
 
 
     // Scalar Division
-    vec operator/ (T s)
+    vec operator/ (T s) const
     {
       T den = s;
       if (abs(s) < math::DIVIDE_BY_ZERO_TOLERANCE)
@@ -232,7 +213,7 @@ namespace nemesis
 
 
     // Dot Product
-    T operator*(const vec& v)
+    T operator*(const vec& v) const
     {
       T dot_product = 0;
       for (unsigned int i = 0; i < N; i++)
@@ -249,14 +230,14 @@ namespace nemesis
       T mag = 0;
       for (unsigned int i = 0; i < N; i++)
       {
-        mag += this->E[i];
+        mag += this->E[i] * this->E[i];
       }
       return sqrt(mag);
     }
 
 
     // Unit & Unitization
-    vec unit(void)
+    vec unit(void) const
     {
       return *this / (this->magnitude());
     }
@@ -300,10 +281,6 @@ namespace nemesis
     {
       this->zeroize();
     }
-    Vec(T v[2])
-    {
-      this->set(v);
-    }
     Vec(const T(& v)[2])
     {
       this->set(v);
@@ -327,11 +304,6 @@ namespace nemesis
 
 
     // Setters
-    void set(T v[2])
-    {
-      this->E[0] = v[0];
-      this->E[1] = v[1];
-    }
     void set(const T(& v)[2])
     {
       this->E[0] = v[0];
@@ -352,10 +324,6 @@ namespace nemesis
 
     // Accessors
     T e(unsigned int pos) const
-    {
-      return this->E[pos];
-    }
-    const T e(const unsigned int& pos) const
     {
       return this->E[pos];
     }
@@ -399,10 +367,6 @@ namespace nemesis
     {
       this->set(v);
     }
-    void operator= (T v[2])
-    {
-      this->set(v);
-    }
     void operator= (const T(& v)[2])
     {
       this->set(v);
@@ -410,12 +374,12 @@ namespace nemesis
 
 
     // Comparison Operators
-    bool operator== (const vec& v)
+    bool operator== (const vec& v) const
     {
       return (this->X == v.X) && 
              (this->Y == v.Y);
     }
-    bool operator!= (const vec& v)
+    bool operator!= (const vec& v) const
     {
       return (this->X != v.X) || 
              (this->Y != v.Y);
@@ -423,7 +387,7 @@ namespace nemesis
 
 
     // Unary Negative
-    vec operator-()
+    vec operator-() const
     {
       return vec( -(this->X), 
                   -(this->Y) );
@@ -431,7 +395,7 @@ namespace nemesis
 
 
     // Addition Operators
-    vec operator+(const vec& v)
+    vec operator+(const vec& v) const
     {
       return vec( (this->X + v.X),
                   (this->Y + v.Y)) ;
@@ -443,7 +407,7 @@ namespace nemesis
 
 
     // Subtraction Operators
-    vec operator-(const vec& v)
+    vec operator-(const vec& v) const
     {
       return *this + -v;
     }
@@ -454,7 +418,7 @@ namespace nemesis
 
 
     // Scalar Multiplication Operators
-    vec operator* (T s)
+    vec operator* (T s) const
     {
       return vec( s * this->X,
                   s * this->Y );
@@ -466,7 +430,7 @@ namespace nemesis
 
 
     // Scalar Division
-    vec operator/ (T s)
+    vec operator/ (T s) const
     {
       T den = s;
       if (abs(s) < math::DIVIDE_BY_ZERO_TOLERANCE)
@@ -487,7 +451,7 @@ namespace nemesis
 
 
     // Dot Product Operators
-    T operator* (const vec& v)
+    T operator* (const vec& v) const
     {
       return (this->X * v.X) +
              (this->Y * v.Y);
@@ -503,7 +467,7 @@ namespace nemesis
 
 
     // Unit & Unitization
-    vec unit(void)
+    vec unit(void) const
     {
       return *this / (this->magnitude());
     }
@@ -553,10 +517,6 @@ namespace nemesis
     {
       this->zeroize();
     }
-    Vec(T v[3])
-    {
-      this->set(v);
-    }
     Vec(const T(& v)[3])
     {
       this->set(v);
@@ -580,12 +540,6 @@ namespace nemesis
 
 
     // Setters
-    void set(T v[3])
-    {
-      this->E[0] = v[0];
-      this->E[1] = v[1];
-      this->E[2] = v[2];
-    }
     void set(const T(& v)[3])
     {
       this->E[0] = v[0];
@@ -610,10 +564,6 @@ namespace nemesis
 
     // Accessors
     T e(unsigned int pos) const
-    {
-      return this->E[pos];
-    }
-    const T e(const unsigned int& pos) const
     {
       return this->E[pos];
     }
@@ -661,10 +611,6 @@ namespace nemesis
     {
       this->set(v);
     }
-    void operator= (T v[3])
-    {
-      this->set(v);
-    }
     void operator= (const T(& v)[3])
     {
       this->set(v);
@@ -672,13 +618,13 @@ namespace nemesis
 
 
     // Comparison Operators
-    bool operator== (const vec& v)
+    bool operator== (const vec& v) const
     {
       return (this->X == v.X) && 
              (this->Y == v.Y) && 
              (this->Z == v.Z);
     }
-    bool operator!= (const vec& v)
+    bool operator!= (const vec& v) const
     {
       return (this->X != v.X) ||
              (this->Y != v.Y) ||
@@ -687,7 +633,7 @@ namespace nemesis
 
 
     // Unary Negative
-    vec operator-()
+    vec operator-() const
     {
       return vec( -(this->X),
                   -(this->Y),
@@ -696,7 +642,7 @@ namespace nemesis
 
 
     // Addition Operators
-    vec operator+(const vec& v)
+    vec operator+(const vec& v) const
     {
       return vec( (this->X + v.X),
                   (this->Y + v.Y),
@@ -709,7 +655,7 @@ namespace nemesis
 
 
     // Subtraction Operators
-    vec operator-(const vec& v)
+    vec operator-(const vec& v) const
     {
       return *this + -v;
     }
@@ -720,7 +666,7 @@ namespace nemesis
 
 
     // Scalar Multiplication Operators
-    vec operator* (T s)
+    vec operator* (T s) const
     {
       return vec( s * this->X,
                   s * this->Y,
@@ -733,7 +679,7 @@ namespace nemesis
 
 
     // Scalar Division
-    vec operator/ (T s)
+    vec operator/ (T s) const
     {
       T den = s;
       if (abs(s) < math::DIVIDE_BY_ZERO_TOLERANCE)
@@ -754,7 +700,7 @@ namespace nemesis
 
 
     // Dot Product Operators
-    T operator* (const vec& v)
+    T operator* (const vec& v) const
     {
       return (this->X * v.X) +
              (this->Y * v.Y) +
@@ -763,7 +709,7 @@ namespace nemesis
 
 
     // Cross Product Operators
-    vec operator% (const vec& v)
+    vec operator% (const vec& v) const
     {
       return vec( (this->Y * v.Z - this->Z * v.Y),
                   (this->Z * v.X - this->X * v.Z),
@@ -780,12 +726,12 @@ namespace nemesis
     {
       return sqrt( this->X * this->X + 
                    this->Y * this->Y +
-                   this->Z + this->Z );
+                   this->Z * this->Z );
     }
 
 
     // Unit & Unitization
-    vec unit(void)
+    vec unit(void) const
     {
       return *this / (this->magnitude());
     }
@@ -818,6 +764,14 @@ namespace nemesis
 
 
   }; // !Vec<T, 3>
+
+
+  //----------------------------------------------------------------------------
+  // Typedefs & Aliases
+  //----------------------------------------------------------------------------
+  template <class T> using Vec2 = Vec<T, 2>;
+  template <class T> using Vec3 = Vec<T, 3>;
+
 
 
 } // !nemesis
