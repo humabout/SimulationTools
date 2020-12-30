@@ -6,7 +6,7 @@
 #include <memory>
 #include <string>
 #include "nemesis.h"
-#include "Math/vec.h"
+#include "Math/mat.h"
 
 
 class BlockTest : public core::Block

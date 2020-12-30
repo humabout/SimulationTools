@@ -6,10 +6,11 @@
 
 
 // Inclusions
+#include <algorithm>
 #include <memory>
 #include <stdexcept>
-#include <utility>
 #include "math_config.h"
+#include "typedefs.h"
 #include "vec.h"
 
 
@@ -31,48 +32,392 @@ namespace nemesis
   //          Number of Rows
   //          Number of Columns
   //----------------------------------------------------------------------------
-  template<class T, unsigned int Rows, unsigned int Cols>
+  template<class T, dim_size Rows, dim_size Cols>
   class Mat
   {
   public:
     // Typedefs
     typedef Mat<T, Rows, Cols>                    mat;
+    typedef Vec<T, Cols>                          row_vec;
+    typedef Vec<T, Rows>                          col_vec;
     typedef std::shared_ptr< Mat<T, Rows, Cols> > pointer;
 
+    // Constructors
+    Mat()
+    {
+      this->zeroize();
+    }
+    Mat(const T(& m)[Cols * Rows])
+    {
+      this->set(m);
+    }
+    Mat(const row_vec(& m)[Rows])
+    {
+      this->set(m);
+    }
+    Mat(const mat& m)
+    {
+      this->set(m);
+    }
+
+    // Destructor
+    ~Mat()
+    {
+      // Does Nothing.
+    }
+
+
+    // Setters
+    void set(const T(& m)[Cols * Rows])
+    {
+      // This assumed that the elements of each row are contiguous, and that the
+      // first row appears first in the array each successive row appears in 
+      // ascending order, with the last row at the end of the array.
+      // For example:
+      // [ 1, 2, 3,
+      //   4, 5, 6,  = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
+      //   7, 8, 9]
+      for (element row = 0; row < Rows; row++)
+      {
+        for (element col = 0; col < Cols; col++)
+        {
+          this->E[row][col] = m[(row * Cols) + col];
+        }
+      }
+    }
+    void set(const row_vec(& m)[Rows])
+    {
+      for (element row = 0; row < Rows; row++)
+      {
+        this->E = m[row];
+      }
+    }
+    void set(const mat& m)
+    {
+      for (element row = 0; row < Rows; row++)
+      {
+        for (element col = 0; col < Cols; col++)
+        {
+          this->E[row][col] = m.E[row][col];
+        }
+      }
+    }
+
+
+    // Accessors
+    T& e(element row, element col)
+    {
+      return this->E[row][col];
+    }
+    row_vec& operator[](element r)
+    {
+      return this->E[r];
+    }
+    const row_vec& operator[](const element& r) const
+    {
+      return this->E[r];
+    }
+    row_vec row(element r)
+    {
+      return this->E[r];
+    }
+    col_vec column(element c)
+    {
+      col_vec output;
+      for (element row = 0; row < Rows; row++)
+      {
+        output[row] = this->E[row][c];
+      }
+      return output;
+    }
+
+    // Return various measures of size
+    dim_size length(void) const
+    {
+      // Returns the largest dimension of the matrix
+      return std::max(Rows, Cols);
+    }
+    dim_size size(void) const
+    {
+      // Returns the total number of elements in the matrix
+      return Rows * Cols;
+    }
+    dimension dim(void) const
+    {
+      // Returns the number of rows and columsn in a dimension object
+      // NOTE:  This is not the true dimensionality of the matrix in the 
+      //        mathematical sense.
+      return dimension(Rows, Cols);
+    }
+
+
+    // Assignment Operator
+    void operator=(const T(& m)[Cols * Rows])
+    {
+      this->set(m);
+    }
+    void operator=(const row_vec(& m)[Rows])
+    {
+      this->set(m);
+    }
+    void operator=(const mat& m)
+    {
+      this->set(m);
+    }
+
+
+    // Comparison Operators
+    bool operator==(const mat& m)
+    {
+      for (element row = 0; row < Rows; row++)
+      {
+        for (element col = 0; col < Cols; col++)
+        {
+          if (this->E[row][col] != m.E[row][col])
+          {
+            return false;
+          }
+          else
+          {
+            // Continue Checking
+          }
+        }
+      }
+      return true;
+    }
+    bool operator!=(const mat& m)
+    {
+      return !(*this == m);
+    }
+
+
+    // Unary Negative
+    mat operator-() const
+    {
+      mat output;
+      for (element row = 0; row < Rows; row++)
+      {
+        for (element col = 0; col < Cols; col++)
+        {
+          output.E[row][col] = -(this->E[row][col]);
+        }
+      }
+      return output;
+    }
+
+
+    // Addition Operators
+    mat operator+(const mat& m) const
+    {
+      mat output;
+      for (element row = 0; row < Rows; row++)
+      {
+        for (element col = 0; col < Cols; col++)
+        {
+          output.E[row][col] = this->E[row][col] + m.E[row][col];
+        }
+      }
+      return output;
+    }
+    void operator+=(const mat& m)
+    {
+      *this = *this + m;
+    }
+
+
+    // Subtraction Operators
+    mat operator-(const mat& m) const
+    {
+      return *this + (-m);
+    }
+    void operator-=(const mat& m)
+    {
+      *this = *this - m;
+    }
+
+
+    // Scalar Multiplication Operators
+    mat operator*(const T& s) const
+    {
+      mat output;
+      for (element row = 0; row < Rows; row++)
+      {
+        for (element col = 0; col < Cols; col++)
+        {
+          output.E[row][col] = s * this->E[row][col];
+        }
+      }
+      return output;
+    }
+    void operator*=(const T& s)
+    {
+      *this = *this * s;
+    }
+
+
+    // Scalar Division Operators
+    mat operator/ (const T& s) const
+    {
+      T den = s;
+      if (abs(s) < math::DIVIDE_BY_ZERO_TOLERANCE)
+      {
+        den = 1 / math::DIVIDE_BY_ZERO_TOLERANCE;
+        throw std::runtime_error("Warning: Division by near-zero. Dividing by tolerance, instead.");
+      }
+      else
+      {
+        den = 1 / s;
+      }
+      return *this * den;
+    }
+    void operator/=(const T& s)
+    {
+      *this = *this / s;
+    }
+
+
+    // Vector Multiplication Operator
+    col_vec operator*(const col_vec& v) const
+    {
+      col_vec output;
+      for (element row = 0; row < Rows; row++)
+      {
+        output.E[row] = this->E[row] * v;
+      }
+      return output;
+    }
+
+
+    // Mextix Mulitplication Operators
+    template<dim_size rhs_Cols>
+    Mat<T, Rows, rhs_Cols> operator*(const Mat<T, Cols, rhs_Cols>& m) const
+    {
+      Mat<T, Rows, rhs_Cols> output;
+      for (element i = 0; i < Rows; i++)
+      {
+        for (element j = 0; j < rhs_Cols; j++)
+        {
+          for (element k = 0; k < Cols; k++)
+          {
+            output.E[i][j] += this->E[i][k] * m.E[k][j];
+          }
+        }
+      }
+      return output;
+    }
+
+
+    // Transposes
+    // TODO:  Find a better syntax for this mess. Transpose is the verb and the
+    //        noun. This makes it difficult.
+    Mat<T, Cols, Rows> trans(void) const
+    {
+      Mat<T, Cols, Rows> output;
+      for (element row = 0; row < Rows; row++)
+      {
+        for (element col = 0; col < Cols; col++)
+        {
+          output.E[row][col] = this->E[col][row];
+        }
+      }
+      return output;
+    }
+    void transpose(void)
+    {
+      *this = this->trans();
+    }
+
+
+    // Zeroize
+    void zeroize(void)
+    {
+      for (element row = 0; row < Rows; row++)
+      {
+        for (element col = 0; col < Cols; col++)
+        {
+          this->E[row][col] = 0;
+        }
+      }
+    }
+
+  private:
+    // Elements
+    row_vec E[Rows];
+
+
+  }; // ! Mat<T, M, N>
+
+  /*
+  //----------------------------------------------------------------------------
+  // Specialized for Rows = Cols
+  //----------------------------------------------------------------------------
+  template <class T, dim_size N>
+  class Mat<T, N, N>
+  {
+  public:
     // Constructors
     // Destructor
     // Setters
     // Accessors
-    // Access Operator
-    // Assignment Operator
+    // Return various measures of size
     // Comparison Operators
     // Unary Negative
     // Addition Operators
     // Subtraction Operators
     // Scalar Multiplication Operators
     // Scalar Division Operators
-    // Vector Multiplication Operator
-    // Mextix Mulitplication Operators
-    // Transposes (return a transpose and transpose this matrix)
+    // Vector Multiplication Operators
+    // Matrix Multiplication Operators
+    // Transposes
     // Trace
-    // Determinate (via LUP decomposition)
-    // Inverses (return the inverse and invert this matrix) (via LUP decomposition)
+    // LU Decomposition
+    // Determinate
+    // Inverses (Using LUP Decomposition)
+    //  TODO:  Add check for Choleski Decomposition
+    // Identity (return one; set to one)
     // Zeroize
-    void zeroize(void)
-    {
-      for (std::size_t row = 0; row < Rows; row++)
-      {
 
-      }
-    }
 
   private:
     // Elements
-    Vec<T, Cols> E[Rows];
+    row_vec E[N];
+  };*/
 
 
-  }; // ! Mat<T, M, N>
+    // Constructors
+    // Destructor
+    // Setters
+    // Accessors
+    // Return various measures of size
+    // Comparison Operators
+    // Unary Negative
+    // Addition Operators
+    // Subtraction Operators
+    // Scalar Multiplication Operators
+    // Scalar Division Operators
+    // Vector Multiplication Operators
+    // Matrix Multiplication Operators
+    // Transposes
+    // Trace
+    // LU Decomposition
+    // Determinate
+    // Inverses (Using LUP Decomposition)
+    //  TODO:  Add check for Choleski Decomposition
+    // Identity (return one; set to one)
+    // Zeroize
 
+
+  //----------------------------------------------------------------------------
+  // Specialized for Rows = Cols = 4
+  //----------------------------------------------------------------------------
+
+  //----------------------------------------------------------------------------
+  // Specialized for Rows = Cols = 3
+  //----------------------------------------------------------------------------
+
+  //----------------------------------------------------------------------------
+  // Specialized for Rows = Cols = 2
+  //----------------------------------------------------------------------------
 
 } // !nemesis
 

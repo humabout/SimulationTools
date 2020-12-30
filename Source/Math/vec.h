@@ -77,7 +77,7 @@ namespace nemesis
 
 
     // Accessors
-    T e(element pos) const
+    T& e(element pos)
     {
       return this->E[pos];
     }
@@ -167,7 +167,7 @@ namespace nemesis
     // Subtraction
     vec operator-(const vec& v) const
     {
-      return *this + -v;
+      return *this + (-v);
     }
     void operator-=(const vec& v)
     {
@@ -198,7 +198,7 @@ namespace nemesis
       if (abs(s) < math::DIVIDE_BY_ZERO_TOLERANCE)
       {
         den = 1/math::DIVIDE_BY_ZERO_TOLERANCE;
-        throw std::runtime_error("Warning: Division by near-zero. Dividing by tolerance, isntead.");
+        throw std::runtime_error("Warning: Division by near-zero. Dividing by tolerance, instead.");
       }
       else
       {
@@ -323,7 +323,7 @@ namespace nemesis
 
 
     // Accessors
-    T e(element pos) const
+    T& e(element pos)
     {
       return this->E[pos];
     }
@@ -436,7 +436,7 @@ namespace nemesis
       if (abs(s) < math::DIVIDE_BY_ZERO_TOLERANCE)
       {
         den = 1 / math::DIVIDE_BY_ZERO_TOLERANCE;
-        throw std::runtime_error("Warning: Division by near-zero. Dividing by tolerance, isntead.");
+        throw std::runtime_error("Warning: Division by near-zero. Dividing by tolerance, instead.");
       }
       else
       {
@@ -563,7 +563,7 @@ namespace nemesis
 
 
     // Accessors
-    T e(element pos) const
+    T& e(element pos)
     {
       return this->E[pos];
     }
@@ -581,7 +581,6 @@ namespace nemesis
     {
       return dimension(3, 1);
     }
-
 
     // Access Operator
     T& operator[](element pos)
@@ -685,7 +684,7 @@ namespace nemesis
       if (abs(s) < math::DIVIDE_BY_ZERO_TOLERANCE)
       {
         den = 1 / math::DIVIDE_BY_ZERO_TOLERANCE;
-        throw std::runtime_error("Warning: Division by near-zero. Dividing by tolerance, isntead.");
+        throw std::runtime_error("Warning: Division by near-zero. Dividing by tolerance, instead.");
       }
       else
       {
