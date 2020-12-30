@@ -317,6 +317,33 @@ TEST_F(Vec3Tests, AccessorConstSetTest)
   EXPECT_DOUBLE_EQ(u.e(1), v.e(1));
   EXPECT_DOUBLE_EQ(u.e(2), v.e(2));
 }
+TEST_F(Vec3Tests, AssignmentXGetTest)
+{
+  EXPECT_DOUBLE_EQ(u.x(), u[0]);
+}
+TEST_F(Vec3Tests, AssignmentYGetTest)
+{
+  EXPECT_DOUBLE_EQ(u.y(), u[1]);
+}
+TEST_F(Vec3Tests, AssignmentZGetTest)
+{
+  EXPECT_DOUBLE_EQ(u.z(), u[2]);
+}
+TEST_F(Vec3Tests, AssignmentXSetTest)
+{
+  u.x() = 9.9;
+  EXPECT_DOUBLE_EQ(u[0], 9.9);
+}
+TEST_F(Vec3Tests, AssignmentYSetTest)
+{
+  u.y() = 9.9;
+  EXPECT_DOUBLE_EQ(u[1], 9.9);
+}
+TEST_F(Vec3Tests, AssignmentZSetTest)
+{
+  u.z() = 9.9;
+  EXPECT_DOUBLE_EQ(u[2], 9.9);
+}
 
 TEST_F(Vec2Tests, AccessorGetTest)
 {
@@ -349,6 +376,24 @@ TEST_F(Vec2Tests, AccessorConstSetTest)
   u[one ] = v[1];
   EXPECT_DOUBLE_EQ(u.e(0), v.e(0));
   EXPECT_DOUBLE_EQ(u.e(1), v.e(1));
+}
+TEST_F(Vec2Tests, AssignmentXGetTest)
+{
+  EXPECT_DOUBLE_EQ(u.x(), u[0]);
+}
+TEST_F(Vec2Tests, AssignmentYGetTest)
+{
+  EXPECT_DOUBLE_EQ(u.y(), u[1]);
+}
+TEST_F(Vec2Tests, AssignmentXSetTest)
+{
+  u.x() = 9.9;
+  EXPECT_DOUBLE_EQ(u[0], 9.9);
+}
+TEST_F(Vec2Tests, AssignmentYSetTest)
+{
+  u.y() = 9.9;
+  EXPECT_DOUBLE_EQ(u[1], 9.9);
 }
 
 
@@ -491,7 +536,7 @@ TEST_F(Vec2Tests, UnaryNegativeTest)
 
 
 //------------------------------------------------------------------------------
-// Setter Tests
+// Addition Operator Tests
 //------------------------------------------------------------------------------
 TEST_F(VecTests, AdditionTest)
 {
