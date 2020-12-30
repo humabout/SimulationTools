@@ -6,9 +6,10 @@
 
 
 // Inclusions
+#include <memory>
 #include <stdexcept>
-#include <utility>
 #include "math_config.h"
+#include "typedefs.h"
 
 
 //------------------------------------------------------------------------------
@@ -26,15 +27,15 @@ namespace nemesis
   //          vectors. Finally, it provides specific implementations for 2- and
   //          3-vectors, with hard-coded solutions to accelerate their use.
   // Inputs:  Type
-  //          Length
+  //          Number of Elements
   //----------------------------------------------------------------------------
-  template <class T, unsigned int N>
+  template <class T, dim_size N>
   class Vec
   {
   public:
     // Typedefs
-    typedef nemesis::Vec<T, N> vec;
-    typedef std::pair<unsigned int, unsigned int> dimension;
+    typedef std::shared_ptr < Vec<T, N> > pointer;
+    typedef nemesis::Vec<T, N>            vec;
 
     // Constructor
     Vec()
@@ -61,14 +62,14 @@ namespace nemesis
     // Setters
     void set(const T(& v)[N])
     {
-      for (unsigned int i = 0; i < N; i++)
+      for (element i = 0; i < N; i++)
       {
         this->E[i] = v[i];
       }
     }
     void set(const vec& v)
     {
-      for (unsigned int i = 0; i < N; i++)
+      for (element i = 0; i < N; i++)
       {
         this->E[i] = v.E[i];
       }
@@ -76,17 +77,17 @@ namespace nemesis
 
 
     // Accessors
-    T e(unsigned int pos) const
+    T e(element pos) const
     {
       return this->E[pos];
     }
 
     // Return number of elements in the vector
-    unsigned int length(void) const
+    dim_size length(void) const
     {
       return N;
     }
-    unsigned int size(void) const
+    dim_size size(void) const
     {
       return N;
     }
@@ -95,13 +96,12 @@ namespace nemesis
       return dimension(N, 1);
     }
 
-
     // Access Operator
-    T& operator[](unsigned int pos)
+    T& operator[](element pos)
     {
       return this->E[pos];
     }
-    const T& operator[](const unsigned int& pos) const
+    const T& operator[](const element& pos) const
     {
       return this->E[pos];
     }
@@ -121,7 +121,7 @@ namespace nemesis
     // Comparison Operators
     bool operator== (const vec& v) const
     {
-      for (unsigned int i = 0; i < N; i++)
+      for (element i = 0; i < N; i++)
       {
         if (this->E[i] != v.E[i])
         {
@@ -140,7 +140,7 @@ namespace nemesis
     vec operator-() const
     {
       Vec<T, N> output;
-      for (unsigned int i = 0; i < N; i++)
+      for (element i = 0; i < N; i++)
       {
         output.E[i] = -(this->E[i]);
       }
@@ -152,7 +152,7 @@ namespace nemesis
     vec operator+(const vec& v) const
     {
       vec output;
-      for (unsigned int i = 0; i < N; i++)
+      for (element i = 0; i < N; i++)
       {
         output.E[i] = this->E[i] + v.E[i];
       }
@@ -179,7 +179,7 @@ namespace nemesis
     vec operator* (T s) const
     {
       vec output;
-      for (unsigned int i = 0; i < N; i++)
+      for (element i = 0; i < N; i++)
       {
         output.E[i] = this->E[i] * s;
       }
@@ -216,7 +216,7 @@ namespace nemesis
     T operator*(const vec& v) const
     {
       T dot_product = 0;
-      for (unsigned int i = 0; i < N; i++)
+      for (element i = 0; i < N; i++)
       {
         dot_product += this->E[i] * v.E[i];
       }
@@ -228,7 +228,7 @@ namespace nemesis
     T magnitude(void) const
     {
       T mag = 0;
-      for (unsigned int i = 0; i < N; i++)
+      for (element i = 0; i < N; i++)
       {
         mag += this->E[i] * this->E[i];
       }
@@ -250,7 +250,7 @@ namespace nemesis
     // Zeroize
     void zeroize(void)
     {
-      for (unsigned int i = 0; i < N; i++)
+      for (element i = 0; i < N; i++)
       {
         this->E[i] = 0;
       }
@@ -272,8 +272,8 @@ namespace nemesis
   {
   public:
     // Typedefs
-    typedef nemesis::Vec<T, 2> vec;
-    typedef std::pair<unsigned int, unsigned int> dimension;
+    typedef std::shared_ptr < Vec<T, 2> > pointer;
+    typedef nemesis::Vec<T, 2>            vec;
 
 
     // Constructors
@@ -323,17 +323,17 @@ namespace nemesis
 
 
     // Accessors
-    T e(unsigned int pos) const
+    T e(element pos) const
     {
       return this->E[pos];
     }
 
     // Return number of elements in the vector
-    unsigned int length(void) const
+    dim_size length(void) const
     {
       return 2;
     }
-    unsigned int size(void) const
+    dim_size size(void) const
     {
       return 2;
     }
@@ -344,11 +344,11 @@ namespace nemesis
 
 
     // Access Operator
-    T& operator[](unsigned int pos)
+    T& operator[](element pos)
     {
       return this->E[pos];
     }
-    const T& operator[](const unsigned int& pos) const
+    const T& operator[](const element& pos) const
     {
       return this->E[pos];
     }
@@ -509,8 +509,8 @@ namespace nemesis
   {
   public:
     // Typedefs
-    typedef nemesis::Vec<T, 3> vec;
-    typedef std::pair<unsigned int, unsigned int> dimension;
+    typedef std::shared_ptr < Vec<T, 3> > pointer;
+    typedef nemesis::Vec<T, 3>            vec;
 
     // Constructors
     Vec()
@@ -563,17 +563,17 @@ namespace nemesis
 
 
     // Accessors
-    T e(unsigned int pos) const
+    T e(element pos) const
     {
       return this->E[pos];
     }
 
     // Return number of elements in the vector
-    unsigned int length(void) const
+    dim_size length(void) const
     {
       return 3;
     }
-    unsigned int size(void) const
+    dim_size size(void) const
     {
       return 3;
     }
@@ -584,11 +584,11 @@ namespace nemesis
 
 
     // Access Operator
-    T& operator[](unsigned int pos)
+    T& operator[](element pos)
     {
       return this->E[pos];
     }
-    const T& operator[](const unsigned int& pos) const
+    const T& operator[](const element& pos) const
     {
       return this->E[pos];
     }
@@ -783,7 +783,7 @@ namespace nemesis
 
 
 // operator* overload for type T * Vec
-template <class T, unsigned int N>
+template <class T, nemesis::dim_size N>
 nemesis::Vec<T, N> operator* (T s, nemesis::Vec<T, N> v)
 {
   return v * s;
