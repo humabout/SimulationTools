@@ -148,10 +148,12 @@
     <ClInclude Include="..\Source\Core\sim_loop.h" />
     <ClInclude Include="..\Source\Core\state.h" />
     <ClInclude Include="..\Source\Core\States\state_euler.h" />
+    <ClInclude Include="..\Source\Math\mat.h" />
     <ClInclude Include="..\Source\Math\math_config.h" />
     <ClInclude Include="..\Source\Math\math_constants.h" />
     <ClInclude Include="..\Source\Math\matrix.h" />
     <ClInclude Include="..\Source\Math\quaternion.h" />
+    <ClInclude Include="..\Source\Math\typedefs.h" />
     <ClInclude Include="..\Source\Math\vec.h" />
     <ClInclude Include="..\Source\Math\vector.h" />
     <ClInclude Include="..\Source\nemesis.h" />
