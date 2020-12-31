@@ -3,15 +3,6 @@
   <ItemGroup>
     <ClCompile Include="test.cpp" />
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="Math_Library\vector_tests.cpp">
-      <Filter>Math Library Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="Math_Library\matrix_tests.cpp">
-      <Filter>Math Library Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="Math_Library\quaternion_tests.cpp">
-      <Filter>Math Library Tests</Filter>
-    </ClCompile>
     <ClCompile Include="Kernel_Tests\basic_clock.cpp">
       <Filter>Kernel Tests</Filter>
     </ClCompile>

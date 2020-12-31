@@ -58,15 +58,6 @@
     <ClInclude Include="..\Source\Math\math_constants.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\Math\matrix.h">
-      <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Math\quaternion.h">
-      <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Math\vector.h">
-      <Filter>Math</Filter>
-    </ClInclude>
     <ClInclude Include="..\Source\nemesis.h" />
     <ClInclude Include="..\Source\Math\vec.h">
       <Filter>Math</Filter>
@@ -100,15 +91,6 @@
     </ClCompile>
     <ClCompile Include="..\Source\Core\End_Conditions\end_condition.cpp">
       <Filter>Core\End Conditions</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Math\matrix.cpp">
-      <Filter>Math</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Math\quaternion.cpp">
-      <Filter>Math</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Math\vector.cpp">
-      <Filter>Math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

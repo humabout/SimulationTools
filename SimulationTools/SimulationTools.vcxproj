@@ -151,11 +151,8 @@
     <ClInclude Include="..\Source\Math\mat.h" />
     <ClInclude Include="..\Source\Math\math_config.h" />
     <ClInclude Include="..\Source\Math\math_constants.h" />
-    <ClInclude Include="..\Source\Math\matrix.h" />
-    <ClInclude Include="..\Source\Math\quaternion.h" />
     <ClInclude Include="..\Source\Math\typedefs.h" />
     <ClInclude Include="..\Source\Math\vec.h" />
-    <ClInclude Include="..\Source\Math\vector.h" />
     <ClInclude Include="..\Source\nemesis.h" />
   </ItemGroup>
   <ItemGroup>
@@ -167,9 +164,6 @@
     <ClCompile Include="..\Source\Core\sim_loop.cpp" />
     <ClCompile Include="..\Source\Core\state.cpp" />
     <ClCompile Include="..\Source\main.cpp" />
-    <ClCompile Include="..\Source\Math\matrix.cpp" />
-    <ClCompile Include="..\Source\Math\quaternion.cpp" />
-    <ClCompile Include="..\Source\Math\vector.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
