@@ -30,6 +30,9 @@
     <ClCompile Include="Math_Library\vec_tests.cpp">
       <Filter>Math Library Tests</Filter>
     </ClCompile>
+    <ClCompile Include="Math_Library\mat_tests.cpp">
+      <Filter>Math Library Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />

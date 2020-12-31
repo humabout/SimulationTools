@@ -89,7 +89,7 @@ namespace nemesis
     {
       for (element row = 0; row < Rows; row++)
       {
-        this->E = m[row];
+        this->E[row] = m[row];
       }
     }
     void set(const mat& m)
@@ -167,13 +167,21 @@ namespace nemesis
 
 
     // Comparison Operators
-    bool operator==(const mat& m)
+    template<dim_size M, dim_size N>
+    bool operator==(const Mat<T, M, N>& m) const
     {
+      // Check if sizes are the same
+      if (this->dim() != m.dim())
+      {
+        return false;
+      }
+
+      // Check if the elements are the same
       for (element row = 0; row < Rows; row++)
       {
         for (element col = 0; col < Cols; col++)
         {
-          if (this->E[row][col] != m.E[row][col])
+          if (this->E[row][col] != m[row][col])
           {
             return false;
           }
@@ -185,7 +193,8 @@ namespace nemesis
       }
       return true;
     }
-    bool operator!=(const mat& m)
+    template<dim_size M, dim_size N>
+    bool operator!=(const Mat<T, M, N>& m) const
     {
       return !(*this == m);
     }
@@ -277,29 +286,34 @@ namespace nemesis
 
 
     // Vector Multiplication Operator
-    col_vec operator*(const col_vec& v) const
+    col_vec operator*(const row_vec& v) const
     {
       col_vec output;
       for (element row = 0; row < Rows; row++)
       {
-        output.E[row] = this->E[row] * v;
+        for (element col = 0; col < Cols; col++)
+        {
+          output[row] += this->E[row][col] * v[col];
+        }
       }
       return output;
     }
 
 
-    // Mextix Mulitplication Operators
-    template<dim_size rhs_Cols>
-    Mat<T, Rows, rhs_Cols> operator*(const Mat<T, Cols, rhs_Cols>& m) const
+    // Matix Mulitplication Operators
+    template<dim_size P>
+    Mat<T, Rows, P> operator*(const Mat<T, Cols, P>& m) const
     {
-      Mat<T, Rows, rhs_Cols> output;
-      for (element i = 0; i < Rows; i++)
+      dim_size M = Rows;
+      dim_size N = Cols;  
+      Mat<T, Rows, P> output;
+      for (element i = 0; i < M; i++)
       {
-        for (element j = 0; j < rhs_Cols; j++)
+        for (element j = 0; j < P; j++)
         {
-          for (element k = 0; k < Cols; k++)
+          for (element k = 0; k < N; k++)
           {
-            output.E[i][j] += this->E[i][k] * m.E[k][j];
+            output[i][j] += this->E[i][k] * m[k][j];
           }
         }
       }
@@ -420,6 +434,19 @@ namespace nemesis
   //----------------------------------------------------------------------------
 
 } // !nemesis
+
+
+//<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+// Operator Overrides
+//<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+
+
+// operator* overload for type T * Vec
+template <class T, nemesis::dim_size Rows, nemesis::dim_size Cols>
+nemesis::Mat<T, Rows, Cols> operator* (T s, nemesis::Mat<T, Rows, Cols> m)
+{
+  return m * s;
+}
 
 
 #endif // !NEMESIS_MAT_H
