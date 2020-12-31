@@ -9,8 +9,8 @@
 // Test Fixtures
 struct MatTests : public ::testing::Test
 {
-  nemesis::Mat<double, 2, 3> A;
-  nemesis::Mat<double, 3, 2> B;
+  nemesis::Mat<double, 3, 2> A;
+  nemesis::Mat<double, 2, 3> B;
   nemesis::Mat<double, 3, 3> C_3x3;
   nemesis::Mat<double, 2, 2> C_2x2;
 
@@ -68,13 +68,13 @@ TEST_F(MatTests, ConstructRowsTest)
 }
 TEST_F(MatTests, ConstructCopyTest)
 {
-  nemesis::Mat<double, 2, 3> test(A);
+  nemesis::Mat<double, 3, 2> test(A);
   EXPECT_DOUBLE_EQ(test.e(0, 0), 1);
   EXPECT_DOUBLE_EQ(test.e(0, 1), 2);
-  EXPECT_DOUBLE_EQ(test.e(0, 2), 3);
-  EXPECT_DOUBLE_EQ(test.e(1, 0), 4);
-  EXPECT_DOUBLE_EQ(test.e(1, 1), 5);
-  EXPECT_DOUBLE_EQ(test.e(1, 2), 6);
+  EXPECT_DOUBLE_EQ(test.e(1, 0), 3);
+  EXPECT_DOUBLE_EQ(test.e(1, 1), 4);
+  EXPECT_DOUBLE_EQ(test.e(2, 0), 5);
+  EXPECT_DOUBLE_EQ(test.e(2, 1), 6);
 }
 
 
@@ -94,26 +94,27 @@ TEST_F(MatTests, SetterArrayTest)
 }
 TEST_F(MatTests, SetterRowsTest)
 {
-  nemesis::Mat<double, 2, 3> test;
-  test.set({ nemesis::Vec3<double>({ 1, 2, 3 }),
-             nemesis::Vec3<double>({ 4, 5, 6 }) });
+  nemesis::Mat<double, 3, 2> test;
+  test.set({ nemesis::Vec2<double>({ 1, 2 }),
+             nemesis::Vec2<double>({ 3, 4 }),
+             nemesis::Vec2<double>({ 5, 6 }) });
   EXPECT_DOUBLE_EQ(test.e(0, 0), 1);
   EXPECT_DOUBLE_EQ(test.e(0, 1), 2);
-  EXPECT_DOUBLE_EQ(test.e(0, 2), 3);
-  EXPECT_DOUBLE_EQ(test.e(1, 0), 4);
-  EXPECT_DOUBLE_EQ(test.e(1, 1), 5);
-  EXPECT_DOUBLE_EQ(test.e(1, 2), 6);
+  EXPECT_DOUBLE_EQ(test.e(1, 0), 3);
+  EXPECT_DOUBLE_EQ(test.e(1, 1), 4);
+  EXPECT_DOUBLE_EQ(test.e(2, 0), 5);
+  EXPECT_DOUBLE_EQ(test.e(2, 1), 6);
 }
 TEST_F(MatTests, SetterCopyTest)
 {
-  nemesis::Mat<double, 2, 3> test;
+  nemesis::Mat<double, 3, 2> test;
   test.set(A);
   EXPECT_DOUBLE_EQ(test.e(0, 0), 1);
   EXPECT_DOUBLE_EQ(test.e(0, 1), 2);
-  EXPECT_DOUBLE_EQ(test.e(0, 2), 3);
-  EXPECT_DOUBLE_EQ(test.e(1, 0), 4);
-  EXPECT_DOUBLE_EQ(test.e(1, 1), 5);
-  EXPECT_DOUBLE_EQ(test.e(1, 2), 6);
+  EXPECT_DOUBLE_EQ(test.e(1, 0), 3);
+  EXPECT_DOUBLE_EQ(test.e(1, 1), 4);
+  EXPECT_DOUBLE_EQ(test.e(2, 0), 5);
+  EXPECT_DOUBLE_EQ(test.e(2, 1), 6);
 }
 
 
@@ -130,8 +131,8 @@ TEST_F(MatTests, SizeTest)
 }
 TEST_F(MatTests, DimTest)
 {
-  EXPECT_EQ(A.dim().first , 2);
-  EXPECT_EQ(A.dim().second, 3);
+  EXPECT_EQ(A.dim().first , 3);
+  EXPECT_EQ(A.dim().second, 2);
 }
 
 
@@ -145,10 +146,10 @@ TEST_F(MatTests, AccessorGetTest)
   unsigned int two = 2;
   EXPECT_DOUBLE_EQ(A[zero][zero], 1);
   EXPECT_DOUBLE_EQ(A[zero][one ], 2);
-  EXPECT_DOUBLE_EQ(A[zero][two ], 3);
-  EXPECT_DOUBLE_EQ(A[one ][zero], 4);
-  EXPECT_DOUBLE_EQ(A[one ][one ], 5);
-  EXPECT_DOUBLE_EQ(A[one ][two ], 6);
+  EXPECT_DOUBLE_EQ(A[one ][zero], 3);
+  EXPECT_DOUBLE_EQ(A[one ][one ], 4);
+  EXPECT_DOUBLE_EQ(A[two ][zero], 5);
+  EXPECT_DOUBLE_EQ(A[two ][one ], 6);
 }
 TEST_F(MatTests, AccessorGetConstTest)
 {
@@ -157,10 +158,10 @@ TEST_F(MatTests, AccessorGetConstTest)
   const unsigned int two = 2;
   EXPECT_DOUBLE_EQ(A[zero][zero], 1);
   EXPECT_DOUBLE_EQ(A[zero][one ], 2);
-  EXPECT_DOUBLE_EQ(A[zero][two ], 3);
-  EXPECT_DOUBLE_EQ(A[one ][zero], 4);
-  EXPECT_DOUBLE_EQ(A[one ][one ], 5);
-  EXPECT_DOUBLE_EQ(A[one ][two ], 6);
+  EXPECT_DOUBLE_EQ(A[one ][zero], 3);
+  EXPECT_DOUBLE_EQ(A[one ][one ], 4);
+  EXPECT_DOUBLE_EQ(A[two ][zero], 5);
+  EXPECT_DOUBLE_EQ(A[two ][one ], 6);
 }
 TEST_F(MatTests, AccessorSetTest)
 {
@@ -168,17 +169,17 @@ TEST_F(MatTests, AccessorSetTest)
   unsigned int one = 1;
   unsigned int two = 2;
   A[zero][zero] = 9;
-  A[zero][one ] = 9;
-  A[zero][two ] = 9;
-  A[one ][zero] = 9;
-  A[one ][one ] = 9;
-  A[one ][two ] = 9;
+  A[zero][one ] = 8;
+  A[one ][zero] = 7;
+  A[one ][one ] = 6;
+  A[two ][zero] = 5;
+  A[two ][one ] = 4;
   EXPECT_DOUBLE_EQ(A.e(0, 0), 9);
-  EXPECT_DOUBLE_EQ(A.e(0, 1), 9);
-  EXPECT_DOUBLE_EQ(A.e(0, 2), 9);
-  EXPECT_DOUBLE_EQ(A.e(1, 0), 9);
-  EXPECT_DOUBLE_EQ(A.e(1, 1), 9);
-  EXPECT_DOUBLE_EQ(A.e(1, 2), 9);
+  EXPECT_DOUBLE_EQ(A.e(0, 1), 8);
+  EXPECT_DOUBLE_EQ(A.e(1, 0), 7);
+  EXPECT_DOUBLE_EQ(A.e(1, 1), 6);
+  EXPECT_DOUBLE_EQ(A.e(2, 0), 5);
+  EXPECT_DOUBLE_EQ(A.e(2, 1), 4);
 }
 TEST_F(MatTests, AccessorSetConstTest)
 {
@@ -186,28 +187,28 @@ TEST_F(MatTests, AccessorSetConstTest)
   const unsigned int one = 1;
   const unsigned int two = 2;
   A[zero][zero] = 9;
-  A[zero][one ] = 9;
-  A[zero][two ] = 9;
-  A[one ][zero] = 9;
-  A[one ][one ] = 9;
-  A[one ][two ] = 9;
+  A[zero][one ] = 8;
+  A[one ][zero] = 7;
+  A[one ][one ] = 6;
+  A[two ][zero] = 5;
+  A[two ][one ] = 4;
   EXPECT_DOUBLE_EQ(A.e(0, 0), 9);
-  EXPECT_DOUBLE_EQ(A.e(0, 1), 9);
-  EXPECT_DOUBLE_EQ(A.e(0, 2), 9);
-  EXPECT_DOUBLE_EQ(A.e(1, 0), 9);
-  EXPECT_DOUBLE_EQ(A.e(1, 1), 9);
-  EXPECT_DOUBLE_EQ(A.e(1, 2), 9);
+  EXPECT_DOUBLE_EQ(A.e(0, 1), 8);
+  EXPECT_DOUBLE_EQ(A.e(1, 0), 7);
+  EXPECT_DOUBLE_EQ(A.e(1, 1), 6);
+  EXPECT_DOUBLE_EQ(A.e(2, 0), 5);
+  EXPECT_DOUBLE_EQ(A.e(2, 1), 4);
 }
 TEST_F(MatTests, AccessorGetRowTest)
 {
-  EXPECT_EQ(A.row(0), nemesis::Vec3<double>({ 1, 2, 3 }));
-  EXPECT_EQ(A.row(1), nemesis::Vec3<double>({ 4, 5, 6 }));
+  EXPECT_EQ(A.row(0), nemesis::Vec2<double>({ 1, 2 }));
+  EXPECT_EQ(A.row(1), nemesis::Vec2<double>({ 3, 4 }));
+  EXPECT_EQ(A.row(2), nemesis::Vec2<double>({ 5, 6 }));
 }
 TEST_F(MatTests, AccessorGetColumnTest)
 {
-  EXPECT_EQ(A.column(0), nemesis::Vec2<double>({ 1, 4 }));
-  EXPECT_EQ(A.column(1), nemesis::Vec2<double>({ 2, 5 }));
-  EXPECT_EQ(A.column(2), nemesis::Vec2<double>({ 3, 6 }));
+  EXPECT_EQ(A.column(0), nemesis::Vec3<double>({ 1, 3, 5 }));
+  EXPECT_EQ(A.column(1), nemesis::Vec3<double>({ 2, 4, 6 }));
 }
 
 
@@ -219,32 +220,33 @@ TEST_F(MatTests, AssignmentArrayTest)
   A = { 9, 8, 7, 6, 5, 4 };
   EXPECT_DOUBLE_EQ(A.e(0, 0), 9);
   EXPECT_DOUBLE_EQ(A.e(0, 1), 8);
-  EXPECT_DOUBLE_EQ(A.e(0, 2), 7);
-  EXPECT_DOUBLE_EQ(A.e(1, 0), 6);
-  EXPECT_DOUBLE_EQ(A.e(1, 1), 5);
-  EXPECT_DOUBLE_EQ(A.e(1, 2), 4);
+  EXPECT_DOUBLE_EQ(A.e(1, 0), 7);
+  EXPECT_DOUBLE_EQ(A.e(1, 1), 6);
+  EXPECT_DOUBLE_EQ(A.e(2, 0), 5);
+  EXPECT_DOUBLE_EQ(A.e(2, 1), 4);
 }
 TEST_F(MatTests, AssignmentRowsTest)
 {
-  A = { nemesis::Vec3<double>({9, 8, 7}),
-        nemesis::Vec3<double>({6, 5, 4}) };
+  A = { nemesis::Vec2<double>({9, 8}),
+        nemesis::Vec2<double>({7, 6 }),
+        nemesis::Vec2<double>({5, 4}) };
   EXPECT_DOUBLE_EQ(A.e(0, 0), 9);
   EXPECT_DOUBLE_EQ(A.e(0, 1), 8);
-  EXPECT_DOUBLE_EQ(A.e(0, 2), 7);
-  EXPECT_DOUBLE_EQ(A.e(1, 0), 6);
-  EXPECT_DOUBLE_EQ(A.e(1, 1), 5);
-  EXPECT_DOUBLE_EQ(A.e(1, 2), 4);
+  EXPECT_DOUBLE_EQ(A.e(1, 0), 7);
+  EXPECT_DOUBLE_EQ(A.e(1, 1), 6);
+  EXPECT_DOUBLE_EQ(A.e(2, 0), 5);
+  EXPECT_DOUBLE_EQ(A.e(2, 1), 4);
 }
 TEST_F(MatTests, AssignmentMatrixTest)
 {
-  nemesis::Mat<double, 2, 3> that({ 9, 8, 7, 6, 5, 4 });
+  nemesis::Mat<double, 3, 2> that({ 9, 8, 7, 6, 5, 4 });
   A = that;
   EXPECT_DOUBLE_EQ(A.e(0, 0), 9);
   EXPECT_DOUBLE_EQ(A.e(0, 1), 8);
-  EXPECT_DOUBLE_EQ(A.e(0, 2), 7);
-  EXPECT_DOUBLE_EQ(A.e(1, 0), 6);
-  EXPECT_DOUBLE_EQ(A.e(1, 1), 5);
-  EXPECT_DOUBLE_EQ(A.e(1, 2), 4);
+  EXPECT_DOUBLE_EQ(A.e(1, 0), 7);
+  EXPECT_DOUBLE_EQ(A.e(1, 1), 6);
+  EXPECT_DOUBLE_EQ(A.e(2, 0), 5);
+  EXPECT_DOUBLE_EQ(A.e(2, 1), 4);
 }
 
 
@@ -253,7 +255,7 @@ TEST_F(MatTests, AssignmentMatrixTest)
 //------------------------------------------------------------------------------
 TEST_F(MatTests, ComparisonEqualTrueTest)
 {
-  nemesis::Mat<double, 2, 3> that(A);
+  nemesis::Mat<double, 3, 2> that(A);
   EXPECT_TRUE(A == that);
 }
 TEST_F(MatTests, ComparisonEqualFalseSizeTest)
@@ -276,7 +278,7 @@ TEST_F(MatTests, ComparisonInequalTrueValueTest)
 }
 TEST_F(MatTests, ComparisonInequalFalseTest)
 {
-  nemesis::Mat<double, 2, 3> that(A);
+  nemesis::Mat<double, 3, 2> that(A);
   EXPECT_FALSE(A != that);
 }
 
@@ -289,10 +291,10 @@ TEST_F(MatTests, UnaryNegativeTest)
   A = -A;
   EXPECT_DOUBLE_EQ(A.e(0, 0), -1);
   EXPECT_DOUBLE_EQ(A.e(0, 1), -2);
-  EXPECT_DOUBLE_EQ(A.e(0, 2), -3);
-  EXPECT_DOUBLE_EQ(A.e(1, 0), -4);
-  EXPECT_DOUBLE_EQ(A.e(1, 1), -5);
-  EXPECT_DOUBLE_EQ(A.e(1, 2), -6);
+  EXPECT_DOUBLE_EQ(A.e(1, 0), -3);
+  EXPECT_DOUBLE_EQ(A.e(1, 1), -4);
+  EXPECT_DOUBLE_EQ(A.e(2, 0), -5);
+  EXPECT_DOUBLE_EQ(A.e(2, 1), -6);
 }
 
 
@@ -304,20 +306,20 @@ TEST_F(MatTests, AdditionTest)
   A = A + A;
   EXPECT_DOUBLE_EQ(A.e(0, 0), 2);
   EXPECT_DOUBLE_EQ(A.e(0, 1), 4);
-  EXPECT_DOUBLE_EQ(A.e(0, 2), 6);
-  EXPECT_DOUBLE_EQ(A.e(1, 0), 8);
-  EXPECT_DOUBLE_EQ(A.e(1, 1), 10);
-  EXPECT_DOUBLE_EQ(A.e(1, 2), 12);
+  EXPECT_DOUBLE_EQ(A.e(1, 0), 6);
+  EXPECT_DOUBLE_EQ(A.e(1, 1), 8);
+  EXPECT_DOUBLE_EQ(A.e(2, 0), 10);
+  EXPECT_DOUBLE_EQ(A.e(2, 1), 12);
 }
 TEST_F(MatTests, AdditionSelfTest)
 {
   A += A;
   EXPECT_DOUBLE_EQ(A.e(0, 0), 2);
   EXPECT_DOUBLE_EQ(A.e(0, 1), 4);
-  EXPECT_DOUBLE_EQ(A.e(0, 2), 6);
-  EXPECT_DOUBLE_EQ(A.e(1, 0), 8);
-  EXPECT_DOUBLE_EQ(A.e(1, 1), 10);
-  EXPECT_DOUBLE_EQ(A.e(1, 2), 12);
+  EXPECT_DOUBLE_EQ(A.e(1, 0), 6);
+  EXPECT_DOUBLE_EQ(A.e(1, 1), 8);
+  EXPECT_DOUBLE_EQ(A.e(2, 0), 10);
+  EXPECT_DOUBLE_EQ(A.e(2, 1), 12);
 }
 
 
@@ -354,30 +356,30 @@ TEST_F(MatTests, ProductScalarTest1)
   A = A * 2.0;
   EXPECT_DOUBLE_EQ(A.e(0, 0), 2);
   EXPECT_DOUBLE_EQ(A.e(0, 1), 4);
-  EXPECT_DOUBLE_EQ(A.e(0, 2), 6);
-  EXPECT_DOUBLE_EQ(A.e(1, 0), 8);
-  EXPECT_DOUBLE_EQ(A.e(1, 1), 10);
-  EXPECT_DOUBLE_EQ(A.e(1, 2), 12);
+  EXPECT_DOUBLE_EQ(A.e(1, 0), 6);
+  EXPECT_DOUBLE_EQ(A.e(1, 1), 8);
+  EXPECT_DOUBLE_EQ(A.e(2, 0), 10);
+  EXPECT_DOUBLE_EQ(A.e(2, 1), 12);
 }
 TEST_F(MatTests, ProductScalarTest2)
 {
   A = 2.0 * A;
   EXPECT_DOUBLE_EQ(A.e(0, 0), 2);
   EXPECT_DOUBLE_EQ(A.e(0, 1), 4);
-  EXPECT_DOUBLE_EQ(A.e(0, 2), 6);
-  EXPECT_DOUBLE_EQ(A.e(1, 0), 8);
-  EXPECT_DOUBLE_EQ(A.e(1, 1), 10);
-  EXPECT_DOUBLE_EQ(A.e(1, 2), 12);
+  EXPECT_DOUBLE_EQ(A.e(1, 0), 6);
+  EXPECT_DOUBLE_EQ(A.e(1, 1), 8);
+  EXPECT_DOUBLE_EQ(A.e(2, 0), 10);
+  EXPECT_DOUBLE_EQ(A.e(2, 1), 12);
 }
 TEST_F(MatTests, ProductSelfScalarTest)
 {
   A *= 2.0;
   EXPECT_DOUBLE_EQ(A.e(0, 0), 2);
   EXPECT_DOUBLE_EQ(A.e(0, 1), 4);
-  EXPECT_DOUBLE_EQ(A.e(0, 2), 6);
-  EXPECT_DOUBLE_EQ(A.e(1, 0), 8);
-  EXPECT_DOUBLE_EQ(A.e(1, 1), 10);
-  EXPECT_DOUBLE_EQ(A.e(1, 2), 12);
+  EXPECT_DOUBLE_EQ(A.e(1, 0), 6);
+  EXPECT_DOUBLE_EQ(A.e(1, 1), 8);
+  EXPECT_DOUBLE_EQ(A.e(2, 0), 10);
+  EXPECT_DOUBLE_EQ(A.e(2, 1), 12);
 }
 
 
@@ -390,10 +392,10 @@ TEST_F(MatTests, QuotientScalarTest)
   A = A / 2;
   EXPECT_DOUBLE_EQ(A.e(0, 0), 1);
   EXPECT_DOUBLE_EQ(A.e(0, 1), 2);
-  EXPECT_DOUBLE_EQ(A.e(0, 2), 3);
-  EXPECT_DOUBLE_EQ(A.e(1, 0), 4);
-  EXPECT_DOUBLE_EQ(A.e(1, 1), 5);
-  EXPECT_DOUBLE_EQ(A.e(1, 2), 6);
+  EXPECT_DOUBLE_EQ(A.e(1, 0), 3);
+  EXPECT_DOUBLE_EQ(A.e(1, 1), 4);
+  EXPECT_DOUBLE_EQ(A.e(2, 0), 5);
+  EXPECT_DOUBLE_EQ(A.e(2, 1), 6);
 }
 TEST_F(MatTests, QuotientSelfScalarTest)
 {
@@ -401,10 +403,10 @@ TEST_F(MatTests, QuotientSelfScalarTest)
   A /= 2;
   EXPECT_DOUBLE_EQ(A.e(0, 0), 1);
   EXPECT_DOUBLE_EQ(A.e(0, 1), 2);
-  EXPECT_DOUBLE_EQ(A.e(0, 2), 3);
-  EXPECT_DOUBLE_EQ(A.e(1, 0), 4);
-  EXPECT_DOUBLE_EQ(A.e(1, 1), 5);
-  EXPECT_DOUBLE_EQ(A.e(1, 2), 6);
+  EXPECT_DOUBLE_EQ(A.e(1, 0), 3);
+  EXPECT_DOUBLE_EQ(A.e(1, 1), 4);
+  EXPECT_DOUBLE_EQ(A.e(2, 0), 5);
+  EXPECT_DOUBLE_EQ(A.e(2, 1), 6);
 }
 TEST_F(MatTests, QuotientScalarDivByZeroTest)
 {
@@ -433,7 +435,6 @@ TEST_F(MatTests, ProductVectorTest)
 //------------------------------------------------------------------------------
 TEST_F(MatTests, ProductMatrixTest1)
 {
-  nemesis::Mat<double, 3, 3> C = B * A;
   EXPECT_EQ(A * B, C_3x3);
 }
 TEST_F(MatTests, ProductMatrixTest2)
@@ -443,13 +444,27 @@ TEST_F(MatTests, ProductMatrixTest2)
 
 
 //------------------------------------------------------------------------------
-// Constructor Tests
+// Transpose Tests
 //------------------------------------------------------------------------------
+TEST_F(MatTests, TransposeTest)
+{
+   nemesis::Mat<double, 2, 3> A_T = A.transpose();
+}
 
 
 //------------------------------------------------------------------------------
-// Constructor Tests
+// Zeroize Tests
 //------------------------------------------------------------------------------
+TEST_F(MatTests, ZeorizeTest)
+{
+  A.zeroize();
+  EXPECT_DOUBLE_EQ(A[0][0], 0);
+  EXPECT_DOUBLE_EQ(A[0][1], 0);
+  EXPECT_DOUBLE_EQ(A[1][0], 0);
+  EXPECT_DOUBLE_EQ(A[1][0], 0);
+  EXPECT_DOUBLE_EQ(A[2][0], 0);
+  EXPECT_DOUBLE_EQ(A[2][1], 0);
+}
 
 
 //------------------------------------------------------------------------------

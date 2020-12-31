@@ -37,7 +37,7 @@ public:
 
 int main()
 {
-  
+  /*
   std::cout << "Testing Simulation Kernel...\n\n";
 
   // Setting test inputs
@@ -60,6 +60,13 @@ int main()
   std::cout << "x:\t" << std::to_string(btest->x) << "\n";
   std::cout << "dx:\t" << std::to_string(btest->dx) << "\n";
   std::cout << "ddx:\t" << std::to_string(btest->ddx) << "\n";
+  */
 
+  nemesis::Mat<int, 2, 3> A({ 1, 2, 3,
+                              4, 5, 6 });
+
+  nemesis::Mat<int, 3, 2> B({ 1, 2,
+                              3, 4,
+                              5, 6 });
   return 0;
 }

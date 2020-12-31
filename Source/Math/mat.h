@@ -304,14 +304,12 @@ namespace nemesis
     template<dim_size P>
     Mat<T, Rows, P> operator*(const Mat<T, Cols, P>& m) const
     {
-      dim_size M = Rows;
-      dim_size N = Cols;  
       Mat<T, Rows, P> output;
-      for (element i = 0; i < M; i++)
+      for (element i = 0; i < Rows; i++)
       {
         for (element j = 0; j < P; j++)
         {
-          for (element k = 0; k < N; k++)
+          for (element k = 0; k < Cols; k++)
           {
             output[i][j] += this->E[i][k] * m[k][j];
           }
@@ -322,23 +320,17 @@ namespace nemesis
 
 
     // Transposes
-    // TODO:  Find a better syntax for this mess. Transpose is the verb and the
-    //        noun. This makes it difficult.
-    Mat<T, Cols, Rows> trans(void) const
+    Mat<T, Cols, Rows> transpose(void) const
     {
       Mat<T, Cols, Rows> output;
       for (element row = 0; row < Rows; row++)
       {
         for (element col = 0; col < Cols; col++)
         {
-          output.E[row][col] = this->E[col][row];
+          output[col][row] = this->E[row][col];
         }
       }
       return output;
-    }
-    void transpose(void)
-    {
-      *this = this->trans();
     }
 
 
