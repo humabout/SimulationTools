@@ -68,6 +68,7 @@
     <ClInclude Include="..\Source\Math\typedefs.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\math.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />
