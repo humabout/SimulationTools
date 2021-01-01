@@ -413,7 +413,7 @@ namespace nemesis
       N = 0;
 
       // Executing the LUP Decomposition
-      for (element i = 0; i < N, i++)
+      for (element i = 0; i < N; i++)
       {
         // Finding the pivot position
         T       A_abs = 0;
@@ -651,8 +651,8 @@ namespace nemesis
       for (element row = 0; row < N; row++)
       {
         for (element col = 0; col < N; col++)
-        {Rows
-          output.E[row][col] = this->E[row][col] + m.E[row][col];
+        {
+          output[row][col] = this->E[row][col] + m[row][col];
         }
       }
       return output;
@@ -733,7 +733,7 @@ namespace nemesis
     template<dim_size P>
     Mat<T, N, P> operator*(const Mat<T, N, P>& m) const
     {
-      Mat<T, Rows, P> output;
+      Mat<T, N, P> output;
       for (element i = 0; i < N; i++)
       {
         for (element j = 0; j < P; j++)
@@ -797,9 +797,10 @@ namespace nemesis
     {
       // LUP Decompostion
       LUP<T, N> lup(*this);
+      mat A = lup.LU();
 
       // Calculating the determinant
-      T det = lup.LU()[0][0];
+      T det = A[0][0];
       for (element i = 1; i < N; i++)
       {
         det *= A[i][i];
