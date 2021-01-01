@@ -353,7 +353,124 @@ namespace nemesis
 
   }; // ! Mat<T, M, N>
 
-  /*
+  
+  //----------------------------------------------------------------------------
+  // Name:    LUP
+  // Purpose: This is a helper class for executing LUP decompositions on square
+  //          matrices. These are used a lot for inverting square matrices or 
+  //          calculating determinates.
+  //----------------------------------------------------------------------------
+  template<class T, dim_size N>
+  class LUP
+  {
+  public:
+    // Constructor & Destructor
+    LUP() { N = 0; }
+    LUP(const Mat<T, N, N>& A) { this->decompose(A); }
+    ~LUP() { /* Does Nothing */ }
+
+    // Accessors
+    Mat<T, N, N> lower(void) const
+    {
+      Mat<T, N, N> low;
+      for (element row = 0; row < N; row++)
+      {
+        for (element col = 0; col < N; col++)
+        {
+          if (row <= col)
+          {
+            low[row][col] = LU[row][col];
+          }
+          else
+          {
+            // Leave the zero in place
+          }
+        }
+      }
+      return low;
+    }
+    Mat<T, N, N> upper(void) const { return LU - this->lower(); }
+    Mat<T, N, N> lower_upper(void) const { return LU; }
+    Vec<T, N>    permutation(void) const { return P; }
+    unsigned int swap_count(void) const { return N; }
+
+    // Functionality
+    void deompose(const Mat<T, N, N>& A)
+    {
+      // Algorithm from https://en.wikipedia.org/wiki/LU_decomposition#C_code_example
+
+      // Initializing the matrix that will hold the sum of the L-E matrix and 
+      // the U matrix. The algorithm will build the answer here.
+      LU = A;
+
+      // Initializing the permutation matrix vector
+      for (element i = 0; i < N; i++)
+      {
+        P[i] = i;
+      }
+
+      // Initializing the number of row swaps to zero
+      N = 0;
+
+      // Executing the LUP Decomposition
+      for (element i = 0; i < N, i++)
+      {
+        // Finding the pivot position
+        T       A_abs = 0;
+        T       A_max = 0;
+        element i_max = i;
+        for (element k = i; k < N; k++)
+        {
+          A_abs = abs(LU[k][i]);
+          if (A_abs > A_max)
+          {
+            A_max = A_abs;
+            i_max = k;
+          }
+        }
+
+        // Checking for degeneracy
+        if (A_max < math::DIVIDE_BY_ZERO_TOLERANCE)
+        {
+          throw std::runtime_error("Fatal Error: Matrix is degenerate and cannot be decomposed.");
+        }
+
+        // Pivoting
+        if (i != i_max)
+        {
+          // Pivoting
+          std::swap(P [i], P [i_max]);
+          std::swap(LU[i], LU[i_max]);
+
+          // Counting pivots
+          N++;
+        }
+
+        // Building the matrix
+        for (element j = i + 1; j < N; j++)
+        {
+          A[j][i] /= A[i][i];
+
+          for (element k = i + 1; k < N; k++)
+          {
+            A[j][k] -= A[j][i] * A[i][k];
+          }
+        }
+      }
+    }
+
+  private:
+    // Stores L-E plus U in a single matrix
+    Mat<T, N, N> LU;
+
+    // Stores the column indices where the permutation matrix has a one
+    Vec<element, N> P;
+
+    // Number of row swaps
+    unsigned int N;
+  };
+
+
   //----------------------------------------------------------------------------
   // Specialized for Rows = Cols
   //----------------------------------------------------------------------------
@@ -361,33 +478,423 @@ namespace nemesis
   class Mat<T, N, N>
   {
   public:
+    // Typedefs
+    typedef Mat<T, N, N>                    mat;
+    typedef Vec<T, N>                       row_vec;
+    typedef Vec<T, N>                       col_vec;
+    typedef std::shared_ptr< Mat<T, N, N> > pointer;
+
+
     // Constructors
+    Mat()
+    {
+      this->zeroize();
+    }
+    Mat(const T(& m)[N * N])
+    {
+      this->set(m);
+    }
+    Mat(const row_vec(& m)[N])
+    {
+      this->set(m);
+    }
+    Mat(const mat& m)
+    {
+      this->set(m);
+    }
+
+
     // Destructor
+    ~Mat()
+    {
+      // Does Nothing
+    }
+
+
     // Setters
+    void set(const T(& m)[N * N])
+    {
+      // This assumed that the elements of each row are contiguous, and that the
+      // first row appears first in the array each successive row appears in 
+      // ascending order, with the last row at the end of the array.
+      // For example:
+      // [ 1, 2, 3,
+      //   4, 5, 6,  = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
+      //   7, 8, 9]
+      for (element row = 0; row < N; row++)
+      {
+        for (element col = 0; col < N; col++)
+        {
+          this->E[row][col] = m[(row * N) + col];
+        }
+      }
+    }
+    void set(const row_vec(& m)[N])
+    {
+      for (element row = 0; row < N; row++)
+      {
+        this->E[row] = m[row];
+      }
+    }
+    void set(const mat& m)
+    {
+      for (element row = 0; row < N; row++)
+      {
+        for (element col = 0; col < N; col++)
+        {
+          this->E[row][col] = m.E[row][col];
+        }
+      }
+    }
+
+
     // Accessors
+    T& e(element row, element col)
+    {
+      return this->E[row][col];
+    }
+    row_vec& operator[](element r)
+    {
+      return this->E[r];
+    }
+    const row_vec& operator[](const element& r) const
+    {
+      return this->E[r];
+    }
+    row_vec row(element r)
+    {
+      return this->E[r];
+    }
+    col_vec column(element c)
+    {
+      col_vec output;
+      for (element row = 0; row < N; row++)
+      {
+        output[row] = this->E[row][c];
+      }
+      return output;
+    }
+
     // Return various measures of size
+    dim_size length(void) const
+    {
+      // Returns the largest dimension of the matrix
+      return N;
+    }
+    dim_size size(void) const
+    {
+      // Returns the total number of elements in the matrix
+      return N * N;
+    }
+    dimension dim(void) const
+    {
+      // Returns the number of rows and columsn in a dimension object
+      // NOTE:  This is not the true dimensionality of the matrix in the 
+      //        mathematical sense.
+      return dimension(N, N);
+    }
+
+
     // Comparison Operators
+    template<dim_size P, dim_size Q>
+    bool operator==(const Mat<T, P, Q>& m) const
+    {
+      // Check if sizes are the same
+      if (this->dim() != m.dim())
+      {
+        return false;
+      }
+
+      // Check if the elements are the same
+      for (element row = 0; row < N; row++)
+      {
+        for (element col = 0; col < N; col++)
+        {
+          if (this->E[row][col] != m[row][col])
+          {
+            return false;
+          }
+          else
+          {
+            // Continue Checking
+          }
+        }
+      }
+      return true;
+    }
+    template<dim_size P, dim_size Q>
+    bool operator!=(const Mat<T, P, Q>& m) const
+    {
+      return !(*this == m);
+    }
+
+
     // Unary Negative
+    mat operator-() const
+    {
+      mat output;
+      for (element row = 0; row < N; row++)
+      {
+        for (element col = 0; col < N; col++)
+        {
+          output.E[row][col] = -(this->E[row][col]);
+        }
+      }
+      return output;
+    }
+
+
     // Addition Operators
+    mat operator+(const mat& m) const
+    {
+      mat output;
+      for (element row = 0; row < N; row++)
+      {
+        for (element col = 0; col < N; col++)
+        {Rows
+          output.E[row][col] = this->E[row][col] + m.E[row][col];
+        }
+      }
+      return output;
+    }
+    void operator+=(const mat& m)
+    {
+      *this = *this + m;
+    }
+
+
     // Subtraction Operators
+    mat operator-(const mat& m) const
+    {
+      return *this + (-m);
+    }
+    void operator-=(const mat& m)
+    {
+      *this = *this - m;
+    }
+
+
     // Scalar Multiplication Operators
+    mat operator*(const T& s) const
+    {
+      mat output;
+      for (element row = 0; row < N; row++)
+      {
+        for (element col = 0; col < N; col++)
+        {
+          output.E[row][col] = s * this->E[row][col];
+        }
+      }
+      return output;
+    }
+    void operator*=(const T& s)
+    {
+      *this = *this * s;
+    }
+
+
     // Scalar Division Operators
-    // Vector Multiplication Operators
-    // Matrix Multiplication Operators
+    mat operator/ (const T& s) const
+    {
+      T den = s;
+      if (abs(s) < math::DIVIDE_BY_ZERO_TOLERANCE)
+      {
+        den = 1 / math::DIVIDE_BY_ZERO_TOLERANCE;
+        throw std::runtime_error("Warning: Division by near-zero. Dividing by tolerance, instead.");
+      }
+      else
+      {
+        den = 1 / s;
+      }
+      return *this * den;
+    }
+    void operator/=(const T& s)
+    {
+      *this = *this / s;
+    }
+
+
+    // Vector Multiplication Operator
+    col_vec operator*(const row_vec& v) const
+    {
+      col_vec output;
+      for (element row = 0; row < N; row++)
+      {
+        for (element col = 0; col < N; col++)
+        {
+          output[row] += this->E[row][col] * v[col];
+        }
+      }
+      return output;
+    }
+
+
+    // Matix Mulitplication Operators
+    template<dim_size P>
+    Mat<T, N, P> operator*(const Mat<T, N, P>& m) const
+    {
+      Mat<T, Rows, P> output;
+      for (element i = 0; i < N; i++)
+      {
+        for (element j = 0; j < P; j++)
+        {
+          for (element k = 0; k < N; k++)
+          {
+            output[i][j] += this->E[i][k] * m[k][j];
+          }
+        }
+      }
+      return output;
+    }
+
+
     // Transposes
+    mat transpose(void) const
+    {
+      mat output;
+      for (element row = 0; row < N; row++)
+      {
+        for (element col = 0; col < N; col++)
+        {
+          output[col][row] = this->E[row][col];
+        }
+      }
+      return output;
+    }
+
+
     // Trace
-    // LU Decomposition
+    T trace(void) const
+    {
+      T tr = 0;
+      for (element i = 0; i < N; i++)
+      {
+        tr += this->E[i][i];
+      }
+      return tr;
+    }
+
+
+    // Symmetry Check
+    bool is_symmetric(void) const
+    {
+      for (element i = 0; i < N; i++)
+      {
+        for (element j = 0; j < N; j++)
+        {
+          if (this->E[i][j] != this->E[j][i])
+          {
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+
+
     // Determinate
+    T determinant(void) const
+    {
+      // LUP Decompostion
+      LUP<T, N> lup(*this);
+
+      // Calculating the determinant
+      T det = lup.LU()[0][0];
+      for (element i = 1; i < N; i++)
+      {
+        det *= A[i][i];
+      }
+
+      // Setting the sign of the determinant
+      if ((lup.N() - N) % 2 != 0)
+      {
+        det = -det;
+      }
+
+      return det;
+    }
+
     // Inverses (Using LUP Decomposition)
-    //  TODO:  Add check for Choleski Decomposition
+    mat inverse(void) const
+    {
+      mat inv;
+
+      // LUP Decompostion
+      LUP<T, N> lup(*this);
+      mat A     = lup.LU();
+      col_vec P = lup.P();
+
+      // Algorithm from https://en.wikipedia.org/wiki/LU_decomposition#C_code_example
+      for (element j = 0; j < N; j++)
+      {
+        for (element i = 0; i < N; i++)
+        {
+          if (P[i] == j) { inv[i][j] = 1; }
+          else { inv[i][j] = 0; }
+
+          for (element k = 0; k < i; k++)
+          {
+            inv[i][j] -= A[i][k] * inv[k][j];
+          }
+        }
+
+        for (element i = N; i >= 0; i--)
+        {
+          for (element k = i + 1; k < N; k++)
+          {
+            inv[i][j] -= A[i][k] * inv[k][j];
+          }
+          inv[i][j] /= A[i][i];
+        }
+      }
+
+      return inv;
+    }
+    void invert(void)
+    {
+      *this = this->inverse();
+    }
+
+
     // Identity (return one; set to one)
+    void set_to_identity(void)
+    {
+      for (element row = 0; row < N; row++)
+      {
+        for (element col = 0; col < N; col++)
+        {
+          if (row == col)
+          {
+            this->E[row][col] = 1;
+          }
+          else
+          {
+            this->E[row][col] = 0;
+          }
+        }
+      }
+    }
+
+
     // Zeroize
+    void zeroize(void)
+    {
+      for (element row = 0; row < N; row++)
+      {
+        for (element col = 0; col < N; col++)
+        {
+          this->E[row][col] = 0;
+        }
+      }
+    }
 
 
   private:
     // Elements
     row_vec E[N];
-  };*/
+
+
+  };
 
 
     // Constructors
@@ -405,7 +912,7 @@ namespace nemesis
     // Matrix Multiplication Operators
     // Transposes
     // Trace
-    // LU Decomposition
+    // Symmetry Check
     // Determinate
     // Inverses (Using LUP Decomposition)
     //  TODO:  Add check for Choleski Decomposition
