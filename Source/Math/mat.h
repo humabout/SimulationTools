@@ -472,7 +472,7 @@ namespace nemesis
 
 
   //----------------------------------------------------------------------------
-  // Specialized for Rows = Cols
+  // Specialized for Square Matrces (Rows = Cols)
   //----------------------------------------------------------------------------
   template <class T, dim_size N>
   class Mat<T, N, N>
@@ -606,21 +606,39 @@ namespace nemesis
       }
 
       // Check if the elements are the same
-      for (element row = 0; row < N; row++)
+
+      // Providing specialized methods for N=2 and N=3 because those are common
+      // sizes that can be made to run faster. All other sizes use a default
+      // algorithm.
+      switch (N)
       {
-        for (element col = 0; col < N; col++)
+      case 2:
+        // 2x2 Matrix
+        return (this->E[0] == m[0]) &&
+               (this->E[1] == m[1]);
+      case 3:
+        // 3x3 Matrix
+        return (this->E[0] == m[0]) &&
+               (this->E[1] == m[1]) &&
+               (this->E[2] == m[2]);
+      default:
+        // All other square matrices
+        for (element row = 0; row < N; row++)
         {
-          if (this->E[row][col] != m[row][col])
+          for (element col = 0; col < N; col++)
           {
-            return false;
-          }
-          else
-          {
-            // Continue Checking
+            if (this->E[row][col] != m[row][col])
+            {
+              return false;
+            }
+            else
+            {
+              // Continue Checking
+            }
           }
         }
+        return true;
       }
-      return true;
     }
     template<dim_size P, dim_size Q>
     bool operator!=(const Mat<T, P, Q>& m) const
@@ -633,11 +651,39 @@ namespace nemesis
     mat operator-() const
     {
       mat output;
-      for (element row = 0; row < N; row++)
+
+      // Providing specialized methods for N=2 and N=3 because those are common
+      // sizes that can be made to run faster. All other sizes use a default
+      // algorithm.
+      switch (N)
       {
-        for (element col = 0; col < N; col++)
+      case 2:
+        // 2x2 Matrix
+        output.E[0][0] = -(this->E[0][0]);
+        output.E[0][1] = -(this->E[0][1]);
+        output.E[1][0] = -(this->E[1][0]);
+        output.E[1][1] = -(this->E[1][1]);
+        break;
+      case 3:
+        // 3x3 Matrix
+        output.E[0][0] = -(this->E[0][0]);
+        output.E[0][1] = -(this->E[0][1]);
+        output.E[0][2] = -(this->E[0][2]);
+        output.E[1][0] = -(this->E[1][0]);
+        output.E[1][1] = -(this->E[1][1]);
+        output.E[1][2] = -(this->E[1][2]);
+        output.E[2][0] = -(this->E[2][0]);
+        output.E[2][1] = -(this->E[2][1]);
+        output.E[2][2] = -(this->E[2][2]);
+        break;
+      default:
+        // All Other Square Matrices
+        for (element row = 0; row < N; row++)
         {
-          output.E[row][col] = -(this->E[row][col]);
+          for (element col = 0; col < N; col++)
+          {
+            output.E[row][col] = -(this->E[row][col]);
+          }
         }
       }
       return output;
@@ -648,11 +694,39 @@ namespace nemesis
     mat operator+(const mat& m) const
     {
       mat output;
-      for (element row = 0; row < N; row++)
+
+      // Providing specialized methods for N=2 and N=3 because those are common
+      // sizes that can be made to run faster. All other sizes use a default
+      // algorithm.
+      switch (N)
       {
-        for (element col = 0; col < N; col++)
+      case 2:
+        // 2x2 Matrix
+        output[0][0] = this->E[0][0] + m[0][0];
+        output[0][1] = this->E[0][1] + m[0][1];
+        output[1][0] = this->E[1][0] + m[1][0];
+        output[1][1] = this->E[1][1] + m[1][1];
+        break;
+      case 3:
+        // 3x3 Matrix
+        output[0][0] = this->E[0][0] + m[0][0];
+        output[0][1] = this->E[0][1] + m[0][1];
+        output[0][2] = this->E[0][2] + m[0][2];
+        output[1][0] = this->E[1][0] + m[1][0];
+        output[1][1] = this->E[1][1] + m[1][1];
+        output[1][2] = this->E[1][2] + m[1][2];
+        output[2][0] = this->E[2][0] + m[2][0];
+        output[2][1] = this->E[2][1] + m[2][1];
+        output[2][2] = this->E[2][2] + m[2][2];
+        break;
+      default:
+        // All Other Square Matrices
+        for (element row = 0; row < N; row++)
         {
-          output[row][col] = this->E[row][col] + m[row][col];
+          for (element col = 0; col < N; col++)
+          {
+            output[row][col] = this->E[row][col] + m[row][col];
+          }
         }
       }
       return output;
@@ -678,11 +752,39 @@ namespace nemesis
     mat operator*(const T& s) const
     {
       mat output;
-      for (element row = 0; row < N; row++)
+
+      // Providing specialized methods for N=2 and N=3 because those are common
+      // sizes that can be made to run faster. All other sizes use a default
+      // algorithm.
+      switch (N)
       {
-        for (element col = 0; col < N; col++)
+      case 2:
+        // 2x2 Matrix
+        output.E[0][0] = s * this->E[0][0];
+        output.E[0][1] = s * this->E[0][1];
+        output.E[1][0] = s * this->E[1][0];
+        output.E[1][1] = s * this->E[1][1];
+        break;
+      case 3:
+        // 3x3 Matrix
+        output.E[0][0] = s * this->E[0][0];
+        output.E[0][1] = s * this->E[0][1];
+        output.E[0][2] = s * this->E[0][2];
+        output.E[1][0] = s * this->E[1][0];
+        output.E[1][1] = s * this->E[1][1];
+        output.E[1][2] = s * this->E[1][2];
+        output.E[2][0] = s * this->E[2][0];
+        output.E[2][1] = s * this->E[2][1];
+        output.E[2][2] = s * this->E[2][2];
+        break;
+      default:
+        // All Other Square Matrices
+        for (element row = 0; row < N; row++)
         {
-          output.E[row][col] = s * this->E[row][col];
+          for (element col = 0; col < N; col++)
+          {
+            output.E[row][col] = s * this->E[row][col];
+          }
         }
       }
       return output;
@@ -718,11 +820,39 @@ namespace nemesis
     col_vec operator*(const row_vec& v) const
     {
       col_vec output;
-      for (element row = 0; row < N; row++)
+
+      // Providing specialized methods for N=2 and N=3 because those are common
+      // sizes that can be made to run faster. All other sizes use a default
+      // algorithm.
+      switch (N)
       {
-        for (element col = 0; col < N; col++)
+      case 2:
+        // 2x2 Matrix
+        output[0] += this->E[0][0] * v[0];
+        output[0] += this->E[0][1] * v[1];
+        output[1] += this->E[1][0] * v[0];
+        output[1] += this->E[1][1] * v[1];
+        break;
+      case 3:
+        // 3x3 Matrix
+        output[0] += this->E[0][0] * v[0];
+        output[0] += this->E[0][1] * v[1];
+        output[0] += this->E[0][2] * v[2];
+        output[1] += this->E[1][0] * v[0];
+        output[1] += this->E[1][1] * v[1];
+        output[1] += this->E[1][2] * v[2];
+        output[2] += this->E[2][0] * v[0];
+        output[2] += this->E[2][1] * v[1];
+        output[2] += this->E[2][2] * v[2];
+        break;
+      default:
+        // All Other Square Matrices
+        for (element row = 0; row < N; row++)
         {
-          output[row] += this->E[row][col] * v[col];
+          for (element col = 0; col < N; col++)
+          {
+            output[row] += this->E[row][col] * v[col];
+          }
         }
       }
       return output;
@@ -734,6 +864,41 @@ namespace nemesis
     Mat<T, N, P> operator*(const Mat<T, N, P>& m) const
     {
       Mat<T, N, P> output;
+
+      // Providing specialized methods for N=2 and N=3 because those are common
+      // sizes that can be made to run faster. All other sizes use a default
+      // algorithm.
+      if (N == P)
+      {
+        // If both matrices are square, choose an algorithm based on their size.
+        // If their size is greater than 3x3, use the default algorithm.
+        switch (N)
+        {
+        case 2:
+          // 2x2 Matrix
+          output[0][0] = this->E[0][0] * m[0][0] + this->E[0][1] * m[1][0];
+          output[0][1] = this->E[0][0] * m[0][1] + this->E[0][1] * m[1][1];
+          output[1][0] = this->E[1][0] * m[0][0] + this->E[1][1] * m[1][0];
+          output[0][1] = this->E[1][0] * m[0][1] + this->E[1][1] * m[1][1];
+          return output;
+        case 3:
+          // 3x3 Matrix
+          output[0][0] = this->E[0][0] * m[0][0] + this->E[0][1] * m[1][0] + this->E[0][2] * m[2][0];
+          output[0][1] = this->E[0][0] * m[0][1] + this->E[0][1] * m[1][1] + this->E[0][2] * m[2][1];
+          output[0][2] = this->E[0][0] * m[0][2] + this->E[0][1] * m[1][2] + this->E[0][2] * m[2][2];
+          output[1][0] = this->E[1][0] * m[0][0] + this->E[1][1] * m[1][0] + this->E[1][2] * m[2][0];
+          output[1][1] = this->E[1][0] * m[0][1] + this->E[1][1] * m[1][1] + this->E[1][2] * m[2][1];
+          output[1][2] = this->E[1][0] * m[0][2] + this->E[1][1] * m[1][2] + this->E[1][2] * m[2][2];
+          output[2][0] = this->E[2][0] * m[0][0] + this->E[2][1] * m[1][0] + this->E[2][2] * m[2][0];
+          output[2][1] = this->E[2][0] * m[0][1] + this->E[2][1] * m[1][1] + this->E[2][2] * m[2][1];
+          output[2][2] = this->E[2][0] * m[0][2] + this->E[2][1] * m[1][2] + this->E[2][2] * m[2][2];
+          return output;
+        default:
+          // All other matrices pass through to the generic calculation below
+        }
+      }
+
+      // Generic Algorithm
       for (element i = 0; i < N; i++)
       {
         for (element j = 0; j < P; j++)
@@ -752,11 +917,34 @@ namespace nemesis
     mat transpose(void) const
     {
       mat output;
-      for (element row = 0; row < N; row++)
+
+      // Providing specialized methods for N=2 and N=3 because those are common
+      // sizes that can be made to run faster. All other sizes use a default
+      // algorithm.
+      switch (N)
       {
-        for (element col = 0; col < N; col++)
+      case 2:
+        // 2x2 Matrix
+        output[1][0] = this->E[0][1];
+        output[0][1] = this->E[1][0];
+        break;
+      case 3:
+        // 3x3 Matrix
+        output[1][0] = this->E[0][1];
+        output[0][1] = this->E[1][0];
+        output[2][0] = this->E[0][2];
+        output[0][2] = this->E[2][0];
+        output[1][2] = this->E[2][1];
+        output[2][1] = this->E[1][2];
+        break;
+      default:
+        // All Other Square Matrices
+        for (element row = 0; row < N; row++)
         {
-          output[col][row] = this->E[row][col];
+          for (element col = 0; col < N; col++)
+          {
+            output[col][row] = this->E[row][col];
+          }
         }
       }
       return output;
@@ -766,90 +954,180 @@ namespace nemesis
     // Trace
     T trace(void) const
     {
-      T tr = 0;
-      for (element i = 0; i < N; i++)
+      // Providing specialized methods for N=2 and N=3 because those are common
+      // sizes that can be made to run faster. All other sizes use a default
+      // algorithm.
+      switch (N)
       {
-        tr += this->E[i][i];
+      case 2:
+        // 2x2 Matrix
+        return this->E[0][0] + this->E[1][1];
+      case 3:
+        // 3x3 Matrix
+        return this->E[0][0] + this->E[1][1] + this->E[2][2];
+      default:
+        // All Other Square Matrices
+        T tr = 0;
+        for (element i = 0; i < N; i++)
+        {
+          tr += this->E[i][i];
+        }
+        return tr;
       }
-      return tr;
     }
 
 
     // Symmetry Check
     bool is_symmetric(void) const
     {
-      for (element i = 0; i < N; i++)
+      // Providing specialized methods for N=2 and N=3 because those are common
+      // sizes that can be made to run faster. All other sizes use a default
+      // algorithm.
+      switch (N)
       {
-        for (element j = 0; j < N; j++)
+      case 2:
+        // 2x2 Matrix
+        return (this->E[0][1] == this->E[1][0]);
+      case 3:
+        // 3x3 Matrix
+        return (this->E[0][1] == this->E[1][0]) &&
+               (this->E[0][2] == this->E[2][0]) &&
+               (this->E[2][1] == this->E[1][2]);
+      default:
+        // All Other Square Matrices
+        for (element i = 0; i < N; i++)
         {
-          if (this->E[i][j] != this->E[j][i])
+          for (element j = 0; j < N; j++)
           {
-            return false;
+            if (this->E[i][j] != this->E[j][i])
+            {
+              return false;
+            }
           }
         }
+        return true;
       }
-      return true;
     }
 
 
     // Determinate
     T determinant(void) const
     {
-      // LUP Decompostion
-      LUP<T, N> lup(*this);
-      mat A = lup.LU();
-
-      // Calculating the determinant
-      T det = A[0][0];
-      for (element i = 1; i < N; i++)
+      // Providing specialized methods for N=2 and N=3 because those are common
+      // sizes that can be made to run faster. All other sizes use a default
+      // algorithm.
+      switch (N)
       {
-        det *= A[i][i];
-      }
+      case 2:
+        // 2x2 Matrix
+        return (this->E[0][0] * this->[1][1]) - (this->E[0][1] * this->E[1][0]);
+      case 3:
+        // 3x3 Matrix
+        return (this->E[0][0] * (this->E[1][1] * this->E[2][2] - this->E[1][2] * this->E[2][1]))
+             - (this->E[0][1] * (this->E[1][0] * this->E[2][2] - this->E[0][2] * this->E[2][0]))
+             + (this->E[0][2] * (this->E[1][0] * this->E[2][1] - this->E[0][2] * this->E[1][1]));
+      default:
+        // All Other Square Matrices
+        // LUP Decompostion
+        LUP<T, N> lup(*this);
+        mat A = lup.LU();
 
-      // Setting the sign of the determinant
-      if ((lup.N() - N) % 2 != 0)
-      {
-        det = -det;
-      }
+        // Calculating the determinant
+        T det = A[0][0];
+        for (element i = 1; i < N; i++)
+        {
+          det *= A[i][i];
+        }
 
-      return det;
+        // Setting the sign of the determinant
+        if ((lup.N() - N) % 2 != 0)
+        {
+          det = -det;
+        }
+
+        return det;
+      }
     }
 
     // Inverses (Using LUP Decomposition)
     mat inverse(void) const
     {
-      mat inv;
-
-      // LUP Decompostion
-      LUP<T, N> lup(*this);
-      mat A     = lup.LU();
-      col_vec P = lup.P();
-
-      // Algorithm from https://en.wikipedia.org/wiki/LU_decomposition#C_code_example
-      for (element j = 0; j < N; j++)
+      // Providing specialized methods for N=2 and N=3 because those are common
+      // sizes that can be made to run faster. All other sizes use a default
+      // algorithm.
+      switch (N)
       {
-        for (element i = 0; i < N; i++)
+      case 2:
+        // 2x2 Matrix
+        T det = this->determinant();
+        if (abs(det) < math::DIVIDE_BY_ZERO_TOLERANCE)
         {
-          if (P[i] == j) { inv[i][j] = 1; }
-          else { inv[i][j] = 0; }
+          throw std::runtime_error("Warning: Matrix is near degenerate")
+        }
+        else
+        {
+          return mat([ this->E[1][1], -this->E[0][1], 
+                      -this->E[1][0],  this->E[0][0]]) / this->determinant();
+        }
+      case 3:
+        // 3x3 Matrix
+        T det = this->determinant();
+        if (abs(det) < math::DIVIDE_BY_ZERO_TOLERANCE)
+        {
+          throw std::runtime_error("Warning: Matrix is near degenerate")
+        }
+        else
+        {
+          mat inv;
+          T det_inv = 1 / det;
 
-          for (element k = 0; k < i; k++)
+          inv->E[0][0] = ( this->E[1][1] * this->E[2][2] - this->E[2][1] * this->E[1][2] ) * det_inv;
+          inv->E[0][1] = ( this->E[0][2] * this->E[2][1] - this->E[0][1] * this->E[2][2] ) * det_inv;
+          inv->E[0][2] = ( this->E[0][1] * this->E[1][2] - this->E[0][2] * this->E[1][1] ) * det_inv;
+          inv->E[1][0] = ( this->E[1][2] * this->E[2][0] - this->E[1][0] * this->E[2][2] ) * det_inv;
+          inv->E[1][1] = ( this->E[0][0] * this->E[2][2] - this->E[0][2] * this->E[2][0] ) * det_inv;
+          inv->E[1][2] = ( this->E[1][0] * this->E[0][2] - this->E[0][0] * this->E[1][2] ) * det_inv;
+          inv->E[2][0] = ( this->E[1][0] * this->E[2][1] - this->E[2][0] * this->E[1][1] ) * det_inv;
+          inv->E[2][1] = ( this->E[2][0] * this->E[0][1] - this->E[0][0] * this->E[2][1] ) * det_inv;
+          inv->E[2][2] = ( this->E[0][0] * this->E[1][1] - this->E[1][0] * this->E[0][1] ) * det_inv;
+
+          return inv;
+        }
+      default:
+        // All Other Square Matrices
+
+        // LUP Decompostion
+        LUP<T, N> lup(*this);
+        mat A = lup.LU();
+        col_vec P = lup.P();
+
+        // Algorithm from https://en.wikipedia.org/wiki/LU_decomposition#C_code_example
+        mat inv;
+        for (element j = 0; j < N; j++)
+        {
+          for (element i = 0; i < N; i++)
           {
-            inv[i][j] -= A[i][k] * inv[k][j];
+            if (P[i] == j) { inv[i][j] = 1; }
+            else { inv[i][j] = 0; }
+
+            for (element k = 0; k < i; k++)
+            {
+              inv[i][j] -= A[i][k] * inv[k][j];
+            }
+          }
+
+          for (element i = N; i >= 0; i--)
+          {
+            for (element k = i + 1; k < N; k++)
+            {
+              inv[i][j] -= A[i][k] * inv[k][j];
+            }
+            inv[i][j] /= A[i][i];
           }
         }
 
-        for (element i = N; i >= 0; i--)
-        {
-          for (element k = i + 1; k < N; k++)
-          {
-            inv[i][j] -= A[i][k] * inv[k][j];
-          }
-          inv[i][j] /= A[i][i];
-        }
+        return inv;
       }
-
-      return inv;
     }
     void invert(void)
     {
@@ -857,22 +1135,74 @@ namespace nemesis
     }
 
 
-    // Identity (return one; set to one)
+    // Identity
     void set_to_identity(void)
     {
-      for (element row = 0; row < N; row++)
+      // Providing specialized methods for N=2 and N=3 because those are common
+      // sizes that can be made to run faster. All other sizes use a default
+      // algorithm.
+      switch (N)
       {
-        for (element col = 0; col < N; col++)
+      case 2:
+        // 2x2 Matrix
+        this->E[0][0] = 1;
+        this->E[1][1] = 1;
+
+        this->E[0][1] = 0;
+        this->E[1][0] = 0;
+        break;
+      case 3:
+        // 3x3 Matrix
+        this->E[0][0] = 1;
+        this->E[1][1] = 1;
+        this->E[2][2] = 1;
+
+        this->E[0][1] = 0;
+        this->E[0][2] = 0;
+        this->E[1][0] = 0;
+        this->E[2][0] = 0;
+        this->E[1][2] = 0;
+        this->E[2][1] = 0;
+        break;
+      default:
+        // All Other Square Matrices
+        for (element row = 0; row < N; row++)
         {
-          if (row == col)
+          for (element col = 0; col < N; col++)
           {
-            this->E[row][col] = 1;
-          }
-          else
-          {
-            this->E[row][col] = 0;
+            if (row == col)
+            {
+              this->E[row][col] = 1;
+            }
+            else
+            {
+              this->E[row][col] = 0;
+            }
           }
         }
+      }
+    }
+    
+    static mat identity(void)
+    {
+      // Providing specialized methods for N=2 and N=3 because those are common
+      // sizes that can be made to run faster. All other sizes use a default
+      // algorithm.
+      switch (N)
+      {
+      case 2:
+        // 2x2 Matrix
+        return mat({ 1, 0, 0, 1 });
+      case 3:
+        // 3x3 Matrix
+        return mat({ 1, 0, 0, 0, 1, 0, 0, 0, 1 });
+      default:
+        mat output;
+        for (element i = 0; i < N; i++)
+        {
+          output[i][i] = 1;
+        }
+        return output;
       }
     }
 
@@ -880,11 +1210,26 @@ namespace nemesis
     // Zeroize
     void zeroize(void)
     {
-      for (element row = 0; row < N; row++)
+      // Providing specialized methods for N=2 and N=3 because those are common
+      // sizes that can be made to run faster. All other sizes use a default
+      // algorithm.
+      switch (N)
       {
-        for (element col = 0; col < N; col++)
+      case 2:
+        // 2x2 Matrix
+        this->set({ 0, 0, 0, 0 });
+        break;
+      case 3:
+        // 3x3 Matrix
+        this->set({ 0, 0, 0, 0, 0, 0, 0, 0, 0 });
+      default:
+        // All Other Square Matrices
+        for (element row = 0; row < N; row++)
         {
-          this->E[row][col] = 0;
+          for (element col = 0; col < N; col++)
+          {
+            this->E[row][col] = 0;
+          }
         }
       }
     }
