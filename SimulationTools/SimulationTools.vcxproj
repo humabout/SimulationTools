@@ -154,6 +154,9 @@
     <ClInclude Include="..\Source\Math\quaternion.h" />
     <ClInclude Include="..\Source\Math\vector.h" />
     <ClInclude Include="..\Source\nemesis.h" />
+    <ClInclude Include="..\Source\Table\table.h" />
+    <ClInclude Include="..\Source\Table\table_boundary_behavior.h" />
+    <ClInclude Include="..\Source\Table\table_lookup_behavior.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Core\block.cpp" />

@@ -23,6 +23,9 @@
     <Filter Include="File">
       <UniqueIdentifier>{ed0621e0-9d6c-43fc-9d31-03fa6c46b5af}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Table">
+      <UniqueIdentifier>{36635a99-f9a0-4790-8811-e769211aab7c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\Core\block.h">
@@ -68,6 +71,15 @@
       <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\nemesis.h" />
+    <ClInclude Include="..\Source\Table\table.h">
+      <Filter>Table</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Table\table_boundary_behavior.h">
+      <Filter>Table</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Table\table_lookup_behavior.h">
+      <Filter>Table</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />
