@@ -26,6 +26,12 @@
     <Filter Include="Table">
       <UniqueIdentifier>{36635a99-f9a0-4790-8811-e769211aab7c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Table\Boundary Behaviors">
+      <UniqueIdentifier>{15a147db-7c47-4c03-b9a4-9ad5a56bf1cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Table\Lookup Behaviors">
+      <UniqueIdentifier>{fba782b1-cc27-44eb-86b6-6603343acdce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\Core\block.h">
@@ -74,10 +80,7 @@
     <ClInclude Include="..\Source\Table\table.h">
       <Filter>Table</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\Table\table_boundary_behavior.h">
-      <Filter>Table</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Table\table_lookup_behavior.h">
+    <ClInclude Include="..\Source\Table\table_type_definitions.h">
       <Filter>Table</Filter>
     </ClInclude>
   </ItemGroup>
@@ -115,6 +118,9 @@
     </ClCompile>
     <ClCompile Include="..\Source\Math\vector.cpp">
       <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Table\table.cpp">
+      <Filter>Table</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
