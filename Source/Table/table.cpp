@@ -20,6 +20,7 @@ nemesis::Table::Table()
   Upper_Bound = nullptr;
   Lower_Bound = nullptr;
   Lookup = nullptr;
+  is_sorted = false;
 }
 
 //------------------------------------------------------------------------------
@@ -31,6 +32,7 @@ nemesis::Table::Table(const Table& that)
   this->Upper_Bound = that.Upper_Bound;
   this->Lower_Bound = that.Lower_Bound;
   this->Lookup = that.Lookup;
+  is_sorted = false;
 }
 
 //------------------------------------------------------------------------------
@@ -55,14 +57,6 @@ void nemesis::Table::operator=(const nemesis::Table& rhs)
 }
 
 
-
-
-
-
-
-
-
-
 //------------------------------------------------------------------------------
 // Name:    add_entry
 // Purpose: Adds an entry line to the table. This is a costly process because
@@ -73,6 +67,7 @@ void nemesis::Table::add_entry(float                     new_key,
 {
   Keys.push_back(new_key);
   Entries.push_back(new_entry);
+  is_sorted = false;
   sort();
 }
 
@@ -102,18 +97,31 @@ void nemesis::Table::add_field(const std::string&        field_name,
 //------------------------------------------------------------------------------
 void nemesis::Table::lower_boundary_behavior(table::at_boundary behavior)
 {
+  // This must be performed on a sorted table
+  this->sort();
   this->Lower_Bound = TableBoundaryInterface::create(behavior, this);
 }
 
 
 //------------------------------------------------------------------------------
 // Name:    lookup
-// Purpose: Sets the the table's behavior when told to look up a value that is
-//          off the lower edge of the table.
+// Purpose: Sets the the table's method of returning values that fall within the
+//          bounds of the table. These all assume that the table is sorted in
+//          ascending order by key value.
+//
+// Note:    Robustness would suggest that the table always be sorted prior to a
+//          lookup. The sort is performed lazily, so this shouldn't add much
+//          time to a lookup.
 //------------------------------------------------------------------------------
 float nemesis::Table::lookup(std::size_t index,
-                             float       key) const
+                             float       key)
 {
+  // All lookup methods rely on the table's data beind sorted. Since the sort is
+  // performed lazily, there shouldn't be a major performance hit from making 
+  // this call, but it will improve robustness.
+  this->sort();
+
+  // Looking up the value based on where it falls related to the table's data.
   if ( (Keys.front() <= key) &&
        (key <= Keys.back())  )
   {
@@ -131,7 +139,7 @@ float nemesis::Table::lookup(std::size_t index,
 
 
 float nemesis::Table::lookup(std::string field,
-                             float       key) const
+                             float       key)
 {
   field_list::const_iterator field_iter = Field_Names.find(field);
   if (field_iter != Field_Names.end())
@@ -173,23 +181,33 @@ nemesis::Table::pointer nemesis::Table::get_pointer(void)
 //------------------------------------------------------------------------------
 void nemesis::Table::upper_boundary_behavior(table::at_boundary behavior)
 {
+  // This must be performed on a sorted table
+  this->sort();
   this->Upper_Bound = TableBoundaryInterface::create(behavior, this);
 }
 
 
 //------------------------------------------------------------------------------
 // Name:    sort
-// Purpose: This uses a quick sort to sort the table by key in ascending order, and must be done
-//          before using the table. It is a costly procedure and should be
-//          executed as rarely as possible while still ensuring that entries
-//          appear in ascending order by key. The assumption is that the table
-//          will be accessed far more often than it will be modified, and thus
-//          spending time presorting the table will enable faster and more
-//          robust lookups.
+// Purpose: This uses a quick sort to sort the table by key in ascending order, 
+//          and must be done before using the table. It is a costly procedure 
+//          and should be executed as rarely as possible while still ensuring 
+//          that entries appear in ascending order by key. The assumption is 
+//          that the table will be accessed far more often than it will be 
+//          modified, and thus spending time presorting the table will enable 
+//          faster and more robust lookups.
 //------------------------------------------------------------------------------
 void nemesis::Table::sort(void)
 {
-  quicksort(0, Keys.size());
+  // Lazy Evaluation of sort
+  if (!is_sorted)
+  {
+    quicksort(0, Keys.size());
+  }
+  else
+  {
+    // Be lazy and do nothing.
+  }
 }
 
 

@@ -89,6 +89,12 @@
     <ClInclude Include="..\Source\Table\Lookup_Behaviors\table_lookup_interface.h">
       <Filter>Table\Lookup Behaviors</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\Table\Boundary_Behaviors\return_zero_at_boundary.h">
+      <Filter>Table\Boundary Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Table\Boundary_Behaviors\return_value_at_boundary.h">
+      <Filter>Table\Boundary Behaviors</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />

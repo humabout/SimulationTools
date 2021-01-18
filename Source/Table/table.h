@@ -66,9 +66,9 @@ namespace nemesis
     // Accessors
     pointer get_pointer(void);
     float lookup(std::string field,
-                 float       key) const;
+                 float       key);
     float lookup(std::size_t index,
-                 float       key) const;
+                 float       key);
 
 
     // Mutators
@@ -91,12 +91,18 @@ namespace nemesis
     std::vector< std::vector<float> > Entries;
     field_list                        Field_Names;
 
+    // Table Metadata
+    bool is_sorted;
+
     // Helper Functions
     void sort(void);
     void quicksort(std::size_t low,
                    std::size_t high);
     std::size_t partition(std::size_t low,
                           std::size_t high);
+
+    // Friends of Table
+    friend class ReturnValueAtBoundary;
   };
 
   
