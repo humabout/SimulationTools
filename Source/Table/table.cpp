@@ -84,7 +84,10 @@ void nemesis::Table::add_entry(float                     new_key,
 void nemesis::Table::add_field(const std::string&        field_name,
                                const std::vector<float>& field_values)
 {
-  Field_Names.emplace(field_name);
+  // Add the new field's name to the list of field names
+  Field_Names.emplace(field_name, Field_Names.size());
+
+  // Add the field values to the table
   for (std::size_t i = 0; i < Entries.size(); i++)
   {
     Entries[i].push_back(field_values[i]);
@@ -99,7 +102,7 @@ void nemesis::Table::add_field(const std::string&        field_name,
 //------------------------------------------------------------------------------
 void nemesis::Table::lower_boundary_behavior(table::at_boundary behavior)
 {
-  this->Lower_Bound = TableBoundaryBehavior::create(behavior, this);
+  this->Lower_Bound = TableBoundaryInterface::create(behavior, this);
 }
 
 
@@ -149,7 +152,7 @@ float nemesis::Table::lookup(std::string field,
 //------------------------------------------------------------------------------
 void nemesis::Table::lookup_method(table::lookup behavior)
 {
-  this->Lookup = TableLookupBehavior::create(behavior, this);
+  this->Lookup = TableLookupInterface::create(behavior, this);
 }
 
 
@@ -170,7 +173,7 @@ nemesis::Table::pointer nemesis::Table::get_pointer(void)
 //------------------------------------------------------------------------------
 void nemesis::Table::upper_boundary_behavior(table::at_boundary behavior)
 {
-  this->Upper_Bound = TableBoundaryBehavior::create(behavior, this);
+  this->Upper_Bound = TableBoundaryInterface::create(behavior, this);
 }
 
 
@@ -220,7 +223,7 @@ std::size_t nemesis::Table::partition(std::size_t low,
 {
   float pivot = Keys[high];
   std::size_t i = low - 1;
-  for (int j = low; j <= high - 1; j++)
+  for (std::size_t j = low; j <= high - 1; j++)
   {
     // If current element is smaller than the pivot
     if (Keys[j] < pivot)

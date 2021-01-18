@@ -83,6 +83,12 @@
     <ClInclude Include="..\Source\Table\table_type_definitions.h">
       <Filter>Table</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\Table\Boundary_Behaviors\table_boundary_interface.h">
+      <Filter>Table\Boundary Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Table\Lookup_Behaviors\table_lookup_interface.h">
+      <Filter>Table\Lookup Behaviors</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />
@@ -121,6 +127,12 @@
     </ClCompile>
     <ClCompile Include="..\Source\Table\table.cpp">
       <Filter>Table</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Table\Boundary_Behaviors\table_boundary_interface.cpp">
+      <Filter>Table\Boundary Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Table\Lookup_Behaviors\table_lookup_interface.cpp">
+      <Filter>Table\Lookup Behaviors</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

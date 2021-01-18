@@ -154,6 +154,8 @@
     <ClInclude Include="..\Source\Math\quaternion.h" />
     <ClInclude Include="..\Source\Math\vector.h" />
     <ClInclude Include="..\Source\nemesis.h" />
+    <ClInclude Include="..\Source\Table\Boundary_Behaviors\table_boundary_interface.h" />
+    <ClInclude Include="..\Source\Table\Lookup_Behaviors\table_lookup_interface.h" />
     <ClInclude Include="..\Source\Table\table.h" />
     <ClInclude Include="..\Source\Table\table_type_definitions.h" />
   </ItemGroup>
@@ -170,6 +172,8 @@
     <ClCompile Include="..\Source\Math\matrix.cpp" />
     <ClCompile Include="..\Source\Math\quaternion.cpp" />
     <ClCompile Include="..\Source\Math\vector.cpp" />
+    <ClCompile Include="..\Source\Table\Boundary_Behaviors\table_boundary_interface.cpp" />
+    <ClCompile Include="..\Source\Table\Lookup_Behaviors\table_lookup_interface.cpp" />
     <ClCompile Include="..\Source\Table\table.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

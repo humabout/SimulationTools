@@ -15,11 +15,15 @@
 // Forward Declarations
 namespace nemesis
 {
-  class TableBoundaryBehavior;
-  class TableLookupBehavior;
+  class TableBoundaryInterface;
+  class TableLookupInterface;
 }
 
 
+//------------------------------------------------------------------------------
+// Name:    nemesis
+// Purpose: This namespace holds all aspects of the Nemesis Simulation Toolkit.
+//------------------------------------------------------------------------------
 namespace nemesis
 {
     
@@ -37,7 +41,6 @@ namespace nemesis
   public:
     // Aliases & Typedefs
     typedef std::shared_ptr<Table> pointer;
-    typedef std::vector<float>     entry_line;
 
 
     // Constructors
@@ -79,9 +82,9 @@ namespace nemesis
     typedef std::unordered_map<std::string, std::size_t> field_list;
 
     // Table State
-    std::shared_ptr<TableBoundaryBehavior> Upper_Bound;
-    std::shared_ptr<TableBoundaryBehavior> Lower_Bound;
-    std::shared_ptr<TableLookupBehavior>   Lookup;
+    std::shared_ptr<TableBoundaryInterface> Upper_Bound;
+    std::shared_ptr<TableBoundaryInterface> Lower_Bound;
+    std::shared_ptr<TableLookupInterface>   Lookup;
 
     // Table Data
     std::vector<float>                Keys;
@@ -101,8 +104,8 @@ namespace nemesis
 
 
 // Forward Declarations
-//#include "Boundary_Behaviors/table_boundary_behavior.h"
-//#include "Lookup_Behaviors/table_lookup_behavior.h"
+#include "Boundary_Behaviors/table_boundary_interface.h"
+#include "Lookup_Behaviors/table_lookup_interface.h"
 
 
 
