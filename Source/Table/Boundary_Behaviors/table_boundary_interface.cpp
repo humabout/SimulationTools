@@ -5,11 +5,11 @@
 #include <memory>
 #include <cstddef>
 #include <stdexcept>
+#include "return_linear_extrapolation.h"
+#include "return_value_at_boundary.h"
+#include "return_zero_at_boundary.h"
 #include "table_boundary_interface.h"
 #include "../table_type_definitions.h"
-
-#include "return_zero_at_boundary.h"
-#include "return_value_at_boundary.h"
 
 
 //------------------------------------------------------------------------------
@@ -56,6 +56,7 @@ nemesis::TableBoundaryInterface::pointer nemesis::TableBoundaryInterface::create
   case table::at_boundary::return_zero:
     return TableBoundaryInterface::pointer( new ReturnZeroAtBoundary(ptr) );
   case table::at_boundary::linear_extrapolation:
+    return TableBoundaryInterface::pointer( new ReturnLinearExtapolation(ptr) );
   default:
     throw std::runtime_error("Fatal Error: Invalid boundary behavior provided.");
     return TableBoundaryInterface::pointer( nullptr );

@@ -103,6 +103,7 @@ namespace nemesis
 
     // Friends of Table
     friend class ReturnValueAtBoundary;
+    friend class ReturnLinearExtapolation;
   };
 
   

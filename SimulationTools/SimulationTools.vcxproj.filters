@@ -95,6 +95,9 @@
     <ClInclude Include="..\Source\Table\Boundary_Behaviors\return_value_at_boundary.h">
       <Filter>Table\Boundary Behaviors</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\Table\Boundary_Behaviors\return_linear_extrapolation.h">
+      <Filter>Table\Boundary Behaviors</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />

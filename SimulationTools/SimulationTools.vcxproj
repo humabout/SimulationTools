@@ -154,6 +154,7 @@
     <ClInclude Include="..\Source\Math\quaternion.h" />
     <ClInclude Include="..\Source\Math\vector.h" />
     <ClInclude Include="..\Source\nemesis.h" />
+    <ClInclude Include="..\Source\Table\Boundary_Behaviors\return_linear_extrapolation.h" />
     <ClInclude Include="..\Source\Table\Boundary_Behaviors\return_value_at_boundary.h" />
     <ClInclude Include="..\Source\Table\Boundary_Behaviors\return_zero_at_boundary.h" />
     <ClInclude Include="..\Source\Table\Boundary_Behaviors\table_boundary_interface.h" />
