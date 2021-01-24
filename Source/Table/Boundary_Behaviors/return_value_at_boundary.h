@@ -46,10 +46,10 @@ namespace nemesis
 
 
     // Functionality
-    float lookup(std::size_t index,
-                 float       key) const
+    double lookup(std::size_t index,
+                  double      key) const
     {
-      std::vector<float> return_data;
+      std::vector<double> return_data;
       if (key < table->Keys.front())
       {
         return_data = table->Entries.front();

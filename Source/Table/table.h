@@ -35,6 +35,8 @@ namespace nemesis
   //          values are always numerical in nature.
   //
   // Future Work: It can be constructed directly from a file
+  // Future Work: It can handle multidimensional tables. This will potentially 
+  //              require a major rewrite.
   //----------------------------------------------------------------------------
   class Table
   {
@@ -65,17 +67,17 @@ namespace nemesis
 
     // Accessors
     pointer get_pointer(void);
-    float lookup(std::string field,
-                 float       key);
-    float lookup(std::size_t index,
-                 float       key);
+    double lookup(std::string field,
+                  double       key);
+    double lookup(std::size_t index,
+                  double       key);
 
 
     // Mutators
-    void add_entry(float                     new_key,
-                   const std::vector<float>& new_entry);
-    void add_field(const std::string&        field_name,
-                   const std::vector<float>& field_values);
+    void add_entry(double                     new_key,
+                   const std::vector<double>& new_entry);
+    void add_field(const std::string&         field_name,
+                   const std::vector<double>& field_values);
 
   private:
     // Aliases & Typedefs
@@ -87,19 +89,22 @@ namespace nemesis
     std::shared_ptr<TableLookupInterface>   Lookup;
 
     // Table Data
-    std::vector<float>                Keys;
-    std::vector< std::vector<float> > Entries;
-    field_list                        Field_Names;
+    std::vector<double>                Keys;
+    std::vector< std::vector<double> > Entries;
+    field_list                         Field_Names;
 
     // Table Metadata
     bool is_sorted;
 
-    // Helper Functions
+    // Quicksort Functions
     void sort(void);
     void quicksort(std::size_t low,
                    std::size_t high);
     std::size_t partition(std::size_t low,
                           std::size_t high);
+
+    // Search Functions
+    std::size_t getLowerIndex(double key) const;
 
     // Friends of Table
     friend class ReturnValueAtBoundary;

@@ -67,23 +67,23 @@ namespace nemesis
 
   private:
     // Data
-    std::vector<float> m_lower;
-    std::vector<float> m_upper;
+    std::vector<double> m_lower;
+    std::vector<double> m_upper;
 
-    std::vector<float> b_lower;
-    std::vector<float> b_upper;
+    std::vector<double> b_lower;
+    std::vector<double> b_upper;
 
 
     // Helper Functions
     void initialize(void)
     {
       // Calculating Upper Boundary Extrapolation Values
-      std::vector<float>::iterator x_it = table->Keys.end() - 1;
-      float x2 = *(x_it);
-      float x1 = *(x_it - 1);
-      std::vector< std::vector<float> >::iterator y_it = table->Entries.end() - 1;
-      std::vector<float> y2 = *(y_it);
-      std::vector<float> y1 = *(y_it - 1);
+      std::vector<double>::iterator x_it = table->Keys.end() - 1;
+      double x2 = *(x_it);
+      double x1 = *(x_it - 1);
+      std::vector< std::vector<double> >::iterator y_it = table->Entries.end() - 1;
+      std::vector<double> y2 = *(y_it);
+      std::vector<double> y1 = *(y_it - 1);
       for (std::size_t i = 0; i < table->Field_Names.size(); i++)
       {
         m_upper[i] = (y2[i] - y1[i]) / (x2 - x1);

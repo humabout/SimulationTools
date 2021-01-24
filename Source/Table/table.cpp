@@ -62,8 +62,8 @@ void nemesis::Table::operator=(const nemesis::Table& rhs)
 // Purpose: Adds an entry line to the table. This is a costly process because
 //          each time it is called, the entire table must be resorted.
 //------------------------------------------------------------------------------
-void nemesis::Table::add_entry(float                     new_key,
-                               const std::vector<float>& new_entry)
+void nemesis::Table::add_entry(double                     new_key,
+                               const std::vector<double>& new_entry)
 {
   Keys.push_back(new_key);
   Entries.push_back(new_entry);
@@ -76,8 +76,8 @@ void nemesis::Table::add_entry(float                     new_key,
 // Name:    add_field
 // Purpose: Adds a new field to the table
 //------------------------------------------------------------------------------
-void nemesis::Table::add_field(const std::string&        field_name,
-                               const std::vector<float>& field_values)
+void nemesis::Table::add_field(const std::string&         field_name,
+                               const std::vector<double>& field_values)
 {
   // Add the new field's name to the list of field names
   Field_Names.emplace(field_name, Field_Names.size());
@@ -113,8 +113,8 @@ void nemesis::Table::lower_boundary_behavior(table::at_boundary behavior)
 //          lookup. The sort is performed lazily, so this shouldn't add much
 //          time to a lookup.
 //------------------------------------------------------------------------------
-float nemesis::Table::lookup(std::size_t index,
-                             float       key)
+double nemesis::Table::lookup(std::size_t index,
+                              double      key)
 {
   // All lookup methods rely on the table's data beind sorted. Since the sort is
   // performed lazily, there shouldn't be a major performance hit from making 
@@ -138,8 +138,8 @@ float nemesis::Table::lookup(std::size_t index,
 }
 
 
-float nemesis::Table::lookup(std::string field,
-                             float       key)
+double nemesis::Table::lookup(std::string field,
+                              double      key)
 {
   field_list::const_iterator field_iter = Field_Names.find(field);
   if (field_iter != Field_Names.end())
@@ -233,7 +233,7 @@ void nemesis::Table::quicksort(std::size_t low,
 
 
 //------------------------------------------------------------------------------
-// Name:    partition
+// Name:    qsPartition
 // Purpose: This assists with the quicksort
 //------------------------------------------------------------------------------
 std::size_t nemesis::Table::partition(std::size_t low,
@@ -257,4 +257,49 @@ std::size_t nemesis::Table::partition(std::size_t low,
   std::swap(Keys[i + 1], Keys[high]);
   std::swap(Entries[i + 1], Entries[high]);
   return (i + 1);
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    getLowerIndex
+// Purpose: This returns the index of the closest value to the key that is less
+//          than or equal to the key. It does so by checking the midpoint on the
+//          table of Keys, and if this isn't the correct value, it sets that as
+//          a bound for the next search. This is repeated until the correct key
+//          value is found.
+//------------------------------------------------------------------------------
+std::size_t nemesis::Table::getLowerIndex(double key) const
+{
+  // Checking if the key is bounded within the list of keys
+  if (Keys.back() < key ||
+    Keys.front() > key)
+  {
+    throw std::runtime_error("Invalid key encountered. Key does not exist on the table.");
+  }
+  else
+  {
+    // Continue
+  }
+
+  // Finding the index of the appropriate value
+  std::size_t upper = Keys.size();
+  std::size_t lower = 0;
+  std::size_t guess = 0.5 * (upper + lower);
+  while (true)
+  {
+    if (Keys[guess] == key)
+    {
+      return guess;
+    }
+    else if (Keys[guess] > key)
+    {
+      upper = guess;
+      guess = 0.5 * (upper + lower);
+    }
+    else
+    {
+      lower = guess;
+      guess = 0.5 * (upper + lower);
+    }
+  }
 }

@@ -52,7 +52,7 @@ nemesis::TableBoundaryInterface::pointer nemesis::TableBoundaryInterface::create
   switch (behavior)
   {
   case table::at_boundary::cap_at_end_value:
-    return TableBoundaryInterface::pointer( new ReturnValueAtBoundary(ptr) );
+    //return TableBoundaryInterface::pointer( new ReturnValueAtBoundary(ptr) );
   case table::at_boundary::return_zero:
     return TableBoundaryInterface::pointer( new ReturnZeroAtBoundary(ptr) );
   case table::at_boundary::linear_extrapolation:
