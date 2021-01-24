@@ -48,7 +48,7 @@ namespace nemesis
     double lookup(std::size_t index,
                   double      key) const
     {
-      float extrapolation;
+      double extrapolation;
       if (key < table->Keys.front())
       {
         extrapolation = m_lower[index] * key + b_lower[index];

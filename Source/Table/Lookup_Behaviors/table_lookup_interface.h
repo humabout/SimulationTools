@@ -52,8 +52,8 @@ namespace nemesis
 
 
     // Functionality
-    virtual float lookup(std::size_t index,
-                         float       key) const = 0;
+    virtual double lookup(std::size_t index,
+                          double       key) const = 0;
 
   private:
     // Pointer to owning table object

@@ -239,7 +239,7 @@ void nemesis::Table::quicksort(std::size_t low,
 std::size_t nemesis::Table::partition(std::size_t low,
                                       std::size_t high)
 {
-  float pivot = Keys[high];
+  double pivot = Keys[high];
   std::size_t i = low - 1;
   for (std::size_t j = low; j <= high - 1; j++)
   {
@@ -284,7 +284,7 @@ std::size_t nemesis::Table::getLowerIndex(double key) const
   // Finding the index of the appropriate value
   std::size_t upper = Keys.size();
   std::size_t lower = 0;
-  std::size_t guess = 0.5 * (upper + lower);
+  std::size_t guess = static_cast<std::size_t>(0.5 * (upper + lower));
   while (true)
   {
     if (Keys[guess] == key)
@@ -294,12 +294,12 @@ std::size_t nemesis::Table::getLowerIndex(double key) const
     else if (Keys[guess] > key)
     {
       upper = guess;
-      guess = 0.5 * (upper + lower);
+      guess = static_cast<std::size_t>(0.5 * (upper + lower));
     }
     else
     {
       lower = guess;
-      guess = 0.5 * (upper + lower);
+      guess = static_cast<std::size_t>(0.5 * (upper + lower));
     }
   }
 }

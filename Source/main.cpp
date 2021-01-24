@@ -59,7 +59,7 @@ std::size_t getLowerIndex(double key, std::vector<double> Keys)
   // Finding the index of the appropriate value
   std::size_t upper = Keys.size();
   std::size_t lower = 0;
-  std::size_t guess = 0.5 * (upper + lower);
+  std::size_t guess = static_cast<std::size_t>(0.5 * (upper + lower));
   while (true)
   {
     if (Keys[guess] == key)
@@ -69,12 +69,12 @@ std::size_t getLowerIndex(double key, std::vector<double> Keys)
     else if (Keys[guess] > key)
     {
       upper = guess;
-      guess = 0.5 * (upper + lower);
+      guess = static_cast<std::size_t>(0.5 * (upper + lower));
     }
     else
     {
       lower = guess;
-      guess = 0.5 * (upper + lower);
+      guess = static_cast<std::size_t>(0.5 * (upper + lower));
     }
   }
 }
