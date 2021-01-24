@@ -55,7 +55,9 @@ nemesis::TableLookupInterface::pointer nemesis::TableLookupInterface::create(tab
   case table::lookup::nearest_value:
   case table::lookup::next_higher_value:
   case table::lookup::next_lower_value:
-  case table::lookup::spline_interpolation:
+  //case table::lookup::spline_interpolation:
+    // This is a future goal to include. Linear interpolation is faster and 
+    // usually sufficient given good coverage of data in the table.
   default:
     throw std::runtime_error("");
     return TableLookupInterface::pointer(nullptr);

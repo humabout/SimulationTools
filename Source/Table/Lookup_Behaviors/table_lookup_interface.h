@@ -6,8 +6,8 @@
 
 
 // Inclusions
-#include <memory>
 #include <cstddef>
+#include <memory>
 #include "../table_type_definitions.h"
 
 
@@ -53,7 +53,7 @@ namespace nemesis
 
     // Functionality
     virtual double lookup(std::size_t index,
-                          double       key) const = 0;
+                          double      key) const = 0;
 
   private:
     // Pointer to owning table object
