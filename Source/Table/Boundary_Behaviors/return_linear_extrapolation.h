@@ -45,8 +45,8 @@ namespace nemesis
 
 
     // Functionality
-    float lookup(std::size_t index,
-                 float       key) const
+    double lookup(std::size_t index,
+                  double      key) const
     {
       float extrapolation;
       if (key < table->Keys.front())
