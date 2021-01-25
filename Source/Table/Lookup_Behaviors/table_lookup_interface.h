@@ -52,7 +52,7 @@ namespace nemesis
 
 
     // Functionality
-    virtual double lookup(std::size_t index,
+    virtual double lookup(std::size_t field_index,
                           double      key) const = 0;
 
   protected:

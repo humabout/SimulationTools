@@ -110,6 +110,7 @@ namespace nemesis
     friend class ReturnValueAtBoundary;
     friend class ReturnLinearExtapolation;
     friend class ReturnExactValue;
+    friend class ReturnNextLowerValue;
   };
 
   
