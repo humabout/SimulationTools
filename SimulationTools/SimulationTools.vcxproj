@@ -158,6 +158,7 @@
     <ClInclude Include="..\Source\Table\Boundary_Behaviors\return_value_at_boundary.h" />
     <ClInclude Include="..\Source\Table\Boundary_Behaviors\return_zero_at_boundary.h" />
     <ClInclude Include="..\Source\Table\Boundary_Behaviors\table_boundary_interface.h" />
+    <ClInclude Include="..\Source\Table\Lookup_Behaviors\return_linear_interpolation.h" />
     <ClInclude Include="..\Source\Table\Lookup_Behaviors\return_nearest_value.h" />
     <ClInclude Include="..\Source\Table\Lookup_Behaviors\return_exact_value.h" />
     <ClInclude Include="..\Source\Table\Lookup_Behaviors\return_next_higher_value.h" />

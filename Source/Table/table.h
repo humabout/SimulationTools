@@ -113,6 +113,7 @@ namespace nemesis
     friend class ReturnNextLowerValue;
     friend class ReturnNextHigherValue;
     friend class ReturnNearestValue;
+    friend class ReturnLinearInterpolation;
   };
 
   
