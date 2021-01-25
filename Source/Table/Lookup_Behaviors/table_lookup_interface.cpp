@@ -58,6 +58,7 @@ nemesis::TableLookupInterface::pointer nemesis::TableLookupInterface::create(tab
   case table::lookup::exact_value:
     return pointer(new ReturnExactValue(ptr));
   case table::lookup::linear_interpolation:
+    return pointer(new ReturnLinearInterpolation(ptr));
   case table::lookup::nearest_value:
     return pointer(new ReturnNearestValue(ptr));
   case table::lookup::next_higher_value:

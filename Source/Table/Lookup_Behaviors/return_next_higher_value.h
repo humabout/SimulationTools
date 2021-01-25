@@ -45,7 +45,7 @@ namespace nemesis
 
 
     // Destructor
-    ReturnNextHigherValue()
+    ~ReturnNextHigherValue()
     {
       // Does Nothing
     }

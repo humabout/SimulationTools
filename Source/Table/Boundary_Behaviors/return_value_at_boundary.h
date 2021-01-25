@@ -27,11 +27,7 @@ namespace nemesis
   {
   public:
     // Constructors
-    ReturnValueAtBoundary()
-    {
-      // Does Nothing
-    }
-
+    ReturnValueAtBoundary() = delete;
     ReturnValueAtBoundary(Table* ptr)
     {
       table = Table::pointer(ptr);

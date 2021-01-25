@@ -36,7 +36,7 @@ namespace nemesis
   {
   public:
     // Constructors
-    ReturnExactValue() {  }
+    ReturnExactValue() = delete;
     ReturnExactValue(Table* ptr)
     {
       this->table = std::shared_ptr<Table>(ptr);

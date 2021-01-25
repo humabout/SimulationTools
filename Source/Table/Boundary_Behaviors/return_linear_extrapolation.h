@@ -26,10 +26,7 @@ namespace nemesis
   {
   public:
     // Constructors
-    ReturnLinearExtapolation()
-    {
-      // Does Nothing
-    }
+    ReturnLinearExtapolation() = delete;
     ReturnLinearExtapolation(Table* ptr)
     {
       table = Table::pointer(ptr);

@@ -31,6 +31,7 @@ namespace nemesis
   //----------------------------------------------------------------------------
   class ReturnLinearInterpolation : public TableLookupInterface
   {
+  public:
     // Constructors
     ReturnLinearInterpolation() = delete;
     ReturnLinearInterpolation(Table* ptr)
