@@ -111,6 +111,7 @@ namespace nemesis
     friend class ReturnLinearExtapolation;
     friend class ReturnExactValue;
     friend class ReturnNextLowerValue;
+    friend class ReturnNextHigherValue;
   };
 
   

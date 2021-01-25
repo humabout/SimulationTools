@@ -9,6 +9,7 @@
 #include "../table_type_definitions.h"
 #include "return_exact_value.h"
 #include "return_next_lower_value.h"
+#include "return_next_higher_value.h"
 
 
 
@@ -57,6 +58,7 @@ nemesis::TableLookupInterface::pointer nemesis::TableLookupInterface::create(tab
   case table::lookup::linear_interpolation:
   case table::lookup::nearest_value:
   case table::lookup::next_higher_value:
+    return pointer(new ReturnNextHigherValue(ptr));
   case table::lookup::next_lower_value:
     return pointer(new ReturnNextLowerValue(ptr));
   //case table::lookup::spline_interpolation:

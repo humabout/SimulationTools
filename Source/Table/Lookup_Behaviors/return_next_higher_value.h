@@ -1,8 +1,8 @@
-// return_next_lower_value.h
+// return_next_higher_value.h
 
 
-#ifndef NEMESIS_RETURN_NEXT_LOWER_VALUE_H
-#define NEMESIS_RETURN_NEXT_LOWER_VALUE_H
+#ifndef NEMESIS_RETURN_NEXT_HIGHER_VALUE_H
+#define NEMESIS_RETURN_NEXT_HIGHER_VALUE_H
 
 
 // Inclusions
@@ -28,40 +28,46 @@ namespace nemesis
 
 
   //----------------------------------------------------------------------------
-  // Name:    ReturnNextLowerValue
-  // Purpose: This concretion only returns the field value for the next lower 
+  // Name:    ReturnNextHigherValue
+  // Purpose: This concretion only returns the field value for the next higher 
   //          value of the key, or the value of the key, if an exact match 
   //          occurs.
   //----------------------------------------------------------------------------
-  class ReturnNextLowerValue : public TableLookupInterface
+  class ReturnNextHigherValue : public TableLookupInterface
   {
   public:
     // Constructors
-    ReturnNextLowerValue() = delete;
-    ReturnNextLowerValue(Table* ptr)
+    ReturnNextHigherValue() = delete;
+    ReturnNextHigherValue(Table* ptr)
     {
       this->table = std::shared_ptr<Table>(ptr);
     }
 
 
     // Destructor
-    ~ReturnNextLowerValue()
+    ReturnNextHigherValue()
     {
-      // Does nothing
+      // Does Nothing
     }
 
 
     // Functionality
-    virtual double lookup(std::size_t field_index,
-                          double      key) const
+    double lookup(std::size_t field_index,
+                  double      key) const
     {
       // Getting the index of the next lower, or exact match
       std::size_t key_index = table->find(key);
-      return table->Entries[key_index][field_index];      
+      if (table->Keys[key_index] == key)
+      {
+        return table->Entries[key_index][field_index];
+      }
+      else
+      {
+        return table->Entries[key_index + 1][field_index];
+      }
     }
 
-
-  }; // !ReturnNextLowerValue
+  }; // !ReturnNextHigherValue
 
 
 } // !nemesis
@@ -70,5 +76,4 @@ namespace nemesis
 // Forward Declaration Inclusions
 #include "../table.h"
 
-
-#endif // !NEMESIS_RETURN_NEXT_LOWER_VALUE_H
+#endif // !NEMESIS_RETURN_NEXT_HIGHER_VALUE_H
