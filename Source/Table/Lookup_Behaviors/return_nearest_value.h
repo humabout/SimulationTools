@@ -1,8 +1,8 @@
-// return_next_higher_value.h
+// return_nearest_value.h
 
 
-#ifndef NEMESIS_RETURN_NEXT_HIGHER_VALUE_H
-#define NEMESIS_RETURN_NEXT_HIGHER_VALUE_H
+#ifndef NEMESIS_RETURN_NEAREST_VALUE_H
+#define NEMESIS_RETURN_NEAREST_VALUE_H
 
 
 // Inclusions
@@ -10,6 +10,7 @@
 #include <memory>
 #include <stdexcept>
 #include "../table_type_definitions.h"
+#include "table_lookup_interface.h"
 
 
 // Forward Declarations
@@ -28,24 +29,23 @@ namespace nemesis
 
 
   //----------------------------------------------------------------------------
-  // Name:    ReturnNextHigherValue
-  // Purpose: This concretion only returns the field value for the next higher 
-  //          value of the key, or the value of the key, if an exact match 
-  //          occurs.
+  // Name:    ReturnNearestValue
+  // Purpose: This concretion only returns the field value for the closest value
+  //          of the key, or the value of the key, if an exact match occurs.
   //----------------------------------------------------------------------------
-  class ReturnNextHigherValue : public TableLookupInterface
+  class ReturnNearestValue : public TableLookupInterface
   {
   public:
     // Constructors
-    ReturnNextHigherValue() = delete;
-    ReturnNextHigherValue(Table* ptr)
+    ReturnNearestValue() = delete;
+    ReturnNearestValue(Table* ptr)
     {
       this->table = std::shared_ptr<Table>(ptr);
     }
 
 
     // Destructor
-    ReturnNextHigherValue()
+    ~ReturnNearestValue()
     {
       // Does Nothing
     }
@@ -58,8 +58,18 @@ namespace nemesis
       // Getting the index of the next lower, or exact match
       std::size_t key_index = table->find(key);
 
-      // Use this to get the exact or next higher value
+      // Check if this is exact. If so just return this.
       if (table->Keys[key_index] == key)
+      {
+        return table->Entries[key_index][field_index];
+      }
+
+      // Since the returned value was the next lower value, we need to next 
+      // higher value so we can find which is closer to the key provided. If
+      // The key is halfway between two values, return the lower one.
+      double key_lo = table->Keys[key_index];
+      double key_hi = table->Keys[key_index + 1];
+      if (abs(key - key_lo) <= abs(key - key_hi))
       {
         return table->Entries[key_index][field_index];
       }
@@ -69,7 +79,8 @@ namespace nemesis
       }
     }
 
-  }; // !ReturnNextHigherValue
+
+  }; // !ReturnClosestValue
 
 
 } // !nemesis
@@ -78,4 +89,5 @@ namespace nemesis
 // Forward Declaration Inclusions
 #include "../table.h"
 
-#endif // !NEMESIS_RETURN_NEXT_HIGHER_VALUE_H
+
+#endif // !NEMESIS_RETURN_NEAREST_VALUE_H

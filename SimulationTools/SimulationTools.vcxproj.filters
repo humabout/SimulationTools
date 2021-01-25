@@ -107,6 +107,9 @@
     <ClInclude Include="..\Source\Table\Lookup_Behaviors\return_next_higher_value.h">
       <Filter>Table\Lookup Behaviors</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\Table\Lookup_Behaviors\return_nearest_value.h">
+      <Filter>Table\Lookup Behaviors</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />

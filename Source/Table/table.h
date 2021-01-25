@@ -112,6 +112,7 @@ namespace nemesis
     friend class ReturnExactValue;
     friend class ReturnNextLowerValue;
     friend class ReturnNextHigherValue;
+    friend class ReturnNearestValue;
   };
 
   
