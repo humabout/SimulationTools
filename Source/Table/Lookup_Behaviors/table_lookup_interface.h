@@ -55,7 +55,7 @@ namespace nemesis
     virtual double lookup(std::size_t index,
                           double      key) const = 0;
 
-  private:
+  protected:
     // Pointer to owning table object
     std::shared_ptr<Table> table;
 

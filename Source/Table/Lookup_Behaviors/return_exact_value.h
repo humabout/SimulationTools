@@ -37,7 +37,10 @@ namespace nemesis
   public:
     // Constructors
     ReturnExactValue() {  }
-    ReturnExactValue(Table* ptr);
+    ReturnExactValue(Table* ptr)
+    {
+      this->table = std::shared_ptr<Table>(ptr);
+    }
 
 
     // Destructor
@@ -48,10 +51,22 @@ namespace nemesis
 
 
     // Functionality
-    double lookup(std::size_t index,
+    double lookup(std::size_t field_index,
                   double      key) const
     {
+      // Getting the key index
+      std::size_t key_index = table->find(key);
 
+      // Returning the exact value requested or throwing an error if no exact
+      // value was provided
+      if (table->Keys[key_index] != key)
+      {
+        return table->Entries[key_index][field_index];
+      }
+      else
+      {
+        throw std::runtime_error("Fatal Error: Lookup value provided was not an exact value.");
+      }
     }
 
 

@@ -268,7 +268,7 @@ std::size_t nemesis::Table::partition(std::size_t low,
 //          a bound for the next search. This is repeated until the correct key
 //          value is found.
 //------------------------------------------------------------------------------
-std::size_t nemesis::Table::getLowerIndex(double key) const
+std::size_t nemesis::Table::find(double key) const
 {
   // Checking if the key is bounded within the list of keys
   if (Keys.back() < key ||

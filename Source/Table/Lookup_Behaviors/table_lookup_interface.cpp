@@ -7,6 +7,7 @@
 #include <stdexcept>
 #include "table_lookup_interface.h"
 #include "../table_type_definitions.h"
+#include "return_exact_value.h"
 
 
 
@@ -51,6 +52,7 @@ nemesis::TableLookupInterface::pointer nemesis::TableLookupInterface::create(tab
   switch (behavior)
   {
   case table::lookup::exact_value:
+    return pointer(new ReturnExactValue(ptr));
   case table::lookup::linear_interpolation:
   case table::lookup::nearest_value:
   case table::lookup::next_higher_value:

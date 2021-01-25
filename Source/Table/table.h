@@ -68,9 +68,9 @@ namespace nemesis
     // Accessors
     pointer get_pointer(void);
     double lookup(std::string field,
-                  double       key);
-    double lookup(std::size_t index,
-                  double       key);
+                  double      key);
+    double lookup(std::size_t field_index,
+                  double      key);
 
 
     // Mutators
@@ -104,11 +104,12 @@ namespace nemesis
                           std::size_t high);
 
     // Search Functions
-    std::size_t getLowerIndex(double key) const;
+    std::size_t find(double key) const;
 
     // Friends of Table
     friend class ReturnValueAtBoundary;
     friend class ReturnLinearExtapolation;
+    friend class ReturnExactValue;
   };
 
   
