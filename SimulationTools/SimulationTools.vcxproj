@@ -145,6 +145,7 @@
     <ClInclude Include="..\Source\Core\config.h" />
     <ClInclude Include="..\Source\Core\End_Conditions\end_condition.h" />
     <ClInclude Include="..\Source\Core\End_Conditions\max_time_exceeded.h" />
+    <ClInclude Include="..\Source\Core\integrator.h" />
     <ClInclude Include="..\Source\Core\sim_loop.h" />
     <ClInclude Include="..\Source\Core\state.h" />
     <ClInclude Include="..\Source\Core\States\state_euler.h" />
