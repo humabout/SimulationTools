@@ -10,7 +10,7 @@
 
 
 // Making a Test Block
-class BlockTest : public core::Block
+class BlockTest : public nemesis::Block
 {
 public:
   double x;
@@ -60,13 +60,13 @@ private:
 // Fixture
 struct BlockTests : public ::testing::Test
 {
-  std::shared_ptr<core::SimClock> clock;
+  std::shared_ptr<nemesis::SimClock> clock;
   std::shared_ptr<BlockTest> test;
 
   virtual void SetUp()
   {
     test = std::shared_ptr<BlockTest>(new BlockTest);
-    clock = core::SimClock::create(core::SimClock::type::basic, 1.0);
+    clock = nemesis::SimClock::create(nemesis::SimClock::type::basic, 1.0);
   }
 
   virtual void TearDown()

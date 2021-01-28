@@ -11,7 +11,7 @@
 //          as provided in the input argument.
 // Inputs:  max_tick [seconds]
 //------------------------------------------------------------------------------
-core::BasicClock::BasicClock(double max_tick_)
+nemesis::BasicClock::BasicClock(double max_tick_)
 {
   Time_Current = 0;
   Tick_Max = max_tick_;
@@ -23,7 +23,7 @@ core::BasicClock::BasicClock(double max_tick_)
 // Name:    ~BasicClock
 // Purpose: Destructor. This owns nothing and deletes nothing.
 //------------------------------------------------------------------------------
-core::BasicClock::~BasicClock()
+nemesis::BasicClock::~BasicClock()
 {
   // Does Nothing
 }
@@ -34,7 +34,7 @@ core::BasicClock::~BasicClock()
 // Purpose: This method implements the advance() method to advance the clock 
 //          time by the current time step. It is part of the template pattern.
 //------------------------------------------------------------------------------
-void core::BasicClock::doAdvance(void)
+void nemesis::BasicClock::doAdvance(void)
 {
   Time_Current += Tick;
 }
@@ -45,7 +45,7 @@ void core::BasicClock::doAdvance(void)
 // Purpose: This method implements the initialize() method to initialize the 
 //          clock's time to zero. It is part of the template pattern.
 //------------------------------------------------------------------------------
-void core::BasicClock::doInitialize(void)
+void nemesis::BasicClock::doInitialize(void)
 {
   Time_Current = 0;
 }

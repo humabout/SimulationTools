@@ -9,7 +9,7 @@
 #include "../../Source/Core/End_Conditions/max_time_exceeded.h"
 
 // Making a Test Block
-class LoopBlockTest : public core::Block
+class LoopBlockTest : public nemesis::Block
 {
 public:
   double* x;
@@ -40,7 +40,7 @@ private:
     *dx = 0;
     *ddx = 1;
 
-    core::State::pointer state = core::State::create(*dx, *ddx);
+    nemesis::State::pointer state = nemesis::State::create(*dx, *ddx);
     this->addState(*x, *dx, 1);
     this->addState(*dx, *ddx, 2);
 
@@ -56,11 +56,11 @@ private:
 // Fixture
 struct SimLoopTests : public ::testing::Test
 {
-  core::EndCondition::pointer max_time;
-  core::SimClock::pointer     clock;
-  core::Block::pointer        block;
+  nemesis::EndCondition::pointer max_time;
+  nemesis::SimClock::pointer     clock;
+  nemesis::Block::pointer        block;
   std::shared_ptr<LoopBlockTest>  access;
-  core::SimLoop::pointer      sim;
+  nemesis::SimLoop::pointer      sim;
   double                      max_tick;
   double x;
   double dx;
@@ -70,13 +70,13 @@ struct SimLoopTests : public ::testing::Test
   {
     max_tick = 0.01;
 
-    core::Block* block_ptr = new LoopBlockTest(x, dx, ddx);
-    block = core::Block::pointer(block_ptr);
+    nemesis::Block* block_ptr = new LoopBlockTest(x, dx, ddx);
+    block = nemesis::Block::pointer(block_ptr);
 
-    clock = core::SimClock::create( core::SimClock::type::basic, 1.0 );
+    clock = nemesis::SimClock::create(nemesis::SimClock::type::basic, 1.0 );
 
-    core::EndCondition* max_time_ptr = new core::MaxTimeExceeded(10.0);
-    max_time = core::EndCondition::pointer(max_time_ptr);
+    nemesis::EndCondition* max_time_ptr = new nemesis::MaxTimeExceeded(10.0);
+    max_time = nemesis::EndCondition::pointer(max_time_ptr);
 
     sim = nullptr;
   }
@@ -87,8 +87,8 @@ struct SimLoopTests : public ::testing::Test
 
 TEST_F(SimLoopTests, SetupWithAddFooTest)
 {
-  core::SimLoop* sim_ptr = new core::SimLoop(max_tick);
-  sim = core::SimLoop::pointer( sim_ptr );
+  nemesis::SimLoop* sim_ptr = new nemesis::SimLoop(max_tick);
+  sim = nemesis::SimLoop::pointer( sim_ptr );
   sim->addBlock(block);
   sim->addEndCondition(max_time);
 
@@ -102,8 +102,8 @@ TEST_F(SimLoopTests, SetupWithAddFooTest)
 
 TEST_F(SimLoopTests, SetupWithOperatorsTest)
 {
-  core::SimLoop* sim_ptr = new core::SimLoop(max_tick);
-  sim = core::SimLoop::pointer(sim_ptr);
+  nemesis::SimLoop* sim_ptr = new nemesis::SimLoop(max_tick);
+  sim = nemesis::SimLoop::pointer(sim_ptr);
   *sim << block;
   *sim << max_time;
 

@@ -12,10 +12,10 @@
 
 
 //------------------------------------------------------------------------------
-// Name:    core
-// Purpose: This namespace holds all parts of the simulation core.
+// Name:    nemesis
+// Purpose: This namespace holds all aspects of the Nemesis Simulation Toolkit.
 //------------------------------------------------------------------------------
-namespace core
+namespace nemesis
 {
 
 
@@ -70,8 +70,8 @@ namespace core
     virtual void doUpdate(void)     = 0;
     virtual void doPropagate(void);
 
-    void placeState(core::State::pointer state_, 
-                    unsigned int         order_);
+    void placeState(nemesis::State::pointer state_,
+                    unsigned int            order_);
   };
 
 

@@ -13,7 +13,7 @@
 // Name:    ~Block
 // Purpose: Destructor. This object owns nothing and deletes nothing.
 //------------------------------------------------------------------------------
-core::Block::~Block()
+nemesis::Block::~Block()
 {
   // Does Nothing.
 }
@@ -24,8 +24,8 @@ core::Block::~Block()
 // Purpose: This method figures out where in the vector of States this 
 //          particular state belongs and reorganizes things accordingly.
 //------------------------------------------------------------------------------
-void core::Block::placeState(core::State::pointer state_, 
-                             unsigned int         order_)
+void nemesis::Block::placeState(nemesis::State::pointer state_,
+                                unsigned int            order_)
 {
   // Add State to Map with the order_ as its key.
   States.insert(state(order_, state_));
@@ -37,7 +37,7 @@ void core::Block::placeState(core::State::pointer state_,
 // Purpose: This method implements the default behavior for propagating the 
 //          state of the block forward one time step.
 //------------------------------------------------------------------------------
-void core::Block::doPropagate(void)
+void nemesis::Block::doPropagate(void)
 {
   state_list::iterator state;
   for (state = States.begin();
@@ -55,7 +55,7 @@ void core::Block::doPropagate(void)
 //          It is part of the template pattern and deferes implementation to
 //          doInitialize().
 //------------------------------------------------------------------------------
-void core::Block::initialize(void)
+void nemesis::Block::initialize(void)
 {
   doInitialize();
 }
@@ -70,7 +70,7 @@ void core::Block::initialize(void)
 //          values. It is part of the template pattern and deferes 
 //          implementation to doPropagate().
 //------------------------------------------------------------------------------
-void core::Block::propagate(void)
+void nemesis::Block::propagate(void)
 {
   doPropagate();
 }
@@ -83,7 +83,7 @@ void core::Block::propagate(void)
 //          It is part of the template pattern and deferes implementation to 
 //          doUpdate().
 //------------------------------------------------------------------------------
-void core::Block::update(void)
+void nemesis::Block::update(void)
 {
   doUpdate();
 }

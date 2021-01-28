@@ -8,16 +8,16 @@
 
 
 // Static Variable Declarations
-double core::SimClock::Time_Current = 0.0;
-double core::SimClock::Tick         = 0.0;
-double core::SimClock::Tick_Max     = 0.0;
+double nemesis::SimClock::Time_Current = 0.0;
+double nemesis::SimClock::Tick         = 0.0;
+double nemesis::SimClock::Tick_Max     = 0.0;
 
 
 //------------------------------------------------------------------------------
 // Name:    ~SimClock
 // Purpose: Destructor. This owns nothing and deletes nothing.
 //------------------------------------------------------------------------------
-core::SimClock::~SimClock()
+nemesis::SimClock::~SimClock()
 {
   // Does Nothing
 }
@@ -27,15 +27,15 @@ core::SimClock::~SimClock()
 // Name:    create
 // Purpose: Factory Method. Returns an instance of the correct sim clock type.
 //------------------------------------------------------------------------------
-std::shared_ptr<core::SimClock> core::SimClock::create(core::SimClock::type type_,
-                                                       double               max_tick_)
+std::shared_ptr<nemesis::SimClock> nemesis::SimClock::create(nemesis::SimClock::type type_,
+                                                             double                  max_tick_)
 {
   switch (type_)
   {
-  case core::SimClock::type::basic:
-    return std::shared_ptr<core::SimClock>( new BasicClock(max_tick_) );
+  case nemesis::SimClock::type::basic:
+    return std::shared_ptr<nemesis::SimClock>( new BasicClock(max_tick_) );
   default:
-    return std::shared_ptr<core::SimClock>( new BasicClock(max_tick_) );
+    return std::shared_ptr<nemesis::SimClock>( new BasicClock(max_tick_) );
   }
 }
 
@@ -46,7 +46,7 @@ std::shared_ptr<core::SimClock> core::SimClock::create(core::SimClock::type type
 //          part of the template pattern and forwards the call to doAdvance for 
 //          implementation.
 //------------------------------------------------------------------------------
-void core::SimClock::advance(void)
+void nemesis::SimClock::advance(void)
 {
   this->doAdvance();
 }
@@ -57,7 +57,7 @@ void core::SimClock::advance(void)
 // Purpose: This method initializes the clock. It is part of the template 
 //          pattern and forwards the call to doInitialize for implementation.
 //------------------------------------------------------------------------------
-void core::SimClock::initialize(void)
+void nemesis::SimClock::initialize(void)
 {
   this->doInitialize();
 }
@@ -66,12 +66,12 @@ void core::SimClock::initialize(void)
 //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 // GETTERS
 //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-double core::SimClock::time(void)
+double nemesis::SimClock::time(void)
 {
   return SimClock::Time_Current;
 }
 
-double core::SimClock::tick(void)
+double nemesis::SimClock::tick(void)
 {
   return SimClock::Tick;
 }

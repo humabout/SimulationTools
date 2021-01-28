@@ -12,7 +12,7 @@
 // Name:    MaxTimeExceeded
 // Purpose: Default Constructor
 //------------------------------------------------------------------------------
-core::MaxTimeExceeded::MaxTimeExceeded(double time_max_)
+nemesis::MaxTimeExceeded::MaxTimeExceeded(double time_max_)
 {
   Time_Max = time_max_;
 }
@@ -22,7 +22,7 @@ core::MaxTimeExceeded::MaxTimeExceeded(double time_max_)
 // Name:    ~MaxTimeExceeded
 // Purpose: Destructor
 //------------------------------------------------------------------------------
-core::MaxTimeExceeded::~MaxTimeExceeded()
+nemesis::MaxTimeExceeded::~MaxTimeExceeded()
 {
   // This object has nothing to deallocate.
 }
@@ -33,8 +33,8 @@ core::MaxTimeExceeded::~MaxTimeExceeded()
 // Purpose: If the current time has exceeded the maximum sim time by more than
 //          the time error tolerance, this condition has been met.
 //------------------------------------------------------------------------------
-bool core::MaxTimeExceeded::met(void)
+bool nemesis::MaxTimeExceeded::met(void)
 {  
-  double time_current = core::SimClock::time();
-  return ((Time_Max - time_current) < core::TIME_ERROR_TOLERANCE);
+  double time_current = nemesis::SimClock::time();
+  return ((Time_Max - time_current) < nemesis::TIME_ERROR_TOLERANCE);
 }

@@ -10,10 +10,10 @@
 
 
 //------------------------------------------------------------------------------
-// Name:    core
-// Purpose: This namespace holds all parts of the simulation core.
+// Name:    nemesis
+// Purpose: This namespace holds all aspects of the Nemesis Simulation Toolkit.
 //------------------------------------------------------------------------------
-namespace core
+namespace nemesis
 {
 
 

@@ -7,8 +7,8 @@
 #include "state.h"
 
 // Static Variables
-bool              core::State::Is_Ready = true;
-core::State::type core::State::Method   = core::State::type::euler;
+bool                 nemesis::State::Is_Ready = true;
+nemesis::State::type nemesis::State::Method   = nemesis::State::type::euler;
 
 
 //----------------------------------------------------------------------------
@@ -19,7 +19,7 @@ core::State::type core::State::Method   = core::State::type::euler;
 //          they live on heap. As a result, this object owns nothing and does
 //          not need to delete anything.
 //----------------------------------------------------------------------------
-core::State::~State()
+nemesis::State::~State()
 {
   // Does nothing.
 }
@@ -31,7 +31,7 @@ core::State::~State()
 //          that the next time an instance is requested, the new method will
 //          generated and returned.
 //----------------------------------------------------------------------------
-void core::State::setIntegrationMethod(core::State::type method_)
+void nemesis::State::setIntegrationMethod(nemesis::State::type method_)
 {
   State::Method = method_;
 }
@@ -40,7 +40,7 @@ void core::State::setIntegrationMethod(core::State::type method_)
 //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 // GETTERS
 //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-bool core::State::isReady(void)
+bool nemesis::State::isReady(void)
 {
   return Is_Ready;
 }

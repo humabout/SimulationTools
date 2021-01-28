@@ -92,9 +92,6 @@
     <ClCompile Include="..\Source\Core\Clocks\basic_clock.cpp">
       <Filter>Core\Clocks</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Core\End_Conditions\end_condition.cpp">
-      <Filter>Core\End Conditions</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Math\matrix.cpp">
       <Filter>Math</Filter>
     </ClCompile>

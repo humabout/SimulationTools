@@ -11,11 +11,11 @@
 #include "../Clocks/sim_clock.h"
 
 
-//----------------------------------------------------------------------------
-// Name:    core
-// Purpose: This namespace holds all parts of the simulation core.
-//----------------------------------------------------------------------------
-namespace core
+//------------------------------------------------------------------------------
+// Name:    nemesis
+// Purpose: This namespace holds all aspects of the Nemesis Simulation Toolkit.
+//------------------------------------------------------------------------------
+namespace nemesis
 {
 
 
@@ -45,7 +45,7 @@ namespace core
     // Functionality
     void propagate(void)
     {
-      *(this->x) += core::SimClock::tick() * *(this->dx);
+      *(this->x) += nemesis::SimClock::tick() * *(this->dx);
       State::Is_Ready = true;
     }
 

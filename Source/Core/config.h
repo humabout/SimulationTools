@@ -9,11 +9,11 @@
 #define KERNEL_CONFIG_H
 
 
-//----------------------------------------------------------------------------
-// Name:    core
-// Purpose: This namespace holds all parts of the simulation core.
-//----------------------------------------------------------------------------
-namespace core
+//------------------------------------------------------------------------------
+// Name:    nemesis
+// Purpose: This namespace holds all aspects of the Nemesis Simulation Toolkit.
+//------------------------------------------------------------------------------
+namespace nemesis
 {
   // Time Error Tolerance
   static const double TIME_ERROR_TOLERANCE = 1e-6; // [s]

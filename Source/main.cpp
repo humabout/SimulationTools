@@ -8,7 +8,7 @@
 #include "nemesis.h"
 
 
-class BlockTest : public core::Block
+class BlockTest : public nemesis::Block
 {
 public:
   double x;
@@ -45,11 +45,11 @@ int main()
 
   // Initial Values
   BlockTest* btest = new BlockTest();
-  core::Block::pointer test = core::Block::pointer(btest);
+  nemesis::Block::pointer test = nemesis::Block::pointer(btest);
 
   // Build Sim
-  core::SimLoop sim(time_step, core::State::type::euler);
-  sim.addEndCondition(core::EndCondition::pointer(new core::MaxTimeExceeded(max_time)));
+  nemesis::SimLoop sim(time_step, nemesis::State::type::euler);
+  sim.addEndCondition(nemesis::EndCondition::pointer(new nemesis::MaxTimeExceeded(max_time)));
   sim.addBlock(test);
 
   // Run Sim

@@ -14,8 +14,8 @@
 // Test Fixture
 struct StateEulerTests : public ::testing::Test
 {
-  core::State::pointer test;
-  std::shared_ptr<core::SimClock> clock;
+  nemesis::State::pointer test;
+  std::shared_ptr<nemesis::SimClock> clock;
   double x;
   double dx;
 
@@ -23,8 +23,8 @@ struct StateEulerTests : public ::testing::Test
   {
     x  = 0;
     dx = 1;
-    test = core::State::pointer(new core::StateEuler<double>(x, dx));
-    clock = core::SimClock::create(core::SimClock::type::basic, 1.0);
+    test = nemesis::State::pointer(new nemesis::StateEuler<double>(x, dx));
+    clock = nemesis::SimClock::create(nemesis::SimClock::type::basic, 1.0);
   }
 
   virtual void TearDown()
@@ -40,10 +40,10 @@ TEST_F(StateEulerTests, UpdateStateTest)
   test->propagate();
   EXPECT_DOUBLE_EQ(x, 1);
   EXPECT_DOUBLE_EQ(dx, 1);
-  EXPECT_TRUE(core::State::isReady());
+  EXPECT_TRUE(nemesis::State::isReady());
 
   test->propagate();
   EXPECT_DOUBLE_EQ(x, 2);
   EXPECT_DOUBLE_EQ(dx, 1);
-  EXPECT_TRUE(core::State::isReady());
+  EXPECT_TRUE(nemesis::State::isReady());
 }

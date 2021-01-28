@@ -10,17 +10,17 @@
 
 
 // Forward Declarations
-namespace core
+namespace nemesis
 {
   template <class T> class StateEuler;
 }
 
 
-//----------------------------------------------------------------------------
-// Name:    core
-// Purpose: This namespace holds all parts of the simulation core.
-//----------------------------------------------------------------------------
-namespace core
+//------------------------------------------------------------------------------
+// Name:    nemesis
+// Purpose: This namespace holds all aspects of the Nemesis Simulation Toolkit.
+//------------------------------------------------------------------------------
+namespace nemesis
 {
 
 
@@ -71,7 +71,7 @@ namespace core
     template<class T>
     static State::pointer create(T& x_, T& dx_)
     {
-      switch (core::State::Method)
+      switch (nemesis::State::Method)
       {
       case State::type::euler:
         return State::pointer(new StateEuler<T>(x_, dx_));
