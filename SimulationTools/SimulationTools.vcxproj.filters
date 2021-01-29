@@ -77,6 +77,9 @@
     <ClInclude Include="..\Source\Models\Examples\position.h">
       <Filter>Models\Examples</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\Core\Integrators\euler.h">
+      <Filter>Core\Integrators</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />
@@ -112,6 +115,9 @@
     </ClCompile>
     <ClCompile Include="..\Source\Models\Examples\position.cpp">
       <Filter>Models\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Core\Integrators\euler.cpp">
+      <Filter>Core\Integrators</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

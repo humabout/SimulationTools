@@ -27,7 +27,7 @@ namespace nemesis
 
 
   //----------------------------------------------------------------------------
-  // Name:    Block
+  // Name:    Integrator
   // Purpose: This abstract class declares the interface for integrator objects,
   //          and is responsible for providing basic services to all children.
   //          These services are limited to maintaining an ordered list of 
@@ -42,8 +42,8 @@ namespace nemesis
     enum class type
     {
       euler = 1,
-      rk2 = 2,
-      rk4 = 3
+      rk2   = 2,
+      rk4   = 3
     }; // !type
     typedef std::shared_ptr<Integrator> pointer;
     typedef std::multimap< unsigned int, 
@@ -55,7 +55,7 @@ namespace nemesis
 
 
     // Constructors
-    Integrator() = delete;
+    Integrator();
     Integrator(SimLoop* sim_);
     Integrator(const Integrator& that);
 
@@ -71,7 +71,7 @@ namespace nemesis
     void updateStates(void);
 
 
-  private:
+  protected:
     // Owning Simulation
     SimLoop_pointer Sim;
 

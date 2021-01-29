@@ -22,6 +22,12 @@ namespace nemesis
   {
 
 
+    //----------------------------------------------------------------------------
+    // Name:    Position
+    // Purpose: This Block is an example of how to execute 1-D position tracking.
+    //          It uses constant acceleration and propagates that to find both
+    //          velocity and position at each frame.
+    //----------------------------------------------------------------------------
     class Position : public Block
     {
     public:

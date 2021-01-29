@@ -141,8 +141,7 @@ void nemesis::SimLoop::run(void)
   Clock->initialize();
 
   // Initialize all blocks
-  std::vector< Block::pointer >::iterator current_block;
-  for (current_block = Blocks.begin(); 
+  for (std::vector< Block::pointer >::iterator current_block = Blocks.begin();
        current_block != Blocks.end(); 
        current_block++)
   {
@@ -150,20 +149,30 @@ void nemesis::SimLoop::run(void)
   }
 
   // Execute the simulation loop
+  updateBlocks();
   while (!isEnd())
   {
-    // Updating any state-dependent information
-    for (current_block = Blocks.begin();
-         current_block != Blocks.end();
-         current_block++)
-    {
-      (*current_block)->update();
-    }
-
     // Propagating states
     Propagator->updateStates();
 
     // Updating clock
     Clock->advance();
+  }
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    updateBlocks
+// Purpose: This updates the internal state of each Block. This includes all 
+//          values that are not directly propagated with time.
+//------------------------------------------------------------------------------
+void nemesis::SimLoop::updateBlocks(void)
+{
+  // Updating any state-dependent information
+  for (std::vector< Block::pointer >::iterator current_block = Blocks.begin();
+       current_block != Blocks.end();
+       current_block++)
+  {
+    (*current_block)->update();
   }
 }

@@ -23,7 +23,11 @@ int main()
   double velocity     = 0;
   double acceleration = 1;
 
-  // Initial Values
+  // Creating Block to Propagate
+  // NOTE:  The block pointer is held separately so we can access its methods. 
+  //        Eventually, data output will be added to the library to avoid 
+  //        needing this sort of thing.
+
   position_pointer access = position_pointer(new position_block(position, velocity, acceleration));
   block_pointer test = access;
 

@@ -52,8 +52,8 @@ namespace nemesis
     void addEndCondition(EndCondition::pointer end_condition_);
     void addState(double& x_,
                   double& dx_);
-
     void run(void);
+    void updateBlocks(void);
 
   private:
     // Member Variables
