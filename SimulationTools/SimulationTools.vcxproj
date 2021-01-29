@@ -145,9 +145,9 @@
     <ClInclude Include="..\Source\Core\config.h" />
     <ClInclude Include="..\Source\Core\End_Conditions\end_condition.h" />
     <ClInclude Include="..\Source\Core\End_Conditions\max_time_exceeded.h" />
-    <ClInclude Include="..\Source\Core\integrator.h" />
+    <ClInclude Include="..\Source\Core\Integrators\integrator.h" />
+    <ClInclude Include="..\Source\Core\Integrators\state.h" />
     <ClInclude Include="..\Source\Core\sim_loop.h" />
-    <ClInclude Include="..\Source\Core\state.h" />
     <ClInclude Include="..\Source\Math\math_config.h" />
     <ClInclude Include="..\Source\Math\math_constants.h" />
     <ClInclude Include="..\Source\Math\matrix.h" />
@@ -160,9 +160,9 @@
     <ClCompile Include="..\Source\Core\Clocks\basic_clock.cpp" />
     <ClCompile Include="..\Source\Core\Clocks\sim_clock.cpp" />
     <ClCompile Include="..\Source\Core\End_Conditions\max_time_exceeded.cpp" />
-    <ClCompile Include="..\Source\Core\integrator.cpp" />
+    <ClCompile Include="..\Source\Core\Integrators\integrator.cpp" />
+    <ClCompile Include="..\Source\Core\Integrators\state.cpp" />
     <ClCompile Include="..\Source\Core\sim_loop.cpp" />
-    <ClCompile Include="..\Source\Core\state.cpp" />
     <ClCompile Include="..\Source\main.cpp" />
     <ClCompile Include="..\Source\Math\matrix.cpp" />
     <ClCompile Include="..\Source\Math\quaternion.cpp" />

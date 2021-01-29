@@ -7,7 +7,7 @@
 #include "block.h"
 #include "config.h"
 #include "sim_loop.h"
-#include "integrator.h"
+#include "Integrators/integrator.h"
 #include "Clocks/sim_clock.h"
 
 

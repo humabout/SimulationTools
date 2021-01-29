@@ -12,21 +12,6 @@
     <ClCompile Include="Math_Library\quaternion_tests.cpp">
       <Filter>Math Library Tests</Filter>
     </ClCompile>
-    <ClCompile Include="Kernel_Tests\basic_clock.cpp">
-      <Filter>Kernel Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="Kernel_Tests\block_tests.cpp">
-      <Filter>Kernel Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="Kernel_Tests\max_time_exceeded_test.cpp">
-      <Filter>Kernel Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="Kernel_Tests\sim_loop_tests.cpp">
-      <Filter>Kernel Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="Kernel_Tests\state_euler_tests.cpp">
-      <Filter>Kernel Tests</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />

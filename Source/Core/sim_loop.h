@@ -8,17 +8,10 @@
 // Inclusions
 #include <memory>
 #include <vector>
+#include "block.h"
 #include "Clocks/sim_clock.h"
 #include "End_Conditions/end_condition.h"
-
-#include "integrator.h"
-
-
-// Forward Declarations
-namespace nemesis
-{
-  class Block;
-}
+#include "Integrators/integrator.h"
 
 
 //------------------------------------------------------------------------------

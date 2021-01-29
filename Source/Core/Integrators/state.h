@@ -9,13 +9,6 @@
 #include <memory>
 
 
-// Forward Declarations
-namespace nemesis
-{
-  template <class T> class StateEuler;
-}
-
-
 //------------------------------------------------------------------------------
 // Name:    nemesis
 // Purpose: This namespace holds all aspects of the Nemesis Simulation Toolkit.

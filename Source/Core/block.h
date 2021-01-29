@@ -6,7 +6,6 @@
 
 
 // Inclusions
-#include <map>
 #include <memory>
 
 

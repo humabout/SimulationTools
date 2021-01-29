@@ -11,9 +11,6 @@
     <Filter Include="Core\End Conditions">
       <UniqueIdentifier>{d78676a6-5027-4292-83af-65b5cd3316d7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\States">
-      <UniqueIdentifier>{301302d7-f237-4507-9c58-90185d5d5233}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core\Clocks">
       <UniqueIdentifier>{0d6ea74b-4e26-46b0-af13-1f945cfe544c}</UniqueIdentifier>
     </Filter>
@@ -22,6 +19,9 @@
     </Filter>
     <Filter Include="File">
       <UniqueIdentifier>{ed0621e0-9d6c-43fc-9d31-03fa6c46b5af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Integrators">
+      <UniqueIdentifier>{301302d7-f237-4507-9c58-90185d5d5233}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -32,9 +32,6 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\Core\sim_loop.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Core\state.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\Core\End_Conditions\end_condition.h">
@@ -65,8 +62,11 @@
       <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\nemesis.h" />
-    <ClInclude Include="..\Source\Core\integrator.h">
-      <Filter>Core</Filter>
+    <ClInclude Include="..\Source\Core\Integrators\integrator.h">
+      <Filter>Core\Integrators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Core\Integrators\state.h">
+      <Filter>Core\Integrators</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -75,9 +75,6 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Core\sim_loop.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Core\state.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Core\End_Conditions\max_time_exceeded.cpp">
@@ -98,8 +95,11 @@
     <ClCompile Include="..\Source\Math\vector.cpp">
       <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Core\integrator.cpp">
-      <Filter>Core</Filter>
+    <ClCompile Include="..\Source\Core\Integrators\integrator.cpp">
+      <Filter>Core\Integrators</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Core\Integrators\state.cpp">
+      <Filter>Core\Integrators</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

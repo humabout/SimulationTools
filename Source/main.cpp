@@ -23,14 +23,14 @@ public:
   }
 
   ~BlockTest() {}
-
-  void doInitialize() override
-  {
-    addState(x, dx, 1);
-    addState(dx, ddx, 2);
-  }
+  void doInitialize() override {}
   void doUpdate() override {}
 
+  void doRegisterWith(SimLoop* sim_) override
+  {
+    sim_->addState(x, dx);
+    sim_->addState(dx, ddx);
+  }
 };
 
 

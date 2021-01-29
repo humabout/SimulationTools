@@ -6,14 +6,15 @@
 
 
 // Inclusions
+#include <map>
 #include <memory>
+#include "state.h"
 
 
 // Forward Declarations
 namespace nemesis
 {
   class SimLoop;
-  class State;
 }
 
 
@@ -48,6 +49,9 @@ namespace nemesis
     typedef std::multimap< unsigned int, 
                            nemesis::State::pointer, 
                            std::greater<unsigned int> > state_list;
+    // Used because SimLoop must be included via forward declaration to avoid a 
+    // circular reference issue.
+    typedef std::shared_ptr<SimLoop> SimLoop_pointer;
 
 
     // Constructors
@@ -69,7 +73,7 @@ namespace nemesis
 
   private:
     // Owning Simulation
-    SimLoop::pointer Sim;
+    SimLoop_pointer Sim;
 
     // Data
     state_list States;
@@ -85,8 +89,7 @@ namespace nemesis
 
 
 // Forward Declaration Inclusions
-#include "sim_loop.h"
-#include "state.h"
+#include "../sim_loop.h"
 
 
 #endif // !NEMESIS_INTEGRATOR_H
