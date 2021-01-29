@@ -8,7 +8,12 @@
 // Inclusions
 #include <map>
 #include <memory>
-#include "state.h"
+
+
+namespace nemesis
+{
+  class SimLoop;
+}
 
 
 //------------------------------------------------------------------------------
@@ -34,48 +39,34 @@ namespace nemesis
   public:
     // Typedefs
     typedef std::shared_ptr<Block> pointer;
-    typedef std::pair<unsigned int, State::pointer> state;
-    typedef std::multimap< unsigned int, State::pointer, std::greater<unsigned int> > state_list;
 
     // Destructor
     virtual ~Block();
 
     // Functionality
     void initialize(void);
-    void propagate(void);
+    void registerWith(SimLoop* sim_);
     void update(void);
 
   protected:
-    // Stores all states associated wtih this block in order from highest to 
-    // lowest order derivatives
-    state_list States;
-
-    //--------------------------------------------------------------------------
-    // Name:    addState
-    // Purpose: This method adds a new state to the block. It forwards the call 
-    //          to placeState for implementation to encapsulate it where it is 
-    //          more easily altered in the future.
-    //--------------------------------------------------------------------------
-    template <class T>
-    void addState(T&           x_, 
-                  T&           dx_, 
-                  unsigned int order_)
-    {
-      placeState( State::create(x_, dx_), order_ );
-    }
+    void addState(double&  x_,
+                  double&  dx_,
+                  SimLoop* sim_);
 
   private:
     // Functionality
     virtual void doInitialize(void) = 0;
+    virtual void doRegisterWith(SimLoop* sim_) = 0;
     virtual void doUpdate(void)     = 0;
-    virtual void doPropagate(void);
 
-    void placeState(nemesis::State::pointer state_,
-                    unsigned int            order_);
+
   };
 
 
 } // !core
 
+
+// Forward Declaration Inclusions
+#include "sim_loop.h"
 
 #endif // !BLOCk_H

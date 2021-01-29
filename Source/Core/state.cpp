@@ -2,45 +2,201 @@
 
 
 // Inclusions
-#include <cstddef>
 #include <memory>
 #include "state.h"
 
-// Static Variables
-bool                 nemesis::State::Is_Ready = true;
-nemesis::State::type nemesis::State::Method   = nemesis::State::type::euler;
+
+//------------------------------------------------------------------------------
+// Name:    State
+// Purpose: Constructor
+//------------------------------------------------------------------------------
+nemesis::State::State(double& x_,
+                      double& dx_)
+{
+  this->State_Variable   = &x_;
+  this->State_Derivative = &dx_;
+  this->Order            = 1;
+}
 
 
-//----------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+// Name:    State
+// Purpose: Copy Constructor
+//------------------------------------------------------------------------------
+nemesis::State::State(const State& that)
+{
+  this->State_Variable   = that.State_Variable;
+  this->State_Derivative = that.State_Derivative;
+  this->Order            = that.Order;
+}
+
+
+//------------------------------------------------------------------------------
 // Name:    ~State
-// Purpose: This object does not own its own state or state derrivative. These
-//          are merely linked to via reference for the sake of propagating 
-//          them. The values' owners are responsible for deleting them, if
-//          they live on heap. As a result, this object owns nothing and does
-//          not need to delete anything.
-//----------------------------------------------------------------------------
+// Purpose: Destructor. This object has nothing to deallocate.
+//------------------------------------------------------------------------------
 nemesis::State::~State()
 {
-  // Does nothing.
+  // Does nothing
 }
 
 
-//----------------------------------------------------------------------------
-// Name:    setMethod
-// Purpose: This clears the old integration instance and sets a new method so
-//          that the next time an instance is requested, the new method will
-//          generated and returned.
-//----------------------------------------------------------------------------
-void nemesis::State::setIntegrationMethod(nemesis::State::type method_)
+//------------------------------------------------------------------------------
+// Name:    create
+// Purpose: Factory method for creating new states.
+//------------------------------------------------------------------------------
+nemesis::State::pointer nemesis::State::create(double& x_,
+                                               double& dx_)
 {
-  State::Method = method_;
+  return pointer(new State(x_, dx_));
 }
 
 
-//<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-// GETTERS
-//<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-bool nemesis::State::isReady(void)
+//------------------------------------------------------------------------------
+// Name:    x
+// Purpose: Returns a reference to the state variable stored in this object.
+// Output:  Reference to State_Variable
+//------------------------------------------------------------------------------
+double& nemesis::State::x(void) const
 {
-  return Is_Ready;
+  return *State_Variable;
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    dx
+// Purpose: Returns a reference to the state derivative stored in this object.
+// Output:  Reference to State_Derivative
+//------------------------------------------------------------------------------
+double& nemesis::State::dx(void) const
+{
+  return *State_Derivative;
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    order
+// Purpose: Returns the order of the state derivative stored here.
+//------------------------------------------------------------------------------
+unsigned int& nemesis::State::order(void)
+{
+  return Order;
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    operator==
+// Purpose: Copy Assignment Operator
+//------------------------------------------------------------------------------
+void nemesis::State::operator=(const State& lhs)
+{
+  this->State_Variable   = lhs.State_Variable;
+  this->State_Derivative = lhs.State_Derivative;
+  this->Order            = lhs.Order;
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    operator==
+// Purpose: Compairs the order of two states, returning true if their orders
+//          are equal.
+//------------------------------------------------------------------------------
+bool nemesis::State::operator==(const State& lhs) const
+{
+  return this->Order == lhs.Order;
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    operator!=
+// Purpose: Compairs the order of two states, returning true if their orders
+//          are not equal.
+//------------------------------------------------------------------------------
+bool nemesis::State::operator!=(const State& lhs) const
+{
+  return this->Order != lhs.Order;
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    operator<
+// Purpose: Compairs the order of two states, returning true if the right-hand
+//          side is less than the left-hand side.
+//------------------------------------------------------------------------------
+bool nemesis::State::operator<(const State& lhs) const
+{
+  return this->Order < lhs.Order;
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    operator<=
+// Purpose: Compairs the order of two states, returning true if the right-hand
+//          side is less than or equal to the left-hand side.
+//------------------------------------------------------------------------------
+bool nemesis::State::operator<=(const State& lhs) const
+{
+  return this->Order <= lhs.Order;
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    operator>
+// Purpose: Compairs the order of two states, returning true if the right-hand
+//          side is greater than the left-hand side.
+//------------------------------------------------------------------------------
+bool nemesis::State::operator>(const State& lhs) const
+{
+  return this->Order > lhs.Order;
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    operator>=
+// Purpose: Compairs the order of two states, returning true if the right-hand
+//          side is greater than or equal to the left-hand side.
+//------------------------------------------------------------------------------
+bool nemesis::State::operator>=(const State& lhs) const
+{
+  return this->Order >= lhs.Order;
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    operator+=
+// Purpose: Adds the left-hand side to the order of the right-hand side.
+//------------------------------------------------------------------------------
+void nemesis::State::operator+=(unsigned int lhs)
+{
+  this->Order += lhs;
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    operator-=
+// Purpose: Subtracts the left-hand side from the order of the right-hand side.
+//------------------------------------------------------------------------------
+void nemesis::State::operator-=(unsigned int lhs)
+{
+  this->Order -= lhs;
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    operator++
+// Purpose: Increments the order of the right-hand side.
+//------------------------------------------------------------------------------
+void nemesis::State::operator++(void)
+{
+  this->Order++;
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    operator--
+// Purpose: Decriments the order of the right-hand side.
+//------------------------------------------------------------------------------
+void nemesis::State::operator--(void)
+{
+  this->Order--;
 }

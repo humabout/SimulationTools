@@ -7,6 +7,8 @@
 #include "block.h"
 #include "config.h"
 #include "sim_loop.h"
+#include "integrator.h"
+#include "Clocks/sim_clock.h"
 
 
 //------------------------------------------------------------------------------
@@ -14,9 +16,8 @@
 // Purpose: Constructor Overload.
 // Inputs:  Time Step [s]
 //------------------------------------------------------------------------------
-nemesis::SimLoop::SimLoop(double      max_tick_)
+nemesis::SimLoop::SimLoop(double max_tick_)
 {
-  State::setIntegrationMethod(State::type::euler);
   Clock = SimClock::create(SimClock::type::basic, max_tick_);
 }
 
@@ -27,10 +28,10 @@ nemesis::SimLoop::SimLoop(double      max_tick_)
 // Inputs:  Time Step [s]
 //          Integration Method
 //------------------------------------------------------------------------------
-nemesis::SimLoop::SimLoop(double      max_tick_,
-                          State::type integration_method_)
+nemesis::SimLoop::SimLoop(double           max_tick_,
+                          Integrator::type method_)
 {
-  State::setIntegrationMethod(integration_method_);
+  Propagator = Integrator::create(method_);
   Clock = SimClock::create(SimClock::type::basic, max_tick_);
 }
 
@@ -42,11 +43,11 @@ nemesis::SimLoop::SimLoop(double      max_tick_,
 //          Integration Method
 //          Clock Type
 //------------------------------------------------------------------------------
-nemesis::SimLoop::SimLoop(double         max_tick_,
-                          State::type    integration_method_,
-                          SimClock::type clock_type_)
+nemesis::SimLoop::SimLoop(double           max_tick_,
+                          Integrator::type method_,
+                          SimClock::type   clock_type_)
 {
-  State::setIntegrationMethod(integration_method_);
+  Propagator = Integrator::create(method_);
   Clock = SimClock::create(clock_type_, max_tick_);
 }
 
@@ -83,6 +84,18 @@ void nemesis::SimLoop::addEndCondition(EndCondition::pointer end_condition_)
 
 
 //------------------------------------------------------------------------------
+// Name:    addState
+// Purpose: This method adds a state variable and its derivative to the sim's 
+//          Integrator for propagation.
+//------------------------------------------------------------------------------
+void nemesis::SimLoop::addState(double& x_,
+                                double& dx_)
+{
+  Propagator->addState(x_, dx_);
+}
+
+
+//------------------------------------------------------------------------------
 // Name:    isEnd
 // Purpose: This method checks if the simulation has met any end conditions and
 //          returns true if it has.
@@ -93,8 +106,7 @@ bool nemesis::SimLoop::isEnd(void) const
 {
   // Check all end conditions when the sim is ready for evaluation and reporting
   std::vector<EndCondition::pointer>::const_iterator condition = End_Conditions.begin();
-  while (nemesis::State::isReady() &&
-         condition != End_Conditions.end()    )
+  while (condition != End_Conditions.end() )
   {
     // Stop checking as soon as an end condition is not met
     if ((*condition)->met())
@@ -110,28 +122,6 @@ bool nemesis::SimLoop::isEnd(void) const
 
   // If we got this far, all end conditions were checked and none were met
   return false;
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    operator<<
-// Purpose: This operator adds a block to the simulation for updating and 
-//          propagation.
-//------------------------------------------------------------------------------
-void nemesis::SimLoop::operator<< (Block::pointer block_)
-{
-  addBlock(block_);
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    operator<<
-// Purpose: This operator adds an end condition to the simulation for checking
-//          simulation termination.
-//------------------------------------------------------------------------------
-void nemesis::SimLoop::operator<< (EndCondition::pointer condition_)
-{
-  addEndCondition(condition_);
 }
 
 
@@ -170,12 +160,7 @@ void nemesis::SimLoop::run(void)
     }
 
     // Propagating states
-    for (current_block = Blocks.begin();
-         current_block != Blocks.end();
-         current_block++)
-    {
-      (*current_block)->propagate();
-    }
+    Propagator->updateStates();
 
     // Updating clock
     Clock->advance();

@@ -37,9 +37,6 @@
     <ClInclude Include="..\Source\Core\state.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\Core\States\state_euler.h">
-      <Filter>Core\States</Filter>
-    </ClInclude>
     <ClInclude Include="..\Source\Core\End_Conditions\end_condition.h">
       <Filter>Core\End Conditions</Filter>
     </ClInclude>
@@ -100,6 +97,9 @@
     </ClCompile>
     <ClCompile Include="..\Source\Math\vector.cpp">
       <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Core\integrator.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

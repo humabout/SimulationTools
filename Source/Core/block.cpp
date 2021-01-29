@@ -2,11 +2,10 @@
 
 
 // Inclusions
-#include <map>
 #include <memory>
-#include <vector>
 #include "block.h"
 #include "state.h"
+#include "sim_loop.h"
 
 
 //------------------------------------------------------------------------------
@@ -20,32 +19,15 @@ nemesis::Block::~Block()
 
 
 //------------------------------------------------------------------------------
-// Name:    placeState
-// Purpose: This method figures out where in the vector of States this 
-//          particular state belongs and reorganizes things accordingly.
+// Name:    addState
+// Purpose: This method adds a new state to the block. It forwards the call to 
+//          Sim->addState, which adds the state to the Integrator.
 //------------------------------------------------------------------------------
-void nemesis::Block::placeState(nemesis::State::pointer state_,
-                                unsigned int            order_)
+void nemesis::Block::addState(double&  x_,
+                              double&  dx_,
+                              SimLoop* sim_)
 {
-  // Add State to Map with the order_ as its key.
-  States.insert(state(order_, state_));
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    doPropagate
-// Purpose: This method implements the default behavior for propagating the 
-//          state of the block forward one time step.
-//------------------------------------------------------------------------------
-void nemesis::Block::doPropagate(void)
-{
-  state_list::iterator state;
-  for (state = States.begin();
-       state != States.end();
-       state++)
-  {
-    (*state).second->propagate();
-  }
+  sim_->addState(x_, dx_);
 }
 
 
@@ -62,17 +44,17 @@ void nemesis::Block::initialize(void)
 
 
 //------------------------------------------------------------------------------
-// Name:    propagate
-// Purpose: This method propagates the block's state variables forward one 
-//          integration step. This may not be a true time step, depending on the
-//          integration method used. It is up to the integrator to track when 
-//          the value of state variables are real and when they are inbetween 
-//          values. It is part of the template pattern and deferes 
-//          implementation to doPropagate().
+// Name:    registerWith
+// Purpose: This method registers the Block with the sim. Part of this is 
+//          process includes registering any state variables that belong to the 
+//          Block with the Sim for propagation. For this reason, child classes 
+//          are expected to provide the implementation for this method via a 
+//          template pattern. The implementation is stored in the pure virtual 
+//          function doRegisterWith.
 //------------------------------------------------------------------------------
-void nemesis::Block::propagate(void)
+void nemesis::Block::registerWith(SimLoop* sim_)
 {
-  doPropagate();
+  doRegisterWith(sim_);
 }
 
 

@@ -8,9 +8,17 @@
 // Inclusions
 #include <memory>
 #include <vector>
-#include "block.h"
 #include "Clocks/sim_clock.h"
 #include "End_Conditions/end_condition.h"
+
+#include "integrator.h"
+
+
+// Forward Declarations
+namespace nemesis
+{
+  class Block;
+}
 
 
 //------------------------------------------------------------------------------
@@ -37,11 +45,11 @@ namespace nemesis
 
     // Constructors
     SimLoop(double time_step_);
-    SimLoop(double      time_step_,
-            State::type integration_method_);
-    SimLoop(double         time_step_,
-            State::type    integration_method_,
-            SimClock::type clock_type_);
+    SimLoop(double           time_step_,
+            Integrator::type integration_method_);
+    SimLoop(double           time_step_,
+            Integrator::type integration_method_,
+            SimClock::type   clock_type_);
 
     // Destructor
     ~SimLoop();
@@ -49,13 +57,15 @@ namespace nemesis
     // Functionality
     void addBlock(Block::pointer block_);
     void addEndCondition(EndCondition::pointer end_condition_);
-    void operator<< (Block::pointer block_);
-    void operator<< (EndCondition::pointer condition_);
+    void addState(double& x_,
+                  double& dx_);
+
     void run(void);
 
   private:
     // Member Variables
     SimClock::pointer                  Clock;
+    Integrator::pointer                Propagator;
     std::vector<Block::pointer>        Blocks;
     std::vector<EndCondition::pointer> End_Conditions;
 
@@ -66,6 +76,10 @@ namespace nemesis
 
 
 } // !core
+
+
+// Forward Declaration Inclusions
+#include "block.h"
 
 
 #endif // !SIM_LOOP_H

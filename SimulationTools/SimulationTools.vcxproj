@@ -148,7 +148,6 @@
     <ClInclude Include="..\Source\Core\integrator.h" />
     <ClInclude Include="..\Source\Core\sim_loop.h" />
     <ClInclude Include="..\Source\Core\state.h" />
-    <ClInclude Include="..\Source\Core\States\state_euler.h" />
     <ClInclude Include="..\Source\Math\math_config.h" />
     <ClInclude Include="..\Source\Math\math_constants.h" />
     <ClInclude Include="..\Source\Math\matrix.h" />
@@ -161,6 +160,7 @@
     <ClCompile Include="..\Source\Core\Clocks\basic_clock.cpp" />
     <ClCompile Include="..\Source\Core\Clocks\sim_clock.cpp" />
     <ClCompile Include="..\Source\Core\End_Conditions\max_time_exceeded.cpp" />
+    <ClCompile Include="..\Source\Core\integrator.cpp" />
     <ClCompile Include="..\Source\Core\sim_loop.cpp" />
     <ClCompile Include="..\Source\Core\state.cpp" />
     <ClCompile Include="..\Source\main.cpp" />
