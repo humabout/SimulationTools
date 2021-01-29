@@ -63,7 +63,8 @@ namespace nemesis
     virtual ~Integrator();
 
     // Factory
-    static pointer create(type method_);
+    static pointer create(type     method_,
+                          SimLoop* sim_);
 
     // Functionality
     void addState(double& x,

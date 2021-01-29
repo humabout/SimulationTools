@@ -18,7 +18,8 @@
 //------------------------------------------------------------------------------
 nemesis::SimLoop::SimLoop(double max_tick_)
 {
-  Clock = SimClock::create(SimClock::type::basic, max_tick_);
+  Clock      = SimClock::create(SimClock::type::basic, max_tick_);
+  Propagator = nullptr;
 }
 
 
@@ -31,8 +32,8 @@ nemesis::SimLoop::SimLoop(double max_tick_)
 nemesis::SimLoop::SimLoop(double           max_tick_,
                           Integrator::type method_)
 {
-  Propagator = Integrator::create(method_);
-  Clock = SimClock::create(SimClock::type::basic, max_tick_);
+  Clock      = SimClock::create(SimClock::type::basic, max_tick_);
+  Propagator = Integrator::create(method_, this);
 }
 
 
@@ -47,7 +48,7 @@ nemesis::SimLoop::SimLoop(double           max_tick_,
                           Integrator::type method_,
                           SimClock::type   clock_type_)
 {
-  Propagator = Integrator::create(method_);
+  Propagator = Integrator::create(method_, this);
   Clock = SimClock::create(clock_type_, max_tick_);
 }
 

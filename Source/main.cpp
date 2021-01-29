@@ -32,7 +32,7 @@ int main()
   block_pointer test = access;
 
   // Build Sim
-  nemesis::SimLoop sim(time_step);
+  nemesis::SimLoop sim(time_step, nemesis::Integrator::type::euler);
   sim.addEndCondition(nemesis::EndCondition::pointer(new nemesis::MaxTimeExceeded(max_time)));
   sim.addBlock(test);
 
