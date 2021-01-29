@@ -54,9 +54,9 @@ namespace nemesis
 
   private:
     // Functionality
-    virtual void doInitialize(void) = 0;
+    virtual void doInitialize(void)            = 0;
     virtual void doRegisterWith(SimLoop* sim_) = 0;
-    virtual void doUpdate(void)     = 0;
+    virtual void doUpdate(void)                = 0;
 
 
   };

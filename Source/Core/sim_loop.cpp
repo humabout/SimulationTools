@@ -70,6 +70,7 @@ nemesis::SimLoop::~SimLoop()
 void nemesis::SimLoop::addBlock(Block::pointer block_)
 {
   Blocks.push_back(block_);
+  block_->registerWith(this);
 }
 
 

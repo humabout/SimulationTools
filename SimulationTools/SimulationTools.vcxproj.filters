@@ -23,6 +23,12 @@
     <Filter Include="Core\Integrators">
       <UniqueIdentifier>{301302d7-f237-4507-9c58-90185d5d5233}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{c5e7616d-144f-42e7-827d-e39de176caff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models\Examples">
+      <UniqueIdentifier>{77253a8c-9ac0-4479-a957-e642f869a9c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\Core\block.h">
@@ -68,6 +74,9 @@
     <ClInclude Include="..\Source\Core\Integrators\state.h">
       <Filter>Core\Integrators</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\Models\Examples\position.h">
+      <Filter>Models\Examples</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />
@@ -100,6 +109,9 @@
     </ClCompile>
     <ClCompile Include="..\Source\Core\Integrators\state.cpp">
       <Filter>Core\Integrators</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Models\Examples\position.cpp">
+      <Filter>Models\Examples</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
