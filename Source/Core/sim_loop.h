@@ -49,7 +49,7 @@ namespace nemesis
 
     // Functionality
     void addBlock(Block::pointer block_);
-    void addEndCondition(EndCondition::pointer end_condition_);
+    void addEndCondition(EndCondition* end_condition_);
     void addState(double& x_,
                   double& dx_);
     void run(void);

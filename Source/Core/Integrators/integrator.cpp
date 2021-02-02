@@ -56,17 +56,18 @@ nemesis::Integrator::~Integrator()
 // Name:    create
 // Purpose: Factory Method
 //------------------------------------------------------------------------------
-nemesis::Integrator::pointer nemesis::Integrator::create(type     method_,
-                                                         SimLoop* sim_)
+nemesis::Integrator* nemesis::Integrator::create(type     method_,
+                                                 SimLoop* sim_)
 {
   switch (method_)
   {
   case nemesis::Integrator::type::euler:
-    return pointer(new Euler(sim_));
+    return new Euler(sim_);
   case nemesis::Integrator::type::rk2:
   case nemesis::Integrator::type::rk4:
   default:
-    throw std::runtime_error("Fatal Error: Unrecognized Integration::type provided at Integrator::create.");
+    throw std::runtime_error("Warning: Unrecognized Integration::type provided at Integrator::create.  Returning Euler integration.");
+    return new Euler(sim_);
   }
 }
 

@@ -37,7 +37,7 @@ namespace nemesis
     State(const State& that);
 
     // Destructor
-    virtual ~State();
+    ~State();
 
     // Accesors
     double&       x(void) const;

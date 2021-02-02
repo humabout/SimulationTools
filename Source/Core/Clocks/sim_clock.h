@@ -50,8 +50,8 @@ namespace nemesis
     static double tick(void);
 
     // Factory Method
-    static SimClock::pointer create(type   clock_type_,
-                                    double max_tick_);
+    static SimClock* create(type   clock_type_,
+                            double max_tick_);
     
     // Functionality
     void advance(void);

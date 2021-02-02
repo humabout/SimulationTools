@@ -3,6 +3,7 @@
 
 // Inclusions
 #include <memory>
+#include <stdexcept>
 #include "sim_clock.h"
 #include "basic_clock.h"
 
@@ -27,15 +28,16 @@ nemesis::SimClock::~SimClock()
 // Name:    create
 // Purpose: Factory Method. Returns an instance of the correct sim clock type.
 //------------------------------------------------------------------------------
-std::shared_ptr<nemesis::SimClock> nemesis::SimClock::create(nemesis::SimClock::type type_,
-                                                             double                  max_tick_)
+nemesis::SimClock* nemesis::SimClock::create(SimClock::type type_,
+                                             double         max_tick_)
 {
   switch (type_)
   {
   case nemesis::SimClock::type::basic:
-    return std::shared_ptr<nemesis::SimClock>( new BasicClock(max_tick_) );
+    return new BasicClock(max_tick_);
   default:
-    return std::shared_ptr<nemesis::SimClock>( new BasicClock(max_tick_) );
+    throw std::runtime_error("Warning: Unrecognized SimClock::type provided at SimClock::create.  Returning BasicClock.");
+    return new BasicClock(max_tick_);
   }
 }
 

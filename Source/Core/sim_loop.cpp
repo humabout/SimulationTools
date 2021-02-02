@@ -18,7 +18,7 @@
 //------------------------------------------------------------------------------
 nemesis::SimLoop::SimLoop(double max_tick_)
 {
-  Clock      = SimClock::create(SimClock::type::basic, max_tick_);
+  Clock.reset(SimClock::create(SimClock::type::basic, max_tick_));
   Propagator = nullptr;
 }
 
@@ -32,8 +32,10 @@ nemesis::SimLoop::SimLoop(double max_tick_)
 nemesis::SimLoop::SimLoop(double           max_tick_,
                           Integrator::type method_)
 {
-  Clock      = SimClock::create(SimClock::type::basic, max_tick_);
-  Propagator = Integrator::create(method_, this);
+  Clock.reset(SimClock::create(SimClock::type::basic, max_tick_));
+  //Clock      = SimClock::create(SimClock::type::basic, max_tick_);
+  Propagator.reset(Integrator::create(method_, this));
+  //Propagator = Integrator::create(method_, this);
 }
 
 
@@ -48,8 +50,10 @@ nemesis::SimLoop::SimLoop(double           max_tick_,
                           Integrator::type method_,
                           SimClock::type   clock_type_)
 {
-  Propagator = Integrator::create(method_, this);
-  Clock = SimClock::create(clock_type_, max_tick_);
+  Clock.reset(SimClock::create(clock_type_, max_tick_));
+  //Clock = SimClock::create(clock_type_, max_tick_);
+  //Propagator = Integrator::create(method_, this);
+  Propagator.reset(Integrator::create(method_, this));
 }
 
 
@@ -79,9 +83,9 @@ void nemesis::SimLoop::addBlock(Block::pointer block_)
 // Name:    addEndCondition
 // Purpose: This method adds an end condition to the simulation for checking.
 //------------------------------------------------------------------------------
-void nemesis::SimLoop::addEndCondition(EndCondition::pointer end_condition_)
+void nemesis::SimLoop::addEndCondition(EndCondition* end_condition_)
 {
-  End_Conditions.push_back(end_condition_);
+  End_Conditions.push_back(EndCondition::pointer(end_condition_));
 }
 
 

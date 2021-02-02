@@ -60,11 +60,11 @@ namespace nemesis
     Integrator(const Integrator& that);
 
     // Destructor
-    virtual ~Integrator();
+    ~Integrator();
 
     // Factory
-    static pointer create(type     method_,
-                          SimLoop* sim_);
+    static Integrator* create(type     method_,
+                              SimLoop* sim_);
 
     // Functionality
     void addState(double& x,

@@ -40,7 +40,7 @@ namespace nemesis
     typedef std::shared_ptr<Block> pointer;
 
     // Destructor
-    virtual ~Block();
+    ~Block();
 
     // Functionality
     void initialize(void);

@@ -29,11 +29,11 @@ int main()
   //        needing this sort of thing.
 
   position_pointer access = position_pointer(new position_block(position, velocity, acceleration));
-  block_pointer test = access;
+  block_pointer test = block_pointer(access.get());
 
   // Build Sim
   nemesis::SimLoop sim(time_step, nemesis::Integrator::type::euler);
-  sim.addEndCondition(nemesis::EndCondition::pointer(new nemesis::MaxTimeExceeded(max_time)));
+  sim.addEndCondition(new nemesis::MaxTimeExceeded(max_time));
   sim.addBlock(test);
 
   // Reporting States Prior to Propagation
