@@ -49,10 +49,6 @@ namespace nemesis
     typedef std::multimap< unsigned int, 
                            nemesis::State::pointer, 
                            std::greater<unsigned int> > state_list;
-    // Used because SimLoop must be included via forward declaration to avoid a 
-    // circular reference issue.
-    typedef std::shared_ptr<SimLoop> SimLoop_pointer;
-
 
     // Constructors
     Integrator();
@@ -74,7 +70,7 @@ namespace nemesis
 
   protected:
     // Owning Simulation
-    SimLoop_pointer Sim;
+    SimLoop* Sim;
 
     // Data
     state_list States;

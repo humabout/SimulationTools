@@ -27,7 +27,7 @@ nemesis::Integrator::Integrator()
 //------------------------------------------------------------------------------
 nemesis::Integrator::Integrator(SimLoop* sim_)
 {
-  this->Sim = std::shared_ptr<SimLoop>(sim_);
+  this->Sim = sim_;
 }
 
 

@@ -28,8 +28,8 @@ int main()
   //        Eventually, data output will be added to the library to avoid 
   //        needing this sort of thing.
 
-  position_pointer access = position_pointer(new position_block(position, velocity, acceleration));
-  block_pointer test = block_pointer(access.get());
+  position_block* access = new position_block(position, velocity, acceleration);
+  block_pointer test = block_pointer(access);
 
   // Build Sim
   nemesis::SimLoop sim(time_step, nemesis::Integrator::type::euler);

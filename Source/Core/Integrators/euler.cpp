@@ -12,7 +12,7 @@
 //------------------------------------------------------------------------------
 nemesis::Euler::Euler(SimLoop* sim_)
 {
-  this->Sim = SimLoop::pointer(sim_);
+  this->Sim = sim_;
 }
 
 
