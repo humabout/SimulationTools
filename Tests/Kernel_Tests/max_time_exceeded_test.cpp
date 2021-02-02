@@ -12,16 +12,16 @@
 // Fixture
 struct MaxTimeExceededTests : public ::testing::Test
 {
-  std::shared_ptr<nemesis::EndCondition> condition;
-  std::shared_ptr<nemesis::SimClock> clock;
+  nemesis::EndCondition::pointer condition;
+  nemesis::SimClock::pointer clock;
 
   virtual void SetUp()
   {
     // Setting up an state for propagating time
-    clock = nemesis::SimClock::create(nemesis::SimClock::type::basic, 2);
+    clock = nemesis::SimClock::pointer(nemesis::SimClock::create(nemesis::SimClock::type::basic, 2));
 
     // Declaring the unit under test
-    condition = std::shared_ptr <nemesis::EndCondition>(new nemesis::MaxTimeExceeded(1));
+    condition = nemesis::EndCondition::pointer(new nemesis::MaxTimeExceeded(1));
   }
 
   virtual void TearDown()

@@ -6,17 +6,19 @@
 #include "../pch.h"
 #include "../../Source/Core/Clocks/basic_clock.h"
 #include "../../Source/Core/Clocks/basic_clock.cpp"
+#include "../../Source/Core/Clocks/sim_clock.h"
+#include "../../Source/Core/Clocks/sim_clock.cpp"
 
 
 struct BasicClockClockTests : public ::testing::Test
 {
-  std::shared_ptr<nemesis::SimClock> clock;
+  nemesis::SimClock::pointer clock;
   double tick;
 
   virtual void SetUp()
   {
     tick = 1.0;
-    clock = nemesis::SimClock::create(nemesis::SimClock::type::basic, tick);
+    clock = nemesis::SimClock::pointer(nemesis::SimClock::create(nemesis::SimClock::type::basic, tick));
   }
 
   virtual void TearDown()
@@ -38,7 +40,7 @@ TEST_F(BasicClockClockTests, SetMaxTimestepTest)
 {
   EXPECT_DOUBLE_EQ(nemesis::SimClock::tick(), 1.0);
 
-  nemesis::SimClock::pointer test_5_5 = nemesis::SimClock::create(nemesis::SimClock::type::basic, 5.5);
+  nemesis::SimClock::pointer test_5_5 = nemesis::SimClock::pointer(nemesis::SimClock::create(nemesis::SimClock::type::basic, 5.5));
   EXPECT_DOUBLE_EQ(nemesis::SimClock::tick(), 5.5);
 }
 
