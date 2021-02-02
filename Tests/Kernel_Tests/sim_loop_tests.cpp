@@ -7,61 +7,28 @@
 #include "../../Source/Core/sim_loop.cpp"
 #include "../../Source/Core/sim_loop.h"
 #include "../../Source/Core/End_Conditions/max_time_exceeded.h"
+#include "../../Source/Models/Examples/position.h"
+#include "../../Source/Models/Examples/position.cpp"
 
-// Making a Test Block
-class LoopBlockTest : public nemesis::Block
-{
-public:
-  double* x;
-  double* dx;
-  double* ddx;
-  bool isInitialized;
-  bool isUpdated;
+#include "../../Source/Core/block.h"
+#include "../../Source/Core/block.cpp"
 
-  LoopBlockTest(double& x_, double& dx_, double& ddx_)
-  {
-    this->x = &x_;
-    this->dx = &dx_;
-    this->ddx = &ddx_;
-
-    isInitialized = false;
-    isUpdated = false;
-  }
-  ~LoopBlockTest()
-  {
-    // Does Nothing
-  };
-
-private:
-  void doInitialize(void) override final
-  {
-
-    *x = 0;
-    *dx = 0;
-    *ddx = 1;
-
-    nemesis::State::pointer state = nemesis::State::create(*dx, *ddx);
-    this->addState(*x, *dx, 1);
-    this->addState(*dx, *ddx, 2);
-
-    isInitialized = true;
-  }
-  void doUpdate(void) override final
-  {
-    isUpdated = true;
-  }
-};
+#include "../../Source/Core/Integrators/integrator.h"
+#include "../../Source/Core/Integrators/integrator.cpp"
+#include "../../Source/Core/Integrators/state.h"
+#include "../../Source/Core/Integrators/state.cpp"
+#include "../../Source/Core/Integrators/euler.h"
+#include "../../Source/Core/Integrators/euler.cpp"
 
 
 // Fixture
 struct SimLoopTests : public ::testing::Test
 {
-  nemesis::EndCondition::pointer max_time;
-  nemesis::SimClock::pointer     clock;
-  nemesis::Block::pointer        block;
-  std::shared_ptr<LoopBlockTest>  access;
-  nemesis::SimLoop::pointer      sim;
-  double                      max_tick;
+  nemesis::SimLoop::pointer sim;
+
+  double max_tick;
+  double max_time;
+  double time_step;
   double x;
   double dx;
   double ddx;
@@ -69,43 +36,19 @@ struct SimLoopTests : public ::testing::Test
   virtual void SetUp()
   {
     max_tick = 0.01;
+    max_time = 10.0;
 
-    nemesis::Block* block_ptr = new LoopBlockTest(x, dx, ddx);
-    block = nemesis::Block::pointer(block_ptr);
-
-    clock = nemesis::SimClock::create(nemesis::SimClock::type::basic, 1.0 );
-
-    nemesis::EndCondition* max_time_ptr = new nemesis::MaxTimeExceeded(10.0);
-    max_time = nemesis::EndCondition::pointer(max_time_ptr);
-
-    sim = nullptr;
+    sim.reset(new nemesis::SimLoop(max_tick));
   }
 
-  virtual void TearDown() { }
+  virtual void TearDown() {}
 };
 
 
 TEST_F(SimLoopTests, SetupWithAddFooTest)
 {
-  nemesis::SimLoop* sim_ptr = new nemesis::SimLoop(max_tick);
-  sim = nemesis::SimLoop::pointer( sim_ptr );
-  sim->addBlock(block);
-  sim->addEndCondition(max_time);
-
-  sim->run();
-
-  EXPECT_DOUBLE_EQ(ddx, 1);
-  EXPECT_NEAR(dx, 10, 1e-6);
-  EXPECT_NEAR(x, 50, 0.1);
-}
-
-
-TEST_F(SimLoopTests, SetupWithOperatorsTest)
-{
-  nemesis::SimLoop* sim_ptr = new nemesis::SimLoop(max_tick);
-  sim = nemesis::SimLoop::pointer(sim_ptr);
-  *sim << block;
-  *sim << max_time;
+  sim->addBlock(nemesis::Block::pointer(new nemesis::examples::Position(x, dx, ddx)));
+  sim->addEndCondition(nemesis::EndCondition::pointer(new nemesis::MaxTimeExceeded(max_time)));
 
   sim->run();
 

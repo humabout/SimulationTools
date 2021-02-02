@@ -34,7 +34,7 @@ namespace nemesis
     bool met(void) override;
 
   private:
-    double  Time_Max;
+    double Time_Max;
 
   }; // !MaxTimeExceeded
 } // !core

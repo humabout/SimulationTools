@@ -18,6 +18,9 @@
     <ClCompile Include="Kernel_Tests\max_time_exceeded_test.cpp">
       <Filter>Core Tests</Filter>
     </ClCompile>
+    <ClCompile Include="Kernel_Tests\sim_loop_tests.cpp">
+      <Filter>Core Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />

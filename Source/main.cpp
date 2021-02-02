@@ -33,7 +33,7 @@ int main()
 
   // Build Sim
   nemesis::SimLoop sim(time_step, nemesis::Integrator::type::euler);
-  sim.addEndCondition(new nemesis::MaxTimeExceeded(max_time));
+  sim.addEndCondition(nemesis::EndCondition::pointer(new nemesis::MaxTimeExceeded(max_time)));
   sim.addBlock(test);
 
   // Reporting States Prior to Propagation

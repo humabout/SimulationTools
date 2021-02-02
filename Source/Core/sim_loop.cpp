@@ -83,9 +83,9 @@ void nemesis::SimLoop::addBlock(Block::pointer block_)
 // Name:    addEndCondition
 // Purpose: This method adds an end condition to the simulation for checking.
 //------------------------------------------------------------------------------
-void nemesis::SimLoop::addEndCondition(EndCondition* end_condition_)
+void nemesis::SimLoop::addEndCondition(EndCondition::pointer end_condition_)
 {
-  End_Conditions.push_back(EndCondition::pointer(end_condition_));
+  End_Conditions.push_back(end_condition_);
 }
 
 
