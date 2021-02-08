@@ -80,7 +80,7 @@ nemesis::Integrator* nemesis::Integrator::create(type     method_,
 void nemesis::Integrator::addState(double& x,
                                    double& dx)
 {
-  State::pointer new_state = State::create(x, dx);
+  State new_state(x, dx);
 
   // Checking if the new state is the derivative of any of the current states
   // There should be, at most, one other state for whom this is true
@@ -89,10 +89,10 @@ void nemesis::Integrator::addState(double& x,
        state != States.end();
        ++state)
   {
-    bool new_state_has_derivative = (&(new_state->dx()) == &((*state).second->x()));
+    bool new_state_has_derivative = (&(new_state.dx()) == &((*state).second.x()));
     if (new_state_has_derivative)
     {
-      (*state).second->order() += new_state->order();
+      (*state).second.order() += new_state.order();
       needs_update = true;
       break;
     }
@@ -108,11 +108,11 @@ void nemesis::Integrator::addState(double& x,
        state != States.end();
        ++state)
   {
-    bool new_state_is_derivative = (&(new_state->x()) == &((*state).second->dx()));
+    bool new_state_is_derivative = (&(new_state.x()) == &((*state).second.dx()));
 
     if (new_state_is_derivative)
     {
-      new_state->order() += (*state).second->order();
+      new_state.order() += (*state).second.order();
       break;
     }
     else
@@ -121,7 +121,7 @@ void nemesis::Integrator::addState(double& x,
     }
   }
   // Add the new state to the list where it belongs
-  this->States.emplace(new_state->order(), new_state);
+  this->States.emplace(new_state.order(), new_state);
 
 
   // Update state list, if needed
@@ -134,7 +134,7 @@ void nemesis::Integrator::addState(double& x,
          state != States.end();
          ++state)
     {
-      temp_list.emplace((*state).second->order(), (*state).second);
+      temp_list.emplace((*state).second.order(), (*state).second);
     }
     States = temp_list;
   }

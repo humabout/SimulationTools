@@ -8,6 +8,18 @@
 
 //------------------------------------------------------------------------------
 // Name:    State
+// Purpose: Default Constructor
+//------------------------------------------------------------------------------
+nemesis::State::State()
+{
+  State_Variable   = nullptr;
+  State_Derivative = nullptr;
+  Order            = 0;
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    State
 // Purpose: Constructor
 //------------------------------------------------------------------------------
 nemesis::State::State(double& x_,
@@ -45,11 +57,13 @@ nemesis::State::~State()
 // Name:    create
 // Purpose: Factory method for creating new states.
 //------------------------------------------------------------------------------
+/*
 nemesis::State::pointer nemesis::State::create(double& x_,
                                                double& dx_)
 {
   return pointer(new State(x_, dx_));
 }
+*/
 
 
 //------------------------------------------------------------------------------

@@ -31,7 +31,7 @@ namespace nemesis
     typedef std::shared_ptr<State> pointer;
 
     // Constructor
-    State() = delete;
+    State();
     State(double& x_,
           double& dx_);
     State(const State& that);
@@ -44,9 +44,11 @@ namespace nemesis
     double&       dx(void) const;
     unsigned int& order(void);
 
+    /*
     // Factory
     static State::pointer create(double& x_,
                                  double& dx_);
+    */
 
     // Copy Assignment Operator
     void operator=(const State& lhs);

@@ -47,7 +47,7 @@ namespace nemesis
     }; // !type
     typedef std::shared_ptr<Integrator> pointer;
     typedef std::multimap< unsigned int, 
-                           nemesis::State::pointer, 
+                           nemesis::State, 
                            std::greater<unsigned int> > state_list;
 
     // Constructors

@@ -54,6 +54,6 @@ void nemesis::Euler::doUpdateStates(void)
     state != States.end();
     ++state)
   {
-    (*state).second->x() += dt * (*state).second->dx();
+    (*state).second.x() += dt * (*state).second.dx();
   }
 }
