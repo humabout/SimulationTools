@@ -89,7 +89,7 @@ void nemesis::Integrator::addState(double& x,
        state != States.end();
        ++state)
   {
-    bool new_state_has_derivative = (&(new_state.dx()) == &((*state).second.x()));
+    bool new_state_has_derivative = (&(new_state.x()) == &((*state).second.dx()));
     if (new_state_has_derivative)
     {
       (*state).second.order() += new_state.order();
@@ -108,11 +108,11 @@ void nemesis::Integrator::addState(double& x,
        state != States.end();
        ++state)
   {
-    bool new_state_is_derivative = (&(new_state.x()) == &((*state).second.dx()));
+    bool new_state_is_derivative = (&(new_state.dx()) == &((*state).second.x()));
 
     if (new_state_is_derivative)
     {
-      new_state.order() += (*state).second.order();
+      new_state.order() = 1 + (*state).second.order();
       break;
     }
     else
