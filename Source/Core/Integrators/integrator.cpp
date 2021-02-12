@@ -82,7 +82,7 @@ void nemesis::Integrator::addState(double& x,
 {
   State new_state(x, dx);
 
-  // Checking if the new state is the derivative of any of the current states
+  // Checking if the new state has a derivative in the current list of states
   // There should be, at most, one other state for whom this is true
   bool needs_update = false;
   for (state_list::iterator state = States.begin();
@@ -94,7 +94,6 @@ void nemesis::Integrator::addState(double& x,
     {
       (*state).second.order() += new_state.order();
       needs_update = true;
-      break;
     }
     else
     {
@@ -103,7 +102,8 @@ void nemesis::Integrator::addState(double& x,
   }
 
 
-  // Checking if the new state has a derivative in the current list of states
+  // Checking if the new state is the derivative of any of the current states
+  // There should be, at most, one other state for whom this is true
   for (state_list::iterator state = States.begin();
        state != States.end();
        ++state)

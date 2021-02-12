@@ -73,26 +73,16 @@ TEST_F(IntegratorTests, AddStateTest)
   double c = 2;
   double d = 3;
 
-  // 1st Order Derivative
-  test.addState(a, b);
   // 2nd Order Derivative
   test.addState(b, c);
   // 3rd Order Derivative
   test.addState(c, d);
-
   // 1st Order Derivative
   test.addState(a, b);
-  // 2nd Order Derivative
-  test.addState(b, c);
-  // 3rd Order Derivative
-  test.addState(c, d);
 
   // Testing order of state orders
   std::vector<unsigned int> orders = test.getStateOrders();
   EXPECT_EQ(orders[0], 3); // expected 3
-  EXPECT_EQ(orders[1], 3); // expected 3
-  EXPECT_EQ(orders[2], 2); // expected 2
-  EXPECT_EQ(orders[3], 2); // expected 2
-  EXPECT_EQ(orders[4], 1); // expected 1
-  EXPECT_EQ(orders[5], 1); // expected 1
+  EXPECT_EQ(orders[1], 2); // expected 2
+  EXPECT_EQ(orders[2], 1); // expected 1
 }
