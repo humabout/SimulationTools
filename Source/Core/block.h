@@ -47,11 +47,6 @@ namespace nemesis
     void registerWith(SimLoop* sim_);
     void update(void);
 
-  protected:
-    void addState(double&  x_,
-                  double&  dx_,
-                  SimLoop* sim_);
-
   private:
     // Functionality
     virtual void doInitialize(void)            = 0;

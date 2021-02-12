@@ -19,19 +19,6 @@ nemesis::Block::~Block()
 
 
 //------------------------------------------------------------------------------
-// Name:    addState
-// Purpose: This method adds a new state to the block. It forwards the call to 
-//          Sim->addState, which adds the state to the Integrator.
-//------------------------------------------------------------------------------
-void nemesis::Block::addState(double&  x_,
-                              double&  dx_,
-                              SimLoop* sim_)
-{
-  sim_->addState(x_, dx_);
-}
-
-
-//------------------------------------------------------------------------------
 // Name:    initialize
 // Purpose: This method sets the initial values for the block's internal state.
 //          It is part of the template pattern and deferes implementation to
