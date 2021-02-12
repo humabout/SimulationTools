@@ -37,6 +37,7 @@ namespace nemesis
     typedef std::shared_ptr<SimLoop> pointer;
 
     // Constructors
+    SimLoop() {};
     SimLoop(double time_step_);
     SimLoop(double           time_step_,
             Integrator::type integration_method_);

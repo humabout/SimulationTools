@@ -2,7 +2,6 @@
 
 
 // Inclusions
-#include <memory>
 #include "../pch.h"
 #include "../../Source/Core/End_Conditions/end_condition.h"
 #include "../../Source/Core/End_Conditions/max_time_exceeded.h"

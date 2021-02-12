@@ -1,8 +1,7 @@
-// simple_synchronous_clock_test.cpp
+// basic_clock_test.cpp
 
 
 // Inclusion
-#include <memory>
 #include "../pch.h"
 #include "../../Source/Core/Clocks/basic_clock.h"
 #include "../../Source/Core/Clocks/basic_clock.cpp"
