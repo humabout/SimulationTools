@@ -80,68 +80,101 @@ nemesis::Integrator* nemesis::Integrator::create(type     method_,
 void nemesis::Integrator::addState(double& x,
                                    double& dx)
 {
-  State new_state(x, dx);
-
-  // Checking if the new state has a derivative in the current list of states
-  // There should be, at most, one other state for whom this is true
-  bool needs_update = false;
+  // Check for duplicate state
+  bool isDuplicate = false;
   for (state_list::iterator state = States.begin();
-       state != States.end();
-       ++state)
+    state != States.end();
+    ++state)
   {
-    bool new_state_has_derivative = (&(new_state.x()) == &((*state).second.dx()));
-    if (new_state_has_derivative)
+    if ( (&((*state).second.x())  == &x)  &&
+         (&((*state).second.dx()) == &dx) )
     {
-      (*state).second.order() += new_state.order();
-      needs_update = true;
-    }
-    else
-    {
-      continue;
-    }
-  }
-
-
-  // Checking if the new state is the derivative of any of the current states
-  // There should be, at most, one other state for whom this is true
-  for (state_list::iterator state = States.begin();
-       state != States.end();
-       ++state)
-  {
-    bool new_state_is_derivative = (&(new_state.dx()) == &((*state).second.x()));
-
-    if (new_state_is_derivative)
-    {
-      new_state.order() = 1 + (*state).second.order();
+      // This is a duplicate
+      isDuplicate = true;
       break;
     }
     else
     {
-      continue;
+      // Continue checking
     }
   }
-  // Add the new state to the list where it belongs
-  this->States.emplace(new_state.order(), new_state);
 
 
-  // Update state list, if needed
-  if (needs_update)
+  // Only try to emplace a duplicate
+  if (!isDuplicate)
   {
-    state_list temp_list;
+    State new_state(x, dx);
 
-    // Reorder the list based on the new state derivative orders
+    // Checking if the new state has a derivative in the current list of states
+    // There should be, at most, one other state for whom this is true
+    bool needs_update = false;
     for (state_list::iterator state = States.begin();
-         state != States.end();
-         ++state)
+      state != States.end();
+      ++state)
     {
-      temp_list.emplace((*state).second.order(), (*state).second);
+      bool new_state_has_derivative = (&(new_state.x()) == &((*state).second.dx()));
+      if (new_state_has_derivative)
+      {
+        (*state).second.order() += new_state.order();
+        needs_update = true;
+      }
+      else
+      {
+        continue;
+      }
     }
-    States = temp_list;
+
+
+    // Checking if the new state is the derivative of any of the current states
+    // There should be, at most, one other state for whom this is true
+    for (state_list::iterator state = States.begin();
+      state != States.end();
+      ++state)
+    {
+      bool new_state_is_derivative = (&(new_state.dx()) == &((*state).second.x()));
+
+      if (new_state_is_derivative)
+      {
+        new_state.order() = 1 + (*state).second.order();
+        break;
+      }
+      else
+      {
+        continue;
+      }
+    }
+
+
+    // Add the new state to the list where it belongs
+    this->States.emplace(new_state.order(), new_state);
+
+
+    // Update state list, if needed
+    if (needs_update)
+    {
+      state_list temp_list;
+
+      // Reorder the list based on the new state derivative orders
+      for (state_list::iterator state = States.begin();
+        state != States.end();
+        ++state)
+      {
+        temp_list.emplace((*state).second.order(), (*state).second);
+      }
+      States = temp_list;
+    }
+    else
+    {
+      // No need to reorder
+    }
   }
   else
   {
-    // No need to reorder
+    // The state provided is a duplicate. Pass a warning and proceed without 
+    // adding
+    // TODO: Add passing a warning to the log/handler/whatever
   }
+
 }
 
 

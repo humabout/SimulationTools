@@ -79,6 +79,12 @@ TEST_F(IntegratorTests, AddStateTest)
   test.addState(c, d);
   // 1st Order Derivative
   test.addState(a, b);
+  // 2nd Order Derivative
+  test.addState(b, c);
+  // 3rd Order Derivative
+  test.addState(c, d);
+  // 1st Order Derivative
+  test.addState(a, b);
 
   // Testing order of state orders
   std::vector<unsigned int> orders = test.getStateOrders();
