@@ -1,4 +1,4 @@
-// simple_integrator.cpp
+// position.cpp
 
 
 // Inclusions
@@ -8,7 +8,7 @@
 
 
 //------------------------------------------------------------------------------
-// Name:    SimpleIntegrator
+// Name:    Position
 // Purpose: Default Constructor.
 //------------------------------------------------------------------------------
 nemesis::examples::Position::Position()
@@ -20,7 +20,7 @@ nemesis::examples::Position::Position()
 
 
 //------------------------------------------------------------------------------
-// Name:    SimpleIntegrator
+// Name:    Position
 // Purpose: Constructor Overload. Sets values of the state variables.
 //------------------------------------------------------------------------------
 nemesis::examples::Position::Position(double position_,
@@ -34,7 +34,7 @@ nemesis::examples::Position::Position(double position_,
 
 
 //------------------------------------------------------------------------------
-// Name:    ~SimpleIntegrator
+// Name:    ~Position
 // Purpose: Destructor. This object owns nothing and deallocates nothing
 //------------------------------------------------------------------------------
 nemesis::examples::Position::~Position()

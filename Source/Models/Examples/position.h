@@ -1,4 +1,4 @@
-// simple_integrator.h
+// position.h
 
 
 #ifndef NEMESIS_MODEL_POSISTION_H
@@ -10,6 +10,10 @@
 #include "../../Core/block.h"
 
 
+//------------------------------------------------------------------------------
+// Name:    nemesis
+// Purpose: This namespace holds all aspects of the Nemesis Simulation Toolkit.
+//------------------------------------------------------------------------------
 namespace nemesis
 {
 
