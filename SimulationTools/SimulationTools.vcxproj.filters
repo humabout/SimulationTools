@@ -80,6 +80,9 @@
     <ClInclude Include="..\Source\Core\Integrators\euler.h">
       <Filter>Core\Integrators</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\Core\Integrators\rk2.h">
+      <Filter>Core\Integrators</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />
@@ -117,6 +120,9 @@
       <Filter>Models\Examples</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Core\Integrators\euler.cpp">
+      <Filter>Core\Integrators</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Core\Integrators\rk2.cpp">
       <Filter>Core\Integrators</Filter>
     </ClCompile>
   </ItemGroup>

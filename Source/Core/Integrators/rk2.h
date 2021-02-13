@@ -1,12 +1,13 @@
-// euler.h
+// rk2.h
 
 
-#ifndef NEMESIS_INTEGRATOR_EULER_H
-#define NEMESIS_INTEGRATOR_EULER_H
+#ifndef NEMESIS_INTEGRATOR_RK2_H
+#define NEMESIS_INTEGRATOR_RK2_H
 
 
 // Inclusions
 #include <memory>
+#include <vector>
 #include "integrator.h"
 
 
@@ -26,37 +27,39 @@ namespace nemesis
 
 
   //----------------------------------------------------------------------------
-  // Name:    Euler
-  // Purpose: This concretion of Integrator implements Euler's integration 
+  // Name:    RK2
+  // Purpose: This concretion of Integrator implements the rK2 integration 
   //          method for propagating states.
   //----------------------------------------------------------------------------
-  class Euler : public Integrator
+  class RK2 : public Integrator
   {
   public:
     // Typdefs
-    typedef std::shared_ptr<Euler> pointer;
+    typedef std::shared_ptr<RK2> pointer;
 
     // Constructor
-    Euler(SimLoop* sim_);
-    Euler(const Euler& that);
-    Euler() = delete;
+    RK2(SimLoop*   sim);
+    RK2(const RK2& that);
+    RK2() = delete;
 
     // Destructor
-    ~Euler();
+    ~RK2();
 
   private:
+    // Member Variables
+    std::vector< std::vector<double> > x;  //
+    std::vector< std::vector<double> > dx; //
+
     // Functionality
     void doUpdateStates(void) override;
 
 
-  }; // !Euler
+  }; // !RK2
 
 
 } // !nemesis
 
 
-// Forward Declaration Inclusions
-#include "../sim_loop.h"
 
 
-#endif // !NEMESIS_INTEGRATOR_EULER_H
+#endif // !NEMESIS_INTEGRATOR_RK2_H
