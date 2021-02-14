@@ -13,19 +13,16 @@
       <Filter>Math Library Tests</Filter>
     </ClCompile>
     <ClCompile Include="Kernel_Tests\basic_clock.cpp">
-      <Filter>Kernel Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="Kernel_Tests\block_tests.cpp">
-      <Filter>Kernel Tests</Filter>
+      <Filter>Core Tests</Filter>
     </ClCompile>
     <ClCompile Include="Kernel_Tests\max_time_exceeded_test.cpp">
-      <Filter>Kernel Tests</Filter>
+      <Filter>Core Tests</Filter>
     </ClCompile>
-    <ClCompile Include="Kernel_Tests\sim_loop_tests.cpp">
-      <Filter>Kernel Tests</Filter>
+    <ClCompile Include="Kernel_Tests\state_tests.cpp">
+      <Filter>Core Tests</Filter>
     </ClCompile>
-    <ClCompile Include="Kernel_Tests\state_euler_tests.cpp">
-      <Filter>Kernel Tests</Filter>
+    <ClCompile Include="Kernel_Tests\integrator_tests.cpp">
+      <Filter>Core Tests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -38,7 +35,7 @@
     <Filter Include="Math Library Tests">
       <UniqueIdentifier>{16df062e-53b9-42b1-9851-1a4f1715e802}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Kernel Tests">
+    <Filter Include="Core Tests">
       <UniqueIdentifier>{aa0f1806-efa5-4386-b333-af3a8d182241}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

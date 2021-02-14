@@ -2,50 +2,19 @@
 
 
 // Inclusions
-#include <map>
 #include <memory>
-#include <vector>
 #include "block.h"
-#include "state.h"
+#include "Integrators/state.h"
+#include "sim_loop.h"
 
 
 //------------------------------------------------------------------------------
 // Name:    ~Block
 // Purpose: Destructor. This object owns nothing and deletes nothing.
 //------------------------------------------------------------------------------
-core::Block::~Block()
+nemesis::Block::~Block()
 {
   // Does Nothing.
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    placeState
-// Purpose: This method figures out where in the vector of States this 
-//          particular state belongs and reorganizes things accordingly.
-//------------------------------------------------------------------------------
-void core::Block::placeState(core::State::pointer state_, 
-                             unsigned int         order_)
-{
-  // Add State to Map with the order_ as its key.
-  States.insert(state(order_, state_));
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    doPropagate
-// Purpose: This method implements the default behavior for propagating the 
-//          state of the block forward one time step.
-//------------------------------------------------------------------------------
-void core::Block::doPropagate(void)
-{
-  state_list::iterator state;
-  for (state = States.begin();
-       state != States.end();
-       state++)
-  {
-    (*state).second->propagate();
-  }
 }
 
 
@@ -55,24 +24,24 @@ void core::Block::doPropagate(void)
 //          It is part of the template pattern and deferes implementation to
 //          doInitialize().
 //------------------------------------------------------------------------------
-void core::Block::initialize(void)
+void nemesis::Block::initialize(void)
 {
   doInitialize();
 }
 
 
 //------------------------------------------------------------------------------
-// Name:    propagate
-// Purpose: This method propagates the block's state variables forward one 
-//          integration step. This may not be a true time step, depending on the
-//          integration method used. It is up to the integrator to track when 
-//          the value of state variables are real and when they are inbetween 
-//          values. It is part of the template pattern and deferes 
-//          implementation to doPropagate().
+// Name:    registerWith
+// Purpose: This method registers the Block with the sim. Part of this is 
+//          process includes registering any state variables that belong to the 
+//          Block with the Sim for propagation. For this reason, child classes 
+//          are expected to provide the implementation for this method via a 
+//          template pattern. The implementation is stored in the pure virtual 
+//          function doRegisterWith.
 //------------------------------------------------------------------------------
-void core::Block::propagate(void)
+void nemesis::Block::registerWith(SimLoop* sim_)
 {
-  doPropagate();
+  doRegisterWith(sim_);
 }
 
 
@@ -83,7 +52,7 @@ void core::Block::propagate(void)
 //          It is part of the template pattern and deferes implementation to 
 //          doUpdate().
 //------------------------------------------------------------------------------
-void core::Block::update(void)
+void nemesis::Block::update(void)
 {
   doUpdate();
 }

@@ -11,13 +11,14 @@
 #include "block.h"
 #include "Clocks/sim_clock.h"
 #include "End_Conditions/end_condition.h"
+#include "Integrators/integrator.h"
 
 
 //------------------------------------------------------------------------------
-// Name:    core
-// Purpose: This namespace holds all parts of the simulation core.
+// Name:    nemesis
+// Purpose: This namespace holds all aspects of the Nemesis Simulation Toolkit.
 //------------------------------------------------------------------------------
-namespace core
+namespace nemesis
 {
 
 
@@ -36,12 +37,13 @@ namespace core
     typedef std::shared_ptr<SimLoop> pointer;
 
     // Constructors
+    SimLoop() {};
     SimLoop(double time_step_);
-    SimLoop(double      time_step_,
-            State::type integration_method_);
-    SimLoop(double         time_step_,
-            State::type    integration_method_,
-            SimClock::type clock_type_);
+    SimLoop(double           time_step_,
+            Integrator::type integration_method_);
+    SimLoop(double           time_step_,
+            Integrator::type integration_method_,
+            SimClock::type   clock_type_);
 
     // Destructor
     ~SimLoop();
@@ -49,13 +51,15 @@ namespace core
     // Functionality
     void addBlock(Block::pointer block_);
     void addEndCondition(EndCondition::pointer end_condition_);
-    void operator<< (Block::pointer block_);
-    void operator<< (EndCondition::pointer condition_);
+    void addState(double& x_,
+                  double& dx_);
     void run(void);
+    void updateBlocks(void);
 
   private:
     // Member Variables
     SimClock::pointer                  Clock;
+    Integrator::pointer                Propagator;
     std::vector<Block::pointer>        Blocks;
     std::vector<EndCondition::pointer> End_Conditions;
 
@@ -66,6 +70,10 @@ namespace core
 
 
 } // !core
+
+
+// Forward Declaration Inclusions
+#include "block.h"
 
 
 #endif // !SIM_LOOP_H

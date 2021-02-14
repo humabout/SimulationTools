@@ -10,10 +10,10 @@
 
 
 //------------------------------------------------------------------------------
-// Name:    core
-// Purpose: This namespace holds all parts of the simulation core.
+// Name:    nemesis
+// Purpose: This namespace holds all aspects of the Nemesis Simulation Toolkit.
 //------------------------------------------------------------------------------
-namespace core
+namespace nemesis
 {
 
 
@@ -50,8 +50,8 @@ namespace core
     static double tick(void);
 
     // Factory Method
-    static SimClock::pointer create(type   clock_type_,
-                                    double max_tick_);
+    static SimClock* create(type   clock_type_,
+                            double max_tick_);
     
     // Functionality
     void advance(void);

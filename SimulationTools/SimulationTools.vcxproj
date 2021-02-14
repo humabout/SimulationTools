@@ -145,8 +145,10 @@
     <ClInclude Include="..\Source\Core\config.h" />
     <ClInclude Include="..\Source\Core\End_Conditions\end_condition.h" />
     <ClInclude Include="..\Source\Core\End_Conditions\max_time_exceeded.h" />
+    <ClInclude Include="..\Source\Core\Integrators\euler.h" />
+    <ClInclude Include="..\Source\Core\Integrators\integrator.h" />
+    <ClInclude Include="..\Source\Core\Integrators\state.h" />
     <ClInclude Include="..\Source\Core\sim_loop.h" />
-    <ClInclude Include="..\Source\Core\state.h" />
     <ClInclude Include="..\Source\Core\States\state_euler.h" />
     <ClInclude Include="..\Source\File\file_path.h" />
     <ClInclude Include="..\Source\Math\math_config.h" />
@@ -154,21 +156,24 @@
     <ClInclude Include="..\Source\Math\matrix.h" />
     <ClInclude Include="..\Source\Math\quaternion.h" />
     <ClInclude Include="..\Source\Math\vector.h" />
+    <ClInclude Include="..\Source\Models\Examples\position.h" />
     <ClInclude Include="..\Source\nemesis.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Core\block.cpp" />
     <ClCompile Include="..\Source\Core\Clocks\basic_clock.cpp" />
     <ClCompile Include="..\Source\Core\Clocks\sim_clock.cpp" />
-    <ClCompile Include="..\Source\Core\End_Conditions\end_condition.cpp" />
     <ClCompile Include="..\Source\Core\End_Conditions\max_time_exceeded.cpp" />
+    <ClCompile Include="..\Source\Core\Integrators\euler.cpp" />
+    <ClCompile Include="..\Source\Core\Integrators\integrator.cpp" />
+    <ClCompile Include="..\Source\Core\Integrators\state.cpp" />
     <ClCompile Include="..\Source\Core\sim_loop.cpp" />
-    <ClCompile Include="..\Source\Core\state.cpp" />
     <ClCompile Include="..\Source\File\file_path.cpp" />
     <ClCompile Include="..\Source\main.cpp" />
     <ClCompile Include="..\Source\Math\matrix.cpp" />
     <ClCompile Include="..\Source\Math\quaternion.cpp" />
     <ClCompile Include="..\Source\Math\vector.cpp" />
+    <ClCompile Include="..\Source\Models\Examples\position.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
