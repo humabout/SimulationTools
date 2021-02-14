@@ -15,6 +15,7 @@
 #include "Core/Clocks/sim_clock.h"
 #include "Core/End_Conditions/end_condition.h"
 #include "Core/End_Conditions/max_time_exceeded.h"
+#include "Core/Integrators/euler.h"
 #include "Core/Integrators/integrator.h"
 #include "Core/Integrators/state.h"
 
