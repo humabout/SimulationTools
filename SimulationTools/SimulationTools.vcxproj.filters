@@ -104,5 +104,8 @@
     <ClCompile Include="..\Source\Math\vector.cpp">
       <Filter>Math</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\File\file_path.cpp">
+      <Filter>File</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

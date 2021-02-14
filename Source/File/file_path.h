@@ -7,16 +7,12 @@
 
 // Inclusions
 #include <string>
+#include <vector>
 #include <Windows.h>
 
 
-//------------------------------------------------------------------------------
-// Name:    file
-// Purpose: This namespace holds all classes, functions, and variables related
-//          to creating, opening, reading, writing, or otherwise manipulating
-//          files.
-//------------------------------------------------------------------------------
-namespace file
+
+namespace nemesis
 {
 
 
@@ -36,41 +32,20 @@ namespace file
     {
       valid          = 0,
       invalid        = 1,
-      does_not_exist = 2
+      inaccessible   = 2,
+      does_not_exist = 3
     }; // !validity
 
     // Constructor
-    FilePath(std::string path)
-    {
-      this->Path = fixSlashes(path);
-      this->validate();
-    }
-
-    // Destructor
+    FilePath(std::string path);
 
     // Accessor
-    std::string operator() (void) const
-    {
-      return Path;
-    }
+    std::string get(void) const;
+    bool is_valid(void) const;
+    validity path_validity(void) const;
 
-    bool is_valid(void) const
-    {
-      switch (validity_flag)
-      {
-      case validity::valid:
-        return true;
-      default:
-        return false;
-      }
-    }
-
-    validity path_validity(void) const
-    {
-      return validity_flag;
-    }
-
-    // Validation
+    // Functionality
+    void create_path(void);
     void validate(void);
 
   private:
@@ -81,28 +56,9 @@ namespace file
     validity validity_flag;
 
     // Functionality
-    std::string fixSlashes(const std::string& path) const
-    {
-      std::string working_path(path);
+    std::string fix_slashes(const std::string& path) const;
+    std::vector<std::string> get_subdirectories(const std::string& path) const;
 
-      // Change any forward slashes to backslashes
-      while (working_path.find("/") != std::string::npos)
-      {
-        size_t position = working_path.find("/");
-        working_path.replace(position, 1, "\\");
-      }
-
-      // Ensure the path ends in a backslash
-      if (path.back() != *"\\")
-      {
-        working_path.append("\\");
-      }
-
-      return working_path;
-    }
-
-
-    void createPath(void); // MAKE NEW DIRECTORIES SO PATH IS VALID
 
   }; // !FilePath
 

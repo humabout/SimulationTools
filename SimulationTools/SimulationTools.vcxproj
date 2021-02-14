@@ -164,6 +164,7 @@
     <ClCompile Include="..\Source\Core\End_Conditions\max_time_exceeded.cpp" />
     <ClCompile Include="..\Source\Core\sim_loop.cpp" />
     <ClCompile Include="..\Source\Core\state.cpp" />
+    <ClCompile Include="..\Source\File\file_path.cpp" />
     <ClCompile Include="..\Source\main.cpp" />
     <ClCompile Include="..\Source\Math\matrix.cpp" />
     <ClCompile Include="..\Source\Math\quaternion.cpp" />
