@@ -65,6 +65,7 @@ void nemesis::FilePath::create_path(void)
       break;
     default:
       // How did we even get here? THROW AN ERROR AND RUN AWAY SCREEMING
+      break;
     }
   }
 
