@@ -150,7 +150,9 @@
     <ClInclude Include="..\Source\Core\Integrators\state.h" />
     <ClInclude Include="..\Source\Core\sim_loop.h" />
     <ClInclude Include="..\Source\Core\States\state_euler.h" />
+    <ClInclude Include="..\Source\File\file.h" />
     <ClInclude Include="..\Source\File\file_path.h" />
+    <ClInclude Include="..\Source\File\States\file_state.h" />
     <ClInclude Include="..\Source\Math\math_config.h" />
     <ClInclude Include="..\Source\Math\math_constants.h" />
     <ClInclude Include="..\Source\Math\matrix.h" />
@@ -168,6 +170,7 @@
     <ClCompile Include="..\Source\Core\Integrators\integrator.cpp" />
     <ClCompile Include="..\Source\Core\Integrators\state.cpp" />
     <ClCompile Include="..\Source\Core\sim_loop.cpp" />
+    <ClCompile Include="..\Source\File\file.cpp" />
     <ClCompile Include="..\Source\File\file_path.cpp" />
     <ClCompile Include="..\Source\main.cpp" />
     <ClCompile Include="..\Source\Math\matrix.cpp" />

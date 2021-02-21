@@ -37,12 +37,16 @@ namespace nemesis
     }; // !validity
 
     // Constructor
+    FilePath();
     FilePath(std::string path);
 
     // Accessor
     std::string get(void) const;
     bool is_valid(void) const;
     validity path_validity(void) const;
+
+    // Mutator
+    void set(std::string path);
 
     // Functionality
     void create_path(void);
@@ -53,7 +57,7 @@ namespace nemesis
     std::string Path;
 
     // Metadata
-    validity validity_flag;
+    validity Validity_Flag;
 
     // Functionality
     std::string fix_slashes(const std::string& path) const;

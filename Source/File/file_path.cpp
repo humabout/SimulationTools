@@ -9,14 +9,25 @@
 
 //------------------------------------------------------------------------------
 // Name:    FilePath
+// Purpose: Default Constructor. This produces a blank path, which is by default
+//          invalid.
+//------------------------------------------------------------------------------
+nemesis::FilePath::FilePath()
+{
+  this->Validity_Flag = validity::invalid;
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    FilePath
 // Purpose: Constructor. This creates a filepath object from a string containing
 //          the file path. In doing os, it ensure that the correct slashes are 
 //          used and determines the validity of the path itself.
 //------------------------------------------------------------------------------
 nemesis::FilePath::FilePath(std::string path)
 {
-  this->Path = fix_slashes(path);
-  this->validate();
+  this->Validity_Flag = validity::invalid;
+  this->set(path);
 }
 
 
@@ -135,7 +146,7 @@ std::vector<std::string> nemesis::FilePath::get_subdirectories(const std::string
 //------------------------------------------------------------------------------
 bool nemesis::FilePath::is_valid(void) const
 {
-  switch (validity_flag)
+  switch (Validity_Flag)
   {
   case validity::valid:
     return true;
@@ -158,7 +169,7 @@ void nemesis::FilePath::validate(void)
   if (dwAttrib & FILE_ATTRIBUTE_DIRECTORY)
   {
     // The directory exists and the path is valid
-    validity_flag = validity::valid;
+    Validity_Flag = validity::valid;
   }
   else if (dwAttrib == INVALID_FILE_ATTRIBUTES)
   {
@@ -169,25 +180,32 @@ void nemesis::FilePath::validate(void)
     case ERROR_FILE_NOT_FOUND:
     case ERROR_PATH_NOT_FOUND:
     case ERROR_BAD_NETPATH:
-      validity_flag = validity::does_not_exist;
+      Validity_Flag = validity::does_not_exist;
       break;
     case ERROR_INVALID_NAME:
-      validity_flag = validity::invalid;
+      Validity_Flag = validity::invalid;
       break;
     default:
       // Something else is wrong and the path cannot be accessed
-      validity_flag = validity::inaccessible;
+      Validity_Flag = validity::inaccessible;
     }
   }
   else
   {
     // The directory does not exist
-    validity_flag = validity::does_not_exist;
+    Validity_Flag = validity::does_not_exist;
   }
 }
 
 
-
+//<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+// GETTERS
+//<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+void nemesis::FilePath::set(std::string path)
+{
+  this->Path = fix_slashes(path);
+  this->validate();
+}
 
 
 //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
@@ -199,5 +217,5 @@ std::string nemesis::FilePath::get(void) const
 }
 nemesis::FilePath::validity nemesis::FilePath::path_validity(void) const
 {
-  return validity_flag;
+  return Validity_Flag;
 }

@@ -29,6 +29,9 @@
     <Filter Include="Models\Examples">
       <UniqueIdentifier>{77253a8c-9ac0-4479-a957-e642f869a9c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="File\States">
+      <UniqueIdentifier>{0deeb8b4-bf2e-41dd-865a-5f5e0a6858f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\Core\block.h">
@@ -83,6 +86,13 @@
     <ClInclude Include="..\Source\File\file_path.h">
       <Filter>File</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\Core\States\state_euler.h" />
+    <ClInclude Include="..\Source\File\file.h">
+      <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\File\States\file_state.h">
+      <Filter>File\States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />
@@ -123,6 +133,9 @@
       <Filter>Core\Integrators</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\File\file_path.cpp">
+      <Filter>File</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\File\file.cpp">
       <Filter>File</Filter>
     </ClCompile>
   </ItemGroup>
