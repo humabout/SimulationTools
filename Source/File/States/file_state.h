@@ -35,9 +35,19 @@ namespace nemesis
   public:
     // Typedef
     typedef std::shared_ptr<FileState> pointer;
+    enum class type
+    {
+      unopened = 0,
+      opened   = 1,
+      closed   = 2,
+      failed   = 3
+    }; // FileState::type
 
     // Constructor
     FileState() {};
+
+    // Factory
+    static FileState::pointer create(type state_type);
 
     // Functionality
     virtual void open(File* file) = 0;
