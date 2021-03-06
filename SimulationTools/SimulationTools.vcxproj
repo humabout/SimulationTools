@@ -154,6 +154,7 @@
     <ClInclude Include="..\Source\File\file_path.h" />
     <ClInclude Include="..\Source\File\States\file_state.h" />
     <ClInclude Include="..\Source\File\States\failed_state.h" />
+    <ClInclude Include="..\Source\File\States\opened_state.h" />
     <ClInclude Include="..\Source\Math\math_config.h" />
     <ClInclude Include="..\Source\Math\math_constants.h" />
     <ClInclude Include="..\Source\Math\matrix.h" />
@@ -175,6 +176,7 @@
     <ClCompile Include="..\Source\File\file_path.cpp" />
     <ClCompile Include="..\Source\File\States\failed_state.cpp" />
     <ClCompile Include="..\Source\File\States\file_state.cpp" />
+    <ClCompile Include="..\Source\File\States\opened_state.cpp" />
     <ClCompile Include="..\Source\main.cpp" />
     <ClCompile Include="..\Source\Math\matrix.cpp" />
     <ClCompile Include="..\Source\Math\quaternion.cpp" />

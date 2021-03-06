@@ -1,8 +1,8 @@
-// failed_state.h
+// opened_state.h
 
 
-#ifndef GUARD_failed_state_h
-#define GUARD_failed_state_h
+#ifndef GUARD_opened_state_h
+#define GUARD_opened_state_h
 
 
 // Inclusions
@@ -25,18 +25,16 @@ namespace nemesis
 
 
   //----------------------------------------------------------------------------
-  // Name:    FailedState
-  // Purpose: This concretion represents a file that has failed to properly 
-  //          open. It can be reached via the unopened state and does not 
-  //          transition to any other state - one a file is failed, it stays 
-  //          failed. Failed files do not do anything except pass warnings when
-  //          something tries to make it do something. They do not crash a sim.
+  // Name:    OpenedState
+  // Purpose: This concretion represents a file that has been successfully 
+  //          opened and is ready for use. It can be reached via the unopened or
+  //          closed state and transitions to closed state.
   //----------------------------------------------------------------------------
-  class FailedState : public FileState
+  class OpenedState : public FileState
   {
   public:
     // Constructor
-    FailedState();
+    OpenedState();
 
     void open(File* file) override;
     void close(File* file) override;
@@ -52,4 +50,5 @@ namespace nemesis
 #include "../file.h"
 
 
-#endif // !GUARD_failed_state_h
+#endif // !GUARD_opened_state_h
+#pragma once

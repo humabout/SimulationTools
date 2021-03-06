@@ -82,7 +82,10 @@ namespace nemesis
     virtual void validate_filename(void) = 0;
 
     // State classes are friends
+    friend class ClosedState;
     friend class FileState;
+    friend class OpenedState;
+    friend class UnopenedState;
 
   }; // !File
 
