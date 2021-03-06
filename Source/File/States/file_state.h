@@ -1,8 +1,8 @@
 // file_state.h
 
 
-#ifndef NEMESIS_FILE_STATE_H
-#define NEMESIS_FILE_STATE_H
+#ifndef GUARD_file_state_h
+#define GUARD_file_state_h
 
 
 // Inclusions
@@ -37,10 +37,10 @@ namespace nemesis
     typedef std::shared_ptr<FileState> pointer;
     enum class type
     {
-      unopened = 0,
-      opened   = 1,
-      closed   = 2,
-      failed   = 3
+      unopened = 0, // Can transit to opened or failed
+      opened   = 1, // Can transit to closed
+      closed   = 2, // Can transit to opened
+      failed   = 3  // Does not transit
     }; // FileState::type
 
     // Constructor
@@ -64,4 +64,4 @@ namespace nemesis
 #include "../file.h"
 
 
-#endif // !NEMESIS_FILE_STATE_H
+#endif // !GUARD_file_state_h

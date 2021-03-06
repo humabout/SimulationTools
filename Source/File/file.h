@@ -1,8 +1,8 @@
 // file.h
 
 
-#ifndef NEMESIS_FILE_H
-#define NEMESIS_FILE_H
+#ifndef GUARD_file_h
+#define GUARD_file_h
 
 
 // Inclusions
@@ -90,4 +90,4 @@ namespace nemesis
 } // !nemesis
 
 
-#endif // !NEMESIS_FILE_H
+#endif // !GUARD_file_h
