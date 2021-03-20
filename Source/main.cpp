@@ -7,11 +7,6 @@
 //#include "nemesis.h"
 //#include"Models/Examples/position.h"
 
-#include <string>
-#include <vector>
-#include "Console Manager/console_manager.h"
-#include "Console Manager/console_manager.cpp"
-
 
 int main()
 {

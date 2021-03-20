@@ -35,13 +35,14 @@ namespace nemesis
   //----------------------------------------------------------------------------
   namespace ConsoleManager
   {
-// Public:
     // Functionality
-    static void print_message(std::string message);
-    static void new_line(void);
-    static int menu(std::string              message,
-                    std::vector<std::string> menu_options);
-// Private:
+    /* NOTE: These could be faster if made static inline */
+    void print_message(std::string message);
+    void new_line(void);
+    /* ************************************************* */
+    int menu(std::string              message,
+             std::vector<std::string> menu_options);
+
     namespace
     {
       int INVALID_INPUT = -666;

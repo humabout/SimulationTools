@@ -47,7 +47,7 @@ int nemesis::ConsoleManager::menu(std::string              message,
   std::cout << "\n" << message << menu;
 
   // Accept, validate and return input
-  int input = nemesis::ConsoleManager::INVALID_INPUT;
+  int input = INVALID_INPUT;
   bool is_valid = false;
   do
   {
