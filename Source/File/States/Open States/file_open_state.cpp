@@ -1,19 +1,23 @@
-// file_state.cpp
+// file_open_state.cpp
 
 
 // Inclusions
 #include <memory>
 
-#include "file_state.h"
+#include "file_open_state.h"
 
 #include "failed_state.h"
+#include "opened_state.h"
+#include "closed_state.h"
+
+#include <cassert>
 
 
 //------------------------------------------------------------------------------
-// Name:    FileState
+// Name:    FileOpenState
 // Purpose: Default Constructor. This class has nothing to initialize.
 //------------------------------------------------------------------------------
-nemesis::FileState::FileState()
+nemesis::FileOpenState::FileOpenState()
 {
   // Does Nothing
 }
@@ -24,17 +28,19 @@ nemesis::FileState::FileState()
 // Purpose: Factory Method. Returns a shared pointer to a new instance of the
 //          requested fiel state type.
 //------------------------------------------------------------------------------
-nemesis::FileState::pointer nemesis::FileState::create(type state_type)
+nemesis::FileOpenState::pointer nemesis::FileOpenState::create(type state_type)
 {
   switch (state_type)
   {
-  case type::unopened:
   case type::opened:
+    return nemesis::FileOpenState::pointer(new OpenedState);
   case type::closed:
+    return nemesis::FileOpenState::pointer(new ClosedState);
   case type::failed:
-    return std::make_shared<FileState>(new FailedState);
+    return nemesis::FileOpenState::pointer(new FailedState);
   default:
     // How did we even get here?!
     // TODO: Create and throw an error if this is reached.
+    assert(false);
   }
 }

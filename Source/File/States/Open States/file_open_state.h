@@ -1,8 +1,8 @@
-// file_state.h
+// file_open_state.h
 
 
-#ifndef GUARD_file_state_h
-#define GUARD_file_state_h
+#ifndef GUARD_file_open_state_h
+#define GUARD_file_open_state_h
 
 
 // Inclusions
@@ -25,29 +25,28 @@ namespace nemesis
 
 
   //----------------------------------------------------------------------------
-  // Name:    FileState
+  // Name:    FileOpenState
   // Purpose: This abstract class declares the interface for file state classes
   //          and enables the state pattern. Its children implement this pattern
   //          for the File class and its children and form a state machine.
   //----------------------------------------------------------------------------
-  class FileState
+  class FileOpenState
   {
   public:
     // Typedef
-    typedef std::shared_ptr<FileState> pointer;
+    typedef std::shared_ptr<FileOpenState> pointer;
     enum class type
     {
-      unopened = 0, // Can transit to opened or failed
-      opened   = 1, // Can transit to closed
-      closed   = 2, // Can transit to opened
-      failed   = 3  // Does not transit
+      opened   = 0, // Can transit to closed
+      closed   = 1, // Can transit to opened or failed
+      failed   = 2  // Does not transit
     }; // FileState::type
 
     // Constructor
-    FileState() {};
+    FileOpenState();
 
     // Factory
-    static FileState::pointer create(type state_type);
+    static FileOpenState::pointer create(type state_type);
 
     // Functionality
     virtual void open(File* file) = 0;
@@ -61,7 +60,7 @@ namespace nemesis
 
 
 // Forward Declaration Inclusion
-#include "../file.h"
+#include "../../file.h"
 
 
-#endif // !GUARD_file_state_h
+#endif // !GUARD_file_open_state_h

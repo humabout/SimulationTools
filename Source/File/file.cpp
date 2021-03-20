@@ -5,7 +5,8 @@
 #include "file.h"
 
 #include "file_path.h"
-#include "States/file_state.h"
+#include "States/Open States/file_open_state.h"
+#include "States/Initialization States/file_init_state.h"
 
 
 //------------------------------------------------------------------------------
@@ -15,7 +16,7 @@
 //------------------------------------------------------------------------------
 nemesis::File::File()
 {
-  this->State = FileState::create(FileState::type::unopened);
+  set_open_state(FileOpenState::type::closed);
 }
 
 
@@ -29,18 +30,30 @@ nemesis::File::File(std::string directory,
 {
   this->Directory = FilePath(directory);
   this->Name      = name;
-  this->State = FileState::create(FileState::type::unopened);
+
+  set_open_state(FileOpenState::type::closed);
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    open
+// Purpose: This method prepares a file for use. It is part of a state pattern 
+//          and passes the call to the file's init state for execution.
+//------------------------------------------------------------------------------
+void nemesis::File::initialize(void)
+{
+  InitState->initialize(this);
 }
 
 
 //------------------------------------------------------------------------------
 // Name:    open
 // Purpose: This method opens the file. It is part of a state pattern and passes
-//          the call to the file's state for execution.
+//          the call to the file's open state for execution.
 //------------------------------------------------------------------------------
 void nemesis::File::open(void)
 {
-  State->open(this);
+  OpenState->open(this);
 }
 
 
@@ -51,7 +64,7 @@ void nemesis::File::open(void)
 //------------------------------------------------------------------------------
 void nemesis::File::close(void)
 {
-  State->close(this);
+  OpenState->close(this);
 }
 
 
@@ -78,14 +91,9 @@ std::ios_base::openmode nemesis::File::open_mode(void) const
 //==============================================================================
 // SETTERS
 //==============================================================================
-void nemesis::File::set_state(FileState::type new_state)
+void nemesis::File::set_directory(std::string directory)
 {
-  State = FileState::create(new_state);
-}
-
-void nemesis::File::set_open_mode(std::ios_base::openmode mode)
-{
-  OpenMode = mode;
+  Directory.set(directory);
 }
 
 void nemesis::File::set_name(std::string name)
@@ -94,7 +102,17 @@ void nemesis::File::set_name(std::string name)
   validate_filename();
 }
 
-void nemesis::File::set_directory(std::string directory)
+void nemesis::File::set_open_mode(std::ios_base::openmode mode)
 {
-  Directory.set(directory);
+  OpenMode = mode;
+}
+
+void nemesis::File::set_init_state(FileInitState::type new_state)
+{
+  InitState = FileInitState::create(new_state);
+}
+
+void nemesis::File::set_open_state(FileOpenState::type new_state)
+{
+  OpenState = FileOpenState::create(new_state);
 }

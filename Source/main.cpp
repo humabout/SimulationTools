@@ -6,6 +6,7 @@
 //#include <memory>
 //#include "nemesis.h"
 //#include"Models/Examples/position.h"
+#include <cassert>
 
 
 int main()

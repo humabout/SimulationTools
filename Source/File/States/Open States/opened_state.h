@@ -6,7 +6,7 @@
 
 
 // Inclusions
-#include "file_state.h"
+#include "file_open_state.h"
 
 
 // Forward Declarations
@@ -30,7 +30,7 @@ namespace nemesis
   //          opened and is ready for use. It can be reached via the unopened or
   //          closed state and transitions to closed state.
   //----------------------------------------------------------------------------
-  class OpenedState : public FileState
+  class OpenedState : public FileOpenState
   {
   public:
     // Constructor
@@ -47,7 +47,7 @@ namespace nemesis
 
 
 // Forward Declaration Inclusions
-#include "../file.h"
+#include "../../file.h"
 
 
 #endif // !GUARD_opened_state_h

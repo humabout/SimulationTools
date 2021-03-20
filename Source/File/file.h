@@ -11,7 +11,8 @@
 #include <string>
 
 #include "file_path.h"
-#include "States/file_state.h"
+#include "States/Open States/file_open_state.h"
+#include "States/Initialization States/file_init_state.h"
 
 
 //------------------------------------------------------------------------------
@@ -54,11 +55,11 @@ namespace nemesis
 
     // Functionality
     void close(void);
+    void initialize(void);
     void open(void);
 
   protected:
-    FileState::pointer State;
-    std::fstream       FileStream;
+    std::fstream FileStream;
 
     // Accessors
     std::ios_base::openmode open_mode(void) const;
@@ -67,26 +68,29 @@ namespace nemesis
     void set_open_mode(std::ios_base::openmode mode);
 
     // Functionality Implementations
-    virtual void initialize(void) = 0;
+    virtual void do_initialize(void) = 0;
     virtual void do_open(void) = 0;
     virtual void do_close(void) = 0;
+
+    // State Helper Functionality
+    virtual void validate_filename(void) = 0;
+    void set_init_state(FileInitState::type new_state);
 
   private:
     FilePath                Directory;
     std::string             Name;
     std::ios_base::openmode OpenMode;
+    FileOpenState::pointer  OpenState;
+    FileInitState::pointer  InitState;
 
-    // Helper Functionality
-    void set_state(FileState::type new_state);
-
-    // Helper Functionality
-    virtual void validate_filename(void) = 0;
+    // State Helper Functionality
+    void set_open_state(FileOpenState::type new_state);
 
     // State classes are friends
     friend class ClosedState;
     friend class FileState;
     friend class OpenedState;
-    friend class UnopenedState;
+    friend class UninitializedState;
 
   }; // !File
 

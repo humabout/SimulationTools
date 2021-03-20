@@ -6,7 +6,7 @@
 
 
 // Inclusions
-#include "file_state.h"
+#include "file_open_state.h"
 
 
 // Forward Declarations
@@ -32,7 +32,7 @@ namespace nemesis
   //          failed. Failed files do not do anything except pass warnings when
   //          something tries to make it do something. They do not crash a sim.
   //----------------------------------------------------------------------------
-  class FailedState : public FileState
+  class FailedState : public FileOpenState
   {
   public:
     // Constructor
@@ -49,7 +49,7 @@ namespace nemesis
 
 
 // Forward Declaration Inclusions
-#include "../file.h"
+#include "../../file.h"
 
 
 #endif // !GUARD_failed_state_h

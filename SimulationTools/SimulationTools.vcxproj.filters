@@ -1,123 +1,189 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\Source\main.cpp" />
-    <ClCompile Include="..\Source\Core\Clocks\basic_clock.cpp">
-      <Filter>Core\Clock</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Core\block.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Console Manager\console_manager.cpp">
-      <Filter>Console Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Core\Integrators\euler.cpp">
-      <Filter>Core\Integration Method</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Core\Integrators\integrator.cpp">
-      <Filter>Core\Integration Method</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Core\End_Conditions\max_time_exceeded.cpp">
-      <Filter>Core\End Conditions</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Core\Clocks\sim_clock.cpp">
-      <Filter>Core\Clock</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Core\sim_loop.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Core\Integrators\state.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Math\quaternion.cpp">
-      <Filter>Math Library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Math\vector.cpp">
-      <Filter>Math Library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Math\matrix.cpp">
-      <Filter>Math Library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Models\Examples\position.cpp">
-      <Filter>Models\Examples</Filter>
-    </ClCompile>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{b7000b3a-ab19-441f-ac2d-2af6a1d1cf49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\End Conditions">
+      <UniqueIdentifier>{d78676a6-5027-4292-83af-65b5cd3316d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Clocks">
+      <UniqueIdentifier>{0d6ea74b-4e26-46b0-af13-1f945cfe544c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{974465ee-ac97-4c94-b59b-f8885a574ea6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="File">
+      <UniqueIdentifier>{ed0621e0-9d6c-43fc-9d31-03fa6c46b5af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Integrators">
+      <UniqueIdentifier>{301302d7-f237-4507-9c58-90185d5d5233}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{c5e7616d-144f-42e7-827d-e39de176caff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models\Examples">
+      <UniqueIdentifier>{77253a8c-9ac0-4479-a957-e642f869a9c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Console Manager">
+      <UniqueIdentifier>{70ba8e05-154f-460f-a6cf-2fb118758c71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="File\States">
+      <UniqueIdentifier>{287e212f-3a05-43ea-bdca-75bb74c174bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="File\States\Initialization States">
+      <UniqueIdentifier>{77b53809-db28-40dd-a4b8-ec56053d4ebd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="File\States\Open States">
+      <UniqueIdentifier>{6f994681-a920-4005-99f0-4ffda3843526}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Source\Core\config.h" />
-    <ClInclude Include="..\Source\nemesis.h" />
-    <ClInclude Include="..\Source\Core\Clocks\basic_clock.h">
-      <Filter>Core\Clock</Filter>
-    </ClInclude>
     <ClInclude Include="..\Source\Core\block.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\Console Manager\console_manager.h">
-      <Filter>Console Manager</Filter>
+    <ClInclude Include="..\Source\Core\config.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Core\sim_loop.h">
+      <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\Core\End_Conditions\end_condition.h">
       <Filter>Core\End Conditions</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Core\Integrators\euler.h">
-      <Filter>Core\Integration Method</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Core\Integrators\integrator.h">
-      <Filter>Core\Integration Method</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\Core\End_Conditions\max_time_exceeded.h">
       <Filter>Core\End Conditions</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\Core\Clocks\sim_clock.h">
-      <Filter>Core\Clock</Filter>
+      <Filter>Core\Clocks</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\Core\sim_loop.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Core\Integrators\state.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Math\vector.h">
-      <Filter>Math Library</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Math\quaternion.h">
-      <Filter>Math Library</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Math\math_constants.h">
-      <Filter>Math Library</Filter>
+    <ClInclude Include="..\Source\Core\Clocks\basic_clock.h">
+      <Filter>Core\Clocks</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\Math\math_config.h">
-      <Filter>Math Library</Filter>
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Math\math_constants.h">
+      <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\Math\matrix.h">
-      <Filter>Math Library</Filter>
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Math\quaternion.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Math\vector.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\nemesis.h" />
+    <ClInclude Include="..\Source\Core\Integrators\integrator.h">
+      <Filter>Core\Integrators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Core\Integrators\state.h">
+      <Filter>Core\Integrators</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\Models\Examples\position.h">
       <Filter>Models\Examples</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\Core\Integrators\euler.h">
+      <Filter>Core\Integrators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Console Manager\console_manager.h">
+      <Filter>Console Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\File\file.h">
+      <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\File\file_path.h">
+      <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\File\States\Initialization States\file_init_state.h">
+      <Filter>File\States\Initialization States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\File\States\Open States\closed_state.h">
+      <Filter>File\States\Open States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\File\States\Open States\failed_state.h">
+      <Filter>File\States\Open States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\File\States\Open States\file_open_state.h">
+      <Filter>File\States\Open States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\File\States\Open States\opened_state.h">
+      <Filter>File\States\Open States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\File\States\Initialization States\initialized_state.h">
+      <Filter>File\States\Initialization States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\File\States\Initialization States\uninitialized_state.h">
+      <Filter>File\States\Initialization States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Core">
-      <UniqueIdentifier>{8354bb7c-885e-4b1d-9ffa-5505d4d147b1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\Clock">
-      <UniqueIdentifier>{b59722b5-2611-44d1-9912-f2a992601362}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Console Manager">
-      <UniqueIdentifier>{3b2c1467-f177-41cb-b412-52aa8e133415}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\End Conditions">
-      <UniqueIdentifier>{69f9d4eb-f115-42fe-83d2-93510f05cfb1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\Integration Method">
-      <UniqueIdentifier>{383c2429-459e-4e16-966a-e2cb0fcad11e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math Library">
-      <UniqueIdentifier>{6b00755e-7932-4adf-9795-beb82ae815e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Models">
-      <UniqueIdentifier>{81cccf3d-8da2-4638-9689-851de75f331c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Models\Examples">
-      <UniqueIdentifier>{7d2e4349-16f6-4274-8c16-9de40883a184}</UniqueIdentifier>
-    </Filter>
+    <ClCompile Include="..\Source\main.cpp" />
+    <ClCompile Include="..\Source\Core\block.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Core\sim_loop.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Core\End_Conditions\max_time_exceeded.cpp">
+      <Filter>Core\End Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Core\Clocks\sim_clock.cpp">
+      <Filter>Core\Clocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Core\Clocks\basic_clock.cpp">
+      <Filter>Core\Clocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Math\matrix.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Math\quaternion.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Math\vector.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Core\Integrators\integrator.cpp">
+      <Filter>Core\Integrators</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Core\Integrators\state.cpp">
+      <Filter>Core\Integrators</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Models\Examples\position.cpp">
+      <Filter>Models\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Core\Integrators\euler.cpp">
+      <Filter>Core\Integrators</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Console Manager\console_manager.cpp">
+      <Filter>Console Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\File\file_path.cpp">
+      <Filter>File</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\File\file.cpp">
+      <Filter>File</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\File\States\Open States\closed_state.cpp">
+      <Filter>File\States\Open States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\File\States\Open States\failed_state.cpp">
+      <Filter>File\States\Open States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\File\States\Open States\file_open_state.cpp">
+      <Filter>File\States\Open States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\File\States\Open States\opened_state.cpp">
+      <Filter>File\States\Open States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\File\States\Initialization States\file_init_state.cpp">
+      <Filter>File\States\Initialization States</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

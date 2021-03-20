@@ -23,7 +23,7 @@ nemesis::OpenedState::OpenedState()
 void nemesis::OpenedState::close(File* file)
 {
   file->do_close();
-  file->set_state(type::closed);
+  file->set_open_state(type::closed);
 }
 
 

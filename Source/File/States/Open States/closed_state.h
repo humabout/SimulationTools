@@ -1,12 +1,12 @@
-// unopened_state.h
+// closed_state.h
 
 
-#ifndef GUARD_unopened_state_h
-#define GUARD_unopened_state_h
+#ifndef GUARD_closed_state_h
+#define GUARD_closed_state_h
 
 
 // Inclusions
-#include "file_state.h"
+#include "file_open_state.h"
 
 
 // Forward Declarations
@@ -24,17 +24,16 @@ namespace nemesis
 {
 
   //----------------------------------------------------------------------------
-  // Name:    UnopenedState
-  // Purpose: This concretion represents a file that has not been opened before. 
-  //          It can not be reached by any other state and transitions to either
-  //          an open or failed state. Unopened files do not do anything other
-  //          than open or fail to open.
+  // Name:    ClosedState
+  // Purpose: This concretion represents a file that is not currently open. It
+  //          can be reached from the open state and transitions to either open
+  //          or failed state.
   //----------------------------------------------------------------------------
-  class UnopenedState : public FileState
+  class ClosedState : public FileOpenState
   {
   public:
     // Constructor
-    UnopenedState();
+    ClosedState();
 
     void open(File* file) override;
     void close(File* file) override;
@@ -43,4 +42,4 @@ namespace nemesis
 
 } // !nemesis
 
-#endif // !GUARD_unopened_state_h
+#endif // !GUARD_closed_state_h
