@@ -29,6 +29,9 @@
     <Filter Include="Models\Examples">
       <UniqueIdentifier>{77253a8c-9ac0-4479-a957-e642f869a9c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Console Manager">
+      <UniqueIdentifier>{70ba8e05-154f-460f-a6cf-2fb118758c71}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\Core\block.h">
@@ -80,6 +83,9 @@
     <ClInclude Include="..\Source\Core\Integrators\euler.h">
       <Filter>Core\Integrators</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\Console Manager\console_manager.h">
+      <Filter>Console Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />
@@ -118,6 +124,9 @@
     </ClCompile>
     <ClCompile Include="..\Source\Core\Integrators\euler.cpp">
       <Filter>Core\Integrators</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Console Manager\console_manager.cpp">
+      <Filter>Console Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

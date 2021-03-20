@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Source\Console Manager\console_manager.h" />
     <ClInclude Include="..\Source\Core\block.h" />
     <ClInclude Include="..\Source\Core\Clocks\basic_clock.h" />
     <ClInclude Include="..\Source\Core\Clocks\sim_clock.h" />
@@ -158,6 +159,7 @@
     <ClInclude Include="..\Source\nemesis.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Source\Console Manager\console_manager.cpp" />
     <ClCompile Include="..\Source\Core\block.cpp" />
     <ClCompile Include="..\Source\Core\Clocks\basic_clock.cpp" />
     <ClCompile Include="..\Source\Core\Clocks\sim_clock.cpp" />
