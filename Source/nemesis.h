@@ -19,6 +19,8 @@
 #include "Core/Integrators/integrator.h"
 #include "Core/Integrators/state.h"
 
+#include "Console Manager/console_manager.h"
+
 
 
 #endif // !SIMULATION_TOOLS_H
