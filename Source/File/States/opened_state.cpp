@@ -34,5 +34,5 @@ void nemesis::OpenedState::close(File* file)
 //------------------------------------------------------------------------------
 void nemesis::OpenedState::open(File* file)
 {
-  // TODO: Pass an error to be logged and return control
+  // TODO: Pass an exception to be logged and return control
 }

@@ -99,6 +99,9 @@
     <ClInclude Include="..\Source\File\States\opened_state.h">
       <Filter>File\States</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\File\States\unopened_state.h">
+      <Filter>File\States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />
@@ -151,6 +154,9 @@
       <Filter>File\States</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\File\States\opened_state.cpp">
+      <Filter>File\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\File\States\unopened_state.cpp">
       <Filter>File\States</Filter>
     </ClCompile>
   </ItemGroup>

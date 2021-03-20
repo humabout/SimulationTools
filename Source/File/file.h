@@ -66,6 +66,11 @@ namespace nemesis
     // Mutators
     void set_open_mode(std::ios_base::openmode mode);
 
+    // Functionality Implementations
+    virtual void initialize(void) = 0;
+    virtual void do_open(void) = 0;
+    virtual void do_close(void) = 0;
+
   private:
     FilePath                Directory;
     std::string             Name;
@@ -73,10 +78,6 @@ namespace nemesis
 
     // Helper Functionality
     void set_state(FileState::type new_state);
-
-    // Functionality Implementations
-    virtual void do_open(void) = 0;
-    virtual void do_close(void) = 0;
 
     // Helper Functionality
     virtual void validate_filename(void) = 0;
