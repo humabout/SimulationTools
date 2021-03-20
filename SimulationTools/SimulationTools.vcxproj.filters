@@ -29,8 +29,8 @@
     <Filter Include="Models\Examples">
       <UniqueIdentifier>{77253a8c-9ac0-4479-a957-e642f869a9c9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="File\States">
-      <UniqueIdentifier>{0deeb8b4-bf2e-41dd-865a-5f5e0a6858f7}</UniqueIdentifier>
+    <Filter Include="Console Manager">
+      <UniqueIdentifier>{70ba8e05-154f-460f-a6cf-2fb118758c71}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -83,24 +83,8 @@
     <ClInclude Include="..\Source\Core\Integrators\euler.h">
       <Filter>Core\Integrators</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\File\file_path.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Core\States\state_euler.h" />
-    <ClInclude Include="..\Source\File\file.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\File\States\file_state.h">
-      <Filter>File\States</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\File\States\failed_state.h">
-      <Filter>File\States</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\File\States\opened_state.h">
-      <Filter>File\States</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\File\States\unopened_state.h">
-      <Filter>File\States</Filter>
+    <ClInclude Include="..\Source\Console Manager\console_manager.h">
+      <Filter>Console Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -141,23 +125,8 @@
     <ClCompile Include="..\Source\Core\Integrators\euler.cpp">
       <Filter>Core\Integrators</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\File\file_path.cpp">
-      <Filter>File</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\File\file.cpp">
-      <Filter>File</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\File\States\file_state.cpp">
-      <Filter>File\States</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\File\States\failed_state.cpp">
-      <Filter>File\States</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\File\States\opened_state.cpp">
-      <Filter>File\States</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\File\States\unopened_state.cpp">
-      <Filter>File\States</Filter>
+    <ClCompile Include="..\Source\Console Manager\console_manager.cpp">
+      <Filter>Console Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

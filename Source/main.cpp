@@ -3,13 +3,14 @@
 // This just exists for rapid testing
 
 #include <iostream>
-#include <memory>
-#include "nemesis.h"
-#include"Models/Examples/position.h"
+//#include <memory>
+//#include "nemesis.h"
+//#include"Models/Examples/position.h"
 
 
 int main()
 {
+  /*
   // Declaring typedefs for sanity's sake
   typedef nemesis::Block::pointer              block_pointer;
   typedef nemesis::examples::Position          position_block;
@@ -46,6 +47,7 @@ int main()
   // Reporting the End Result
   std::cout << "\nFinal States:\n";
   access->print();
+  */
 
   return 0;
 }
