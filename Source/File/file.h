@@ -73,7 +73,7 @@ namespace nemesis
     virtual void do_close(void) = 0;
 
     // State Helper Functionality
-    virtual void validate_filename(void) = 0;
+    virtual void validate_filename(void) {/* TODO: Need to make this */ };
     void set_init_state(FileInitState::type new_state);
 
   private:

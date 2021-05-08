@@ -150,8 +150,10 @@
     <ClInclude Include="..\Source\Core\Integrators\integrator.h" />
     <ClInclude Include="..\Source\Core\Integrators\state.h" />
     <ClInclude Include="..\Source\Core\sim_loop.h" />
+    <ClInclude Include="..\Source\File\delimited_input_file.h" />
     <ClInclude Include="..\Source\File\file.h" />
     <ClInclude Include="..\Source\File\file_path.h" />
+    <ClInclude Include="..\Source\File\input_file.h" />
     <ClInclude Include="..\Source\File\States\Initialization States\file_init_state.h" />
     <ClInclude Include="..\Source\File\States\Initialization States\initialized_state.h" />
     <ClInclude Include="..\Source\File\States\Initialization States\uninitialized_state.h" />
@@ -177,6 +179,7 @@
     <ClCompile Include="..\Source\Core\Integrators\integrator.cpp" />
     <ClCompile Include="..\Source\Core\Integrators\state.cpp" />
     <ClCompile Include="..\Source\Core\sim_loop.cpp" />
+    <ClCompile Include="..\Source\File\delimited_input_file.cpp" />
     <ClCompile Include="..\Source\File\file.cpp" />
     <ClCompile Include="..\Source\File\file_path.cpp" />
     <ClCompile Include="..\Source\File\States\Initialization States\file_init_state.cpp" />

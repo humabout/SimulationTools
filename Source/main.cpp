@@ -6,11 +6,12 @@
 //#include <memory>
 //#include "nemesis.h"
 //#include"Models/Examples/position.h"
-#include <cassert>
-
+#include "File/delimited_input_file.h"
+#include <string>
 
 int main()
 {
+
   /*
   // Declaring typedefs for sanity's sake
   typedef nemesis::Block::pointer              block_pointer;
