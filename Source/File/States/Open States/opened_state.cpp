@@ -36,3 +36,26 @@ void nemesis::OpenedState::open(File* file)
 {
   // TODO: Pass an exception to be logged and return control
 }
+
+
+//------------------------------------------------------------------------------
+// Name:    read
+// Purpose: This reads the contents of an opened file into memory by forwarding
+//          the call to the originating file object as part of the template
+//          pattern.
+//------------------------------------------------------------------------------
+void nemesis::OpenedState::read(File* file)
+{
+  file->do_read();
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    write
+// Purpose: This writes to an open file by forwarding the call to the 
+//          originating file object as part of the template pattern.
+//------------------------------------------------------------------------------
+void nemesis::OpenedState::write(File* file)
+{
+  file->do_write();
+}

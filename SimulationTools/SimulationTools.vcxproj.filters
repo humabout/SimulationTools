@@ -128,7 +128,7 @@
     <ClInclude Include="..\Source\File\input_file.h">
       <Filter>File</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\File\delimited_input_file.h">
+    <ClInclude Include="..\Source\File\delimited_file.h">
       <Filter>File</Filter>
     </ClInclude>
   </ItemGroup>
@@ -194,7 +194,7 @@
     <ClCompile Include="..\Source\File\States\Initialization States\file_init_state.cpp">
       <Filter>File\States\Initialization States</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\File\delimited_input_file.cpp">
+    <ClCompile Include="..\Source\File\delimited_file.cpp">
       <Filter>File</Filter>
     </ClCompile>
   </ItemGroup>

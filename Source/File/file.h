@@ -45,6 +45,9 @@ namespace nemesis
     File(std::string directory, 
          std::string name);
 
+    // Destructor
+    virtual ~File();
+
     // Accessors
     std::string name(void) const;
     std::string directory(void) const;
@@ -57,6 +60,8 @@ namespace nemesis
     void close(void);
     void initialize(void);
     void open(void);
+    void read(void);
+    void write(void);
 
   protected:
     std::fstream FileStream;
@@ -71,6 +76,8 @@ namespace nemesis
     virtual void do_initialize(void) = 0;
     virtual void do_open(void) = 0;
     virtual void do_close(void) = 0;
+    virtual void do_read(void) = 0;
+    virtual void do_write(void) = 0;
 
     // State Helper Functionality
     virtual void validate_filename(void) {/* TODO: Need to make this */ };

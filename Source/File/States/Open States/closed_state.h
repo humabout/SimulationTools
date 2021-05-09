@@ -35,8 +35,11 @@ namespace nemesis
     // Constructor
     ClosedState();
 
+    // Fucntionality
     void open(File* file) override;
     void close(File* file) override;
+    void read(File* file) override;
+    void write(File* file) override;
   };
 
 

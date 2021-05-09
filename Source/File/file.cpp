@@ -36,7 +36,29 @@ nemesis::File::File(std::string directory,
 
 
 //------------------------------------------------------------------------------
-// Name:    open
+// Name:    ~File
+// Purpose: Destructor. This closes the file.
+// 
+//------------------------------------------------------------------------------
+nemesis::File::~File()
+{
+  close();
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    close
+// Purpose: This method closes the file. It is part of a state pattern and 
+//          passes the call to the file's state for execution.
+//------------------------------------------------------------------------------
+void nemesis::File::close(void)
+{
+  OpenState->close(this);
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    initialize
 // Purpose: This method prepares a file for use. It is part of a state pattern 
 //          and passes the call to the file's init state for execution.
 //------------------------------------------------------------------------------
@@ -58,15 +80,23 @@ void nemesis::File::open(void)
 
 
 //------------------------------------------------------------------------------
-// Name:    close
-// Purpose: This method closes the file. It is part of a state pattern and 
-//          passes the call to the file's state for execution.
+// Name:    read
+// Purpose: This method reads the contents of the file into memory.
 //------------------------------------------------------------------------------
-void nemesis::File::close(void)
+void nemesis::File::read(void)
 {
-  OpenState->close(this);
+  OpenState->read(this);
 }
 
+
+//------------------------------------------------------------------------------
+// Name:    write
+// Purpose: This method writes a string to the file
+//------------------------------------------------------------------------------
+void nemesis::File::write(void)
+{
+  OpenState->write(this);
+}
 
 
 //==============================================================================

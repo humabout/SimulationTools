@@ -1,39 +1,39 @@
-// delimited_input_file.cpp
+// delimited_file.cpp
 
 
 // Inclusions
-#include "delimited_input_file.h"
+#include "delimited_file.h"
 
 
 //------------------------------------------------------------------------------
-// Name:    DelimitedInputFile
+// Name:    DelimitedFile
 // Purpose: Default Constructor. This defaults to unopened with a blank path and
 //          file name, and white space as the delimiter.
 //------------------------------------------------------------------------------
-nemesis::DelimitedInputFile::DelimitedInputFile()
+nemesis::DelimitedFile::DelimitedFile()
 {
   set_delimiter(delimiters::WHITE_SPACE);
 }
 
 
 //------------------------------------------------------------------------------
-// Name:    DelimitedInputFile
+// Name:    DelimitedFile
 // Purpose: Constructor Override. This defaults to unopened with a blank path and
 //          file name. The delimiter is set from the arguments.
 //------------------------------------------------------------------------------
-nemesis::DelimitedInputFile::DelimitedInputFile(delimiter delim)
+nemesis::DelimitedFile::DelimitedFile(delimiter delim)
 {
   set_delimiter(delim);
 }
 
 
 //------------------------------------------------------------------------------
-// Name:    DelimitedInputFile
+// Name:    DelimitedFile
 // Purpose: Constructor Override. This sets the directory and name for the file
 //          and defaults the delimiter to white space.
 //------------------------------------------------------------------------------
-nemesis::DelimitedInputFile::DelimitedInputFile(std::string directory,
-                                                std::string name)
+nemesis::DelimitedFile::DelimitedFile(std::string directory,
+                                      std::string name)
 {
   set_directory(directory);
   set_name(name);
@@ -45,9 +45,9 @@ nemesis::DelimitedInputFile::DelimitedInputFile(std::string directory,
 // Purpose: Constructor Override. This sets the directory and name for the file
 //          and sets the delimiter, as well.
 //------------------------------------------------------------------------------
-nemesis::DelimitedInputFile::DelimitedInputFile(std::string directory,
-                                                std::string name,
-                                                delimiter   delim)
+nemesis::DelimitedFile::DelimitedFile(std::string directory,
+                                      std::string name,
+                                      delimiter   delim)
 {
   set_directory(directory);
   set_name(name);
@@ -60,7 +60,7 @@ nemesis::DelimitedInputFile::DelimitedInputFile(std::string directory,
 // Purpose: This method adds additional delimiters to this file's list of 
 //          delimiters.
 //------------------------------------------------------------------------------
-void nemesis::DelimitedInputFile::add_delimiter(delimiter delim)
+void nemesis::DelimitedFile::add_delimiter(delimiter delim)
 {
   Delimiters += delim;
 }
@@ -70,7 +70,7 @@ void nemesis::DelimitedInputFile::add_delimiter(delimiter delim)
 // Name:    reset_delimiters
 // Purpose: This method clears out all stored delimiters
 //------------------------------------------------------------------------------
-void nemesis::DelimitedInputFile::reset_delimiters(void)
+void nemesis::DelimitedFile::reset_delimiters(void)
 {
   Delimiters.clear();
 }
@@ -81,7 +81,7 @@ void nemesis::DelimitedInputFile::reset_delimiters(void)
 // Purpose: This method assigns one or more delimtiers as the list of delimiters
 //          overwriting whatever is currently stored.
 //------------------------------------------------------------------------------
-void nemesis::DelimitedInputFile::set_delimiter(delimiter delim)
+void nemesis::DelimitedFile::set_delimiter(delimiter delim)
 {
   reset_delimiters();
   add_delimiter(delim);
@@ -92,7 +92,7 @@ void nemesis::DelimitedInputFile::set_delimiter(delimiter delim)
 // Name:    parse_line
 // Purpose: 
 //------------------------------------------------------------------------------
-nemesis::DelimitedInputFile::file_line nemesis::DelimitedInputFile::parse_line(std::string line) const
+nemesis::DelimitedFile::file_line nemesis::DelimitedFile::parse_line(std::string line) const
 {
   file_line fields_out;
   std::string remaining_line = line;
@@ -110,29 +110,13 @@ nemesis::DelimitedInputFile::file_line nemesis::DelimitedInputFile::parse_line(s
 
 
 //------------------------------------------------------------------------------
-// Name:    read_file
-// Purpose: 
-//------------------------------------------------------------------------------
-
-
-//------------------------------------------------------------------------------
 // Name:    do_initialize
 // Purpose: Implements initializing the file. In this case, there is nothing to
 //          do on initialization.
 //------------------------------------------------------------------------------
-void nemesis::DelimitedInputFile::do_initialize(void)
+void nemesis::DelimitedFile::do_initialize(void)
 {
   // Do Nothing
-}
-
-
-//------------------------------------------------------------------------------
-// Name:    do_open
-// Purpose: Implements opening the file.
-//------------------------------------------------------------------------------
-void nemesis::DelimitedInputFile::do_open(void)
-{
-  FileStream.open(directory() + name());
 }
 
 
@@ -140,20 +124,50 @@ void nemesis::DelimitedInputFile::do_open(void)
 // Name:    do_close
 // Purpose: Implements closing the file.
 //------------------------------------------------------------------------------
-void nemesis::DelimitedInputFile::do_close(void)
+void nemesis::DelimitedFile::do_close(void)
 {
   FileStream.close();
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    do_open
+// Purpose: Implements opening the file.
+//------------------------------------------------------------------------------
+void nemesis::DelimitedFile::do_open(void)
+{
+  FileStream.open(directory() + name());
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    do_read
+// Purpose: Implements reading the file's contents into memory.
+//------------------------------------------------------------------------------
+void nemesis::DelimitedFile::do_close(void)
+{
+  // TODO: Make this funciton
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    do_write
+// Purpose: Implements writing to the file.
+//------------------------------------------------------------------------------
+void nemesis::DelimitedFile::do_close(void)
+{
+  // TODO: Make this funciton
 }
 
 
 //==============================================================================
 // GETTERS
 //==============================================================================
-nemesis::DelimitedInputFile::file_content nemesis::DelimitedInputFile::content(void) const
+nemesis::DelimitedFile::file_content nemesis::DelimitedFile::content(void) const
 {
   return Content;
 }
-nemesis::DelimitedInputFile::delimiter nemesis::DelimitedInputFile::delimiters(void) const
+nemesis::DelimitedFile::delimiter nemesis::DelimitedFile::delimiters(void) const
 {
   return Delimiters;
 }

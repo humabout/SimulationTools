@@ -1,8 +1,8 @@
-// delimited_input_file.h
+// delimited_file.h
 
 
-#ifndef GUARD_delimited_input_file_h
-#define GUARD_delimited_input_file_h
+#ifndef GUARD_delimited_file_h
+#define GUARD_delimited_file_h
 
 
 // Inclusions
@@ -44,7 +44,7 @@ namespace nemesis
   //          rows representing lines and columns representing delimited 
   //          entries.
   //----------------------------------------------------------------------------
-  class DelimitedInputFile : public InputFile
+  class DelimitedFile : public File
   {
   public:
     // Typedefs
@@ -53,20 +53,19 @@ namespace nemesis
     typedef std::string                delimiter;
 
     // Constructors
-    DelimitedInputFile();
-    DelimitedInputFile(delimiter delim);
-    DelimitedInputFile(std::string directory,
-                       std::string name);
-    DelimitedInputFile(std::string directory,
-                       std::string name,
-                       delimiter   delim);
+    DelimitedFile();
+    DelimitedFile(delimiter delim);
+    DelimitedFile(std::string directory,
+                  std::string name);
+    DelimitedFile(std::string directory,
+                  std::string name,
+                  delimiter   delim);
 
     // Accessors
     file_content content(void) const;
     delimiter delimiters(void) const;
 
     // Functionality
-    void read_file(void) {/* Just until I get parse_line working */};
     void add_delimiter(delimiter delim);
     void reset_delimiters(void);
     void set_delimiter(delimiter delim);
@@ -78,17 +77,19 @@ namespace nemesis
 
   private:
     // Functionality Implementations
-    void do_initialize(void);
-    void do_open(void);
-    void do_close(void);
+    virtual void do_close(void);
+    virtual void do_open(void);
+    virtual void do_initialize(void);
+    virtual void do_read(void);
+    virtual void do_write(void);
 
     // Helper Functions
     file_line parse_line(std::string line) const;
 
-  }; // !DelimitedInputFile
+  }; // !DelimitedFile
 
 
 } // !nemesis
 
 
-#endif // !GUARD_delimited_input_file_h
+#endif // !GUARD_delimited_file_h

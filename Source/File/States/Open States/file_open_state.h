@@ -49,8 +49,10 @@ namespace nemesis
     static FileOpenState::pointer create(type state_type);
 
     // Functionality
-    virtual void open(File* file) = 0;
     virtual void close(File* file) = 0;
+    virtual void open(File* file) = 0;
+    virtual void read(File* file) = 0;
+    virtual void write(File* file) = 0;
 
 
   }; // !FileState

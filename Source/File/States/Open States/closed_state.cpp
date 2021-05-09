@@ -20,8 +20,19 @@ nemesis::ClosedState::ClosedState()
 
 
 //------------------------------------------------------------------------------
+// Name:    close
+// Purpose: This file has not been opened and therefore cannot be closed. Throw
+//          a warning for logging, but otherwise do nothing.
+//------------------------------------------------------------------------------
+void nemesis::ClosedState::close(File* file)
+{
+  // TODO: Pass an exception to be logged and return control
+}
+
+
+//------------------------------------------------------------------------------
 // Name:    open
-// Purpose: 
+// Purpose: Opens a closed file
 //------------------------------------------------------------------------------
 void nemesis::ClosedState::open(File* file)
 {
@@ -62,11 +73,22 @@ void nemesis::ClosedState::open(File* file)
 
 
 //------------------------------------------------------------------------------
-// Name:    close
-// Purpose: This file has not been opened and therefore cannot be closed. Throw
-//          a warning for logging, but otherwise do nothing.
+// Name:    read
+// Purpose: This file has not been opened and therefore its contents cannot be
+//          read into memory. Throw a warning and do nothing
 //------------------------------------------------------------------------------
-void nemesis::ClosedState::close(File* file)
+void nemesis::ClosedState::read(File* file)
+{
+  // TODO: Pass an exception to be logged and return control
+}
+
+
+//------------------------------------------------------------------------------
+// Name:    write
+// Purpose: This file has not been opened and therefore nothing can be written
+//          to it. Throw a warning and do nothing
+//------------------------------------------------------------------------------
+void nemesis::ClosedState::write(File* file)
 {
   // TODO: Pass an exception to be logged and return control
 }
